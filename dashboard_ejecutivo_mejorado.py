@@ -383,176 +383,46 @@ class DashboardEjecutivoMejorado:
         """Crear análisis de puestos Ventas/Marketing con gráfico de quartiles"""
         return self.create_ventas_marketing_quartiles_chart(df)
     
-    def create_mineria_quartiles_chart(self, df):
-        """Crear análisis de quartiles para puestos de Minería por cargos principales"""
-        if len(df) == 0:
-            return "<p>No se encontraron datos para análisis de minería</p>"
-        
-        # Filtrar por sector minería
-        mineria_keywords = ['minería', 'mineria', 'mining', 'extractiva']
-        mineria_jobs = df[df['sector'].str.lower().str.contains('|'.join(mineria_keywords), na=False)].copy()
-        
-        if len(mineria_jobs) == 0:
-            return "<p>No se encontraron puestos en el sector minería</p>"
-        
-        # Clasificar puestos de minería por cargos principales
-        def classify_mineria_role(puesto):
-            puesto_lower = str(puesto).lower()
-            
-            if any(word in puesto_lower for word in ['ingeniero minas', 'mining engineer', 'geólogo', 'geology']):
-                return 'Ingeniería de Minas y Geología'
-            elif any(word in puesto_lower for word in ['operaciones', 'operations', 'planta', 'plant', 'producción']):
-                return 'Operaciones y Producción'
-            elif any(word in puesto_lower for word in ['seguridad', 'safety', 'medio ambiente', 'environmental']):
-                return 'Seguridad y Medio Ambiente'
-            elif any(word in puesto_lower for word in ['mantenimiento', 'maintenance', 'mecánico', 'eléctrico']):
-                return 'Mantenimiento'
-            elif any(word in puesto_lower for word in ['exploración', 'exploration', 'prospección']):
-                return 'Exploración'
-            elif any(word in puesto_lower for word in ['metalurgia', 'metallurgy', 'procesamiento']):
-                return 'Metalurgia y Procesamiento'
-            else:
-                return 'Otros Cargos Minería'
-        
-        mineria_jobs['mineria_role'] = mineria_jobs['puesto'].apply(classify_mineria_role)
-        
-        # Calcular quartiles por cargo
-        quartiles_data = []
-        
-        for role in mineria_jobs['mineria_role'].unique():
-            role_salaries = mineria_jobs[mineria_jobs['mineria_role'] == role]['salario_promedio']
-            
-            if len(role_salaries) >= 2:  # Mínimo 2 salarios
-                quartiles = {
-                    'category': role,
-                    'count': len(role_salaries),
-                    'min': role_salaries.min(),
-                    'q1': role_salaries.quantile(0.25),
-                    'median': role_salaries.median(),
-                    'q3': role_salaries.quantile(0.75),
-                    'max': role_salaries.max(),
-                    'mean': role_salaries.mean()
-                }
-                quartiles_data.append(quartiles)
-        
-        if not quartiles_data:
-            return "<p>No hay suficientes datos para análisis de quartiles en minería</p>"
-        
-        quartiles_df = pd.DataFrame(quartiles_data)
-        quartiles_df = quartiles_df.sort_values('median', ascending=True)
-        
-        # Crear gráfico de quartiles horizontal
-        fig = go.Figure()
-        
-        for i, row in quartiles_df.iterrows():
-            # Barra principal (Q1 a Q3)
-            fig.add_trace(go.Bar(
-                name=f"{row['category']} (Q1-Q3)",
-                y=[row['category']],
-                x=[row['q3'] - row['q1']],
-                base=row['q1'],
-                orientation='h',
-                marker_color='#8B4513',  # Marrón minería
-                opacity=0.8,
-                showlegend=False,
-                text=f"Q1-Q3: S/ {row['q1']:,.0f} - S/ {row['q3']:,.0f}",
-                textposition='inside'
-            ))
-            
-            # Líneas y puntos como en el análisis TI
-            fig.add_trace(go.Scatter(
-                x=[row['min'], row['q1']],
-                y=[row['category'], row['category']],
-                mode='lines',
-                line=dict(color='#654321', width=3),
-                showlegend=False
-            ))
-            
-            fig.add_trace(go.Scatter(
-                x=[row['q3'], row['max']],
-                y=[row['category'], row['category']],
-                mode='lines',
-                line=dict(color='#654321', width=3),
-                showlegend=False
-            ))
-            
-            fig.add_trace(go.Scatter(
-                x=[row['median']],
-                y=[row['category']],
-                mode='markers',
-                marker=dict(color='orange', size=12, symbol='circle', line=dict(color='white', width=2)),
-                name='Mediana' if i == 0 else '',
-                showlegend=True if i == 0 else False
-            ))
-            
-            fig.add_trace(go.Scatter(
-                x=[row['min']],
-                y=[row['category']],
-                mode='markers',
-                marker=dict(color='#654321', size=8, symbol='diamond'),
-                name='Min/Max' if i == 0 else '',
-                showlegend=True if i == 0 else False
-            ))
-            
-            fig.add_trace(go.Scatter(
-                x=[row['max']],
-                y=[row['category']],
-                mode='markers',
-                marker=dict(color='#654321', size=8, symbol='diamond'),
-                showlegend=False
-            ))
-        
-        fig.update_layout(
-            title='⛏️ Análisis Salarial Minería - Distribución de Sueldos por Cargo Principal<br><sub>Quartiles salariales por especialización minera (Min, Q1, Mediana, Q3, Max)</sub>',
-            xaxis_title='Salario (S/)',
-            yaxis_title='Cargo Minería',
-            height=500,
-            template="plotly_white",
-            title_x=0.5,
-            xaxis=dict(tickformat=',.0f'),
-            yaxis={'categoryorder':'total ascending'},
-            showlegend=True,
-            legend=dict(
-                orientation="h",
-                yanchor="bottom",
-                y=1.02,
-                xanchor="right",
-                x=1
-            )
-        )
-        
-        return fig.to_html(include_plotlyjs=False, div_id="mineria-quartiles")
-
     def create_agroindustria_quartiles_chart(self, df):
         """Crear análisis de quartiles para puestos de Agroindustria por cargos principales"""
         if len(df) == 0:
             return "<p>No se encontraron datos para análisis de agroindustria</p>"
         
-        # Filtrar por sector agroindustria
-        agro_keywords = ['agricultura', 'agroindustria', 'agro', 'alimentos']
-        agro_jobs = df[df['sector'].str.lower().str.contains('|'.join(agro_keywords), na=False)].copy()
+        # Filtrar por empresas de agroindustria/alimentos/consumo masivo
+        agro_empresas = [
+            'Agro Industrial Paramonga Saa', 
+            'Backus', 
+            'Super Food Holding',
+            'Alicorp',
+            'Colgate-Palmolive',
+            'Procter & Gamble',
+            'Reckitt'
+        ]
+        agro_jobs = df[df['empresa'].isin(agro_empresas)].copy()
         
         if len(agro_jobs) == 0:
-            return "<p>No se encontraron puestos en el sector agroindustria</p>"
+            return "<p>No se encontraron puestos en empresas de agroindustria</p>"
         
-        # Clasificar puestos de agroindustria por cargos principales
+        # Clasificar puestos de consumo masivo/alimentos por cargos principales
         def classify_agro_role(puesto):
             puesto_lower = str(puesto).lower()
             
-            if any(word in puesto_lower for word in ['agrónomo', 'agronomy', 'cultivo', 'crop']):
-                return 'Agronomía y Cultivos'
-            elif any(word in puesto_lower for word in ['producción', 'production', 'planta', 'manufacturing']):
-                return 'Producción y Manufactura'
+            if any(word in puesto_lower for word in ['marketing', 'marca', 'brand', 'trade']):
+                return 'Marketing y Marcas'
+            elif any(word in puesto_lower for word in ['ventas', 'sales', 'comercial', 'account']):
+                return 'Ventas y Comercial'
+            elif any(word in puesto_lower for word in ['producción', 'production', 'planta', 'manufacturing', 'supply']):
+                return 'Producción y Supply Chain'
             elif any(word in puesto_lower for word in ['calidad', 'quality', 'control', 'aseguramiento']):
                 return 'Control de Calidad'
-            elif any(word in puesto_lower for word in ['comercial', 'ventas', 'marketing', 'trade']):
-                return 'Comercial y Marketing'
-            elif any(word in puesto_lower for word in ['logística', 'logistics', 'supply', 'cadena']):
-                return 'Logística y Supply Chain'
-            elif any(word in puesto_lower for word in ['investigación', 'research', 'desarrollo', 'innovation']):
+            elif any(word in puesto_lower for word in ['finanzas', 'finance', 'planeamiento', 'planning', 'analyst']):
+                return 'Finanzas y Planeamiento'
+            elif any(word in puesto_lower for word in ['investigación', 'research', 'desarrollo', 'innovation', 'design']):
                 return 'I+D e Innovación'
+            elif any(word in puesto_lower for word in ['gerente', 'manager', 'director', 'jefe', 'head', 'ceo']):
+                return 'Gestión y Liderazgo'
             else:
-                return 'Otros Cargos Agroindustria'
+                return 'Otros Roles Consumo Masivo'
         
         agro_jobs['agro_role'] = agro_jobs['puesto'].apply(classify_agro_role)
         
@@ -643,9 +513,9 @@ class DashboardEjecutivoMejorado:
             ))
         
         fig.update_layout(
-            title='🌾 Análisis Salarial Agroindustria - Distribución de Sueldos por Cargo Principal<br><sub>Quartiles salariales por especialización agroindustrial (Min, Q1, Mediana, Q3, Max)</sub>',
+            title='🌾 Análisis Salarial Consumo Masivo - Distribución de Sueldos por Cargo Principal<br><sub>Quartiles salariales en empresas de alimentos y consumo masivo (Min, Q1, Mediana, Q3, Max)</sub>',
             xaxis_title='Salario (S/)',
-            yaxis_title='Cargo Agroindustria',
+            yaxis_title='Cargo Consumo Masivo',
             height=500,
             template="plotly_white",
             title_x=0.5,
@@ -662,157 +532,172 @@ class DashboardEjecutivoMejorado:
         )
         
         return fig.to_html(include_plotlyjs=False, div_id="agroindustria-quartiles")
-    
-    def create_no_gerencial_chart(self, df):
-        """Crear análisis de puestos no gerenciales con gráfico de barras mejorado"""
-        no_ger_jobs = df[df['es_no_gerencial'] == True].copy()
+
+    def create_practicantes_juniors_chart(self, df):
+        """Crear análisis de quartiles para puestos de Practicantes y Juniors"""
+        if len(df) == 0:
+            return "<p>No se encontraron datos para análisis de practicantes y juniors</p>"
         
-        if len(no_ger_jobs) == 0:
-            return "<p>No se encontraron puestos no gerenciales en el dataset</p>"
+        # Filtrar puestos de practicantes y juniors
+        practicante_keywords = ['practicante', 'trainee', 'intern', 'junior', 'jr.', 'jr ', 'auxiliar']
+        junior_jobs = df[df['puesto'].str.lower().str.contains('|'.join(practicante_keywords), na=False)].copy()
         
-        # Agrupar por puesto no gerencial y obtener más información
-        no_ger_analysis = no_ger_jobs.groupby('puesto').agg({
-            'salario_promedio': 'mean',
-            'empresa': ['nunique', 'first'],
-            'sector': 'first'
-        }).round(0)
+        # FILTRAR PUESTOS MAL CLASIFICADOS: Excluir puestos que claramente NO son junior
+        puestos_excluir = [
+            'Jefe de comunicación interna y gestión del cambio',  # Es jefe, no junior
+            'Chile International and National Senior Transport Manager',  # Es senior manager
+        ]
         
-        no_ger_analysis.columns = ['salario_promedio', 'total_empresas', 'empresa_ejemplo', 'sector']
-        no_ger_analysis = no_ger_analysis.sort_values('salario_promedio', ascending=False).head(15)
+        # También excluir puestos que contengan palabras de liderazgo pero tengan "junior" en el nombre
+        palabras_liderazgo = ['jefe', 'head', 'manager', 'director', 'gerente', 'supervisor', 'senior']
         
-        # Crear gráfico de barras horizontal más limpio
+        # Crear máscara para excluir puestos mal clasificados
+        mask_excluir = junior_jobs['puesto'].isin(puestos_excluir)
+        
+        # También excluir si contiene palabras de liderazgo (excepto si es claramente junior)
+        for palabra in palabras_liderazgo:
+            mask_liderazgo = junior_jobs['puesto'].str.lower().str.contains(palabra, na=False)
+            # Solo excluir si NO tiene "junior" o "jr" claramente en el título
+            mask_no_junior_claro = ~junior_jobs['puesto'].str.lower().str.contains(r'\bjunior\b|\bjr\b', na=False)
+            mask_excluir = mask_excluir | (mask_liderazgo & mask_no_junior_claro)
+        
+        # Aplicar filtro: mantener solo los que NO están en la lista de exclusión
+        junior_jobs = junior_jobs[~mask_excluir].copy()
+        
+        print(f"🔍 Puestos junior filtrados: {len(junior_jobs)} (excluidos {mask_excluir.sum()} puestos mal clasificados)")
+        
+        if len(junior_jobs) == 0:
+            return "<p>No se encontraron puestos de practicantes y juniors</p>"
+        
+        # Clasificar puestos de practicantes/juniors por área
+        def classify_junior_area(puesto):
+            puesto_lower = str(puesto).lower()
+            
+            if any(word in puesto_lower for word in ['marketing', 'marca', 'brand', 'comercial', 'ventas', 'sales']):
+                return 'Marketing y Comercial Jr'
+            elif any(word in puesto_lower for word in ['finanzas', 'finance', 'planeamiento', 'planning', 'revenue', 'analyst']):
+                return 'Finanzas y Análisis Jr'
+            elif any(word in puesto_lower for word in ['ti', 'tecnología', 'sistemas', 'proyectos ti', 'tech']):
+                return 'Tecnología Jr'
+            elif any(word in puesto_lower for word in ['recursos humanos', 'rrhh', 'hr', 'talento', 'selección']):
+                return 'Recursos Humanos Jr'
+            elif any(word in puesto_lower for word in ['supply', 'logística', 'cadena', 'operaciones', 'operations']):
+                return 'Supply Chain y Operaciones Jr'
+            elif any(word in puesto_lower for word in ['consultoría', 'consulting', 'business', 'estrategia']):
+                return 'Consultoría y Negocios Jr'
+            elif any(word in puesto_lower for word in ['comunicación', 'communication', 'interno', 'clima']):
+                return 'Comunicaciones Jr'
+            else:
+                return 'Otros Practicantes/Juniors'
+        
+        junior_jobs['junior_area'] = junior_jobs['puesto'].apply(classify_junior_area)
+        
+        # Calcular quartiles por área
+        quartiles_data = []
+        
+        for area in junior_jobs['junior_area'].unique():
+            area_salaries = junior_jobs[junior_jobs['junior_area'] == area]['salario_promedio']
+            
+            if len(area_salaries) >= 2:  # Mínimo 2 salarios
+                quartiles = {
+                    'category': area,
+                    'count': len(area_salaries),
+                    'min': area_salaries.min(),
+                    'q1': area_salaries.quantile(0.25),
+                    'median': area_salaries.median(),
+                    'q3': area_salaries.quantile(0.75),
+                    'max': area_salaries.max(),
+                    'mean': area_salaries.mean()
+                }
+                quartiles_data.append(quartiles)
+        
+        if not quartiles_data:
+            return "<p>No hay suficientes datos para análisis de quartiles de practicantes/juniors</p>"
+        
+        quartiles_df = pd.DataFrame(quartiles_data)
+        quartiles_df = quartiles_df.sort_values('median', ascending=True)
+        
+        # Crear gráfico de quartiles horizontal
         fig = go.Figure()
         
-        fig.add_trace(go.Bar(
-            y=no_ger_analysis.index,
-            x=no_ger_analysis['salario_promedio'],
-            orientation='h',
-            marker=dict(
-                color='#2E86AB',
+        for i, row in quartiles_df.iterrows():
+            # Barra principal (Q1 a Q3)
+            fig.add_trace(go.Bar(
+                name=f"{row['category']} (Q1-Q3)",
+                y=[row['category']],
+                x=[row['q3'] - row['q1']],
+                base=row['q1'],
+                orientation='h',
+                marker_color='#4169E1',  # Azul para practicantes/juniors
                 opacity=0.8,
-                line=dict(color='white', width=1)
-            ),
-            text=[f'S/ {val:,.0f}' for val in no_ger_analysis['salario_promedio']],
-            textposition='outside',
-            textfont=dict(size=11, color='#2c3e50'),
-            hovertemplate='<b>%{y}</b><br>' +
-                         'Salario: S/ %{x:,.0f}<br>' +
-                         'Empresas: %{customdata[0]}<br>' +
-                         'Sector: %{customdata[1]}<br>' +
-                         'Ejemplo: %{customdata[2]}<br>' +
-                         '<extra></extra>',
-            customdata=list(zip(no_ger_analysis['total_empresas'], 
-                               no_ger_analysis['sector'],
-                               no_ger_analysis['empresa_ejemplo']))
-        ))
-        
-        fig.update_layout(
-            title='🏆 Top 15 Puestos No Gerenciales Mejor Pagados<br><sub>💰 Ordenados por salario promedio descendente</sub>',
-            xaxis_title='💰 Salario Promedio (S/)',
-            yaxis_title='',
-            height=650,
-            template="plotly_white",
-            title_x=0.5,
-            margin=dict(l=300, r=100, t=100, b=80),  # Más margen izquierdo para las etiquetas
-            xaxis=dict(
-                tickformat=',.0f',
-                showgrid=True,
-                gridcolor='rgba(128,128,128,0.2)'
-            ),
-            yaxis=dict(
-                showgrid=False,
-                tickfont=dict(size=10)
-            ),
-            showlegend=False
-        )
-        
-        return fig.to_html(include_plotlyjs=False, div_id="no-ger-chart")
-    
-    def create_no_gerencial_bubble_chart(self, df):
-        """Crear gráfico de burbujas mejorado para puestos no gerenciales"""
-        no_ger_jobs = df[df['es_no_gerencial'] == True].copy()
-        
-        if len(no_ger_jobs) == 0:
-            return "<p>No se encontraron puestos no gerenciales para el análisis de burbujas</p>"
-        
-        # Agrupar por empresa para puestos no gerenciales
-        bubble_data = no_ger_jobs.groupby(['empresa', 'sector']).agg({
-            'salario_promedio': 'mean',
-            'puesto': 'count'
-        }).reset_index()
-        
-        bubble_data = bubble_data[bubble_data['puesto'] >= 2]  # Al menos 2 puestos
-        bubble_data = bubble_data.sort_values('salario_promedio', ascending=False).head(25)
-        
-        # Crear gráfico de burbujas con Plotly Go para mejor control
-        fig = go.Figure()
-        
-        # Definir colores por sector
-        sectores_unicos = bubble_data['sector'].unique()
-        colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#F4A460', '#98D8E8']
-        color_map = {sector: colores[i % len(colores)] for i, sector in enumerate(sectores_unicos)}
-        
-        for sector in sectores_unicos:
-            sector_data = bubble_data[bubble_data['sector'] == sector]
+                showlegend=False,
+                text=f"Q1-Q3: S/ {row['q1']:,.0f} - S/ {row['q3']:,.0f}",
+                textposition='inside'
+            ))
+            
+            # Líneas y puntos
+            fig.add_trace(go.Scatter(
+                x=[row['min'], row['q1']],
+                y=[row['category'], row['category']],
+                mode='lines',
+                line=dict(color='#000080', width=3),
+                showlegend=False
+            ))
             
             fig.add_trace(go.Scatter(
-                x=sector_data['puesto'],
-                y=sector_data['salario_promedio'],
-                mode='markers+text',
-                marker=dict(
-                    size=sector_data['puesto'],  # Tamaño proporcional
-                    color=color_map[sector],
-                    opacity=0.7,
-                    line=dict(width=2, color='white'),
-                    sizemin=15,
-                    sizeref=0.1,  # Factor de escala para el tamaño
-                    sizemode='diameter'
-                ),
-                text=sector_data['empresa'].str[:15] + '...',  # Nombres truncados
-                textposition='middle center',
-                textfont=dict(size=9, color='white', family='Arial Black'),
-                name=sector,
-                hovertemplate='<b>%{hovertext}</b><br>' +
-                             '💰 Salario Promedio: S/ %{y:,.0f}<br>' +
-                             '👥 Puestos No Gerenciales: %{x}<br>' +
-                             '🏭 Sector: ' + sector + '<br>' +
-                             '<extra></extra>',
-                hovertext=sector_data['empresa']
+                x=[row['q3'], row['max']],
+                y=[row['category'], row['category']],
+                mode='lines',
+                line=dict(color='#000080', width=3),
+                showlegend=False
+            ))
+            
+            fig.add_trace(go.Scatter(
+                x=[row['median']],
+                y=[row['category']],
+                mode='markers',
+                marker=dict(color='orange', size=12, symbol='circle', line=dict(color='white', width=2)),
+                name='Mediana' if i == 0 else '',
+                showlegend=True if i == 0 else False
+            ))
+            
+            fig.add_trace(go.Scatter(
+                x=[row['min']],
+                y=[row['category']],
+                mode='markers',
+                marker=dict(color='#000080', size=8, symbol='diamond'),
+                name='Min/Max' if i == 0 else '',
+                showlegend=True if i == 0 else False
+            ))
+            
+            fig.add_trace(go.Scatter(
+                x=[row['max']],
+                y=[row['category']],
+                mode='markers',
+                marker=dict(color='#000080', size=8, symbol='diamond'),
+                showlegend=False
             ))
         
         fig.update_layout(
-            title='🔵 Análisis de Burbujas - Empresas con Múltiples Puestos No Gerenciales<br><sub>💰 Tamaño de burbuja = Cantidad de puestos | 🎨 Color = Sector industrial</sub>',
-            xaxis_title='👥 Número de Puestos No Gerenciales',
-            yaxis_title='💰 Salario Promedio (S/)',
-            height=600,
+            title='🎓 Análisis Salarial Practicantes y Juniors - Distribución por Área Profesional<br><sub>Quartiles salariales para puestos de entrada y desarrollo profesional (Min, Q1, Mediana, Q3, Max)</sub>',
+            xaxis_title='Salario (S/)',
+            yaxis_title='Área Profesional Junior',
+            height=500,
             template="plotly_white",
             title_x=0.5,
-            xaxis=dict(
-                tickformat='d',
-                showgrid=True,
-                gridcolor='rgba(128,128,128,0.2)',
-                range=[1.5, bubble_data['puesto'].max() + 0.5]
-            ),
-            yaxis=dict(
-                tickformat=',.0f',
-                showgrid=True,
-                gridcolor='rgba(128,128,128,0.2)'
-            ),
-            legend=dict(
-                orientation="v",
-                yanchor="top",
-                y=1,
-                xanchor="left",
-                x=1.02,
-                bgcolor="rgba(255,255,255,0.8)",
-                bordercolor="rgba(0,0,0,0.2)",
-                borderwidth=1
-            ),
+            xaxis=dict(tickformat=',.0f'),
+            yaxis={'categoryorder':'total ascending'},
             showlegend=True,
-            plot_bgcolor='rgba(248,249,250,0.8)'
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            )
         )
         
-        return fig.to_html(include_plotlyjs=False, div_id="bubble-no-ger")
+        return fig.to_html(include_plotlyjs=False, div_id="practicantes-juniors")
 
     def create_gerencial_bubble_chart(self, df):
         """Crear gráfico de burbujas para puestos netamente gerenciales"""
@@ -930,100 +815,6 @@ class DashboardEjecutivoMejorado:
         
         return fig.to_html(include_plotlyjs=False, div_id="gerencial-bubble")
 
-    def create_menor_pagados_chart(self, df):
-        """Crear análisis de puestos menor pagados por industria/sector"""
-        if len(df) == 0:
-            return "<p>No se encontraron datos para análisis de puestos menor pagados</p>"
-        
-        # Obtener los 30 puestos con menor salario promedio
-        df_sorted = df.sort_values('salario_promedio', ascending=True)
-        menor_pagados = df_sorted.head(30).copy()
-        
-        # Agrupar por sector para análisis de industrias con menores salarios
-        sector_analysis = df.groupby('sector').agg({
-            'salario_promedio': ['mean', 'min', 'count'],
-            'puesto': 'nunique'
-        }).round(0)
-        
-        sector_analysis.columns = ['salario_promedio', 'salario_minimo', 'total_puestos', 'puestos_unicos']
-        sector_analysis = sector_analysis.reset_index()
-        sector_analysis = sector_analysis[sector_analysis['total_puestos'] >= 3]  # Al menos 3 puestos
-        sector_analysis = sector_analysis.sort_values('salario_promedio', ascending=True).head(15)
-        
-        # Crear subplot con dos gráficos
-        from plotly.subplots import make_subplots
-        
-        fig = make_subplots(
-            rows=2, cols=1,
-            subplot_titles=(
-                '📉 Top 30 Puestos con Menores Salarios',
-                '🏭 Sectores/Industrias con Menores Sueldos Promedio'
-            ),
-            vertical_spacing=0.12,
-            row_heights=[0.6, 0.4]
-        )
-        
-        # Gráfico 1: Puestos individuales menor pagados
-        fig.add_trace(
-            go.Bar(
-                x=menor_pagados['salario_promedio'],
-                y=menor_pagados['puesto'],
-                orientation='h',
-                marker_color='#e74c3c',
-                opacity=0.8,
-                text=[f"S/ {x:,.0f}" for x in menor_pagados['salario_promedio']],
-                textposition='auto',
-                hovertemplate='<b>%{y}</b><br>' +
-                             'Salario: S/ %{x:,.0f}<br>' +
-                             'Empresa: %{customdata[0]}<br>' +
-                             'Sector: %{customdata[1]}<br>' +
-                             '<extra></extra>',
-                customdata=list(zip(menor_pagados['empresa'], menor_pagados['sector'])),
-                name='Puestos Menor Pagados'
-            ),
-            row=1, col=1
-        )
-        
-        # Gráfico 2: Sectores con menores salarios promedio
-        fig.add_trace(
-            go.Bar(
-                x=sector_analysis['salario_promedio'],
-                y=sector_analysis['sector'],
-                orientation='h',
-                marker_color='#f39c12',
-                opacity=0.8,
-                text=[f"S/ {x:,.0f}" for x in sector_analysis['salario_promedio']],
-                textposition='auto',
-                hovertemplate='<b>%{y}</b><br>' +
-                             'Salario Promedio: S/ %{x:,.0f}<br>' +
-                             'Salario Mínimo: S/ %{customdata[0]:,.0f}<br>' +
-                             'Total Puestos: %{customdata[1]}<br>' +
-                             'Puestos Únicos: %{customdata[2]}<br>' +
-                             '<extra></extra>',
-                customdata=list(zip(sector_analysis['salario_minimo'], 
-                                  sector_analysis['total_puestos'],
-                                  sector_analysis['puestos_unicos'])),
-                name='Sectores Menor Pagados'
-            ),
-            row=2, col=1
-        )
-        
-        fig.update_layout(
-            title='📉 Análisis Salarial - Puestos y Sectores con Menores Sueldos<br><sub>💰 Identificación de oportunidades de mejora salarial por industria</sub>',
-            height=800,
-            template="plotly_white",
-            title_x=0.5,
-            showlegend=False
-        )
-        
-        # Actualizar ejes
-        fig.update_xaxes(title_text="💰 Salario Promedio (S/)", tickformat=',.0f', row=1, col=1)
-        fig.update_xaxes(title_text="💰 Salario Promedio (S/)", tickformat=',.0f', row=2, col=1)
-        fig.update_yaxes(title_text="Puesto", row=1, col=1)
-        fig.update_yaxes(title_text="Sector/Industria", row=2, col=1)
-        
-        return fig.to_html(include_plotlyjs=False, div_id="menor-pagados")
-    
     def calculate_real_metrics(self):
         """Calcular métricas reales desde los datos"""
         df = self.classify_job_categories(self.df.copy())
@@ -1050,8 +841,10 @@ class DashboardEjecutivoMejorado:
             'promedio_ventas_marketing': df[df['es_ventas_marketing'] == True]['salario_promedio'].mean() if len(df[df['es_ventas_marketing'] == True]) > 0 else 0,
             'total_gerencial': len(df[df['es_gerencial'] == True]),
             'promedio_gerencial': df[df['es_gerencial'] == True]['salario_promedio'].mean() if len(df[df['es_gerencial'] == True]) > 0 else 0,
-            'total_no_gerencial': len(df[df['es_no_gerencial'] == True]),
-            'promedio_no_gerencial': df[df['es_no_gerencial'] == True]['salario_promedio'].mean() if len(df[df['es_no_gerencial'] == True]) > 0 else 0,
+            
+            # Análisis de practicantes/juniors REALES
+            'total_practicantes': len(df[df['puesto'].str.lower().str.contains('practicante|trainee|intern|junior|jr.|jr |auxiliar', na=False)]),
+            'promedio_practicantes': df[df['puesto'].str.lower().str.contains('practicante|trainee|intern|junior|jr.|jr |auxiliar', na=False)]['salario_promedio'].mean() if len(df[df['puesto'].str.lower().str.contains('practicante|trainee|intern|junior|jr.|jr |auxiliar', na=False)]) > 0 else 0,
             
             # Top performers reales
             'top_empresa_salario': df.groupby('empresa')['salario_promedio'].mean().max(),
@@ -1088,10 +881,10 @@ class DashboardEjecutivoMejorado:
             </div>
             
             <div class="kpi-card warning">
-                <div class="kpi-value">{metrics['total_no_gerencial']}</div>
-                <div class="kpi-label">Puestos No Gerenciales</div>
-                <div class="kpi-source">Promedio: S/ {metrics['promedio_no_gerencial']:,.0f}</div>
-                <div class="kpi-change real">👥 Datos reales filtrados</div>
+                <div class="kpi-value">{metrics['total_practicantes']}</div>
+                <div class="kpi-label">Puestos Practicantes/Juniors</div>
+                <div class="kpi-source">Promedio: S/ {metrics['promedio_practicantes']:,.0f}</div>
+                <div class="kpi-change real">🎓 Puestos de entrada</div>
             </div>
             
             <div class="kpi-card secondary">
@@ -1125,21 +918,68 @@ class DashboardEjecutivoMejorado:
         """
         return cards_html
     
+    def correct_salary_formatting(self, df):
+        """Corregir salarios que parecen estar mal formateados"""
+        df_corrected = df.copy()
+        
+        # Identificar salarios problemáticos para puestos profesionales
+        # Criterios: salario < 2000 Y puesto no es practicante/trainee/auxiliar
+        problematic_mask = (
+            (df_corrected['salario_promedio'] < 2000) &
+            (~df_corrected['puesto'].str.lower().str.contains(
+                'practicante|trainee|intern|auxiliar|asistente|assistant', 
+                na=False, regex=True
+            ))
+        )
+        
+        # Para puestos profesionales con salarios < 2000, multiplicar por 10
+        professional_roles = [
+            'analista', 'analyst', 'coordinador', 'coordinator', 'especialista', 
+            'specialist', 'ejecutivo', 'executive', 'asesor', 'advisor',
+            'supervisor', 'jefe', 'head', 'gerente', 'manager'
+        ]
+        
+        professional_mask = df_corrected['puesto'].str.lower().str.contains(
+            '|'.join(professional_roles), na=False, regex=True
+        )
+        
+        # Aplicar corrección: multiplicar por 10 para puestos profesionales con salarios muy bajos
+        correction_mask = problematic_mask & professional_mask
+        
+        if correction_mask.sum() > 0:
+            print(f"🔧 Corrigiendo {correction_mask.sum()} salarios que parecen mal formateados:")
+            for idx in df_corrected[correction_mask].index:
+                old_salary = df_corrected.loc[idx, 'salario_promedio']
+                new_salary = old_salary * 10
+                empresa = df_corrected.loc[idx, 'empresa']
+                puesto = df_corrected.loc[idx, 'puesto']
+                print(f"   • {empresa} - {puesto}: S/ {old_salary:,.0f} → S/ {new_salary:,.0f}")
+                
+                # Corregir salario_promedio, salario_minimo y salario_maximo
+                df_corrected.loc[idx, 'salario_promedio'] = new_salary
+                df_corrected.loc[idx, 'salario_minimo'] = df_corrected.loc[idx, 'salario_minimo'] * 10
+                df_corrected.loc[idx, 'salario_maximo'] = df_corrected.loc[idx, 'salario_maximo'] * 10
+        
+        return df_corrected
+    
     def generate_improved_dashboard(self):
         """Generar dashboard ejecutivo mejorado con análisis específicos"""
         print("🎨 Generando Dashboard Ejecutivo Mejorado...")
         
+        # Aplicar corrección de salarios mal formateados
+        df_corrected = self.correct_salary_formatting(self.df.copy())
+        
         # Clasificar trabajos y calcular métricas
-        df_classified = self.classify_job_categories(self.df.copy())
+        df_classified = self.classify_job_categories(df_corrected)
+        self.df = df_corrected  # Actualizar el DataFrame principal
         metrics = self.calculate_real_metrics()
         
         # Generar componentes
         ti_chart = self.create_ti_analysis_chart(df_classified)
         vm_chart = self.create_ventas_marketing_chart(df_classified)
-        mineria_chart = self.create_mineria_quartiles_chart(df_classified)
+        practicantes_chart = self.create_practicantes_juniors_chart(df_classified)
         agroindustria_chart = self.create_agroindustria_quartiles_chart(df_classified)
         bubble_gerencial = self.create_gerencial_bubble_chart(df_classified)
-        menor_pagados_chart = self.create_menor_pagados_chart(df_classified)
         
         # HTML del dashboard mejorado
         html_content = f"""
@@ -1312,27 +1152,27 @@ class DashboardEjecutivoMejorado:
             <div id="vm-chart">{vm_chart}</div>
         </section>
         
-        <!-- Análisis Minería -->
+        <!-- Análisis Practicantes y Juniors -->
         <section class="chart-container">
             <h3 class="chart-title">
-                <i class="fas fa-mountain"></i> 
-                Análisis Salarial Minería - Distribución de Sueldos por Cargo Principal
+                <i class="fas fa-graduation-cap"></i> 
+                Análisis Salarial Practicantes y Juniors - Distribución por Área Profesional
             </h3>
             <p class="chart-description">
-                <strong>Análisis salarial por quartiles:</strong> Sueldos en el sector minero por especialización. 
-                Barras marrones = rango salarial intercuartílico (Q1-Q3), puntos naranjas = sueldo mediano.
+                <strong>Análisis salarial por quartiles:</strong> {metrics['total_practicantes']} puestos de entrada y desarrollo profesional agrupados por área. 
+                Barras azules = rango salarial intercuartílico (Q1-Q3), puntos naranjas = sueldo mediano.
             </p>
-            <div id="mineria-chart">{mineria_chart}</div>
+            <div id="practicantes-chart">{practicantes_chart}</div>
         </section>
         
-        <!-- Análisis Agroindustria -->
+        <!-- Análisis Consumo Masivo -->
         <section class="chart-container">
             <h3 class="chart-title">
                 <i class="fas fa-seedling"></i> 
-                Análisis Salarial Agroindustria - Distribución de Sueldos por Cargo Principal
+                Análisis Salarial Consumo Masivo - Distribución de Sueldos por Cargo Principal
             </h3>
             <p class="chart-description">
-                <strong>Análisis salarial por quartiles:</strong> Sueldos en el sector agroindustrial por especialización. 
+                <strong>Análisis salarial por quartiles:</strong> Sueldos en empresas de alimentos y consumo masivo (Alicorp, P&G, Colgate, etc.). 
                 Barras verdes = rango salarial intercuartílico (Q1-Q3), puntos naranjas = sueldo mediano.
             </p>
             <div id="agroindustria-chart">{agroindustria_chart}</div>
@@ -1350,19 +1190,6 @@ class DashboardEjecutivoMejorado:
                 <br><strong>Jerarquía salarial:</strong> C-Level → Directores → Gerentes → Jefaturas → Supervisión.
             </p>
             <div id="gerencial-bubble">{bubble_gerencial}</div>
-        </section>
-        
-        <!-- Análisis Menores Sueldos -->
-        <section class="chart-container">
-            <h3 class="chart-title">
-                <i class="fas fa-chart-area"></i> 
-                Análisis Salarial de Oportunidad - Puestos y Sectores con Menores Sueldos
-            </h3>
-            <p class="chart-description">
-                <strong>Identificación de brechas salariales:</strong> Top 30 puestos con menores salarios y sectores industriales con menor compensación promedio. 
-                Útil para identificar oportunidades de mejora salarial por industria.
-            </p>
-            <div id="menor-pagados">{menor_pagados_chart}</div>
         </section>
     </main>
 
@@ -1387,8 +1214,8 @@ class DashboardEjecutivoMejorado:
             console.log('📊 Dashboard Análisis Salarial Ejecutivo cargado');
             console.log('💻 Puestos TI:', {metrics['total_ti']});
             console.log('📈 Puestos Ventas/Marketing:', {metrics['total_ventas_marketing']});
-            console.log('👥 Puestos No Gerenciales:', {metrics['total_no_gerencial']});
             console.log('👑 Puestos Gerenciales:', {metrics['total_gerencial']});
+            console.log('🎓 Puestos Practicantes/Juniors:', {metrics['total_practicantes']});
         }});
     </script>
 </body>
@@ -1407,7 +1234,7 @@ class DashboardEjecutivoMejorado:
 def main():
     """Función principal"""
     print("🎯 DASHBOARD ANÁLISIS SALARIAL EJECUTIVO")
-    print("🔍 Estudio de sueldos específicos: TI, Ventas/Marketing, Gerenciales, Menores Pagados")
+    print("🔍 Estudio de sueldos específicos: TI, Ventas/Marketing, Gerenciales, Practicantes/Juniors")
     print("📊 Solo datos salariales reales - Sin simulaciones")
     print("=" * 60)
     
@@ -1422,11 +1249,9 @@ def main():
         print(f"\n📊 ANÁLISIS SALARIALES INCLUIDOS:")
         print(f"💻 Análisis salarial TI con gráfico de quartiles por categoría")
         print(f"📈 Análisis salarial Ventas/Marketing con quartiles (sin gerenciales)")
-        print(f"🏭 Análisis salarial Sectores Clave - Minería, Agroindustria y Banca")
-        print(f"👥 Análisis salarial No Gerencial con top sueldos operativos")
-        print(f"🔵 Análisis salarial por burbujas - compensación no gerencial")
+        print(f"🎓 Análisis salarial Practicantes y Juniors por área profesional")
+        print(f"🌾 Análisis salarial Consumo Masivo por cargos principales")
         print(f"👑 Análisis salarial gerencial por nivel jerárquico ejecutivo")
-        print(f"📉 Análisis de oportunidad - puestos y sectores con menores sueldos")
         
         abrir = input("\n¿Abrir dashboard en el navegador? (y/n): ").strip().lower()
         if abrir in ['y', 'yes', 'sí', 's']:
