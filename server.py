@@ -12,7 +12,8 @@ import threading
 import time
 from datetime import datetime
 
-PORT = 8000
+# Puerto por defecto - puede ser sobrescrito con variable de entorno
+PORT = int(os.environ.get('SALARIOS_PORT', 20000))
 
 class SalariosHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     """Handler personalizado para el servidor web"""
@@ -78,6 +79,7 @@ def start_server():
     print(f"\n🌐 Servidor corriendo en: http://localhost:{PORT}")
     print("📊 Página principal: index.html")
     print("🎯 Dashboard ejecutivo: dashboard_ejecutivo.html")
+    print(f"🔗 URL completa: http://localhost:{PORT}/index.html")
     print("\n💡 Para detener el servidor: Ctrl+C")
     print("=" * 50)
     

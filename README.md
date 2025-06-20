@@ -79,8 +79,8 @@ python server.py
 
 El sistema incluye un **servidor web integrado** que permite visualizar todos los reportes en el navegador:
 
-- **Página principal**: `http://localhost:8000/index.html`
-- **Dashboard ejecutivo**: `http://localhost:8000/dashboard_ejecutivo.html`
+- **Página principal**: `http://localhost:20000/index.html`
+- **Dashboard ejecutivo**: `http://localhost:20000/dashboard_ejecutivo.html`
 - **Reportes interactivos**: Todos los archivos HTML generados
 
 ### Características del Dashboard:

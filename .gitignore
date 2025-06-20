@@ -320,4 +320,23 @@ metrics.csv
 # - Templates HTML base (index.html, dashboard_ejecutivo.html)
 # - Scripts de configuración (.sh)
 # - Documentación (README.md, LICENSE)
-# - Configuración de dependencias (requirements.txt) 
+# - Configuración de dependencias (requirements.txt)
+
+# Datos generados
+*.xlsx
+*.json
+
+# Reportes HTML dinámicos
+*_reporte_*.html
+*_analisis_*.html
+dashboard_*.html
+
+# Logs y temporales
+*.log
+.DS_Store
+.pytest_cache/
+
+# Archivos de configuración local
+config.ini
+.vscode/
+.idea/ 
