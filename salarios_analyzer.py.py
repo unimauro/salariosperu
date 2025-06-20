@@ -554,10 +554,59 @@ def main():
     print("🎨 ANALIZADOR PROFESIONAL DE SALARIOS PERÚ")
     print("=" * 50)
     
-    # Solicitar fuente de datos
-    data_source = input("📁 Ingresa la ruta del archivo de datos (CSV o SQLite) [Enter para default]: ")
-    if not data_source.strip():
-        data_source = 'salarios_peru.csv'
+    # Buscar archivos disponibles automáticamente
+    import os
+    import glob
+    
+    # Buscar archivos CSV y DB en el directorio actual
+    csv_files = glob.glob("*.csv")
+    db_files = glob.glob("*.db")
+    
+    data_files = []
+    if csv_files:
+        data_files.extend(csv_files)
+    if db_files:
+        data_files.extend(db_files)
+    
+    if data_files:
+        print("📁 Archivos de datos encontrados:")
+        for i, file in enumerate(data_files, 1):
+            file_size = os.path.getsize(file) / 1024  # KB
+            print(f"   {i}. {file} ({file_size:.1f} KB)")
+        
+        # Sugerir el archivo más completo por defecto
+        if csv_files:
+            # Priorizar archivo completo si existe
+            completo_files = [f for f in csv_files if 'completo' in f]
+            if completo_files:
+                default_file = max(completo_files, key=os.path.getsize)  # El más grande
+            else:
+                default_file = max(csv_files, key=os.path.getsize)  # El más grande
+        else:
+            # Para DB también priorizar completo
+            completo_db = [f for f in db_files if 'completo' in f]
+            if completo_db:
+                default_file = max(completo_db, key=os.path.getsize)
+            else:
+                default_file = max(db_files, key=os.path.getsize)
+        
+        print(f"\n💡 Archivo sugerido: {default_file}")
+        data_source = input("📁 Ingresa el nombre del archivo o número (Enter para usar sugerido): ").strip()
+        
+        if not data_source:
+            data_source = default_file
+        elif data_source.isdigit():
+            file_index = int(data_source) - 1
+            if 0 <= file_index < len(data_files):
+                data_source = data_files[file_index]
+            else:
+                print("❌ Número de archivo inválido, usando sugerido")
+                data_source = default_file
+    else:
+        print("⚠️  No se encontraron archivos de datos en el directorio actual")
+        data_source = input("📁 Ingresa la ruta completa del archivo de datos: ")
+        if not data_source.strip():
+            data_source = 'salarios_simple.csv'
     
     try:
         # Crear analizador
@@ -907,16 +956,39 @@ if __name__ == "__main__":
         plt.show()
 
 
-def main():
-    """Función principal para ejecutar análisis"""
+def main_simple():
+    """Función principal simplificada para ejecutar análisis"""
     print("📊 ANALIZADOR DE SALARIOS PERÚ")
     print("=" * 40)
     
-    # Solicitar fuente de datos
-    data_source = input("Ingresa la ruta del archivo de datos (CSV o SQLite): ")
+    # Buscar archivos disponibles
+    import os
+    import glob
     
-    if not data_source:
-        data_source = 'salarios_peru.csv'  # Por defecto
+    csv_files = glob.glob("*.csv")
+    db_files = glob.glob("*.db")
+    
+    if csv_files or db_files:
+        # Priorizar archivo completo si existe
+        if csv_files:
+            completo_files = [f for f in csv_files if 'completo' in f]
+            if completo_files:
+                data_source = max(completo_files, key=os.path.getsize)
+            else:
+                data_source = max(csv_files, key=os.path.getsize)
+            print(f"📁 Usando archivo encontrado: {data_source}")
+        else:
+            completo_db = [f for f in db_files if 'completo' in f]
+            if completo_db:
+                data_source = max(completo_db, key=os.path.getsize)
+            else:
+                data_source = max(db_files, key=os.path.getsize)
+            print(f"📁 Usando base de datos encontrada: {data_source}")
+    else:
+        data_source = input("Ingresa la ruta del archivo de datos (CSV o SQLite): ")
+        if not data_source:
+            print("❌ No se encontraron archivos de datos")
+            return
     
     try:
         # Crear analizador
