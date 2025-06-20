@@ -1,0 +1,30 @@
+# Dependencias para Web Scraping
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# Dependencias para Análisis de Datos
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Dependencias para Visualización
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+kaleido>=0.2.1
+
+# Dependencias para Base de Datos
+mysql-connector-python>=8.1.0
+sqlite3
+
+# Dependencias para Manejo de Archivos y Sistema
+openpyxl>=3.1.0
+xlsxwriter>=3.1.0
+
+# Dependencias para Web y APIs
+urllib3>=2.0.0
+chardet>=5.1.0
+
+# Dependencias para Logging y Debugging
+colorama>=0.4.6
+tqdm>=4.65.0 
