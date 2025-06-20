@@ -1,0 +1,323 @@
+# Salarios Perú - .gitignore
+# Evita subir datos y archivos temporales innecesarios
+
+# ============================
+# DATOS Y RESULTADOS GENERADOS
+# ============================
+
+# Archivos de datos principales
+*.csv
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de texto con datos
+empresas_encontradas.txt
+scraping.log
+*.log
+
+# Estadísticas y configuración temporal
+stats.json
+config_temp.json
+
+# Reportes HTML generados (excepto los templates base)
+# Mantener: index.html, dashboard_ejecutivo.html
+bubble_chart_salarios.html
+radar_universidades.html
+heatmap_salarios.html
+ranking_puestos.html
+ranking_universidades.html
+tendencias_puestos.html
+sectores_analisis.html
+comparativa_sectores.html
+dashboard_profesional_salarios.html
+
+# ============================
+# ENTORNO PYTHON
+# ============================
+
+# Entorno virtual
+venv/
+env/
+ENV/
+venv.bak/
+
+# Archivos Python temporales
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribución / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pruebas unitarias / coverage
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# ============================
+# ARCHIVOS DE SISTEMA
+# ============================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================
+# EDITORES E IDEs
+# ============================
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.viminfo
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ============================
+# CONFIGURACIONES LOCALES
+# ============================
+
+# Variables de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Configuraciones de base de datos
+database.conf
+db_config.ini
+mysql_config.json
+
+# Credenciales y API keys
+credentials.json
+api_keys.txt
+secrets.py
+
+# Archivos de configuración personal
+user_config.yaml
+local_settings.py
+
+# ============================
+# ARCHIVOS TEMPORALES DE RED
+# ============================
+
+# Archivos de descarga temporal
+*.tmp.html
+temp_*.json
+cache_*
+session_*
+
+# Cookies y sesiones web
+cookies.txt
+session_data.pickle
+
+# ============================
+# RESPALDOS Y VERSIONES
+# ============================
+
+# Archivos de respaldo
+*.bak
+*.backup
+*.old
+*.orig
+*_backup.*
+*_old.*
+
+# Archivos de versiones temporales
+*_v1.*
+*_v2.*
+*_temp.*
+*_draft.*
+
+# ============================
+# DOCUMENTACIÓN TEMPORAL
+# ============================
+
+# Documentos de trabajo
+notas.md
+TODO.md
+DRAFT.md
+borrador_*
+
+# Imágenes temporales de desarrollo
+screenshot_*
+debug_*
+test_image_*
+
+# ============================
+# ARCHIVOS DE PRUEBA
+# ============================
+
+# Datos de prueba
+test_data/
+sample_data/
+dummy_*
+fake_*
+
+# Outputs de pruebas
+test_output/
+debug_output/
+temp_results/
+
+# ============================
+# ARCHIVOS GRANDES
+# ============================
+
+# Evitar archivos muy grandes accidentalmente
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Videos o imágenes grandes
+*.mp4
+*.avi
+*.mov
+*.png
+*.jpg
+*.jpeg
+*.gif
+# Excepto logos pequeños
+!logo.png
+!favicon.ico
+
+# ============================
+# LOGS Y MONITORING
+# ============================
+
+# Logs del sistema
+*.log
+*.log.*
+logs/
+log/
+
+# Archivos de monitoreo
+monitoring.txt
+performance.json
+metrics.csv
+
+# ============================
+# COMENTARIOS INFORMATIVOS
+# ============================
+
+# Este .gitignore está diseñado para:
+# 1. Mantener el código fuente limpio
+# 2. Evitar subir datos sensibles o temporales
+# 3. Permitir que cada desarrollador tenga sus configuraciones locales
+# 4. Mantener solo los archivos esenciales del proyecto
+#
+# Archivos que SÍ se incluyen:
+# - Código fuente Python (.py)
+# - Templates HTML base (index.html, dashboard_ejecutivo.html)
+# - Scripts de configuración (.sh)
+# - Documentación (README.md, LICENSE)
+# - Configuración de dependencias (requirements.txt) 
