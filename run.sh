@@ -26,8 +26,8 @@ source venv/bin/activate
 # Menú de opciones
 echo ""
 echo -e "${GREEN}¿Qué deseas hacer?${NC}"
-echo "1) 🕷️  Web Scraping RÁPIDO (15 empresas + SQLite)"
-echo "2) 🌟 Web Scraping COMPLETO (todas las empresas + SQLite)"
+echo "1) 🕷️  Web Scraping RÁPIDO (15 empresas automáticas + SQLite)"
+echo "2) 🌟 Web Scraping COMPLETO (255+ empresas automáticas + SQLite)"
 echo "3) 🔄 Web Scraping RÁPIDO con MySQL"
 echo "4) 🚀 Web Scraping COMPLETO con MySQL"
 echo "5) 📊 Ejecutar Análisis y Visualizaciones"
@@ -43,12 +43,12 @@ read -p "Selecciona una opción (1-11): " choice
 case $choice in
     1)
         echo -e "${GREEN}🕷️  Iniciando Web Scraping RÁPIDO...${NC}"
-        echo "💡 15 empresas principales con SQLite"
+        echo "💡 15 empresas desde lista automática con SQLite"
         python scraper_simple.py
         ;;
     2)
         echo -e "${GREEN}🌟 Iniciando Web Scraping COMPLETO...${NC}"
-        echo "💡 TODAS las empresas disponibles con SQLite"
+        echo "💡 255+ empresas extraídas automáticamente con SQLite"
         echo "⏱️  Esto puede tomar varios minutos..."
         read -p "¿Continuar? (y/n): " confirm
         if [[ "$confirm" =~ ^([yY][eE][sS]|[yY])$ ]]; then

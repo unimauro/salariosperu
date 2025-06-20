@@ -14,7 +14,12 @@ from datetime import datetime
 import mysql.connector
 from urllib.parse import quote
 from mysql_config import MYSQL_CONFIG
-from empresas_completas import get_all_companies, EMPRESAS_COMPLETAS
+try:
+    from empresas_auto import get_empresas_auto
+    EMPRESAS_SOURCE = "auto"
+except ImportError:
+    from empresas_completas import get_all_companies
+    EMPRESAS_SOURCE = "manual"
 
 # Configuración de logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -31,8 +36,13 @@ class SalariosScraperSimple:
         })
         self.salary_data = []
         
-        # Cargar todas las empresas disponibles
-        self.all_companies = get_all_companies()
+        # Cargar todas las empresas según la fuente disponible
+        if EMPRESAS_SOURCE == "auto":
+            self.all_companies = get_empresas_auto()
+            logger.info(f"📊 Usando lista automática extraída: {len(self.all_companies)} empresas")
+        else:
+            self.all_companies = get_all_companies()
+            logger.info(f"📊 Usando lista manual: {len(self.all_companies)} empresas")
         
         # Lista de empresas para testing rápido (subset de las principales)
         self.test_companies = [
