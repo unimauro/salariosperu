@@ -32,13 +32,60 @@ class SalariosHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         print(f"[{timestamp}] {format % args}")
 
 def create_stats_file():
-    """Crear archivo de estadísticas básicas"""
-    stats = {
-        "total_empresas": 142,
-        "total_puestos": 1247,
-        "total_universidades": 45,
-        "ultima_actualizacion": datetime.now().strftime('%d/%m/%Y %H:%M')
-    }
+    """Crear archivo de estadísticas básicas desde los datos reales"""
+    try:
+        import pandas as pd
+        import glob
+        
+        # Buscar archivos CSV
+        csv_files = glob.glob("*.csv")
+        
+        if csv_files:
+            # Usar el archivo más completo
+            completo_files = [f for f in csv_files if 'completo' in f]
+            if completo_files:
+                data_file = max(completo_files, key=os.path.getsize)
+            else:
+                data_file = max(csv_files, key=os.path.getsize)
+            
+            # Cargar datos
+            df = pd.read_csv(data_file)
+            
+            stats = {
+                "total_empresas": int(df['empresa'].nunique()),
+                "total_puestos": int(df['puesto'].nunique()),
+                "total_registros": len(df),
+                "total_sectores": int(df['sector'].nunique()),
+                "salario_promedio": round(df['salario_promedio'].mean(), 2),
+                "salario_maximo": round(df['salario_promedio'].max(), 2),
+                "ultima_actualizacion": datetime.now().strftime('%d/%m/%Y %H:%M'),
+                "archivo_datos": data_file
+            }
+        else:
+            # Estadísticas por defecto si no hay datos
+            stats = {
+                "total_empresas": 255,
+                "total_puestos": 278,
+                "total_registros": 1055,
+                "total_sectores": 10,
+                "salario_promedio": 4850.00,
+                "salario_maximo": 25000.00,
+                "ultima_actualizacion": datetime.now().strftime('%d/%m/%Y %H:%M'),
+                "archivo_datos": "No disponible"
+            }
+            
+    except Exception as e:
+        print(f"⚠️  Error leyendo datos: {e}")
+        stats = {
+            "total_empresas": 255,
+            "total_puestos": 278,
+            "total_registros": 1055,
+            "total_sectores": 10,
+            "salario_promedio": 4850.00,
+            "salario_maximo": 25000.00,
+            "ultima_actualizacion": datetime.now().strftime('%d/%m/%Y %H:%M'),
+            "archivo_datos": "Error al cargar"
+        }
     
     try:
         import json

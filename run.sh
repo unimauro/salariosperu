@@ -32,13 +32,15 @@ echo "3) 🔄 Web Scraping RÁPIDO con MySQL"
 echo "4) 🚀 Web Scraping COMPLETO con MySQL"
 echo "5) 📊 Ejecutar Análisis y Visualizaciones"
 echo "6) 🌐 Abrir Dashboard Web (servidor local)"
+echo "6b) 🎨 Generar Dashboard Web Moderno"
+echo "6c) 🎯 Dashboard Ejecutivo Mejorado (con análisis de fuentes)"
 echo "7) 🔧 Configurar MySQL"
 echo "8) 🔍 Ver archivos de datos generados"
 echo "9) 🧹 Limpiar datos anteriores (rápido)"
 echo "10) 🗑️ Limpieza completa del proyecto"
-echo "11) ❌ Salir"
+echo "12) ❌ Salir"
 echo ""
-read -p "Selecciona una opción (1-11): " choice
+read -p "Selecciona una opción (1-12): " choice
 
 case $choice in
     1)
@@ -105,18 +107,28 @@ case $choice in
         ;;
     5)
         echo -e "${GREEN}📊 Iniciando Análisis...${NC}"
-        if [ -f "salarios_analyzer.py.py" ]; then
+        if [ -f "salarios_analyzer_simple.py" ]; then
+            python salarios_analyzer_simple.py
+        elif [ -f "salarios_analyzer.py.py" ]; then
             python salarios_analyzer.py.py
         elif [ -f "salarios_analyzer.py" ]; then
             python salarios_analyzer.py
         else
             echo "❌ Archivo de análisis no encontrado"
-            echo "💡 Verifica que existe salarios_analyzer.py"
+            echo "💡 Verifica que existe salarios_analyzer_simple.py"
         fi
         ;;
     6)
         echo -e "${GREEN}🌐 Iniciando servidor web...${NC}"
         python server.py
+        ;;
+    "6b")
+        echo -e "${GREEN}🎨 Generando Dashboard Web Moderno...${NC}"
+        python dashboard_web.py
+        ;;
+    "6c")
+        echo -e "${GREEN}🎯 Generando Dashboard Ejecutivo Mejorado...${NC}"
+        python dashboard_ejecutivo_mejorado.py
         ;;
     7)
         echo -e "${GREEN}🔧 Configurando MySQL...${NC}"
@@ -171,7 +183,7 @@ case $choice in
         echo -e "${YELLOW}🗑️  Iniciando limpieza completa...${NC}"
         ./clean.sh
         ;;
-    11)
+    12)
         echo -e "${GREEN}👋 ¡Hasta luego!${NC}"
         exit 0
         ;;

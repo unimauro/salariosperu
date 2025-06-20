@@ -660,9 +660,6 @@ def main():
         print(f"❌ Error: {e}")
 
 
-if __name__ == "__main__":
-    main()
-    
     def resumen_general(self):
         """Genera resumen estadístico general"""
         print("\n" + "="*70)

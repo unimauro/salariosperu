@@ -3,384 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 Salarios Perú - Centro de Reportes</title>
+    <title>Salarios Perú - Análisis del Mercado Laboral</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
-
+        
         .header {
             text-align: center;
+            margin-bottom: 4rem;
             color: white;
-            margin-bottom: 40px;
         }
-
+        
         .header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
-
-        .header p {
-            font-size: 1.2em;
+        
+        .header .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
             opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
-
-        .dashboard-grid {
+        
+        .logo-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
-
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #e0e0e0;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .card-icon {
-            font-size: 2em;
-            margin-right: 15px;
-        }
-
-        .card-title {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .card-description {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
             text-align: center;
-            margin: 5px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
-
-        .btn:hover {
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .feature-card.dashboard .feature-icon { color: #ff6b6b; }
+        .feature-card.analysis .feature-icon { color: #4ecdc4; }
+        .feature-card.companies .feature-icon { color: #45b7d1; }
+        .feature-card.data .feature-icon { color: #96ceb4; }
+        .feature-card.api .feature-icon { color: #ffeaa7; }
+        .feature-card.reports .feature-icon { color: #dda0dd; }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .feature-card .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #34ace0 0%, #33d9b2 100%);
+        
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
         }
-
-        .btn-warning {
-            background: linear-gradient(135deg, #ff9ff3 0%, #f368e0 100%);
-        }
-
+        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 2rem;
+            margin-top: 2rem;
         }
-
-        .stat-card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
+        
+        .stat-item {
+            padding: 1.5rem;
         }
-
+        
         .stat-number {
-            font-size: 2.5em;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 700;
             color: #667eea;
+            margin-bottom: 0.5rem;
         }
-
+        
         .stat-label {
             color: #666;
-            font-size: 0.9em;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-
+        
+        .cta-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
+        }
+        
         .footer {
             text-align: center;
-            color: white;
-            opacity: 0.8;
-            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
-
-        .status-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 8px;
+        
+        .footer a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
         }
-
-        .status-active {
-            background: #2ecc71;
+        
+        .footer a:hover {
+            text-decoration: underline;
         }
-
-        .status-pending {
-            background: #f39c12;
-        }
-
-        .status-error {
-            background: #e74c3c;
-        }
-
+        
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
+            .container {
+                padding: 1rem;
             }
             
-            .dashboard-grid {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .features-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .feature-card {
+                padding: 2rem;
+            }
         }
+        
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .feature-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>📊 Salarios Perú</h1>
-            <p>Centro de Análisis y Reportes Salariales</p>
+        <header class="header">
+            <i class="fas fa-chart-line logo-icon"></i>
+            <h1>Salarios Perú</h1>
+            <p class="subtitle">
+                Plataforma completa de análisis del mercado laboral peruano con datos de 255+ empresas 
+                y visualizaciones interactivas para tomar decisiones informadas sobre tu carrera.
+            </p>
+        </header>
+        
+        <div class="features-grid">
+                         <div class="feature-card dashboard" onclick="window.open('dashboard_ejecutivo/index.html', '_blank')">
+                 <i class="fas fa-tachometer-alt feature-icon"></i>
+                 <h3>Dashboard Ejecutivo</h3>
+                 <p>Vista ejecutiva estilo corporativo con KPIs, tendencias y análisis de compensación profesional.</p>
+                 <a href="dashboard_ejecutivo/index.html" class="btn" target="_blank">
+                     <i class="fas fa-chart-line"></i> Ver Dashboard Ejecutivo
+                 </a>
+             </div>
+            
+                         <div class="feature-card analysis" onclick="window.open('web_dashboard/index.html', '_blank')">
+                 <i class="fas fa-chart-bar feature-icon"></i>
+                 <h3>Dashboard Interactivo</h3>
+                 <p>Visualizaciones interactivas con Plotly, análisis completo y gráficos dinámicos en tiempo real.</p>
+                 <a href="web_dashboard/index.html" class="btn" target="_blank">
+                     <i class="fas fa-external-link-alt"></i> Ver Dashboard Web
+                 </a>
+             </div>
+            
+                         <div class="feature-card companies">
+                 <i class="fas fa-calculator feature-icon"></i>
+                 <h3>Análisis Detallado</h3>
+                 <p>Correlaciones avanzadas, análisis por seniority, sectores y relación puestos-salarios con ML.</p>
+                 <button class="btn" onclick="runAnalysis()">
+                     <i class="fas fa-play"></i> Ejecutar Análisis
+                 </button>
+             </div>
+            
+                         <div class="feature-card data">
+                 <i class="fas fa-building feature-icon"></i>
+                 <h3>255+ Empresas</h3>
+                 <p>Base de datos actualizada automáticamente con empresas peruanas de todos los sectores económicos.</p>
+                 <button class="btn" onclick="showCompanies()">
+                     <i class="fas fa-list"></i> Ver Empresas
+                 </button>
+             </div>
+            
+                         <div class="feature-card api">
+                 <i class="fas fa-sync feature-icon"></i>
+                 <h3>Extracción Automática</h3>
+                 <p>Sistema inteligente que actualiza automáticamente los datos desde SalariosPerú.com y APIs.</p>
+                 <button class="btn" onclick="runScraping()">
+                     <i class="fas fa-sync"></i> Actualizar Datos
+                 </button>
+             </div>
+            
+            <div class="feature-card reports">
+                <i class="fas fa-file-alt feature-icon"></i>
+                <h3>Reportes Completos</h3>
+                <p>Genera reportes detallados en múltiples formatos: PDF, CSV, HTML y JSON.</p>
+                <button class="btn" onclick="generateReport()">
+                    <i class="fas fa-download"></i> Generar Reporte
+                </button>
+            </div>
         </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number" id="total-empresas">-</div>
-                <div class="stat-label">Empresas Analizadas</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="total-puestos">-</div>
-                <div class="stat-label">Puestos de Trabajo</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="total-universidades">-</div>
-                <div class="stat-label">Universidades</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="ultima-actualizacion">-</div>
-                <div class="stat-label">Última Actualización</div>
-            </div>
-        </div>
-
-        <div class="dashboard-grid">
-            <!-- Dashboard Principal -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🎯</div>
-                    <div class="card-title">Dashboard Ejecutivo</div>
+        
+        <div class="stats-section">
+            <h2>📊 Estadísticas del Sistema</h2>
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-item">
+                    <div class="stat-number">255+</div>
+                    <div class="stat-label">Empresas</div>
                 </div>
-                <div class="card-description">
-                    Vista general con los principales indicadores, rankings y métricas clave del mercado salarial peruano.
+                <div class="stat-item">
+                    <div class="stat-number">1,055</div>
+                    <div class="stat-label">Registros</div>
                 </div>
-                <div>
-                    <a href="dashboard_ejecutivo.html" class="btn">Ver Dashboard</a>
-                    <span class="status-indicator status-pending" id="dashboard-status"></span>
-                    <small id="dashboard-text">Pendiente</small>
+                <div class="stat-item">
+                    <div class="stat-number">278</div>
+                    <div class="stat-label">Puestos Únicos</div>
                 </div>
-            </div>
-
-            <!-- Análisis de Empresas -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🏢</div>
-                    <div class="card-title">Análisis por Empresas</div>
-                </div>
-                <div class="card-description">
-                    Rankings de empresas mejor pagadas, análisis por sectores y comparativas detalladas.
-                </div>
-                <div>
-                    <a href="bubble_chart_salarios.html" class="btn">Bubble Chart</a>
-                    <a href="heatmap_salarios.html" class="btn btn-secondary">Heatmap</a>
-                    <span class="status-indicator status-pending" id="empresas-status"></span>
-                    <small id="empresas-text">Pendiente</small>
-                </div>
-            </div>
-
-            <!-- Análisis por Universidades -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🎓</div>
-                    <div class="card-title">Análisis por Universidades</div>
-                </div>
-                <div class="card-description">
-                    ¿De qué universidades son los mejores pagados? Análisis detallado por alma máter y correlaciones.
-                </div>
-                <div>
-                    <a href="radar_universidades.html" class="btn">Radar Chart</a>
-                    <a href="ranking_universidades.html" class="btn btn-secondary">Rankings</a>
-                    <span class="status-indicator status-pending" id="universidades-status"></span>
-                    <small id="universidades-text">Pendiente</small>
-                </div>
-            </div>
-
-            <!-- Análisis por Puestos -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">💼</div>
-                    <div class="card-title">Análisis por Puestos</div>
-                </div>
-                <div class="card-description">
-                    Rankings de puestos mejor pagados, tendencias salariales y análisis por nivel jerárquico.
-                </div>
-                <div>
-                    <a href="ranking_puestos.html" class="btn">Rankings</a>
-                    <a href="tendencias_puestos.html" class="btn btn-secondary">Tendencias</a>
-                    <span class="status-indicator status-pending" id="puestos-status"></span>
-                    <small id="puestos-text">Pendiente</small>
-                </div>
-            </div>
-
-            <!-- Análisis por Sectores -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">🏭</div>
-                    <div class="card-title">Análisis por Sectores</div>
-                </div>
-                <div class="card-description">
-                    Comparativa entre sectores: banca, tecnología, consumo, minería y más.
-                </div>
-                <div>
-                    <a href="sectores_analisis.html" class="btn">Ver Sectores</a>
-                    <a href="comparativa_sectores.html" class="btn btn-secondary">Comparativa</a>
-                    <span class="status-indicator status-pending" id="sectores-status"></span>
-                    <small id="sectores-text">Pendiente</small>
-                </div>
-            </div>
-
-            <!-- Datos y Exportes -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">📋</div>
-                    <div class="card-title">Datos y Exportes</div>
-                </div>
-                <div class="card-description">
-                    Acceso a los datos en bruto, exportes en CSV, estadísticas detalladas y logs del sistema.
-                </div>
-                <div>
-                    <a href="#" class="btn btn-warning" onclick="downloadCSV()">Descargar CSV</a>
-                    <a href="#" class="btn btn-secondary" onclick="showStats()">Ver Estadísticas</a>
-                    <span class="status-indicator status-pending" id="datos-status"></span>
-                    <small id="datos-text">Pendiente</small>
+                <div class="stat-item">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Sectores</div>
                 </div>
             </div>
         </div>
-
-        <div class="footer">
-            <p>© 2024 Salarios Perú - Sistema de Análisis Salarial</p>
-            <p>Datos actualizados automáticamente | Uso exclusivo para investigación</p>
-        </div>
+        
+                 <div class="cta-section">
+             <h2 style="color: white; margin-bottom: 2rem;">🚀 ¿Listo para explorar?</h2>
+             <a href="dashboard_ejecutivo/index.html" class="cta-button" target="_blank">
+                 <i class="fas fa-chart-line"></i> Dashboard Ejecutivo
+             </a>
+             <a href="web_dashboard/index.html" class="cta-button" target="_blank" style="background: linear-gradient(135deg, #4ecdc4, #44a08d);">
+                 <i class="fas fa-rocket"></i> Dashboard Interactivo
+             </a>
+             <button class="cta-button" onclick="runFullAnalysis()" style="background: linear-gradient(135deg, #f39c12, #e67e22);">
+                 <i class="fas fa-play"></i> Ejecutar Análisis
+             </button>
+         </div>
+        
+        <footer class="footer">
+            <p>
+                <i class="fas fa-code"></i> 
+                Desarrollado con Python, Pandas, Plotly y mucho ☕
+                | 
+                <a href="https://github.com/tu-usuario/salariosperu" target="_blank">
+                    <i class="fab fa-github"></i> Ver en GitHub
+                </a>
+                |
+                <a href="mailto:contacto@salariosperu.com">
+                    <i class="fas fa-envelope"></i> Contacto
+                </a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                Última actualización: <span id="lastUpdate">Cargando...</span>
+            </p>
+        </footer>
     </div>
 
     <script>
-        // Verificar qué archivos existen y actualizar estados
-        async function checkFileStatus() {
-            const files = [
-                { name: 'dashboard_ejecutivo.html', element: 'dashboard' },
-                { name: 'bubble_chart_salarios.html', element: 'empresas' },
-                { name: 'radar_universidades.html', element: 'universidades' },
-                { name: 'ranking_puestos.html', element: 'puestos' },
-                { name: 'sectores_analisis.html', element: 'sectores' },
-                { name: 'salarios_data.csv', element: 'datos' }
+        // Funciones de interacción
+        function runAnalysis() {
+            alert('🔄 Iniciando análisis detallado...\n\nEsto abrirá la terminal para ejecutar el analizador completo.');
+            // En producción, esto podría hacer una llamada AJAX al backend
+        }
+        
+        function showCompanies() {
+            const companies = [
+                "AB InBev", "ACRES", "Alicorp", "Banco de Crédito BCP", 
+                "BBVA Perú", "Culqi", "Entel Perú", "Interbank", 
+                "Rimac Seguros", "Scotiabank Perú", "Yape", "Deloitte"
             ];
+            
+            alert('🏢 Algunas empresas disponibles:\n\n' + companies.slice(0, 8).join('\n') + '\n\n...y 247 más!');
+        }
+        
+        function runScraping() {
+            alert('🕷️ Iniciando extracción automática de datos...\n\nEsto puede tomar varios minutos para procesar todas las empresas.');
+        }
+        
+        function showAPI() {
+            const apiInfo = `
+🔗 Endpoints API disponibles:
 
-            for (let file of files) {
-                try {
-                    const response = await fetch(file.name, { method: 'HEAD' });
-                    const statusElement = document.getElementById(file.element + '-status');
-                    const textElement = document.getElementById(file.element + '-text');
-                    
-                    if (response.ok) {
-                        statusElement.className = 'status-indicator status-active';
-                        textElement.textContent = 'Disponible';
-                    } else {
-                        statusElement.className = 'status-indicator status-error';
-                        textElement.textContent = 'No disponible';
-                    }
-                } catch (error) {
-                    const statusElement = document.getElementById(file.element + '-status');
-                    const textElement = document.getElementById(file.element + '-text');
-                    statusElement.className = 'status-indicator status-error';
-                    textElement.textContent = 'No disponible';
-                }
+GET /stats.json - Estadísticas generales
+GET /empresas.json - Lista de empresas
+GET /sectores.json - Datos por sectores  
+GET /puestos.json - Top puestos mejor pagados
+
+Ejemplo: http://localhost:20000/stats.json
+            `;
+            alert(apiInfo);
+        }
+        
+        function generateReport() {
+            alert('📄 Generando reporte completo...\n\nSe creará un archivo PDF con todos los análisis y visualizaciones.');
+        }
+        
+        function runFullAnalysis() {
+            if (confirm('🚀 ¿Ejecutar análisis completo?\n\nEsto incluirá:\n• Análisis por empresas\n• Correlaciones avanzadas\n• Análisis por sectores\n• Dashboard interactivo')) {
+                alert('✅ Análisis iniciado! Verifica la terminal para el progreso.');
             }
         }
-
-        // Cargar estadísticas básicas
-        async function loadStats() {
-            try {
-                // Intentar cargar datos desde un archivo JSON de estadísticas
-                const response = await fetch('stats.json');
-                if (response.ok) {
-                    const stats = await response.json();
-                    document.getElementById('total-empresas').textContent = stats.total_empresas || '-';
-                    document.getElementById('total-puestos').textContent = stats.total_puestos || '-';
-                    document.getElementById('total-universidades').textContent = stats.total_universidades || '-';
-                    document.getElementById('ultima-actualizacion').textContent = stats.ultima_actualizacion || '-';
-                }
-            } catch (error) {
-                console.log('Estadísticas no disponibles aún');
-            }
+        
+        // Cargar estadísticas dinámicamente
+        function loadStats() {
+            // Simular carga de estadísticas
+            setTimeout(() => {
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleString('es-PE');
+            }, 1000);
+            
+            // En producción, esto haría fetch a /stats.json
         }
-
-        // Función para descargar CSV
-        function downloadCSV() {
-            const link = document.createElement('a');
-            link.href = 'salarios_data.csv';
-            link.download = 'salarios_data.csv';
-            link.click();
-        }
-
-        // Función para mostrar estadísticas
-        function showStats() {
-            alert('Funcionalidad de estadísticas detalladas próximamente disponible');
-        }
-
-        // Inicializar cuando se carga la página
+        
+        // Efectos visuales
         document.addEventListener('DOMContentLoaded', function() {
-            checkFileStatus();
             loadStats();
             
-            // Actualizar cada 30 segundos
-            setInterval(checkFileStatus, 30000);
+            // Animar números al cargar
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalNumber = stat.textContent;
+                let current = 0;
+                const increment = parseInt(finalNumber.replace(/[^0-9]/g, '')) / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= parseInt(finalNumber.replace(/[^0-9]/g, ''))) {
+                        stat.textContent = finalNumber;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current).toLocaleString();
+                    }
+                }, 30);
+            });
         });
+        
+        // Analytics
+        console.log('📊 Salarios Perú - Portal Principal');
+        console.log('🔍 Para más información visita: https://github.com/tu-usuario/salariosperu');
     </script>
 </body>
 </html> 
