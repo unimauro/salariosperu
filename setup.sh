@@ -188,10 +188,103 @@ except Exception as e:
 "
 
 if [ $? -eq 0 ]; then
-    print_success "Verificación completada exitosamente"
+    print_success "Verificación del servidor web completada"
 else
     print_error "Algunas dependencias críticas faltan"
     exit 1
+fi
+
+# Configuración de MySQL
+echo ""
+print_status "Configurando MySQL..."
+echo "=================================================="
+
+# Verificar si MySQL está instalado
+if ! command -v mysql &> /dev/null; then
+    print_warning "MySQL no está instalado. Instalando con Homebrew..."
+    if command -v brew &> /dev/null; then
+        print_status "Instalando MySQL..."
+        brew install mysql
+        if [ $? -eq 0 ]; then
+            print_success "MySQL instalado correctamente"
+        else
+            print_error "Error al instalar MySQL"
+        fi
+    else
+        print_warning "Homebrew no está disponible. Instala MySQL manualmente:"
+        echo "   🌐 https://dev.mysql.com/downloads/mysql/"
+        echo "   📦 O instala Homebrew: /bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    fi
+else
+    mysql_version=$(mysql --version 2>/dev/null | head -1)
+    print_success "MySQL ya está instalado: $mysql_version"
+fi
+
+# Intentar iniciar MySQL
+if command -v mysql &> /dev/null; then
+    print_status "Iniciando servicio MySQL..."
+    
+    # Verificar si ya está corriendo
+    if pgrep -f mysqld > /dev/null; then
+        print_success "MySQL ya está ejecutándose"
+    else
+        # Intentar iniciarlo
+        if brew services start mysql >/dev/null 2>&1; then
+            print_success "MySQL iniciado correctamente con brew services"
+        elif mysqld_safe --user=mysql --datadir=/usr/local/var/mysql --log-error=/usr/local/var/mysql/error.log --pid-file=/usr/local/var/mysql/mysql.pid >/dev/null 2>&1 &; then
+            print_success "MySQL iniciado en segundo plano"
+            sleep 3  # Esperar un poco para que inicie
+        else
+            print_warning "No se pudo iniciar MySQL automáticamente"
+            print_status "Intenta manualmente:"
+            echo "   • brew services start mysql"
+            echo "   • sudo /usr/local/mysql/support-files/mysql.server start"
+        fi
+    fi
+    
+    # Verificar archivos de configuración MySQL
+    print_status "Verificando archivos de configuración MySQL..."
+    mysql_config_files=(
+        "mysql_config.py:⚙️  Configuración de conexión MySQL"
+        "setup_mysql.py:🔧 Script de configuración automática MySQL"
+        "scraper_simple.py:🔄 Scraper optimizado con soporte MySQL"
+        "INSTRUCCIONES_MYSQL.md:📋 Guía de configuración MySQL"
+    )
+    
+    mysql_files_ok=true
+    for file_info in "${mysql_config_files[@]}"; do
+        file="${file_info%%:*}"
+        description="${file_info#*:}"
+        
+        if [ -f "$file" ]; then
+            print_success "$description - ✓"
+        else
+            print_warning "$description - ✗ (Archivo no encontrado: $file)"
+            mysql_files_ok=false
+        fi
+    done
+    
+    if [ "$mysql_files_ok" = true ]; then
+        print_success "Todos los archivos de configuración MySQL están presentes"
+        
+        # Test básico de conexión
+        print_status "Probando configuración MySQL..."
+        python -c "
+try:
+    from mysql_config import MYSQL_CONFIG
+    print('✅ Configuración MySQL cargada correctamente')
+    print(f'   Host: {MYSQL_CONFIG[\"host\"]}')
+    print(f'   Usuario: {MYSQL_CONFIG[\"user\"]}')
+    print(f'   Base de datos: {MYSQL_CONFIG[\"database\"]}')
+except Exception as e:
+    print(f'⚠️  Error al cargar configuración MySQL: {e}')
+" 2>/dev/null
+    else
+        print_warning "Algunos archivos de configuración MySQL faltan"
+        print_status "El sistema funcionará con SQLite como respaldo"
+    fi
+else
+    print_warning "MySQL no está disponible. El sistema usará SQLite"
 fi
 
 # Crear archivo de activación rápida
@@ -259,16 +352,20 @@ echo ""
 echo -e "${YELLOW}🚀 PRÓXIMOS PASOS:${NC}"
 echo "   1. Usar el menú interactivo: ./run.sh"
 echo "   2. O activar manualmente: source venv/bin/activate"
-echo "   3. Opciones disponibles en el menú:"
-echo "      • 🕷️  Web Scraping"
+echo "   3. Configurar MySQL (opcional): python setup_mysql.py"
+echo "   4. Opciones disponibles en el menú:"
+echo "      • 🕷️  Web Scraping (con SQLite o MySQL)"
 echo "      • 📊 Análisis y Visualizaciones"
 echo "      • 🌐 Dashboard Web (http://localhost:20000)"
+echo "      • 🔧 Configuración MySQL"
 echo "      • 🔍 Ver archivos generados"
 echo ""
 echo -e "${BLUE}💡 TIPS:${NC}"
 echo "   • El menú ./run.sh maneja automáticamente el entorno virtual"
 echo "   • El dashboard web se abre automáticamente en tu navegador"
 echo "   • Los datos se guardan en múltiples formatos (CSV, SQLite, MySQL)"
+echo "   • Usa SQLite para empezar rápido, MySQL para producción"
+echo "   • scraper_simple.py funciona con ambas bases de datos"
 echo "   • Todas las visualizaciones son interactivas con zoom y filtros"
 echo "   • El sistema detecta automáticamente qué reportes están disponibles"
 echo ""

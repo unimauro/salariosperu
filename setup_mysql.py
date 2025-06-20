@@ -152,8 +152,109 @@ def check_mysql_status():
         print(f"❌ Error de conexión a MySQL: {e}")
         return False
 
-if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "check":
-        check_mysql_status()
+def check_mysql_config():
+    """Verifica la configuración detallada de MySQL"""
+    print("🔍 Verificando configuración MySQL...")
+    print("=" * 50)
+    
+    try:
+        print(f"✅ Archivo de configuración encontrado")
+        print(f"   Host: {MYSQL_CONFIG['host']}")
+        print(f"   Usuario: {MYSQL_CONFIG['user']}")
+        print(f"   Base de datos: {MYSQL_CONFIG['database']}")
+        
+        # Intentar conexión
+        try:
+            conn = mysql.connector.connect(**MYSQL_CONFIG)
+            print(f"✅ Conexión exitosa")
+            
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = %s", (MYSQL_CONFIG['database'],))
+            table_count = cursor.fetchone()[0]
+            print(f"   Tablas en la base de datos: {table_count}")
+            
+            # Verificar tabla salarios
+            cursor.execute("SHOW TABLES LIKE 'salarios'")
+            if cursor.fetchone():
+                cursor.execute("SELECT COUNT(*) FROM salarios")
+                record_count = cursor.fetchone()[0]
+                print(f"   Registros en tabla salarios: {record_count}")
+                
+                # Obtener algunos ejemplos
+                if record_count > 0:
+                    cursor.execute("SELECT empresa, puesto, salario_promedio FROM salarios LIMIT 3")
+                    examples = cursor.fetchall()
+                    print(f"   Ejemplos de datos:")
+                    for emp, puesto, salario in examples:
+                        print(f"     • {emp}: {puesto} - S/{salario:.0f}")
+            else:
+                print("   Tabla 'salarios' no existe aún")
+            
+            conn.close()
+            return True
+            
+        except mysql.connector.Error as e:
+            print(f"❌ Error de conexión: {e}")
+            return False
+            
+    except ImportError:
+        print("❌ Archivo mysql_config.py no encontrado")
+        return False
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        return False
+
+def reset_mysql_config():
+    """Reinicia la configuración de MySQL"""
+    print("🔄 Reiniciando configuración MySQL...")
+    print("=" * 50)
+    
+    try:
+        # Conectar y eliminar base de datos
+        root_password = getpass.getpass("Ingresa la contraseña de root de MySQL: ")
+        
+        root_conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password=root_password
+        )
+        root_cursor = root_conn.cursor()
+        
+        # Eliminar base de datos y usuario
+        print(f"🗑️  Eliminando base de datos '{MYSQL_CONFIG['database']}'...")
+        root_cursor.execute(f"DROP DATABASE IF EXISTS {MYSQL_CONFIG['database']}")
+        
+        print(f"👤 Eliminando usuario '{MYSQL_CONFIG['user']}'...")
+        root_cursor.execute(f"DROP USER IF EXISTS '{MYSQL_CONFIG['user']}'@'localhost'")
+        
+        root_conn.commit()
+        root_conn.close()
+        
+        print("✅ Configuración anterior eliminada")
+        print("💡 Ejecuta 'python setup_mysql.py' para reconfigurar")
+        
+    except Exception as e:
+        print(f"❌ Error al reiniciar configuración: {e}")
+
+def main():
+    """Función principal con manejo de argumentos"""
+    if len(sys.argv) > 1:
+        command = sys.argv[1].lower()
+        
+        if command == 'check':
+            check_mysql_config()
+        elif command == 'status':
+            check_mysql_status()
+        elif command == 'reset':
+            reset_mysql_config()
+        else:
+            print("Comandos disponibles:")
+            print("  python setup_mysql.py        - Configuración automática")
+            print("  python setup_mysql.py check  - Verificar configuración detallada")
+            print("  python setup_mysql.py status - Verificar estado básico")
+            print("  python setup_mysql.py reset  - Reiniciar configuración")
     else:
-        setup_mysql() 
+        setup_mysql()
+
+if __name__ == "__main__":
+    main() 
