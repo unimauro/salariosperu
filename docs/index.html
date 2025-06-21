@@ -8,6 +8,16 @@
     <link rel="icon" type="image/x-icon" href="https://unimauro.github.io/salariosperu/favicon.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-170L71ZZK1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-170L71ZZK1');
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #333; line-height: 1.6; }
@@ -111,6 +121,7 @@
                     <div>📊 Procesado: 20/06/2025 20:22</div>
                     <div>📁 Fuente: salarios_completo.csv</div>
                     <div>📈 1,052 registros analizados</div>
+                    <div id="visit-counter">👁️ Cargando visitas...</div>
                 </div>
                 <div class="yape-section">
                     <img src="https://unimauro.github.io/salariosperu/yape.png" alt="Yape QR" class="yape-qr" />
@@ -335,6 +346,25 @@
             });
         }
         
+        // Función para cargar contador de visitas
+        async function loadVisitCounter() {
+            try {
+                // Opción 1: API Counter (gratuita)
+                const response = await fetch('https://api.countapi.xyz/hit/salariosperu-dashboard/visits');
+                const data = await response.json();
+                document.getElementById('visit-counter').innerHTML = `👁️ ${data.value.toLocaleString()} visitas`;
+                
+                // Guardar en localStorage también
+                localStorage.setItem('dashboard-visits', data.value);
+            } catch (error) {
+                // Fallback: usar localStorage
+                let visits = parseInt(localStorage.getItem('dashboard-visits') || '0') + 1;
+                localStorage.setItem('dashboard-visits', visits);
+                document.getElementById('visit-counter').innerHTML = `👁️ ${visits.toLocaleString()} visitas (local)`;
+                console.log('📊 Contador de visitas funcionando en modo local');
+            }
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📊 Dashboard Análisis Salarial Ejecutivo cargado');
             console.log('💻 Puestos TI:', 46);
@@ -344,6 +374,9 @@
             
             // Activar primera pestaña por defecto
             console.log('🔧 Sistema de pestañas inicializado');
+            
+            // Contador de visitas usando API gratuita
+            loadVisitCounter();
             
             // FORZAR REDIMENSIÓN INICIAL DE TODOS LOS GRÁFICOS
             setTimeout(function() {
