@@ -1999,6 +1999,26 @@ class DashboardEjecutivoMejorado:
             // Mostrar la pestaña seleccionada
             document.getElementById(tabName + '-tab').classList.add('active');
             event.target.classList.add('active');
+            
+            // FORZAR REDIMENSIÓN DE GRÁFICOS AL CAMBIAR PESTAÑA
+            setTimeout(function() {{
+                resizeAllPlotlyGraphs();
+            }}, 100);
+        }}
+        
+        // Función para redimensionar todos los gráficos de Plotly
+        function resizeAllPlotlyGraphs() {{
+            const plotlyDivs = document.querySelectorAll('.plotly-graph-div');
+            plotlyDivs.forEach(function(div) {{
+                if (window.Plotly && div.layout) {{
+                    // Forzar ancho al 100% del contenedor padre
+                    const parentWidth = div.parentElement.offsetWidth;
+                    window.Plotly.relayout(div, {{
+                        width: parentWidth,
+                        autosize: true
+                    }});
+                }}
+            }});
         }}
         
         document.addEventListener('DOMContentLoaded', function() {{
@@ -2010,6 +2030,17 @@ class DashboardEjecutivoMejorado:
             
             // Activar primera pestaña por defecto
             console.log('🔧 Sistema de pestañas inicializado');
+            
+            // FORZAR REDIMENSIÓN INICIAL DE TODOS LOS GRÁFICOS
+            setTimeout(function() {{
+                resizeAllPlotlyGraphs();
+                console.log('🔧 Gráficos redimensionados al ancho completo');
+            }}, 1000);
+            
+            // Redimensionar cuando cambie el tamaño de la ventana
+            window.addEventListener('resize', function() {{
+                setTimeout(resizeAllPlotlyGraphs, 100);
+            }});
         }});
     </script>
 </body>
