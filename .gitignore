@@ -286,8 +286,6 @@ temp_results/
 *.jpeg
 *.gif
 # Excepto logos pequeños
-!logo.png
-!favicon.ico
 
 # ============================
 # LOGS Y MONITORING
