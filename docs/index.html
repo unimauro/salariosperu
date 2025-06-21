@@ -94,7 +94,8 @@
             .tab-button { padding: 0.8rem 1rem; text-align: left; }
             .tabs-content { padding: 1rem; }
             .header-content { flex-direction: column; gap: 1rem; text-align: center; }
-            .yape-section { margin-left: 0; margin-top: 1rem; }
+            .logo > div > div { flex-direction: column !important; align-items: center !important; gap: 1rem; }
+            .yape-section { margin-left: 0 !important; margin-top: 1rem; }
             .yape-qr { width: 60px; height: 60px; }
             .yape-text { font-size: 0.8rem; }
         }
@@ -108,22 +109,22 @@
                     <i class="fas fa-chart-line"></i>
                     <div>
                         <h1>Dashboard Análisis Salarial Ejecutivo</h1>
-                        <div>Estudio de sueldos por categorías: TI, Ventas/Marketing, Sectores Clave, Gerenciales y Análisis Completo</div>
-                    </div>
-                </div>
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <div class="update-info">
-                        <div>📊 Procesado: 20/06/2025 19:27</div>
-                        <div>📁 Fuente: https://salariosperu.com</div>
-                        <div>📈 1,052 registros analizados</div>
-                    </div>
-                    <div class="yape-section">
-                        <img src="yape.png" alt="QR Yape" class="yape-qr">
-                        <div class="yape-text">
-                            <div>🎯 ¡Apóyanos para otros dashboards!</div>
-                            <div>Yape aquí 👆</div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <div>Estudio de sueldos por categorías: TI, Ventas/Marketing, Sectores Clave, Gerenciales y Análisis Completo</div>
+                            <div class="yape-section" style="margin-left: 20px;">
+                                <img src="yape.png" alt="QR Yape" class="yape-qr">
+                                <div class="yape-text">
+                                    <div>🎯 ¡Apóyanos para otros dashboards!</div>
+                                    <div>Yape aquí 👆</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="update-info">
+                    <div>📊 Procesado: 20/06/2025 19:27</div>
+                    <div>📁 Fuente: https://salariosperu.com</div>
+                    <div>📈 1,052 registros analizados</div>
                 </div>
             </div>
         </div>
