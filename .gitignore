@@ -340,3 +340,9 @@ dashboard_*.html
 config.ini
 .vscode/
 .idea/ 
+
+#Bases de Datos 
+salarios_peru.db
+salarios_peru.db-journal
+salarios_simple.db
+salarios_simple.csv

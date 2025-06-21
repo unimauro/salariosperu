@@ -570,11 +570,11 @@ class DashboardEjecutivoMejorado:
         # Aplicar filtro: mantener solo los que NO están en la lista de exclusión
         junior_jobs = junior_jobs[~mask_excluir].copy()
         
-        # FILTRO ADICIONAL: Excluir salarios mayores a S/ 5,000 (probablemente no son juniors reales)
-        mask_salario_alto = junior_jobs['salario_promedio'] > 5000
+        # FILTRO ADICIONAL: Excluir salarios mayores a S/ 8,000 (probablemente no son juniors reales)
+        mask_salario_alto = junior_jobs['salario_promedio'] > 8000
         junior_jobs = junior_jobs[~mask_salario_alto].copy()
         
-        print(f"🔍 Puestos junior filtrados: {len(junior_jobs)} (excluidos {mask_excluir.sum()} por clasificación + {mask_salario_alto.sum()} por salario >S/ 5,000)")
+        print(f"🔍 Puestos junior filtrados: {len(junior_jobs)} (excluidos {mask_excluir.sum()} por clasificación + {mask_salario_alto.sum()} por salario >S/ 8,000)")
         
         if len(junior_jobs) == 0:
             return "<p>No se encontraron puestos de practicantes y juniors</p>"
@@ -608,7 +608,7 @@ class DashboardEjecutivoMejorado:
         for area in junior_jobs['junior_area'].unique():
             area_salaries = junior_jobs[junior_jobs['junior_area'] == area]['salario_promedio']
             
-            if len(area_salaries) >= 2:  # Mínimo 2 salarios
+            if len(area_salaries) >= 1:  # Mínimo 1 salario para mostrar datos
                 quartiles = {
                     'category': area,
                     'count': len(area_salaries),
@@ -1744,6 +1744,9 @@ class DashboardEjecutivoMejorado:
         .logo i {{ font-size: 2.5rem; color: #3498db; }}
         .logo h1 {{ font-size: 1.8rem; font-weight: 300; }}
         .update-info {{ text-align: right; font-size: 0.9rem; opacity: 0.9; }}
+        .yape-section {{ display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; margin-left: 20px; }}
+        .yape-qr {{ width: 80px; height: 80px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.3); }}
+        .yape-text {{ color: #f39c12; font-weight: 600; font-size: 0.9rem; }}
         .chart-container {{ background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 2rem; }}
         .chart-title {{ font-size: 1.3rem; font-weight: 600; color: #2c3e50; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #ecf0f1; }}
         .chart-description {{ color: #666; margin-bottom: 1rem; font-size: 0.9rem; font-style: italic; }}
@@ -1751,19 +1754,19 @@ class DashboardEjecutivoMejorado:
         .footer a {{ color: #3498db; text-decoration: none; }}
         
         /* KPIs */
-        .kpi-section {{ margin: 2rem 0 3rem 0; }}
-        .kpi-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }}
-        .kpi-card-modern {{ background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid; display: flex; align-items: center; gap: 1rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }}
+        .kpi-section {{ margin: 1rem 0 1.5rem 0; }}
+        .kpi-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }}
+        .kpi-card-modern {{ background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid; display: flex; align-items: center; gap: 0.8rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }}
         .kpi-card-modern:hover {{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }}
         .kpi-card-modern.primary {{ border-left-color: #3498db; }}
         .kpi-card-modern.success {{ border-left-color: #2ecc71; }}
         .kpi-card-modern.purple {{ border-left-color: #9b59b6; }}
         .kpi-card-modern.orange {{ border-left-color: #e67e22; }}
-        .kpi-icon {{ font-size: 2.5rem; min-width: 60px; text-align: center; }}
+        .kpi-icon {{ font-size: 2rem; min-width: 50px; text-align: center; }}
         .kpi-content {{ flex: 1; }}
-        .kpi-title {{ font-size: 0.9rem; color: #666; margin-bottom: 0.5rem; font-weight: 500; }}
-        .kpi-value {{ font-size: 1.8rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.3rem; }}
-        .kpi-trend {{ font-size: 0.8rem; font-weight: 500; }}
+        .kpi-title {{ font-size: 0.85rem; color: #666; margin-bottom: 0.3rem; font-weight: 500; }}
+        .kpi-value {{ font-size: 1.5rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.2rem; }}
+        .kpi-trend {{ font-size: 0.75rem; font-weight: 500; }}
         .kpi-trend.positive {{ color: #27ae60; }}
         .kpi-trend.neutral {{ color: #7f8c8d; }}
         
@@ -2047,13 +2050,20 @@ class DashboardEjecutivoMejorado:
 </html>
         """
         
-        # Guardar archivo
-        output_file = os.path.join(self.output_dir, 'especializado.html')
-        with open(output_file, 'w', encoding='utf-8') as f:
+        # Guardar archivo directamente en docs/index.html para GitHub Pages
+        docs_file = 'docs/index.html'
+        os.makedirs('docs', exist_ok=True)
+        with open(docs_file, 'w', encoding='utf-8') as f:
             f.write(html_content)
         
-        print(f"✅ Dashboard Ejecutivo CON PESTAÑAS creado: {output_file}")
-        return output_file
+        # También guardar copia de respaldo
+        backup_file = os.path.join(self.output_dir, 'especializado.html')
+        with open(backup_file, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+        
+        print(f"✅ Dashboard Ejecutivo CON PESTAÑAS creado: {docs_file}")
+        print(f"✅ Copia de respaldo: {backup_file}")
+        return docs_file
 
 
 def main():
@@ -2081,11 +2091,15 @@ def main():
         print(f"🎓 Análisis salarial Practicantes/Juniors (≤ S/ 5,000)")
         print(f"👑 Análisis salarial gerencial por nivel jerárquico ejecutivo")
         
-        abrir = input("\n¿Abrir dashboard en el navegador? (y/n): ").strip().lower()
-        if abrir in ['y', 'yes', 'sí', 's']:
-            import webbrowser
-            webbrowser.open(f'file://{os.path.abspath(dashboard_file)}')
-            print("🚀 Dashboard abierto en el navegador")
+        try:
+            abrir = input("\n¿Abrir dashboard en el navegador? (y/n): ").strip().lower()
+            if abrir in ['y', 'yes', 'sí', 's']:
+                import webbrowser
+                webbrowser.open(f'file://{os.path.abspath(dashboard_file)}')
+                print("🚀 Dashboard abierto en el navegador")
+        except EOFError:
+            # Ejecutado de forma no interactiva, no pedir confirmación
+            print("🔧 Ejecutado de forma no interactiva - dashboard generado exitosamente")
         
     except Exception as e:
         print(f"❌ Error: {e}")

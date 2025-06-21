@@ -34,13 +34,13 @@ echo "5) 📊 Ejecutar Análisis y Visualizaciones"
 echo "6) 🌐 Abrir Dashboard Web (servidor local)"
 echo "6b) 🎨 Generar Dashboard Web Moderno"
 echo "6c) 🎯 Dashboard Ejecutivo Mejorado (con análisis de fuentes)"
-echo "7) 🔧 Configurar MySQL"
-echo "8) 🔍 Ver archivos de datos generados"
-echo "9) 🧹 Limpiar datos anteriores (rápido)"
-echo "10) 🗑️ Limpieza completa del proyecto"
-echo "12) ❌ Salir"
+echo "7) 📋 Generar dashboard para GitHub Pages"
+echo "8) 🔧 Configurar MySQL"
+echo "9) 🔄 Actualizar lista de empresas (extracción automática)"
+echo "10) 📄 Ver estadísticas rápidas"
+echo "11) ❌ Salir"
 echo ""
-read -p "Selecciona una opción (1-12): " choice
+read -p "Selecciona una opción (1-11): " choice
 
 case $choice in
     1)
@@ -131,59 +131,49 @@ case $choice in
         python dashboard_ejecutivo_mejorado.py
         ;;
     7)
-        echo -e "${GREEN}🔧 Configurando MySQL...${NC}"
-        echo "=================================================="
-        echo "Opciones de configuración MySQL:"
-        echo "a) Configuración automática"
-        echo "b) Verificar configuración actual"
-        echo "c) Reiniciar configuración"
-        echo ""
-        read -p "Selecciona una opción (a/b/c): " mysql_option
-        
-        case $mysql_option in
-            a)
-                echo "🔧 Ejecutando configuración automática..."
-                python setup_mysql.py
-                ;;
-            b)
-                echo "🔍 Verificando configuración actual..."
-                python setup_mysql.py check
-                ;;
-            c)
-                echo "🔄 Reiniciando configuración..."
-                python setup_mysql.py reset
-                ;;
-            *)
-                echo "Opción no válida"
-                ;;
-        esac
+        echo "📋 Generando dashboard para GitHub Pages..."
+        echo "🎯 El dashboard se generará directamente en docs/index.html"
+        if [ -f "salarios_completo.csv" ]; then
+            python dashboard_ejecutivo_corregido.py
+            echo ""
+            echo "✅ Dashboard generado en docs/index.html"
+            echo "🌐 Puedes subirlo a GitHub Pages o abrirlo localmente"
+            echo "�� Ubicación: $(pwd)/docs/index.html"
+        else
+            echo "❌ No se encontró salarios_completo.csv"
+            echo "💡 Ejecuta primero la opción 2 (Scraping COMPLETO)"
+        fi
         ;;
     8)
-        echo -e "${GREEN}🔍 Archivos de datos encontrados:${NC}"
-        echo "📊 Archivos CSV:"
-        ls -la *.csv 2>/dev/null || echo "   No hay archivos CSV"
-        echo "🗄️  Bases de datos:"
-        ls -la *.db *.sqlite 2>/dev/null || echo "   No hay archivos de base de datos SQLite"
-        echo "📄 Reportes HTML:"
-        ls -la *reporte*.html *analisis*.html 2>/dev/null || echo "   No hay reportes HTML"
-        echo "📝 Otros archivos:"
-        ls -la *.txt *.json 2>/dev/null || echo "   No hay otros archivos de datos"
+        echo -e "${GREEN}🔧 Configurando MySQL...${NC}"
+        if [ -f "setup_mysql.py" ]; then
+            python setup_mysql.py
+        else
+            echo "❌ No se encontró setup_mysql.py"
+        fi
         ;;
     9)
-        echo -e "${YELLOW}🧹 Limpiando datos anteriores...${NC}"
-        read -p "¿Estás seguro? Esto eliminará todos los datos (y/n): " confirm
-        if [[ "$confirm" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-            rm -f *.csv *.db *.sqlite *.html empresas_encontradas.txt stats.json
-            echo -e "${GREEN}✅ Datos limpiados${NC}"
+        echo "🔄 Actualizando lista de empresas..."
+        if [ -f "empresas_extractor.py" ]; then
+            python empresas_extractor.py
+            echo "✅ Lista actualizada. Ahora puedes usar el scraping completo."
         else
-            echo "Operación cancelada"
+            echo "❌ No se encontró empresas_extractor.py"
         fi
         ;;
     10)
-        echo -e "${YELLOW}🗑️  Iniciando limpieza completa...${NC}"
-        ./clean.sh
+        echo "📄 Estadísticas rápidas de archivos existentes:"
+        if [ -f "salarios_completo.csv" ]; then
+            echo "📊 salarios_completo.csv: $(wc -l < salarios_completo.csv) líneas"
+        fi
+        if [ -f "salarios_simple.csv" ]; then
+            echo "📊 salarios_simple.csv: $(wc -l < salarios_simple.csv) líneas"
+        fi
+        if [ -f "empresas_extraidas.json" ]; then
+            echo "🏢 Empresas disponibles: $(python -c "import json; print(len(json.load(open('empresas_extraidas.json'))))" 2>/dev/null || echo "Error al leer")"
+        fi
         ;;
-    12)
+    11)
         echo -e "${GREEN}👋 ¡Hasta luego!${NC}"
         exit 0
         ;;
