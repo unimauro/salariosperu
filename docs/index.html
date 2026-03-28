@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Análisis Salarial Perú 2025</title>
+    <title>Dashboard Análisis Salarial Perú 2026</title>
     <link rel="icon" type="image/x-icon" href="https://unimauro.github.io/salariosperu/favicon.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -20,89 +20,90 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #333; line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 1.5rem 0; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #1a2332, #2c3e50); color: white; padding: 1.2rem 0; margin-bottom: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
-        .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .logo { display: flex; align-items: center; gap: 15px; }
-        .logo i { font-size: 2.5rem; color: #3498db; }
-        .logo h1 { font-size: 1.8rem; font-weight: 300; }
-        .update-info { text-align: right; font-size: 0.9rem; opacity: 0.9; }
-        .yape-section { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 8px; margin-left: 20px; }
-        .yape-qr { width: 80px; height: 80px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.3); }
-        .yape-text { color: #f39c12; font-weight: 600; font-size: 0.9rem; }
-        .chart-container { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 2rem; }
-        .chart-title { font-size: 1.3rem; font-weight: 600; color: #2c3e50; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #ecf0f1; }
-        .chart-description { color: #666; margin-bottom: 1rem; font-size: 0.9rem; font-style: italic; }
-        .footer { background: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo i { font-size: 2rem; color: #3498db; }
+        .logo h1 { font-size: 1.5rem; font-weight: 400; letter-spacing: -0.5px; }
+        .logo-subtitle { font-size: 0.8rem; opacity: 0.7; margin-top: 2px; }
+        .header-right { display: flex; align-items: center; gap: 1.5rem; }
+        .update-info { text-align: right; font-size: 0.78rem; opacity: 0.85; line-height: 1.5; }
+        .yape-section { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.08); padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); }
+        .yape-qr { width: 55px; height: 55px; border-radius: 6px; }
+        .yape-text { color: #f39c12; font-weight: 600; font-size: 0.75rem; line-height: 1.4; }
+
+        .chart-container { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 1.5rem; border: 1px solid #e8ecf1; }
+        .chart-title { font-size: 1.2rem; font-weight: 600; color: #2c3e50; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid #ecf0f1; }
+        .chart-description { color: #666; margin-bottom: 1rem; font-size: 0.85rem; font-style: italic; line-height: 1.5; }
+        .footer { background: #1a2332; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.85rem; }
         .footer a { color: #3498db; text-decoration: none; }
-        
+        .footer a:hover { text-decoration: underline; }
+
         /* KPIs */
-        .kpi-section { margin: 1rem 0 1.5rem 0; }
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
-        .kpi-card-modern { background: white; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid; display: flex; align-items: center; gap: 0.8rem; transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .kpi-card-modern:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .kpi-section { margin: 0 0 1.5rem 0; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 0; }
+        .kpi-card-modern { background: white; border-radius: 10px; padding: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid; display: flex; align-items: center; gap: 0.8rem; transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e8ecf1; border-left-width: 4px; }
+        .kpi-card-modern:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
         .kpi-card-modern.primary { border-left-color: #3498db; }
         .kpi-card-modern.success { border-left-color: #2ecc71; }
         .kpi-card-modern.purple { border-left-color: #9b59b6; }
         .kpi-card-modern.orange { border-left-color: #e67e22; }
-        .kpi-icon { font-size: 2rem; min-width: 50px; text-align: center; }
+        .kpi-icon { font-size: 1.8rem; min-width: 45px; text-align: center; }
         .kpi-content { flex: 1; }
-        .kpi-title { font-size: 0.85rem; color: #666; margin-bottom: 0.3rem; font-weight: 500; }
-        .kpi-value { font-size: 1.5rem; font-weight: bold; color: #2c3e50; margin-bottom: 0.2rem; }
-        .kpi-trend { font-size: 0.75rem; font-weight: 500; }
+        .kpi-title { font-size: 0.78rem; color: #888; margin-bottom: 0.2rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-value { font-size: 1.6rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.15rem; }
+        .kpi-trend { font-size: 0.72rem; font-weight: 500; }
         .kpi-trend.positive { color: #27ae60; }
-        .kpi-trend.neutral { color: #7f8c8d; }
-        
+        .kpi-trend.neutral { color: #95a5a6; }
+
         /* Pestañas */
-        .tabs-container { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin: 2rem 0; overflow: hidden; }
-        .tabs-header { display: flex; background: #f8f9fa; border-bottom: 1px solid #dee2e6; }
-        .tab-button { flex: 1; padding: 1rem 1.5rem; border: none; background: transparent; color: #6c757d; font-weight: 500; cursor: pointer; transition: all 0.3s ease; border-bottom: 3px solid transparent; }
+        .tabs-container { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin: 1.5rem 0; overflow: hidden; border: 1px solid #e8ecf1; }
+        .tabs-header { display: flex; background: #f8f9fa; border-bottom: 2px solid #e8ecf1; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .tab-button { flex: 1; min-width: 120px; padding: 0.9rem 1rem; border: none; background: transparent; color: #8899a6; font-weight: 500; font-size: 0.88rem; cursor: pointer; transition: all 0.3s ease; border-bottom: 3px solid transparent; white-space: nowrap; }
         .tab-button:hover { background: #e9ecef; color: #495057; }
-        .tab-button.active { background: white; color: #2c3e50; border-bottom-color: #3498db; }
-        .tab-button i { margin-right: 0.5rem; }
-        .tabs-content { padding: 2rem; }
+        .tab-button.active { background: white; color: #2c3e50; border-bottom-color: #3498db; font-weight: 600; }
+        .tab-button i { margin-right: 0.4rem; }
+        .tabs-content { padding: 1.5rem; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
-        /* Gráficos responsivos - FORZAR ANCHO COMPLETO */
-        .plotly-graph-div { 
-            width: 100% !important; 
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        .tab-content > div { 
-            width: 100% !important; 
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        .js-plotly-plot { 
-            width: 100% !important; 
-            max-width: 100% !important;
-            margin: 0 auto !important;
-        }
-        
-        /* Contenedor de gráficos */
+
+        /* Gráficos responsivos */
+        .plotly-graph-div { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+        .tab-content > div { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+        .js-plotly-plot { width: 100% !important; max-width: 100% !important; margin: 0 auto !important; }
         .chart-container .plotly-graph-div,
         .tab-content .plotly-graph-div,
-        #practicantes-chart .plotly-graph-div { 
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
+        #practicantes-chart .plotly-graph-div { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+
+        /* Scroll to top */
+        .scroll-top { position: fixed; bottom: 20px; right: 20px; width: 44px; height: 44px; border-radius: 50%; background: #3498db; color: white; border: none; cursor: pointer; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(52,152,219,0.4); display: none; z-index: 99; transition: opacity 0.3s; }
+        .scroll-top:hover { background: #2980b9; }
+        .scroll-top.visible { display: flex; align-items: center; justify-content: center; }
+
+        @media (max-width: 1024px) {
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        
         @media (max-width: 768px) {
-            .container { padding: 0 15px; }
-            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
-            .kpi-card-modern { padding: 1rem; }
-            .kpi-icon { font-size: 2rem; min-width: 50px; }
-            .kpi-value { font-size: 1.5rem; }
-            .tabs-header { flex-direction: column; }
-            .tab-button { padding: 0.8rem 1rem; text-align: left; }
+            .header { position: static; }
+            .container { padding: 0 12px; }
+            .header-content { flex-direction: column; align-items: flex-start; }
+            .header-right { flex-direction: column; align-items: flex-start; width: 100%; }
+            .update-info { text-align: left; }
+            .yape-section { width: 100%; }
+            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .kpi-card-modern { padding: 0.8rem; }
+            .kpi-icon { font-size: 1.5rem; min-width: 35px; }
+            .kpi-value { font-size: 1.3rem; }
+            .kpi-title { font-size: 0.7rem; }
+            .tabs-header { flex-wrap: nowrap; }
+            .tab-button { padding: 0.7rem 0.8rem; font-size: 0.8rem; min-width: 100px; }
             .tabs-content { padding: 1rem; }
+        }
+        @media (max-width: 480px) {
+            .kpi-grid { grid-template-columns: 1fr; }
+            .logo h1 { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -114,20 +115,22 @@
                     <i class="fas fa-chart-line"></i>
                     <div>
                         <h1>Dashboard Análisis Salarial</h1>
-                        <div>Estudio de sueldos por categorías: TI, Ventas/Marketing, Sectores Clave, Gerenciales y Análisis Completo</div>
+                        <div class="logo-subtitle">Estudio de sueldos reales del mercado peruano por sector y nivel</div>
                     </div>
                 </div>
-                <div class="update-info">
-                    <div>📊 Procesado: 20/06/2025 20:22</div>
-                    <div>📁 Fuente: salariosperu.com</div>
-                    <div>📈 1,052 registros analizados</div>
-                    <div id="visit-counter">👁️ Cargando visitas...</div>
-                </div>
-                <div class="yape-section">
-                    <img src="https://unimauro.github.io/salariosperu/yape.png" alt="Yape QR" class="yape-qr" />
-                    <div class="yape-text">
-                        💰 Apoya el proyecto<br/>
-                        📱 Escanea con Yape
+                <div class="header-right">
+                    <div class="update-info">
+                        <div>📊 Actualizado: 28/03/2026</div>
+                        <div>📁 Fuente: salariosperu.com</div>
+                        <div>📈 2,068 registros | 416 empresas</div>
+                        <div id="visit-counter">👁️ Cargando visitas...</div>
+                    </div>
+                    <div class="yape-section">
+                        <img src="https://unimauro.github.io/salariosperu/yape.png" alt="Yape QR" class="yape-qr" loading="lazy" />
+                        <div class="yape-text">
+                            Apoya el proyecto<br/>
+                            Escanea con Yape
+                        </div>
                     </div>
                 </div>
             </div>
@@ -142,16 +145,16 @@
                     <div class="kpi-icon">💰</div>
                     <div class="kpi-content">
                         <div class="kpi-title">Salario Promedio</div>
-                        <div class="kpi-value">S/ 8,947</div>
-                        <div class="kpi-trend neutral">📊 Datos reales</div>
+                        <div class="kpi-value">S/ 8,990</div>
+                        <div class="kpi-trend neutral">Mediana: S/ 5,500</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern success">
                     <div class="kpi-icon">🏢</div>
                     <div class="kpi-content">
                         <div class="kpi-title">Empresas Analizadas</div>
-                        <div class="kpi-value">252</div>
-                        <div class="kpi-trend neutral">📊 Datos actualizados</div>
+                        <div class="kpi-value">416</div>
+                        <div class="kpi-trend positive">+164 vs anterior</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern purple">
@@ -159,15 +162,15 @@
                     <div class="kpi-content">
                         <div class="kpi-title">Salario Más Alto</div>
                         <div class="kpi-value">S/ 191,399</div>
-                        <div class="kpi-trend positive">📊 Rango superior</div>
+                        <div class="kpi-trend neutral">Senior Partner, McKinsey</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern orange">
                     <div class="kpi-icon">💼</div>
                     <div class="kpi-content">
-                        <div class="kpi-title">Posiciones Activas</div>
-                        <div class="kpi-value">942</div>
-                        <div class="kpi-trend neutral">📋 Diferentes roles</div>
+                        <div class="kpi-title">Posiciones Registradas</div>
+                        <div class="kpi-value">2,068</div>
+                        <div class="kpi-trend positive">1,192 con salario</div>
                     </div>
                 </div>
             </div>
@@ -190,6 +193,9 @@
                 </button>
                 <button class="tab-button" onclick="showTab('banca')">
                     <i class="fas fa-university"></i> Banca
+                </button>
+                <button class="tab-button" onclick="showTab('practicantes')">
+                    <i class="fas fa-graduation-cap"></i> Juniors
                 </button>
             </div>
             
@@ -276,117 +282,105 @@
             </div>
         </section>
         
-        <!-- Análisis Practicantes y Juniors -->
-        <section class="chart-container">
-            <h3 class="chart-title">
-                <i class="fas fa-graduation-cap"></i> 
-                Análisis Salarial Practicantes y Juniors - Distribución por Área Profesional
-            </h3>
-            <p class="chart-description">
-                <strong>Análisis salarial por quartiles:</strong> 55 puestos de entrada y desarrollo profesional (salarios ≤ S/ 5,000). 
-                Barras azules = rango salarial intercuartílico (Q1-Q3), puntos naranjas = sueldo mediano.
-            </p>
-            <div id="practicantes-chart"><html>
+        <!-- Practicantes como Tab -->
+        <section class="tabs-container">
+            <div class="tabs-content">
+                <div id="practicantes-tab" class="tab-content active">
+                    <h3 class="chart-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        Análisis Salarial Practicantes y Juniors
+                    </h3>
+                    <p class="chart-description">
+                        55 puestos de entrada y desarrollo profesional (salarios &le; S/ 5,000).
+                        Barras = rango intercuartílico (Q1-Q3), puntos naranjas = mediana.
+                    </p>
+                    <div id="practicantes-chart"><html>
 <head><meta charset="utf-8" /></head>
 <body>
     <div>                            <div id="practicantes-juniors" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("practicantes-juniors")) {                    Plotly.newPlot(                        "practicantes-juniors",                        [{"base":1931.25,"marker":{"color":"#4169E1"},"name":"Recursos Humanos Jr (Q1-Q3)","opacity":0.8,"orientation":"h","showlegend":false,"text":"Q1-Q3: S\u002f 1,931 - S\u002f 2,594","textposition":"inside","x":[662.5],"y":["Recursos Humanos Jr"],"type":"bar"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[1600.0,1931.25],"y":["Recursos Humanos Jr","Recursos Humanos Jr"],"type":"scatter"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[2593.75,2925.0],"y":["Recursos Humanos Jr","Recursos Humanos Jr"],"type":"scatter"},{"marker":{"color":"orange","line":{"color":"white","width":2},"size":12,"symbol":"circle"},"mode":"markers","name":"","showlegend":false,"x":[2262.5],"y":["Recursos Humanos Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","name":"","showlegend":false,"x":[1600.0],"y":["Recursos Humanos Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","showlegend":false,"x":[2925.0],"y":["Recursos Humanos Jr"],"type":"scatter"},{"base":1807.5,"marker":{"color":"#4169E1"},"name":"Marketing y Comercial Jr (Q1-Q3)","opacity":0.8,"orientation":"h","showlegend":false,"text":"Q1-Q3: S\u002f 1,808 - S\u002f 3,195","textposition":"inside","x":[1387.5],"y":["Marketing y Comercial Jr"],"type":"bar"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[930.0,1807.5],"y":["Marketing y Comercial Jr","Marketing y Comercial Jr"],"type":"scatter"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[3195.0,3780.0],"y":["Marketing y Comercial Jr","Marketing y Comercial Jr"],"type":"scatter"},{"marker":{"color":"orange","line":{"color":"white","width":2},"size":12,"symbol":"circle"},"mode":"markers","name":"","showlegend":false,"x":[2550.0],"y":["Marketing y Comercial Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","name":"","showlegend":false,"x":[930.0],"y":["Marketing y Comercial Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","showlegend":false,"x":[3780.0],"y":["Marketing y Comercial Jr"],"type":"scatter"},{"base":2421.75,"marker":{"color":"#4169E1"},"name":"Comunicaciones Jr (Q1-Q3)","opacity":0.8,"orientation":"h","showlegend":false,"text":"Q1-Q3: S\u002f 2,422 - S\u002f 3,474","textposition":"inside","x":[1052.0],"y":["Comunicaciones Jr"],"type":"bar"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[1378.0,2421.75],"y":["Comunicaciones Jr","Comunicaciones Jr"],"type":"scatter"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[3473.75,5850.0],"y":["Comunicaciones Jr","Comunicaciones Jr"],"type":"scatter"},{"marker":{"color":"orange","line":{"color":"white","width":2},"size":12,"symbol":"circle"},"mode":"markers","name":"","showlegend":false,"x":[2900.0],"y":["Comunicaciones Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","name":"","showlegend":false,"x":[1378.0],"y":["Comunicaciones Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","showlegend":false,"x":[5850.0],"y":["Comunicaciones Jr"],"type":"scatter"},{"base":2075.0,"marker":{"color":"#4169E1"},"name":"Otros Practicantes\u002fJuniors (Q1-Q3)","opacity":0.8,"orientation":"h","showlegend":false,"text":"Q1-Q3: S\u002f 2,075 - S\u002f 4,486","textposition":"inside","x":[2411.25],"y":["Otros Practicantes\u002fJuniors"],"type":"bar"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[1264.0,2075.0],"y":["Otros Practicantes\u002fJuniors","Otros Practicantes\u002fJuniors"],"type":"scatter"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[4486.25,7500.0],"y":["Otros Practicantes\u002fJuniors","Otros Practicantes\u002fJuniors"],"type":"scatter"},{"marker":{"color":"orange","line":{"color":"white","width":2},"size":12,"symbol":"circle"},"mode":"markers","name":"","showlegend":false,"x":[3093.75],"y":["Otros Practicantes\u002fJuniors"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","name":"","showlegend":false,"x":[1264.0],"y":["Otros Practicantes\u002fJuniors"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","showlegend":false,"x":[7500.0],"y":["Otros Practicantes\u002fJuniors"],"type":"scatter"},{"base":3111.0,"marker":{"color":"#4169E1"},"name":"Finanzas y Análisis Jr (Q1-Q3)","opacity":0.8,"orientation":"h","showlegend":false,"text":"Q1-Q3: S\u002f 3,111 - S\u002f 3,550","textposition":"inside","x":[439.0],"y":["Finanzas y Análisis Jr"],"type":"bar"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[2300.0,3111.0],"y":["Finanzas y Análisis Jr","Finanzas y Análisis Jr"],"type":"scatter"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[3550.0,3960.0],"y":["Finanzas y Análisis Jr","Finanzas y Análisis Jr"],"type":"scatter"},{"marker":{"color":"orange","line":{"color":"white","width":2},"size":12,"symbol":"circle"},"mode":"markers","name":"","showlegend":false,"x":[3300.0],"y":["Finanzas y Análisis Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","name":"","showlegend":false,"x":[2300.0],"y":["Finanzas y Análisis Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","showlegend":false,"x":[3960.0],"y":["Finanzas y Análisis Jr"],"type":"scatter"},{"base":3500.0,"marker":{"color":"#4169E1"},"name":"Consultoría y Negocios Jr (Q1-Q3)","opacity":0.8,"orientation":"h","showlegend":false,"text":"Q1-Q3: S\u002f 3,500 - S\u002f 3,500","textposition":"inside","x":[0.0],"y":["Consultoría y Negocios Jr"],"type":"bar"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[3500.0,3500.0],"y":["Consultoría y Negocios Jr","Consultoría y Negocios Jr"],"type":"scatter"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[3500.0,3500.0],"y":["Consultoría y Negocios Jr","Consultoría y Negocios Jr"],"type":"scatter"},{"marker":{"color":"orange","line":{"color":"white","width":2},"size":12,"symbol":"circle"},"mode":"markers","name":"","showlegend":false,"x":[3500.0],"y":["Consultoría y Negocios Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","name":"","showlegend":false,"x":[3500.0],"y":["Consultoría y Negocios Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","showlegend":false,"x":[3500.0],"y":["Consultoría y Negocios Jr"],"type":"scatter"},{"base":3600.0,"marker":{"color":"#4169E1"},"name":"Tecnología Jr (Q1-Q3)","opacity":0.8,"orientation":"h","showlegend":false,"text":"Q1-Q3: S\u002f 3,600 - S\u002f 4,150","textposition":"inside","x":[550.0],"y":["Tecnología Jr"],"type":"bar"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[1350.0,3600.0],"y":["Tecnología Jr","Tecnología Jr"],"type":"scatter"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[4150.0,5310.0],"y":["Tecnología Jr","Tecnología Jr"],"type":"scatter"},{"marker":{"color":"orange","line":{"color":"white","width":2},"size":12,"symbol":"circle"},"mode":"markers","name":"","showlegend":false,"x":[3663.0],"y":["Tecnología Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","name":"","showlegend":false,"x":[1350.0],"y":["Tecnología Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","showlegend":false,"x":[5310.0],"y":["Tecnología Jr"],"type":"scatter"},{"base":5131.0,"marker":{"color":"#4169E1"},"name":"Supply Chain y Operaciones Jr (Q1-Q3)","opacity":0.8,"orientation":"h","showlegend":false,"text":"Q1-Q3: S\u002f 5,131 - S\u002f 5,917","textposition":"inside","x":[786.0],"y":["Supply Chain y Operaciones Jr"],"type":"bar"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[4738.0,5131.0],"y":["Supply Chain y Operaciones Jr","Supply Chain y Operaciones Jr"],"type":"scatter"},{"line":{"color":"#000080","width":3},"mode":"lines","showlegend":false,"x":[5917.0,6310.0],"y":["Supply Chain y Operaciones Jr","Supply Chain y Operaciones Jr"],"type":"scatter"},{"marker":{"color":"orange","line":{"color":"white","width":2},"size":12,"symbol":"circle"},"mode":"markers","name":"Mediana","showlegend":true,"x":[5524.0],"y":["Supply Chain y Operaciones Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","name":"Min\u002fMax","showlegend":true,"x":[4738.0],"y":["Supply Chain y Operaciones Jr"],"type":"scatter"},{"marker":{"color":"#000080","size":8,"symbol":"diamond"},"mode":"markers","showlegend":false,"x":[6310.0],"y":["Supply Chain y Operaciones Jr"],"type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"title":{"text":"🎓 Análisis Salarial Practicantes y Juniors - Distribución por Área Profesional\u003cbr\u003e\u003csub\u003eQuartiles salariales para puestos de entrada y desarrollo profesional (Min, Q1, Mediana, Q3, Max)\u003c\u002fsub\u003e","x":0.5},"xaxis":{"title":{"text":"Salario (S\u002f)"},"tickformat":",.0f"},"yaxis":{"title":{"text":"Área Profesional Junior"},"categoryorder":"total ascending"},"legend":{"orientation":"h","yanchor":"bottom","y":1.02,"xanchor":"right","x":1},"height":500,"showlegend":true},                        {"responsive": true}                    )                };            </script>        </div>
 </body>
 </html></div>
+                </div>
+            </div>
         </section>
     </main>
+
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <footer class="footer">
         <div class="container">
             <p>
-                <i class="fas fa-database"></i> 
-                Dashboard Análisis Salarial Ejecutivo - Estudio de Sueldos Perú 2024
-                | 
-                <a href="../index.html">
-                    <i class="fas fa-home"></i> Volver al inicio
+                <i class="fas fa-database"></i>
+                Dashboard Análisis Salarial - Estudio de Sueldos Peru 2026
+                |
+                <a href="https://github.com/unimauro/salariosperu" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                |
+                <a href="https://salariosperu.com" target="_blank">
+                    Fuente: salariosperu.com
                 </a>
             </p>
-            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-                Análisis salarial basado en 1,052 registros de sueldos reales sin datos simulados
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">
+                Basado en 2,068 registros de sueldos reales de 416 empresas. Sin datos simulados.
             </p>
         </div>
     </footer>
 
     <script>
-        // Función para cambiar pestañas
         function showTab(tabName) {
-            // Ocultar todas las pestañas
-            const allTabs = document.querySelectorAll('.tab-content');
-            const allButtons = document.querySelectorAll('.tab-button');
-            
-            allTabs.forEach(tab => tab.classList.remove('active'));
-            allButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Mostrar la pestaña seleccionada
-            document.getElementById(tabName + '-tab').classList.add('active');
-            event.target.classList.add('active');
-            
-            // FORZAR REDIMENSIÓN DE GRÁFICOS AL CAMBIAR PESTAÑA
-            setTimeout(function() {
-                resizeAllPlotlyGraphs();
-            }, 100);
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+
+            const tab = document.getElementById(tabName + '-tab');
+            if (tab) tab.classList.add('active');
+
+            // Find the correct button (handles clicks on icon inside button)
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabName)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            setTimeout(resizeAllPlotlyGraphs, 150);
         }
-        
-        // Función para redimensionar todos los gráficos de Plotly
+
         function resizeAllPlotlyGraphs() {
-            const plotlyDivs = document.querySelectorAll('.plotly-graph-div');
-            plotlyDivs.forEach(function(div) {
+            document.querySelectorAll('.plotly-graph-div').forEach(div => {
                 if (window.Plotly && div.layout) {
-                    // Forzar ancho al 100% del contenedor padre
-                    const parentWidth = div.parentElement.offsetWidth;
-                    window.Plotly.relayout(div, {
-                        width: parentWidth,
-                        autosize: true
-                    });
+                    Plotly.relayout(div, { width: div.parentElement.offsetWidth, autosize: true });
                 }
             });
         }
-        
-        // Función para cargar contador de visitas
+
         async function loadVisitCounter() {
             try {
-                // Opción 1: API Counter (gratuita)
                 const response = await fetch('https://api.countapi.xyz/hit/salariosperu-dashboard/visits');
                 const data = await response.json();
-                document.getElementById('visit-counter').innerHTML = `👁️ ${data.value.toLocaleString()} visitas`;
-                
-                // Guardar en localStorage también
+                document.getElementById('visit-counter').innerHTML = '👁️ ' + data.value.toLocaleString() + ' visitas';
                 localStorage.setItem('dashboard-visits', data.value);
-            } catch (error) {
-                // Fallback: usar localStorage
+            } catch (e) {
                 let visits = parseInt(localStorage.getItem('dashboard-visits') || '0') + 1;
                 localStorage.setItem('dashboard-visits', visits);
-                document.getElementById('visit-counter').innerHTML = `👁️ ${visits.toLocaleString()} visitas (local)`;
-                console.log('📊 Contador de visitas funcionando en modo local');
+                document.getElementById('visit-counter').innerHTML = '👁️ ' + visits.toLocaleString() + ' visitas';
             }
         }
-        
+
+        // Scroll to top button
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('scrollTop');
+            if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('📊 Dashboard Análisis Salarial Ejecutivo cargado');
-            console.log('💻 Puestos TI:', 46);
-            console.log('📈 Puestos Ventas/Marketing:', 93);
-            console.log('👑 Puestos Gerenciales:', 371);
-            console.log('🎓 Puestos Practicantes/Juniors:', 55);
-            
-            // Activar primera pestaña por defecto
-            console.log('🔧 Sistema de pestañas inicializado');
-            
-            // Contador de visitas usando API gratuita
             loadVisitCounter();
-            
-            // FORZAR REDIMENSIÓN INICIAL DE TODOS LOS GRÁFICOS
-            setTimeout(function() {
-                resizeAllPlotlyGraphs();
-                console.log('🔧 Gráficos redimensionados al ancho completo');
-            }, 1000);
-            
-            // Redimensionar cuando cambie el tamaño de la ventana
+            setTimeout(resizeAllPlotlyGraphs, 800);
+            let resizeTimer;
             window.addEventListener('resize', function() {
-                setTimeout(resizeAllPlotlyGraphs, 100);
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(resizeAllPlotlyGraphs, 150);
             });
         });
     </script>
