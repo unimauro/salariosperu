@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 """
-Scraper Simplificado para SalariosPerú.com
-Versión optimizada que funciona con SQLite y MySQL
+Scraper para SalariosPerú.com (2026)
+Extrae datos de salarios desde JSON-LD (Schema.org JobPosting)
+Compatible con el nuevo sitio Next.js
 """
 
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import sqlite3
+import json
 import time
+import re
 import logging
 from datetime import datetime
-import mysql.connector
-from urllib.parse import quote
-from mysql_config import MYSQL_CONFIG
+from urllib.parse import quote, unquote
+
+# Configuración de logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
 try:
     from empresas_auto import get_empresas_auto
     EMPRESAS_SOURCE = "auto"
@@ -21,9 +27,6 @@ except ImportError:
     from empresas_completas import get_all_companies
     EMPRESAS_SOURCE = "manual"
 
-# Configuración de logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
 
 class SalariosScraperSimple:
     def __init__(self, delay=2, use_mysql=False):
@@ -32,369 +35,328 @@ class SalariosScraperSimple:
         self.use_mysql = use_mysql
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'es-PE,es;q=0.9,en;q=0.8',
         })
         self.salary_data = []
-        
-        # Cargar todas las empresas según la fuente disponible
+
+        # Cargar empresas
         if EMPRESAS_SOURCE == "auto":
             self.all_companies = get_empresas_auto()
-            logger.info(f"📊 Usando lista automática extraída: {len(self.all_companies)} empresas")
+            logger.info(f"Usando lista automática: {len(self.all_companies)} empresas")
         else:
             self.all_companies = get_all_companies()
-            logger.info(f"📊 Usando lista manual: {len(self.all_companies)} empresas")
-        
-        # Lista de empresas para testing rápido (subset de las principales)
+            logger.info(f"Usando lista manual: {len(self.all_companies)} empresas")
+
+        # Empresas para testing rápido
         self.test_companies = [
             ('banco-de-credito-bcp', 'Banco de Crédito BCP'),
-            ('interbank', 'Interbank'), 
-            ('bbva-peru', 'BBVA Perú'),
-            ('scotiabank-perú', 'Scotiabank Perú'),  # Con tilde
-            ('entel-perú', 'Entel Perú'),  # Con tilde
-            ('telefónica', 'Telefónica'),  # Con tilde
-            ('alicorp', 'Alicorp'),
-            ('rimac-seguros', 'Rimac Seguros'),
-            ('falabella', 'Falabella'),
-            ('deloitte', 'Deloitte'),
-            ('pwc-perú', 'PwC Perú'),
-            ('rappi', 'Rappi'),
-            ('yape', 'Yape'),
+            ('interbank', 'Interbank'),
+            ('bbva-peru', 'BBVA en Perú'),
+            ('alicorpoficial', 'Alicorp'),
+            ('yapeoficial', 'Yape'),
             ('culqi', 'Culqi'),
-            ('nestlé', 'Nestlé')  # Con tilde
+            ('entel-perú', 'Entel Perú'),
+            ('deloitte', 'Deloitte'),
+            ('rappi', 'Rappi'),
+            ('minsur-s-a-', 'Minsur S.A.'),
+            ('scotiabank', 'Scotiabank'),
+            ('rimac-seguros', 'Rimac Seguros'),
+            ('izipay', 'izipay'),
+            ('loréal', "L'Oréal"),
+            ('belcorpcorporativo', 'Belcorp'),
         ]
-    
-    def encode_company_url(self, company_slug):
-        """Codifica correctamente URLs de empresas con caracteres especiales"""
-        # Separar el slug en partes para codificar solo las partes necesarias
-        if '/' in company_slug:
-            # Si ya incluye la ruta completa
-            return company_slug
-        else:
-            # Codificar caracteres especiales para URL
-            encoded_slug = quote(company_slug, safe='-')
-            return f"/empresa/{encoded_slug}"
-    
+
     def get_page(self, url):
         """Obtiene el contenido HTML de una página"""
         try:
             time.sleep(self.delay)
-            logger.debug(f"Solicitando URL: {url}")
-            response = self.session.get(url, timeout=10)
+            response = self.session.get(url, timeout=15)
             response.raise_for_status()
             return BeautifulSoup(response.content, 'html.parser')
         except Exception as e:
             logger.error(f"Error al obtener {url}: {e}")
             return None
-    
-    def extract_company_data(self, company_info):
-        """Extrae datos de una empresa específica"""
-        if isinstance(company_info, tuple):
-            company_slug, company_display_name = company_info
+
+    def extract_jsonld_data(self, soup):
+        """Extrae datos de salarios desde tags <script type='application/ld+json'>"""
+        job_postings = []
+        company_info = {}
+
+        for script in soup.find_all('script', type='application/ld+json'):
+            try:
+                data = json.loads(script.string)
+            except (json.JSONDecodeError, TypeError):
+                continue
+
+            items = data if isinstance(data, list) else [data]
+            for item in items:
+                if not isinstance(item, dict):
+                    continue
+                item_type = item.get('@type', '')
+
+                if item_type == 'Organization':
+                    company_info = {
+                        'name': item.get('name', ''),
+                        'url': item.get('url', ''),
+                        'description': item.get('description', ''),
+                    }
+                elif item_type == 'JobPosting':
+                    job_postings.append(item)
+
+        return company_info, job_postings
+
+    def extract_from_nextjs_data(self, soup):
+        """Extrae datos de los scripts __next_f.push (RSC payload)"""
+        salary_entries = []
+
+        for script in soup.find_all('script'):
+            text = script.string or ''
+            if 'self.__next_f.push' not in text:
+                continue
+
+            # Buscar patrones de salary_range en el payload
+            salary_matches = re.findall(
+                r'"title"\s*:\s*"([^"]+)"[^}]*?"salary_range"\s*:\s*"([^"]+)"',
+                text
+            )
+            for title, salary_range in salary_matches:
+                salary_entries.append({
+                    'title': title,
+                    'salary_range': salary_range,
+                })
+
+        return salary_entries
+
+    def parse_salary_range(self, salary_text):
+        """Parsea texto de salario y extrae min, max, promedio"""
+        if not salary_text:
+            return None, None, None
+
+        # Limpiar
+        clean = salary_text.replace('S/', '').replace('PEN', '').replace(',', '').strip()
+
+        # Rango: "3600.00 - 5000.00"
+        range_match = re.search(r'(\d+\.?\d*)\s*-\s*(\d+\.?\d*)', clean)
+        if range_match:
+            salary_min = float(range_match.group(1))
+            salary_max = float(range_match.group(2))
+            return salary_min, salary_max, (salary_min + salary_max) / 2
+
+        # Valor único: "4600.00"
+        single_match = re.search(r'(\d+\.?\d*)', clean)
+        if single_match:
+            val = float(single_match.group(1))
+            return val, val, val
+
+        return None, None, None
+
+    def extract_salary_from_description(self, description):
+        """Extrae rango salarial de la descripción del JobPosting"""
+        if not description:
+            return None
+        match = re.search(r'Rango salarial:\s*(S/[^.]+)', description)
+        if match:
+            return match.group(1).strip()
+        match = re.search(r'S/\s*[\d,]+\.?\d*(?:\s*-\s*S/\s*[\d,]+\.?\d*)?', description)
+        if match:
+            return match.group(0).strip()
+        return None
+
+    def extract_company_data(self, company_info_tuple):
+        """Extrae datos de salarios de una empresa"""
+        if isinstance(company_info_tuple, tuple):
+            company_slug, company_display_name = company_info_tuple
         else:
-            # Compatibilidad con formato anterior
-            company_slug = company_info
-            company_display_name = company_slug.replace('-', ' ').title()
-        
-        # Construir URL con encoding correcto
-        company_path = self.encode_company_url(company_slug)
-        company_url = f"{self.base_url}{company_path}"
-        
-        logger.info(f"Procesando: {company_display_name} ({company_slug})")
-        logger.info(f"URL: {company_url}")
-        
+            company_slug = company_info_tuple
+            company_display_name = unquote(company_slug).replace('-', ' ').title()
+
+        # Codificar slug para URL
+        encoded_slug = quote(company_slug, safe='-.')
+        company_url = f"{self.base_url}/empresa/{encoded_slug}"
+
+        logger.info(f"Procesando: {company_display_name}")
         soup = self.get_page(company_url)
         if not soup:
             return []
-        
+
         company_data = []
-        company_name = company_display_name
-        
-        # Buscar tablas de salarios (método mejorado)
-        salary_tables = soup.find_all('table')
-        
-        # Intentar extraer datos reales de la tabla
-        extracted_data = self.extract_real_salary_data(soup, company_name, company_url)
-        
-        if extracted_data:
-            company_data.extend(extracted_data)
-            logger.info(f"Extraídos {len(extracted_data)} registros reales de {company_name}")
-        elif not salary_tables:
-            # Si no hay tablas, crear datos de ejemplo
-            example_positions = [
-                'Analista de Sistemas',
-                'Desarrollador',
-                'Gerente de Ventas',
-                'Especialista en Marketing'
-            ]
-            
-            for position in example_positions:
-                salary_min = 3000 + (len(position) * 100)
-                salary_max = salary_min + 2000
-                salary_avg = (salary_min + salary_max) / 2
-                
+
+        # Método 1: Extraer de JSON-LD (Schema.org)
+        org_info, job_postings = self.extract_jsonld_data(soup)
+
+        # Usar nombre real de la empresa si lo encontramos
+        if org_info.get('name'):
+            company_display_name = org_info['name']
+
+        for job in job_postings:
+            title = job.get('title', '')
+            description = job.get('description', '')
+
+            # Extraer salario de la descripción
+            salary_text = self.extract_salary_from_description(description)
+            salary_min, salary_max, salary_avg = self.parse_salary_range(salary_text)
+
+            # Extraer universidad si está disponible
+            universidad = None
+            if 'universidad' in str(job).lower():
+                uni_match = re.search(r'"universidad"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"', json.dumps(job))
+                if uni_match:
+                    universidad = uni_match.group(1)
+
+            # Fechas
+            date_posted = job.get('datePosted', '')
+            valid_through = job.get('validThrough', '')
+
+            if title:
                 company_data.append({
-                    'empresa': company_name,
-                    'puesto': position,
+                    'empresa': company_display_name,
+                    'puesto': title,
+                    'salario_minimo': salary_min,
+                    'salario_maximo': salary_max,
+                    'salario_promedio': salary_avg,
+                    'moneda': 'PEN',
+                    'universidad_principal': universidad,
+                    'url_empresa': company_url,
+                    'fecha_inicio': date_posted,
+                    'fecha_fin': valid_through,
+                    'fecha_extraccion': datetime.now().isoformat()
+                })
+
+        # Método 2: Si JSON-LD no dio resultados, intentar Next.js RSC payload
+        if not company_data:
+            nextjs_entries = self.extract_from_nextjs_data(soup)
+            for entry in nextjs_entries:
+                salary_min, salary_max, salary_avg = self.parse_salary_range(entry.get('salary_range'))
+                company_data.append({
+                    'empresa': company_display_name,
+                    'puesto': entry.get('title', 'Desconocido'),
                     'salario_minimo': salary_min,
                     'salario_maximo': salary_max,
                     'salario_promedio': salary_avg,
                     'moneda': 'PEN',
                     'universidad_principal': None,
                     'url_empresa': company_url,
-                    'fecha_extraccion': datetime.now()
+                    'fecha_inicio': None,
+                    'fecha_fin': None,
+                    'fecha_extraccion': datetime.now().isoformat()
                 })
-        else:
-            # Procesar datos reales si existen
-            for table in salary_tables[:3]:  # Limitar a 3 tablas
-                rows = table.find_all('tr')
-                for row in rows[1:]:  # Skip header
-                    cells = row.find_all(['td', 'th'])
-                    if len(cells) >= 2:
-                        position = cells[0].get_text(strip=True)
-                        salary_text = cells[1].get_text(strip=True)
-                        
-                        if position and salary_text:
-                            salary_min, salary_max, salary_avg = self.parse_salary(salary_text)
-                            
-                            company_data.append({
-                                'empresa': company_name,
-                                'puesto': position,
-                                'salario_minimo': salary_min,
-                                'salario_maximo': salary_max,
-                                'salario_promedio': salary_avg,
-                                'moneda': 'PEN',
-                                'universidad_principal': None,
-                                'url_empresa': company_url,
-                                'fecha_extraccion': datetime.now()
-                            })
-        
-        logger.info(f"Extraídos {len(company_data)} registros de {company_name}")
+
+        # Método 3: Fallback a tablas HTML (compatibilidad)
+        if not company_data:
+            company_data = self.extract_from_html_tables(soup, company_display_name, company_url)
+
+        logger.info(f"  -> {len(company_data)} registros de {company_display_name}")
         return company_data
-    
-    def parse_salary(self, salary_text):
-        """Parsea texto de salario y extrae valores numéricos"""
-        import re
-        
-        # Buscar números en el texto
-        numbers = re.findall(r'[\d,]+', salary_text.replace(',', ''))
-        numbers = [int(n) for n in numbers if n.isdigit()]
-        
-        if len(numbers) >= 2:
-            salary_min = min(numbers)
-            salary_max = max(numbers)
-            salary_avg = (salary_min + salary_max) / 2
-        elif len(numbers) == 1:
-            salary_avg = numbers[0]
-            salary_min = salary_avg * 0.8
-            salary_max = salary_avg * 1.2
-        else:
-            # Valores por defecto
-            salary_avg = 4000
-            salary_min = 3000
-            salary_max = 5000
-        
-        return salary_min, salary_max, salary_avg
-    
-    def extract_real_salary_data(self, soup, company_name, company_url):
-        """Extrae datos reales de salarios de la página usando diferentes métodos"""
-        salary_data = []
-        
-        # Método 1: Buscar tabla principal de salarios
-        tables = soup.find_all('table')
-        for table in tables:
+
+    def extract_from_html_tables(self, soup, company_name, company_url):
+        """Fallback: extrae datos de tablas HTML si existen"""
+        data = []
+        for table in soup.find_all('table'):
             rows = table.find_all('tr')
-            
-            for row in rows[1:]:  # Saltar encabezado
+            for row in rows[1:]:
                 cells = row.find_all(['td', 'th'])
-                
                 if len(cells) >= 2:
-                    # Primera celda: puesto, segunda celda: salario
-                    puesto_text = cells[0].get_text(strip=True)
+                    puesto = cells[0].get_text(strip=True)
                     salario_text = cells[1].get_text(strip=True)
-                    
-                    # Filtrar filas de encabezado o vacías
-                    if (puesto_text and salario_text and 
-                        'Puesto' not in puesto_text and 
-                        'Salario' not in salario_text and
-                        'S/' in salario_text):
-                        
-                        salary_min, salary_max, salary_avg = self.parse_salary_advanced(salario_text)
-                        
-                        salary_data.append({
+                    if puesto and salario_text and 'S/' in salario_text:
+                        salary_min, salary_max, salary_avg = self.parse_salary_range(salario_text)
+                        data.append({
                             'empresa': company_name,
-                            'puesto': puesto_text,
+                            'puesto': puesto,
                             'salario_minimo': salary_min,
                             'salario_maximo': salary_max,
                             'salario_promedio': salary_avg,
                             'moneda': 'PEN',
                             'universidad_principal': None,
                             'url_empresa': company_url,
-                            'fecha_extraccion': datetime.now()
+                            'fecha_inicio': None,
+                            'fecha_fin': None,
+                            'fecha_extraccion': datetime.now().isoformat()
                         })
-        
-        # Método 2: Buscar divs con clases específicas si no hay tablas
-        if not salary_data:
-            salary_divs = soup.find_all('div', class_=lambda x: x and any(
-                keyword in x.lower() for keyword in ['salary', 'position', 'job', 'puesto', 'salario']
-            ))
-            
-            for div in salary_divs:
-                text = div.get_text(strip=True)
-                if 'S/' in text:
-                    # Intentar extraer puesto y salario del texto
-                    lines = text.split('\n')
-                    for i, line in enumerate(lines):
-                        if 'S/' in line and i > 0:
-                            puesto = lines[i-1].strip()
-                            salario = line.strip()
-                            
-                            if puesto and salario:
-                                salary_min, salary_max, salary_avg = self.parse_salary_advanced(salario)
-                                
-                                salary_data.append({
-                                    'empresa': company_name,
-                                    'puesto': puesto,
-                                    'salario_minimo': salary_min,
-                                    'salario_maximo': salary_max,
-                                    'salario_promedio': salary_avg,
-                                    'moneda': 'PEN',
-                                    'universidad_principal': None,
-                                    'url_empresa': company_url,
-                                    'fecha_extraccion': datetime.now()
-                                })
-        
-        return salary_data
-    
-    def parse_salary_advanced(self, salary_text):
-        """Parsea texto de salario de forma más avanzada"""
-        import re
-        
-        # Remover texto no numérico común
-        clean_text = salary_text.replace('S/', '').replace('PEN', '').replace(',', '')
-        
-        # Buscar patrones de rango (ej: "3,600.00 - 5,000.00")
-        range_pattern = r'(\d+\.?\d*)\s*-\s*(\d+\.?\d*)'
-        range_match = re.search(range_pattern, clean_text)
-        
-        if range_match:
-            salary_min = float(range_match.group(1))
-            salary_max = float(range_match.group(2))
-            salary_avg = (salary_min + salary_max) / 2
-        else:
-            # Buscar un solo número
-            number_pattern = r'(\d+\.?\d*)'
-            numbers = re.findall(number_pattern, clean_text)
-            
-            if numbers:
-                salary_avg = float(numbers[0])
-                salary_min = salary_avg * 0.8
-                salary_max = salary_avg * 1.2
-            else:
-                # Valores por defecto
-                salary_avg = 4000
-                salary_min = 3000
-                salary_max = 5000
-        
-        return salary_min, salary_max, salary_avg
-    
+        return data
+
     def scrape_companies(self, limit=5, use_all_companies=False):
         """Extrae datos de empresas"""
         if use_all_companies:
             companies_to_scrape = self.all_companies[:limit] if limit else self.all_companies
-            logger.info(f"Iniciando scraping COMPLETO de {len(companies_to_scrape)} empresas...")
+            logger.info(f"Scraping COMPLETO de {len(companies_to_scrape)} empresas...")
         else:
             companies_to_scrape = self.test_companies[:limit]
-            logger.info(f"Iniciando scraping de prueba de {len(companies_to_scrape)} empresas...")
-        
-        successful_companies = 0
-        failed_companies = 0
-        
+            logger.info(f"Scraping de prueba de {len(companies_to_scrape)} empresas...")
+
+        successful = 0
+        failed = 0
+
         for i, company in enumerate(companies_to_scrape, 1):
-            logger.info(f"Procesando empresa {i}/{len(companies_to_scrape)}: {company}")
-            
             try:
                 company_data = self.extract_company_data(company)
                 if company_data:
                     self.salary_data.extend(company_data)
-                    successful_companies += 1
-                    logger.info(f"✅ {company[1]}: {len(company_data)} registros extraídos")
+                    successful += 1
                 else:
-                    failed_companies += 1
-                    logger.warning(f"⚠️  {company[1]}: Sin datos")
-                    
+                    failed += 1
+                    logger.warning(f"  Sin datos para {company[1] if isinstance(company, tuple) else company}")
             except Exception as e:
-                failed_companies += 1
-                logger.error(f"❌ {company[1]}: Error - {e}")
-            
-            # Pausa entre empresas
-            time.sleep(self.delay)
-            
-            # Mostrar progreso cada 10 empresas
+                failed += 1
+                logger.error(f"  Error en {company}: {e}")
+
             if i % 10 == 0:
-                logger.info(f"📊 Progreso: {i}/{len(companies_to_scrape)} empresas procesadas")
-                logger.info(f"   Exitosas: {successful_companies}, Fallidas: {failed_companies}")
-                logger.info(f"   Total registros acumulados: {len(self.salary_data)}")
-        
-        logger.info(f"🎉 Scraping completado!")
-        logger.info(f"   Empresas exitosas: {successful_companies}")
-        logger.info(f"   Empresas fallidas: {failed_companies}")
-        logger.info(f"   Total de registros: {len(self.salary_data)}")
+                logger.info(f"Progreso: {i}/{len(companies_to_scrape)} | OK: {successful} | Fail: {failed} | Registros: {len(self.salary_data)}")
+
+        logger.info(f"Scraping completado! OK: {successful} | Fail: {failed} | Total registros: {len(self.salary_data)}")
         return self.salary_data
-    
+
     def scrape_all_companies(self, max_companies=None):
         """Hace scraping de TODAS las empresas disponibles"""
-        logger.info("🌟 INICIANDO SCRAPING COMPLETO DE TODAS LAS EMPRESAS")
-        logger.info("=" * 60)
-        
         limit = max_companies if max_companies else len(self.all_companies)
         return self.scrape_companies(limit=limit, use_all_companies=True)
-    
+
     def save_to_csv(self, filename='salarios_peru.csv'):
         """Guarda los datos en CSV"""
         if not self.salary_data:
             logger.warning("No hay datos para guardar")
             return
-        
+
         df = pd.DataFrame(self.salary_data)
         df.to_csv(filename, index=False, encoding='utf-8')
-        logger.info(f"✅ Datos guardados en {filename}")
-    
+        logger.info(f"Datos guardados en {filename}")
+
     def save_to_sqlite(self, db_name='salarios_peru.db'):
         """Guarda los datos en SQLite"""
         if not self.salary_data:
             logger.warning("No hay datos para guardar")
             return
-        
+
         conn = sqlite3.connect(db_name)
         df = pd.DataFrame(self.salary_data)
         df.to_sql('salarios', conn, if_exists='replace', index=False)
-        
-        # Crear índices
+
         cursor = conn.cursor()
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_empresa ON salarios(empresa)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_puesto ON salarios(puesto)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_salario ON salarios(salario_promedio)")
-        
         conn.commit()
         conn.close()
-        logger.info(f"✅ Datos guardados en SQLite: {db_name}")
-    
+        logger.info(f"Datos guardados en SQLite: {db_name}")
+
     def save_to_mysql(self, config=None):
         """Guarda los datos en MySQL"""
-        if config is None:
-            config = MYSQL_CONFIG
-            
         try:
+            import mysql.connector
+            from mysql_config import MYSQL_CONFIG
+            if config is None:
+                config = MYSQL_CONFIG
+
             if not self.salary_data:
                 logger.warning("No hay datos para guardar")
-                return
-            
-            # Crear conexión
+                return False
+
             conn = mysql.connector.connect(**config)
             cursor = conn.cursor()
-            
-            # Crear tabla si no existe
-            create_table_query = """
+
+            cursor.execute("""
             CREATE TABLE IF NOT EXISTS salarios (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 empresa VARCHAR(255) NOT NULL,
@@ -405,179 +367,152 @@ class SalariosScraperSimple:
                 moneda VARCHAR(10) DEFAULT 'PEN',
                 universidad_principal VARCHAR(255),
                 url_empresa VARCHAR(500),
+                fecha_inicio DATE,
+                fecha_fin DATE,
                 fecha_extraccion DATETIME DEFAULT CURRENT_TIMESTAMP,
                 INDEX idx_empresa (empresa),
                 INDEX idx_puesto (puesto),
                 INDEX idx_salario (salario_promedio)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-            """
-            
-            cursor.execute(create_table_query)
-            
-            # Limpiar tabla anterior
+            """)
+
             cursor.execute("DELETE FROM salarios")
-            
-            # Insertar datos
+
             insert_query = """
-            INSERT INTO salarios (empresa, puesto, salario_minimo, salario_maximo, 
-                                salario_promedio, moneda, universidad_principal, 
-                                url_empresa, fecha_extraccion)
+            INSERT INTO salarios (empresa, puesto, salario_minimo, salario_maximo,
+                                salario_promedio, moneda, universidad_principal,
+                                url_empresa, fecha_inicio, fecha_fin, fecha_extraccion)
             VALUES (%(empresa)s, %(puesto)s, %(salario_minimo)s, %(salario_maximo)s,
                     %(salario_promedio)s, %(moneda)s, %(universidad_principal)s,
-                    %(url_empresa)s, %(fecha_extraccion)s)
+                    %(url_empresa)s, %(fecha_inicio)s, %(fecha_fin)s, %(fecha_extraccion)s)
             """
-            
+
             cursor.executemany(insert_query, self.salary_data)
             conn.commit()
-            
             cursor.close()
             conn.close()
-            
-            logger.info(f"✅ Datos guardados en MySQL: {config['database']}")
+            logger.info(f"Datos guardados en MySQL: {config['database']}")
             return True
-            
-        except mysql.connector.Error as e:
-            logger.error(f"❌ Error de MySQL: {e}")
+        except ImportError:
+            logger.error("mysql-connector-python no instalado")
             return False
         except Exception as e:
-            logger.error(f"❌ Error al guardar en MySQL: {e}")
+            logger.error(f"Error MySQL: {e}")
             return False
-    
+
     def generate_report(self):
         """Genera un reporte básico"""
         if not self.salary_data:
             logger.warning("No hay datos para analizar")
             return
-        
+
         df = pd.DataFrame(self.salary_data)
-        
-        print("\n" + "="*60)
-        print("REPORTE DE ANÁLISIS - SALARIOS PERÚ")
-        print("="*60)
-        
+
+        # Filtrar registros con salario válido
+        df_valid = df[df['salario_promedio'].notna() & (df['salario_promedio'] > 0)]
+
+        print("\n" + "=" * 60)
+        print("REPORTE DE ANALISIS - SALARIOS PERU 2026")
+        print("=" * 60)
+
         print(f"\nTotal de registros: {len(df)}")
+        print(f"Registros con salario: {len(df_valid)}")
         print(f"Total de empresas: {df['empresa'].nunique()}")
-        print(f"Total de puestos únicos: {df['puesto'].nunique()}")
-        
-        print("\n--- TOP 5 EMPRESAS CON MÁS PUESTOS ---")
-        print(df['empresa'].value_counts().head())
-        
-        print("\n--- TOP 5 SALARIOS MÁS ALTOS ---")
-        top_salaries = df.nlargest(5, 'salario_promedio')[['empresa', 'puesto', 'salario_promedio']]
-        print(top_salaries.to_string(index=False))
-        
-        print("\n--- SALARIO PROMEDIO POR EMPRESA ---")
-        avg_by_company = df.groupby('empresa')['salario_promedio'].mean().sort_values(ascending=False)
-        print(avg_by_company)
+        print(f"Total de puestos unicos: {df['puesto'].nunique()}")
+
+        if not df_valid.empty:
+            print(f"\nSalario promedio general: S/ {df_valid['salario_promedio'].mean():,.2f}")
+            print(f"Salario mediano: S/ {df_valid['salario_promedio'].median():,.2f}")
+            print(f"Rango: S/ {df_valid['salario_promedio'].min():,.2f} - S/ {df_valid['salario_promedio'].max():,.2f}")
+
+            print("\n--- TOP 10 SALARIOS MAS ALTOS ---")
+            top = df_valid.nlargest(10, 'salario_promedio')[['empresa', 'puesto', 'salario_promedio']]
+            for _, row in top.iterrows():
+                print(f"  S/ {row['salario_promedio']:>10,.2f} | {row['empresa'][:25]:<25} | {row['puesto'][:40]}")
+
+            print("\n--- TOP 10 EMPRESAS (por salario promedio) ---")
+            avg_by_company = df_valid.groupby('empresa')['salario_promedio'].agg(['mean', 'count'])
+            avg_by_company = avg_by_company[avg_by_company['count'] >= 3].sort_values('mean', ascending=False).head(10)
+            for empresa, row in avg_by_company.iterrows():
+                print(f"  S/ {row['mean']:>10,.2f} ({int(row['count']):>3} puestos) | {empresa[:40]}")
+
+        # Universidades
+        if 'universidad_principal' in df.columns:
+            unis = df[df['universidad_principal'].notna()]
+            if not unis.empty:
+                print(f"\n--- UNIVERSIDADES ({len(unis)} registros) ---")
+                print(unis['universidad_principal'].value_counts().head(10))
+
 
 def main():
     """Función principal"""
     import sys
-    
-    # Verificar argumentos de línea de comandos
+
     use_mysql = '--use-mysql' in sys.argv
     full_scraping = '--all' in sys.argv or '--full' in sys.argv
     max_companies = None
-    
-    # Buscar argumento de límite
+
     for arg in sys.argv:
         if arg.startswith('--limit='):
             try:
                 max_companies = int(arg.split('=')[1])
-            except:
-                print("⚠️  Formato de límite inválido. Usa: --limit=50")
-    
+            except ValueError:
+                print("Formato invalido. Usa: --limit=50")
+
     if full_scraping:
-        if max_companies:
-            print(f"🔍 SalariosPerú - Scraper COMPLETO (límite: {max_companies} empresas)")
-        else:
-            print("🔍 SalariosPerú - Scraper COMPLETO (TODAS las empresas)")
+        label = f"COMPLETO (limite: {max_companies})" if max_companies else "COMPLETO (TODAS)"
     else:
-        print("🔍 SalariosPerú - Scraper de Prueba (15 empresas)")
-    
-    if use_mysql:
-        print("🗄️  Base de datos: MySQL")
-    else:
-        print("🗄️  Base de datos: SQLite (rápido)")
-    
+        label = "PRUEBA (15 empresas)"
+
+    print(f"Salarios Peru - Scraper {label}")
+    print(f"DB: {'MySQL' if use_mysql else 'SQLite'}")
     print("=" * 60)
-    
+
     scraper = SalariosScraperSimple(delay=2, use_mysql=use_mysql)
-    
-    # Mostrar información de empresas disponibles
-    print(f"📊 Empresas disponibles: {len(scraper.all_companies)}")
-    companies_with_tildes = [c for c in scraper.all_companies if any(char in c[0] for char in 'áéíóúñ')]
-    print(f"🔤 Empresas con tildes: {len(companies_with_tildes)}")
-    
+    print(f"Empresas disponibles: {len(scraper.all_companies)}")
+
     try:
         if full_scraping:
-            # Scraping completo
             data = scraper.scrape_all_companies(max_companies=max_companies)
-            filename_suffix = 'completo'
+            suffix = 'completo'
         else:
-            # Scraping de prueba
             data = scraper.scrape_companies(limit=15)
-            filename_suffix = 'simple'
-        
-        print(f"\n✅ EXTRACCIÓN COMPLETADA")
-        print(f"   Total de registros: {len(data)}")
-        
-        # Guardar en CSV (siempre)
-        csv_filename = f'salarios_{filename_suffix}.csv'
-        scraper.save_to_csv(csv_filename)
-        
-        # Guardar en base de datos según configuración
+            suffix = 'simple'
+
+        print(f"\nTotal registros extraidos: {len(data)}")
+
+        csv_file = f'salarios_{suffix}.csv'
+        scraper.save_to_csv(csv_file)
+
         if use_mysql:
-            print("💾 Guardando en MySQL...")
-            mysql_success = scraper.save_to_mysql()
-            if mysql_success:
-                print("✅ Datos guardados en MySQL")
-            else:
-                print("⚠️  Error con MySQL, guardando en SQLite como respaldo...")
-                db_filename = f'salarios_{filename_suffix}.db'
-                scraper.save_to_sqlite(db_filename)
+            if not scraper.save_to_mysql():
+                db_file = f'salarios_{suffix}.db'
+                scraper.save_to_sqlite(db_file)
         else:
-            print("💾 Guardando en SQLite...")
-            db_filename = f'salarios_{filename_suffix}.db'
-            scraper.save_to_sqlite(db_filename)
-        
-        # Generar reporte
+            db_file = f'salarios_{suffix}.db'
+            scraper.save_to_sqlite(db_file)
+
         scraper.generate_report()
-        
-        print("\n🎉 PROCESO COMPLETADO!")
-        print("\n📁 Archivos generados:")
-        print(f"- {csv_filename}")
-        
-        if use_mysql:
-            print("- Base de datos MySQL actualizada")
-        else:
-            print(f"- {db_filename}")
-        
-        print(f"\n📈 Estadísticas:")
+
         if data:
-            empresas_unicas = len(set(item['empresa'] for item in data))
-            print(f"   • Empresas procesadas: {empresas_unicas}")
-            print(f"   • Registros de salarios: {len(data)}")
-            print(f"   • Promedio por empresa: {len(data)/empresas_unicas:.1f}")
-        
-        print(f"\n💡 Próximos pasos:")
-        print("   • Análisis: python salarios_analyzer.py.py")
-        print("   • Dashboard: python server.py")
-        print("   • Menú completo: ./run.sh")
-        
-        print(f"\n🚀 Comandos disponibles:")
-        print("   python scraper_simple.py                    # Prueba (15 empresas)")
-        print("   python scraper_simple.py --all              # Todas las empresas")
-        print("   python scraper_simple.py --all --limit=50   # Primeras 50 empresas")
-        print("   python scraper_simple.py --use-mysql        # Con MySQL")
-        print("   python scraper_simple.py --all --use-mysql  # Completo con MySQL")
-        
+            empresas = len(set(item['empresa'] for item in data))
+            con_salario = len([d for d in data if d.get('salario_promedio')])
+            print(f"\nResumen: {empresas} empresas, {len(data)} registros, {con_salario} con salario")
+
+        print(f"\nComandos:")
+        print("  python scraper_simple.py                    # Prueba (15 empresas)")
+        print("  python scraper_simple.py --all              # Todas las empresas")
+        print("  python scraper_simple.py --all --limit=50   # Primeras 50")
+        print("  python scraper_simple.py --use-mysql        # Con MySQL")
+        print("  python update_empresas.py                   # Actualizar lista de empresas")
+
     except KeyboardInterrupt:
-        print("\n❌ Interrumpido por el usuario")
-        print("💾 Datos parciales guardados si los había")
+        print("\nInterrumpido por el usuario")
     except Exception as e:
         logger.error(f"Error: {e}")
-        print(f"❌ Error: {e}")
+        import traceback
+        traceback.print_exc()
+
 
 if __name__ == "__main__":
-    main() 
+    main()
