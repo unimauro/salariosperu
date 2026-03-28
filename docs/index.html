@@ -33,6 +33,10 @@
         .yape-section { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.08); padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); }
         .yape-qr { width: 55px; height: 55px; border-radius: 6px; }
         .yape-text { color: #f39c12; font-weight: 600; font-size: 0.75rem; line-height: 1.4; }
+        .support-buttons { display: flex; align-items: center; gap: 10px; }
+        .bmc-btn { display: inline-flex; align-items: center; gap: 6px; background: #FFDD00; color: #000; font-weight: 600; font-size: 0.8rem; padding: 8px 14px; border-radius: 8px; text-decoration: none; transition: all 0.2s ease; border: none; cursor: pointer; white-space: nowrap; }
+        .bmc-btn:hover { background: #e6c700; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,221,0,0.4); }
+        .bmc-btn img { height: 20px; width: 20px; }
 
         .chart-container { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 1.5rem; border: 1px solid #e8ecf1; }
         .chart-title { font-size: 1.2rem; font-weight: 600; color: #2c3e50; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid #ecf0f1; }
@@ -125,11 +129,16 @@
                         <div>📈 2,068 registros | 416 empresas</div>
                         <div id="visit-counter">👁️ Cargando visitas...</div>
                     </div>
-                    <div class="yape-section">
-                        <img src="https://unimauro.github.io/salariosperu/yape.png" alt="Yape QR" class="yape-qr" loading="lazy" />
-                        <div class="yape-text">
-                            Apoya el proyecto<br/>
-                            Escanea con Yape
+                    <div class="support-buttons">
+                        <a href="https://buymeacoffee.com/unimauro" target="_blank" class="bmc-btn">
+                            <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee" />
+                            Buy me a coffee
+                        </a>
+                        <div class="yape-section">
+                            <img src="https://unimauro.github.io/salariosperu/yape.png" alt="Yape QR" class="yape-qr" loading="lazy" />
+                            <div class="yape-text">
+                                Yape
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -321,6 +330,10 @@
                 |
                 <a href="https://salariosperu.com" target="_blank">
                     Fuente: salariosperu.com
+                </a>
+                |
+                <a href="https://buymeacoffee.com/unimauro" target="_blank" style="color: #FFDD00;">
+                    ☕ Buy me a coffee
                 </a>
             </p>
             <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">
