@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Por qué SalariosPerú? · Transparencia salarial en Perú y el mundo</title>
+    <meta name="description" content="¿Por qué existe SalariosPerú? Cómo funciona la transparencia salarial en Noruega, Suecia, Finlandia, Brasil y Perú. Guía para entender los datos del dashboard y negociar tu sueldo.">
+    <meta name="keywords" content="transparencia salarial Peru, negociar sueldo Peru, sueldos publicos, transparencia nordicos, Kateuspaiva Finlandia, Skatteverket Suecia, transparencia salarial mundo">
+    <link rel="canonical" href="https://unimauro.github.io/salariosperu/transparencia.html">
+    <link rel="icon" type="image/x-icon" href="https://unimauro.github.io/salariosperu/favicon.ico">
+
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta property="og:title" content="¿Por qué SalariosPerú? · Transparencia salarial en el mundo">
+    <meta property="og:description" content="Por qué importa la transparencia salarial: el caso de los países nórdicos vs Perú.">
+    <meta property="og:url" content="https://unimauro.github.io/salariosperu/transparencia.html">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://unimauro.github.io/salariosperu/yape.png">
+    <meta property="og:locale" content="es_PE">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@unimauro">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "¿Por qué SalariosPerú? Transparencia salarial en Perú y el mundo",
+      "description": "Guía sobre transparencia salarial: nórdicos vs Perú, por qué importa, cómo usar el dashboard.",
+      "author": { "@type": "Person", "name": "Carlos Mauro Cárdenas", "url": "https://unimauro.github.io/" },
+      "datePublished": "2026-05-13",
+      "image": "https://unimauro.github.io/salariosperu/yape.png",
+      "inLanguage": "es-PE"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-170L71ZZK1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-170L71ZZK1');
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #f7f9fc;
+            --surface: #fff;
+            --text: #2c3e50;
+            --text-soft: #5d6d7e;
+            --text-muted: #95a5a6;
+            --border: #e8ecf1;
+            --accent: #3498db;
+            --accent-strong: #2980b9;
+        }
+        [data-theme="dark"] {
+            --bg: #0f1419;
+            --surface: #1a232e;
+            --text: #ecf0f1;
+            --text-soft: #b0bec5;
+            --text-muted: #7f8c8d;
+            --border: #2d3a48;
+            --accent: #5fb8ff;
+            --accent-strong: #3498db;
+        }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navbar minimal */
+        .topbar {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0.7rem 1.2rem;
+        }
+        .topbar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .topbar-brand { font-weight: 700; font-size: 1rem; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .topbar-brand i { color: var(--accent); }
+        .topbar-nav { display: flex; gap: 0.3rem; align-items: center; }
+        .topbar-nav a, .topbar-nav button {
+            color: var(--text-soft); text-decoration: none; padding: 0.5rem 0.85rem;
+            font-size: 0.88rem; font-weight: 500; border-radius: 6px;
+            transition: all 0.2s; background: none; border: none; cursor: pointer; font-family: inherit;
+        }
+        .topbar-nav a:hover, .topbar-nav button:hover { background: var(--bg); color: var(--text); }
+        .topbar-nav a.cta {
+            background: var(--accent); color: white;
+        }
+        .topbar-nav a.cta:hover { background: var(--accent-strong); color: white; }
+
+        /* Hero */
+        .hero {
+            text-align: center; padding: 4rem 1.2rem 2.5rem;
+            max-width: 800px; margin: 0 auto;
+        }
+        .hero__eyebrow {
+            display: inline-block; padding: 0.3rem 0.9rem;
+            background: rgba(52,152,219,0.1); color: var(--accent-strong);
+            border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 1.2rem;
+        }
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800; line-height: 1.15; letter-spacing: -1px;
+            margin-bottom: 1rem; color: var(--text);
+        }
+        .hero h1 .accent {
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero__lead { font-size: 1.05rem; color: var(--text-soft); max-width: 640px; margin: 0 auto; }
+
+        /* Container */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.2rem; }
+
+        /* Section */
+        section.block { padding: 2.5rem 0; }
+        section.block h2 {
+            font-size: 1.6rem; font-weight: 800; margin-bottom: 0.6rem;
+            display: flex; align-items: center; gap: 0.6rem; color: var(--text);
+        }
+        section.block h2 i { color: var(--accent); font-size: 1.25rem; }
+        section.block > p.lead { color: var(--text-soft); font-size: 1rem; margin-bottom: 1.8rem; max-width: 800px; }
+
+        /* Country cards */
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 1rem;
+        }
+        .country {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.2rem 1.2rem 1rem; transition: all 0.2s;
+            display: flex; flex-direction: column; gap: 0.5rem; position: relative;
+        }
+        .country:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); border-color: var(--accent); }
+        .country__flag { font-size: 2rem; line-height: 1; margin-bottom: 0.2rem; }
+        .country__name { font-size: 1.05rem; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
+        .country__tier {
+            font-size: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 10px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .tier-max { background: rgba(39,174,96,0.15); color: #27ae60; }
+        .tier-mid { background: rgba(243,156,18,0.15); color: #e67e22; }
+        .tier-low { background: rgba(231,76,60,0.15); color: #c0392b; }
+        .country__desc { color: var(--text-soft); font-size: 0.88rem; line-height: 1.55; flex: 1; }
+        .country__link {
+            color: var(--accent); text-decoration: none; font-size: 0.82rem;
+            font-weight: 600; margin-top: 0.5rem; display: inline-flex;
+            align-items: center; gap: 0.35rem;
+        }
+        .country__link:hover { color: var(--accent-strong); text-decoration: underline; }
+
+        /* Quote */
+        .quote {
+            background: linear-gradient(135deg, rgba(52,152,219,0.07), rgba(155,89,182,0.07));
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem 1.6rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-size: 1.1rem; font-style: italic;
+            color: var(--text);
+            line-height: 1.55;
+        }
+        .quote strong { font-style: normal; color: var(--text); background: rgba(243,156,18,0.18); padding: 0 6px; border-radius: 3px; }
+
+        /* Use case cards */
+        .uses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+        .use {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 12px; padding: 1.2rem; display: flex; gap: 0.9rem;
+            align-items: flex-start; transition: all 0.2s;
+        }
+        .use:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        .use__icon {
+            flex-shrink: 0; width: 44px; height: 44px;
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            background: rgba(52,152,219,0.12); color: var(--accent-strong);
+            font-size: 1.2rem;
+        }
+        .use__body h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--text); }
+        .use__body p { font-size: 0.83rem; color: var(--text-soft); line-height: 1.5; }
+
+        /* FAQ */
+        details.faq {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 10px; margin-bottom: 0.7rem; padding: 0;
+            transition: all 0.2s;
+        }
+        details.faq[open] { border-color: var(--accent); }
+        details.faq summary {
+            padding: 0.95rem 1.2rem; cursor: pointer; font-weight: 600;
+            display: flex; align-items: center; justify-content: space-between;
+            color: var(--text); list-style: none;
+        }
+        details.faq summary::-webkit-details-marker { display: none; }
+        details.faq summary::after {
+            content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            color: var(--text-muted); font-size: 0.85rem; transition: transform 0.2s;
+        }
+        details.faq[open] summary::after { transform: rotate(180deg); color: var(--accent); }
+        details.faq .faq__body {
+            padding: 0 1.2rem 1.2rem; color: var(--text-soft);
+            font-size: 0.92rem; line-height: 1.65;
+        }
+        details.faq .faq__body strong { color: var(--text); }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem; padding: 2rem 1.2rem;
+            border-top: 1px solid var(--border);
+            text-align: center; color: var(--text-muted); font-size: 0.85rem;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 600px) {
+            section.block { padding: 1.8rem 0; }
+            section.block h2 { font-size: 1.3rem; }
+            .hero { padding: 2.5rem 1rem 1.5rem; }
+            .quote { font-size: 1rem; padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a href="index.html" class="topbar-brand">
+                <i class="fas fa-chart-line"></i> SalariosPerú
+            </a>
+            <nav class="topbar-nav">
+                <a href="index.html"><i class="fas fa-chart-bar"></i> Dashboard</a>
+                <button id="theme-toggle" aria-label="Cambiar tema"><i class="fas fa-moon"></i></button>
+                <a href="index.html" class="cta">Ver dashboard <i class="fas fa-arrow-right"></i></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <span class="hero__eyebrow"><i class="fas fa-circle-info"></i> Guía & Contexto</span>
+            <h1>En Finlandia puedes ver el sueldo de tu vecino. <span class="accent">En Perú no podés ver ni el tuyo del año pasado.</span></h1>
+            <p class="hero__lead">Esta es una guía corta sobre por qué la transparencia salarial importa, qué pasa en el mundo, y cómo este dashboard intenta cerrar la brecha de información en Perú.</p>
+        </section>
+
+        <!-- 1. Mundo -->
+        <section class="block" id="mundo">
+            <h2><i class="fas fa-globe-americas"></i> Transparencia salarial en el mundo</h2>
+            <p class="lead">Los países nórdicos hicieron pública la información tributaria individual hace siglos. En Latinoamérica solo se publica el sector estatal, y con grandes vacíos. Perú está cerca del fondo.</p>
+
+            <div class="countries-grid">
+                <article class="country">
+                    <div class="country__flag">🇳🇴</div>
+                    <div class="country__name">Noruega <span class="country__tier tier-max">Total</span></div>
+                    <p class="country__desc">Cualquier ciudadano puede consultar el ingreso, patrimonio e impuestos pagados de otro ciudadano en el portal de Skatteetaten. Desde 2014, cuando alguien consulta tu info, te notifican — eso redujo el "stalking salarial" drásticamente.</p>
+                    <a href="https://www.skatteetaten.no/" class="country__link" target="_blank" rel="noopener">Skatteetaten <i class="fas fa-external-link-alt"></i></a>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇸🇪</div>
+                    <div class="country__name">Suecia <span class="country__tier tier-max">Total</span></div>
+                    <p class="country__desc">Basado en la <em>Offentlighetsprincipen</em> de 1766 — la ley de transparencia más antigua del mundo. Llamás a Skatteverket y te dicen el ingreso reportado de cualquier persona.</p>
+                    <a href="https://www.skatteverket.se/" class="country__link" target="_blank" rel="noopener">Skatteverket <i class="fas fa-external-link-alt"></i></a>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇫🇮</div>
+                    <div class="country__name">Finlandia <span class="country__tier tier-max">Total</span></div>
+                    <p class="country__desc"><strong>"Kateuspäivä"</strong> (Día Nacional de los Celos): cada 1 de noviembre publican los ingresos de todos los finlandeses del año anterior. Los medios hacen rankings públicos — top ricos, vecinos, celebridades.</p>
+                    <a href="https://www.vero.fi/en/" class="country__link" target="_blank" rel="noopener">Verohallinto <i class="fas fa-external-link-alt"></i></a>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇮🇸</div>
+                    <div class="country__name">Islandia <span class="country__tier tier-max">Total</span></div>
+                    <p class="country__desc">Declaraciones fiscales publicadas anualmente. Población pequeña + cultura abierta = todos saben de todos. Existe desde principios del siglo XX.</p>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇧🇷</div>
+                    <div class="country__name">Brasil <span class="country__tier tier-mid">Solo público</span></div>
+                    <p class="country__desc">Portal da Transparência publica sueldos de <strong>todos</strong> los funcionarios públicos federales, estaduales y municipales por nombre. No incluye sector privado.</p>
+                    <a href="https://portaldatransparencia.gov.br/" class="country__link" target="_blank" rel="noopener">Portal Transparência <i class="fas fa-external-link-alt"></i></a>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇺🇸</div>
+                    <div class="country__name">Estados Unidos <span class="country__tier tier-mid">Solo público</span></div>
+                    <p class="country__desc">Empleados federales, estatales y municipales públicos por nombre vía sitios como Transparent California, OpenPayrolls. Sector privado solo ejecutivos de empresas listadas vía SEC.</p>
+                    <a href="https://openpayrolls.com/" class="country__link" target="_blank" rel="noopener">OpenPayrolls <i class="fas fa-external-link-alt"></i></a>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇬🇧</div>
+                    <div class="country__name">Reino Unido <span class="country__tier tier-mid">Senior público</span></div>
+                    <p class="country__desc">Solo funcionarios públicos sobre £150k anuales (ministros, BBC executives, civil servants senior). Sector privado opaco salvo empresas que reportan brecha salarial por género desde 2017.</p>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇲🇽</div>
+                    <div class="country__name">México <span class="country__tier tier-mid">Solo público</span></div>
+                    <p class="country__desc">Plataforma Nacional de Transparencia con sueldos de funcionarios públicos. Sector privado sin transparencia.</p>
+                    <a href="https://www.plataformadetransparencia.org.mx/" class="country__link" target="_blank" rel="noopener">PNT <i class="fas fa-external-link-alt"></i></a>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇨🇱</div>
+                    <div class="country__name">Chile <span class="country__tier tier-mid">Solo público</span></div>
+                    <p class="country__desc">Portal de Transparencia Activa: salarios de funcionarios públicos. Sin acceso al privado.</p>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇦🇷</div>
+                    <div class="country__name">Argentina <span class="country__tier tier-mid">Solo público</span></div>
+                    <p class="country__desc">Ley de Acceso a la Información Pública (27.275): obliga publicar sueldos del sector público. Privado opaco.</p>
+                </article>
+
+                <article class="country">
+                    <div class="country__flag">🇵🇪</div>
+                    <div class="country__name">Perú <span class="country__tier tier-low">Casi nada</span></div>
+                    <p class="country__desc">SERVIR publica algunos rangos genéricos. MEF y Transparencia Económica tienen datos <strong>agregados</strong>, no por persona. Sector privado totalmente opaco. <strong>Por eso existe este dashboard.</strong></p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Quote -->
+        <section class="container">
+            <div class="quote">
+                "Si todos pudiéramos ver lo que gana cada cual, la negociación salarial dejaría de favorecer al que ya tiene la información. <strong>La transparencia es el gran ecualizador del mercado laboral.</strong>"
+            </div>
+        </section>
+
+        <!-- 2. La realidad peruana -->
+        <section class="block" id="peru">
+            <h2><i class="fas fa-flag"></i> La realidad peruana</h2>
+            <p class="lead">¿Por qué es difícil saber cuánto se paga en Perú?</p>
+
+            <div class="uses-grid">
+                <div class="use">
+                    <div class="use__icon" style="background:rgba(231,76,60,0.12); color:#e74c3c;"><i class="fas fa-user-secret"></i></div>
+                    <div class="use__body">
+                        <h3>72% empleo informal</h3>
+                        <p>La mayoría del trabajo en Perú está en la informalidad. No hay planillas oficiales que se puedan auditar ni publicar.</p>
+                    </div>
+                </div>
+                <div class="use">
+                    <div class="use__icon" style="background:rgba(243,156,18,0.12); color:#e67e22;"><i class="fas fa-eye-slash"></i></div>
+                    <div class="use__body">
+                        <h3>Privado opaco</h3>
+                        <p>Las empresas no están obligadas a publicar planillas. Glassdoor, LinkedIn y similares tienen muy poca data específica de Perú.</p>
+                    </div>
+                </div>
+                <div class="use">
+                    <div class="use__icon" style="background:rgba(52,73,94,0.15); color:#34495e;"><i class="fas fa-balance-scale-left"></i></div>
+                    <div class="use__body">
+                        <h3>Asimetría de información</h3>
+                        <p>El empleador conoce el mercado salarial; el candidato no. Esto convierte cada negociación en un partido desigual.</p>
+                    </div>
+                </div>
+                <div class="use">
+                    <div class="use__icon" style="background:rgba(155,89,182,0.12); color:#9b59b6;"><i class="fas fa-file-contract"></i></div>
+                    <div class="use__body">
+                        <h3>CAS sí transparente</h3>
+                        <p>Lo único transparente: convocatorias CAS del Estado, donde cada vacante pública incluye salario y plaza. Pero solo es ~5% del empleo total.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Cómo ayuda -->
+        <section class="block" id="ayuda">
+            <h2><i class="fas fa-hand-holding-heart"></i> Cómo te puede ayudar este dashboard</h2>
+            <p class="lead">Usos concretos. Si estás en alguna de estas situaciones, abrí el dashboard.</p>
+
+            <div class="uses-grid">
+                <div class="use">
+                    <div class="use__icon"><i class="fas fa-comments-dollar"></i></div>
+                    <div class="use__body">
+                        <h3>Vas a negociar tu sueldo</h3>
+                        <p>Mirá la mediana de tu rol+sector. Si el ofrecimiento está por debajo, tenés data para pedir más.</p>
+                    </div>
+                </div>
+                <div class="use">
+                    <div class="use__icon"><i class="fas fa-route"></i></div>
+                    <div class="use__body">
+                        <h3>Querés cambiar de carrera o industria</h3>
+                        <p>Comparativa por sector y por rol. Te muestra dónde paga más cada nivel jerárquico.</p>
+                    </div>
+                </div>
+                <div class="use">
+                    <div class="use__icon"><i class="fas fa-bullseye"></i></div>
+                    <div class="use__body">
+                        <h3>Querés saber tu NSE real</h3>
+                        <p>La calculadora APEIM te ubica en NSE A++/A+/A/B/C/D/E y te dice qué % de peruanos gana menos que vos.</p>
+                    </div>
+                </div>
+                <div class="use">
+                    <div class="use__icon"><i class="fas fa-landmark"></i></div>
+                    <div class="use__body">
+                        <h3>Buscás trabajo en el Estado</h3>
+                        <p>1,194 convocatorias CAS activas, actualizadas a diario. Filtrá por institución, rol o región.</p>
+                    </div>
+                </div>
+                <div class="use">
+                    <div class="use__icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <div class="use__body">
+                        <h3>Considerás mudarte a otra región</h3>
+                        <p>Mapa de ingresos por departamento (INEI ENAHO). Brecha entre Lima y Huancavelica: 2.6x.</p>
+                    </div>
+                </div>
+                <div class="use">
+                    <div class="use__icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="use__body">
+                        <h3>Estás investigando el mercado laboral</h3>
+                        <p>Datos abiertos, descargables, con metodología documentada. Para periodistas, estudiantes, RRHH.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. FAQ -->
+        <section class="block" id="faq">
+            <h2><i class="fas fa-question-circle"></i> Preguntas frecuentes</h2>
+
+            <details class="faq" open>
+                <summary>¿Los datos son reales?</summary>
+                <div class="faq__body">
+                    Sí. El sector privado proviene de salariosperu.com (2,068 registros que usuarios reportaron voluntariamente, scrapeados en marzo 2026 antes de que el sitio cerrara). El sector público viene de <strong>convocatoriasdetrabajo.com</strong> con salarios oficiales de cada vacante CAS, actualizados a diario. Los datos regionales y NSE vienen de INEI y APEIM, fuentes oficiales.
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary>¿Por qué los datos del privado son de marzo 2026 y no más recientes?</summary>
+                <div class="faq__body">
+                    La fuente original (<strong>salariosperu.com</strong>) cerró después de marzo. Quedó como snapshot histórico. No existe otra fuente equivalente en Perú con la misma granularidad por empresa y puesto.
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary>¿Es legal scrapear esta información?</summary>
+                <div class="faq__body">
+                    Los datos provienen de sitios públicos sin login ni paywall. El scraping respeta los <code>robots.txt</code> y los términos de uso publicados. No se almacenan datos personales identificables — solo agregados por empresa, puesto, rol y región.
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary>¿Quién mantiene este proyecto?</summary>
+                <div class="faq__body">
+                    <strong>Carlos Mauro Cárdenas</strong> (<a href="https://github.com/unimauro" target="_blank">@unimauro</a>) como proyecto open source personal. Todo el código está en <a href="https://github.com/unimauro/salariosperu" target="_blank">GitHub</a>. Si querés apoyar el mantenimiento, hay link a Buy Me a Coffee y Yape en el dashboard.
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary>¿Puedo usar estos datos en mi investigación / artículo / TFG?</summary>
+                <div class="faq__body">
+                    Sí. Pedimos solamente que cites la fuente: <strong>SalariosPerú</strong> (<code>unimauro.github.io/salariosperu</code>) y las fuentes originales (INEI, APEIM, convocatoriasdetrabajo.com). El código está bajo MIT License.
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary>¿Cómo se calcula el NSE?</summary>
+                <div class="faq__body">
+                    Según <strong>APEIM Lima Metropolitana 2024</strong>, usando ingreso personal mensual del trabajo. Bandas: A++ &gt;S/30k (~0.3%), A+ S/15-30k (~1.5%), A S/8-15k (~2.7%), B S/4.5-8k (~25.6%), C S/2.5-4.5k (~42.7%), D S/1.5-2.5k (~21%), E &lt;S/1.5k (~6.2%). El percentil nacional se interpola desde percentiles ENAHO 2023 INEI.
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary>¿Por qué importa tanto la transparencia salarial?</summary>
+                <div class="faq__body">
+                    Estudios en Noruega y Finlandia (donde es total) muestran que la transparencia <strong>reduce la brecha salarial de género</strong>, <strong>mejora la movilidad laboral</strong> y <strong>desincentiva los pagos por debajo del mercado</strong>. El empleador siempre conoce el mercado; el candidato debería tener la misma información para que la negociación sea justa.
+                </div>
+            </details>
+
+            <details class="faq">
+                <summary>¿Cómo contribuyo / reporto un error?</summary>
+                <div class="faq__body">
+                    Abrí un <a href="https://github.com/unimauro/salariosperu/issues" target="_blank">issue en GitHub</a> o mandame DM en <a href="https://twitter.com/unimauro" target="_blank">@unimauro</a>. Si tenés un CSV alternativo de salarios de Perú, mejor todavía.
+                </div>
+            </details>
+        </section>
+
+        <!-- 5. CTA final -->
+        <section class="block" style="text-align:center; padding: 2rem 0 3rem;">
+            <a href="index.html" class="topbar-nav cta" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 1.6rem; background: var(--accent); color:white; text-decoration:none; border-radius:8px; font-weight:600;">
+                Ir al dashboard <i class="fas fa-arrow-right"></i>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <a href="index.html">SalariosPerú Dashboard</a> ·
+            <a href="https://github.com/unimauro/salariosperu" target="_blank">GitHub</a> ·
+            <a href="https://unimauro.github.io/">Carlos Mauro Cárdenas</a>
+        </p>
+        <p style="margin-top:0.5rem; font-size:0.78rem;">
+            Datos: INEI, APEIM, convocatoriasdetrabajo.com, salariosperu.com (snapshot). MIT License.
+        </p>
+    </footer>
+
+    <script>
+        // Dark mode toggle (mismo localStorage que el dashboard)
+        (function(){
+            const KEY = 'theme_preference';
+            const root = document.documentElement;
+            const btn = document.getElementById('theme-toggle');
+
+            function apply(theme) {
+                if (theme === 'dark') root.setAttribute('data-theme', 'dark');
+                else root.removeAttribute('data-theme');
+                if (btn) btn.querySelector('i').className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            }
+            let saved = null;
+            try { saved = localStorage.getItem(KEY); } catch(e) {}
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            apply(saved || (prefersDark ? 'dark' : 'light'));
+
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                    const next = current === 'dark' ? 'light' : 'dark';
+                    apply(next);
+                    try { localStorage.setItem(KEY, next); } catch(e) {}
+                });
+            }
+
+            // GA4 tracking para FAQ aperturas
+            document.querySelectorAll('details.faq').forEach(d => {
+                d.addEventListener('toggle', () => {
+                    if (d.open && typeof gtag === 'function') {
+                        gtag('event', 'faq_open', { question: d.querySelector('summary').textContent.trim().slice(0,80) });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
