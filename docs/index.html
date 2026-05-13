@@ -4,8 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Análisis Salarial Perú 2026</title>
+    <title>SalariosPerú · Dashboard de Sueldos Perú 2026 (Privado, Público CAS, NSE)</title>
+    <meta name="description" content="Dashboard público con análisis de salarios en Perú: sector privado (2,068 registros, 416 empresas), sector público CAS (1,194 vacantes actualizadas a diario), calculadora NSE APEIM A-E, mapa regional INEI ENAHO, comparativa público vs privado.">
+    <meta name="author" content="Carlos Mauro Cárdenas">
+    <meta name="keywords" content="salarios Peru, sueldos Peru 2026, salario promedio Peru, salario CAS, NSE Peru, APEIM, calculadora salario Peru, dashboard salarios, mediana salarial Peru, INEI ENAHO, brecha salarial, ingreso laboral Peru">
+    <link rel="canonical" href="https://unimauro.github.io/salariosperu/">
     <link rel="icon" type="image/x-icon" href="https://unimauro.github.io/salariosperu/favicon.ico">
+
+    <!-- Robots: open + AI bots permitidos -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SalariosPerú · Dashboard de Sueldos Perú 2026">
+    <meta property="og:description" content="Análisis de salarios en Perú: privado vs público CAS, calculadora NSE, mapa regional, brecha salarial. Datos INEI + APEIM.">
+    <meta property="og:url" content="https://unimauro.github.io/salariosperu/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://unimauro.github.io/salariosperu/yape.png">
+    <meta property="og:locale" content="es_PE">
+    <meta property="og:site_name" content="SalariosPerú">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@unimauro">
+    <meta name="twitter:creator" content="@unimauro">
+    <meta name="twitter:title" content="SalariosPerú · Dashboard de Sueldos Perú 2026">
+    <meta name="twitter:description" content="Análisis salarial Perú: privado vs público CAS + calculadora NSE + mapa regional INEI.">
+
+    <!-- Schema.org Dataset + WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "SalariosPerú — Dataset de salarios Perú 2026",
+      "description": "Dataset agregado y visualizado de salarios en Perú: sector privado (2,068 registros formales) + sector público CAS (1,194 vacantes activas) + clasificación NSE APEIM Lima + ingresos regionales INEI ENAHO.",
+      "url": "https://unimauro.github.io/salariosperu/",
+      "creator": {
+        "@type": "Person",
+        "name": "Carlos Mauro Cárdenas",
+        "url": "https://unimauro.github.io/"
+      },
+      "license": "https://github.com/unimauro/salariosperu/blob/main/LICENSE",
+      "spatialCoverage": {
+        "@type": "Country",
+        "name": "Perú"
+      },
+      "temporalCoverage": "2017/2026",
+      "keywords": "salarios Peru, sueldos, sector publico, sector privado, CAS, NSE, APEIM, INEI, ENAHO",
+      "isAccessibleForFree": true,
+      "inLanguage": "es-PE",
+      "variableMeasured": [
+        "Salario mensual sector privado",
+        "Salario sector público CAS",
+        "Nivel socioeconómico APEIM",
+        "Ingreso laboral regional INEI"
+      ]
+    }
+    </script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script>
     // ===== Plotly async loader + lazy chart decryption =====
@@ -245,26 +301,30 @@
         .toc-side {
             position: fixed;
             right: 1rem;
-            top: 110px;
-            width: 200px;
-            max-height: calc(100vh - 130px);
+            bottom: 1.5rem;
+            width: 188px;
+            max-height: min(calc(100vh - 180px), 520px);
             overflow-y: auto;
             background: white;
             border: 1px solid #e8ecf1;
             border-radius: 10px;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-            padding: 0.7rem 0.6rem;
-            z-index: 90;
-            font-size: 0.8rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 0.6rem 0.55rem;
+            z-index: 80;
+            font-size: 0.78rem;
             opacity: 0;
-            transform: translateX(10px);
+            transform: translateY(12px);
             pointer-events: none;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
         .toc-side.show {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
             pointer-events: auto;
+        }
+        /* Solo desktop ancho (>=1400px) y siempre OCULTO si chocaria con KPIs/navbar */
+        @media (max-width: 1400px) {
+            .toc-side { display: none !important; }
         }
         .toc-side__header {
             display: flex;
@@ -301,9 +361,6 @@
             border-left-color: #3498db;
         }
         .toc-item.active i { color: #3498db; }
-        @media (max-width: 1280px) {
-            .toc-side { display: none !important; }
-        }
         /* Toast notification */
         .app-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: #2c3e50; color: white; padding: 0.7rem 1.1rem; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); font-size: 0.88rem; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; z-index: 2000; max-width: 90vw; }
         .app-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -2274,13 +2331,20 @@ if(document.getElementById("chart-heatmap")){
                 aside.classList.remove('show');
             });
 
-            // Mostrar/ocultar segun el estado del accordion Privado
+            // Mostrar/ocultar segun el estado del accordion Privado:
+            //  - accordion Privado abierto
+            //  - viewport ancho (>= 1400px)
+            //  - el usuario ya scrolleo pasado los KPIs (>400px) para no
+            //    chocar con el header / buscador
+            //  - hay un chart visible del Privado en viewport
             function updateVisibility() {
-                if (userHidden) return;
+                if (userHidden) { aside.classList.remove('show'); return; }
                 const accPrivado = document.getElementById('acc-privado');
                 const accClosed = accPrivado && accPrivado.classList.contains('closed');
-                // Solo desktop (>= 1280px) y accordion Privado abierto
-                if (!accClosed && window.innerWidth >= 1280) {
+                const wideEnough = window.innerWidth >= 1400;
+                const scrolledPastKpis = window.scrollY > 380;
+
+                if (!accClosed && wideEnough && scrolledPastKpis) {
                     aside.classList.add('show');
                 } else {
                     aside.classList.remove('show');
@@ -2316,6 +2380,11 @@ if(document.getElementById("chart-heatmap")){
                 return r;
             };
             window.addEventListener('resize', updateVisibility);
+            let scrollTimer;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(updateVisibility, 50);
+            }, { passive: true });
 
             updateVisibility();
         }
