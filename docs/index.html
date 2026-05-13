@@ -185,6 +185,69 @@
         @media (max-width: 768px) {
             .nav-dropdown-menu { position: fixed; top: auto; bottom: 0; left: 0; right: 0; min-width: 0; border-radius: 12px 12px 0 0; max-height: 60vh; }
         }
+        /* Sub-TOC lateral para Sector Privado */
+        .toc-side {
+            position: fixed;
+            right: 1rem;
+            top: 110px;
+            width: 200px;
+            max-height: calc(100vh - 130px);
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #e8ecf1;
+            border-radius: 10px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+            padding: 0.7rem 0.6rem;
+            z-index: 90;
+            font-size: 0.8rem;
+            opacity: 0;
+            transform: translateX(10px);
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .toc-side.show {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+        .toc-side__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.2rem 0.4rem 0.5rem;
+            border-bottom: 1px solid #f0f2f5;
+            margin-bottom: 0.4rem;
+        }
+        .toc-side__title { font-size: 0.78rem; font-weight: 700; color: #2c3e50; }
+        .toc-side__close { background: none; border: none; cursor: pointer; color: #95a5a6; padding: 0.15rem 0.3rem; font-size: 0.85rem; }
+        .toc-side__close:hover { color: #2c3e50; }
+        .toc-group { margin-bottom: 0.4rem; }
+        .toc-group-title { font-size: 0.6rem; color: #95a5a6; text-transform: uppercase; font-weight: 700; padding: 0.3rem 0.4rem 0.15rem; letter-spacing: 0.4px; }
+        .toc-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.32rem 0.5rem;
+            color: #5d6d7e;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            font-size: 0.78rem;
+            border-left: 2px solid transparent;
+        }
+        .toc-item i { width: 12px; color: #b0bec5; font-size: 0.72rem; }
+        .toc-item:hover { background: #f5f7fa; color: #2c3e50; }
+        .toc-item.active {
+            background: #eaf3fb;
+            color: #2980b9;
+            font-weight: 600;
+            border-left-color: #3498db;
+        }
+        .toc-item.active i { color: #3498db; }
+        @media (max-width: 1280px) {
+            .toc-side { display: none !important; }
+        }
         /* Toast notification */
         .app-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: #2c3e50; color: white; padding: 0.7rem 1.1rem; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); font-size: 0.88rem; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; z-index: 2000; max-width: 90vw; }
         .app-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -496,7 +559,7 @@
                     <div class="kpi-content">
                         <div class="kpi-title" title="Salario más alto registrado">Sal. Más Alto</div>
                         <div class="kpi-value">S/ 191k<span class="kpi-unit">/mes</span></div>
-                        <div class="kpi-trend neutral">McKinsey Sr. Partner</div>
+                        <div class="kpi-trend neutral">Sr. Partner consultor&iacute;a</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern orange">
@@ -1323,10 +1386,17 @@ if(document.getElementById("chart-heatmap")){
             </div><!-- /accordion-body NSE -->
         </div><!-- /accordion-section NSE -->
 
-        <!-- Separador -->
-        <div id="section-contexto" style="text-align:center; margin: 2rem 0 0.5rem; color: #8899a6; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">
-            <i class="fas fa-globe-americas"></i> Contexto Nacional: PEA y Regiones
-        </div>
+        <!-- Acordeón Contexto Nacional -->
+        <div class="accordion-section closed" id="acc-contexto" data-acc-group="sector">
+            <div class="sector-banner accordion-header" id="section-contexto" onclick="toggleAccordion('acc-contexto')" style="background: linear-gradient(90deg, #eef5fc 0%, transparent 80%); border-left: 4px solid #5d6d7e;">
+                <span class="sector-banner__icon">&#127758;</span>
+                <div>
+                    <div class="sector-banner__title">Contexto Nacional: PEA y Regiones</div>
+                    <div class="sector-banner__subtitle">D&oacute;nde encaja el dashboard en la realidad peruana &middot; PEA, informalidad, mapa ENAHO, brecha</div>
+                </div>
+                <i class="fas fa-chevron-down accordion-chevron"></i>
+            </div>
+            <div class="accordion-body">
 
         <!-- Disclaimer -->
         <div style="background: #fff8e1; border-left: 4px solid #f39c12; padding: 1rem 1.25rem; margin: 0 0 1rem; border-radius: 6px; color: #5d4037; font-size: 0.92rem; line-height: 1.5;">
@@ -1569,6 +1639,9 @@ if(document.getElementById("chart-heatmap")){
             }
         })();
         </script>
+
+            </div><!-- /accordion-body Contexto -->
+        </div><!-- /accordion-section Contexto -->
     </main>
 
     <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -1979,7 +2052,8 @@ if(document.getElementById("chart-heatmap")){
                 'section-privado-banner': 'acc-privado',
                 'section-publico': 'acc-publico',
                 'section-comparativa': 'acc-comparativa',
-                'section-nse': 'acc-nse'
+                'section-nse': 'acc-nse',
+                'section-contexto': 'acc-contexto'
             };
             const accId = NAV_TO_ACC[targetId];
             if (accId) {
@@ -1987,6 +2061,129 @@ if(document.getElementById("chart-heatmap")){
                 return true;
             }
             return false;
+        }
+
+        // Sub-TOC lateral cuando el accordion Privado esta abierto
+        function setupPrivadoTOC() {
+            const TOC_DATA = [
+                { title: 'An&aacute;lisis General', icon: '&#128202;', items: [
+                    { tab: 'overview', label: 'Distribuci&oacute;n', icon: 'fa-chart-bar' },
+                    { tab: 'niveles', label: 'Por Nivel', icon: 'fa-layer-group' },
+                    { tab: 'sectores', label: 'Por Sector', icon: 'fa-industry' },
+                    { tab: 'ranking', label: 'Top Empresas', icon: 'fa-trophy' },
+                    { tab: 'mapa', label: 'Mapa Empresas', icon: 'fa-th-large' },
+                    { tab: 'matriz', label: 'Heatmap', icon: 'fa-fire' }
+                ]},
+                { title: 'Complementario', icon: '&#128270;', items: [
+                    { tab: 'roles', label: 'Por Rol', icon: 'fa-user-tie' },
+                    { tab: 'timeline', label: 'Evoluci&oacute;n', icon: 'fa-clock' },
+                    { tab: 'scatter', label: 'Empresas', icon: 'fa-braille' },
+                    { tab: 'radar', label: 'Radar', icon: 'fa-broadcast-tower' },
+                    { tab: 'burbujas', label: 'Burbujas', icon: 'fa-circle' }
+                ]},
+                { title: 'Detallado por Sector', icon: '&#128208;', items: [
+                    { tab: 'tecnologia', label: 'Tecnolog&iacute;a', icon: 'fa-laptop-code' },
+                    { tab: 'consumo', label: 'Consumo Masivo', icon: 'fa-seedling' },
+                    { tab: 'ventas', label: 'Ventas', icon: 'fa-chart-line' },
+                    { tab: 'gerentes', label: 'Gerentes', icon: 'fa-crown' },
+                    { tab: 'banca', label: 'Banca', icon: 'fa-university' },
+                    { tab: 'practicantes', label: 'Juniors', icon: 'fa-graduation-cap' }
+                ]}
+            ];
+
+            const aside = document.createElement('aside');
+            aside.className = 'toc-side';
+            aside.id = 'toc-privado';
+            aside.setAttribute('aria-label', 'Indice del Sector Privado');
+            const groupsHtml = TOC_DATA.map(g =>
+                '<div class="toc-group">' +
+                    '<div class="toc-group-title">' + g.icon + ' ' + g.title + '</div>' +
+                    g.items.map(i =>
+                        '<a class="toc-item" data-tab="' + i.tab + '">' +
+                            '<i class="fas ' + i.icon + '"></i>' +
+                            '<span>' + i.label + '</span>' +
+                        '</a>'
+                    ).join('') +
+                '</div>'
+            ).join('');
+            aside.innerHTML =
+                '<div class="toc-side__header">' +
+                    '<span class="toc-side__title"><i class="fas fa-building" style="color:#3498db;margin-right:5px;"></i> Sector Privado</span>' +
+                    '<button class="toc-side__close" aria-label="Ocultar" title="Ocultar">&times;</button>' +
+                '</div>' + groupsHtml;
+            document.body.appendChild(aside);
+
+            const closeBtn = aside.querySelector('.toc-side__close');
+            let userHidden = false;
+
+            // Click items: ir al tab + flash + highlight
+            aside.querySelectorAll('.toc-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const tabName = item.dataset.tab;
+                    if (!tabName) return;
+                    showTab(tabName);
+                    const tabEl = document.getElementById(tabName + '-tab');
+                    if (tabEl) {
+                        setTimeout(() => {
+                            tabEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            if (typeof flashTarget === 'function') flashTarget(tabEl);
+                        }, 250);
+                    }
+                    if (typeof trackEvent === 'function') {
+                        trackEvent('toc_privado_select', { tab: tabName });
+                    }
+                });
+            });
+
+            closeBtn.addEventListener('click', () => {
+                userHidden = true;
+                aside.classList.remove('show');
+            });
+
+            // Mostrar/ocultar segun el estado del accordion Privado
+            function updateVisibility() {
+                if (userHidden) return;
+                const accPrivado = document.getElementById('acc-privado');
+                const accClosed = accPrivado && accPrivado.classList.contains('closed');
+                // Solo desktop (>= 1280px) y accordion Privado abierto
+                if (!accClosed && window.innerWidth >= 1280) {
+                    aside.classList.add('show');
+                } else {
+                    aside.classList.remove('show');
+                }
+                updateActive();
+            }
+
+            // Highlight del tab activo
+            function updateActive() {
+                const activeTab = document.querySelector('#acc-privado .tab-button.active');
+                let activeName = null;
+                if (activeTab) {
+                    const onclick = activeTab.getAttribute('onclick') || '';
+                    const m = onclick.match(/showTab\('([^']+)'\)/);
+                    if (m) activeName = m[1];
+                }
+                aside.querySelectorAll('.toc-item').forEach(it => {
+                    it.classList.toggle('active', it.dataset.tab === activeName);
+                });
+            }
+
+            // Hooks: cambios de tab y de accordion
+            const origToggle = window.toggleAccordion;
+            window.toggleAccordion = function(...args) {
+                const r = origToggle.apply(this, args);
+                setTimeout(updateVisibility, 450);
+                return r;
+            };
+            const origShowTab = window.showTab;
+            window.showTab = function(...args) {
+                const r = origShowTab.apply(this, args);
+                setTimeout(updateActive, 250);
+                return r;
+            };
+            window.addEventListener('resize', updateVisibility);
+
+            updateVisibility();
         }
 
         function setupNavbarDropdowns() {
@@ -2091,6 +2288,7 @@ if(document.getElementById("chart-heatmap")){
             setupNavbarScrollSpy();
             setupNavbarAccordionLinks();
             setupNavbarDropdowns();
+            setupPrivadoTOC();
             setupSearch();
             // Aplica fixes de UI tras unos segundos para asegurar que los
             // charts cifrados ya se renderizaron
