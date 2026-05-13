@@ -41,6 +41,14 @@
         .chart-container { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 1.5rem; border: 1px solid #e8ecf1; }
         .chart-title { font-size: 1.2rem; font-weight: 600; color: #2c3e50; margin-bottom: 0.8rem; padding-bottom: 0.5rem; border-bottom: 2px solid #ecf0f1; }
         .chart-description { color: #666; margin-bottom: 1rem; font-size: 0.85rem; font-style: italic; line-height: 1.5; }
+        .navbar { position: sticky; top: 0; z-index: 999; background: white; border-bottom: 1px solid #e8ecf1; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .navbar-inner { display: flex; gap: 0.25rem; padding: 0.5rem 1rem; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 1400px; margin: 0 auto; }
+        .navbar a { flex-shrink: 0; padding: 0.55rem 0.95rem; color: #5d6d7e; text-decoration: none; font-size: 0.88rem; font-weight: 500; border-radius: 6px; transition: all 0.2s ease; white-space: nowrap; }
+        .navbar a:hover { background: #eaf3fb; color: #2980b9; }
+        .navbar a.active { background: #3498db; color: white; }
+        .navbar a i { margin-right: 0.35rem; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        @media (max-width: 768px) { .navbar a { padding: 0.5rem 0.7rem; font-size: 0.8rem; } }
         .footer { background: #1a2332; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.85rem; }
         .footer a { color: #3498db; text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
@@ -146,9 +154,19 @@
         </div>
     </header>
 
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="#kpis" class="nav-link"><i class="fas fa-tachometer-alt"></i> KPIs</a>
+            <a href="#section-general" class="nav-link"><i class="fas fa-chart-bar"></i> An&aacute;lisis General</a>
+            <a href="#section-complementario" class="nav-link"><i class="fas fa-search-dollar"></i> Complementario</a>
+            <a href="#section-detallado" class="nav-link"><i class="fas fa-chart-pie"></i> Por Sector</a>
+            <a href="#section-contexto" class="nav-link"><i class="fas fa-globe-americas"></i> Contexto Nacional</a>
+        </div>
+    </nav>
+
     <main class="container">
         <!-- KPIs Principales -->
-        <section class="kpi-section">
+        <section class="kpi-section" id="kpis">
             <div class="kpi-grid">
                 <div class="kpi-card-modern primary">
                     <div class="kpi-icon">💰</div>
@@ -187,7 +205,7 @@
 
 
         <!-- Analisis General -->
-        <section class="tabs-container" style="margin-bottom: 1.5rem;">
+        <section class="tabs-container" id="section-general" style="margin-bottom: 1.5rem;">
             <div class="tabs-header">
                 <button class="tab-button active" onclick="showTab('overview')">
                     <i class="fas fa-chart-bar"></i> Distribucion
@@ -280,7 +298,7 @@ if(document.getElementById("chart-heatmap")){
 
 
         <!-- Analisis Complementario -->
-        <div style="text-align:center; margin: 1rem 0 0.5rem; color: #8899a6; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">
+        <div id="section-complementario" style="text-align:center; margin: 1rem 0 0.5rem; color: #8899a6; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">
             <i class="fas fa-search-dollar"></i> Analisis Complementario
         </div>
 
@@ -332,7 +350,7 @@ if(document.getElementById("chart-heatmap")){
         </section>
 
         <!-- Separador -->
-        <div style="text-align:center; margin: 1rem 0 0.5rem; color: #8899a6; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">
+        <div id="section-detallado" style="text-align:center; margin: 1rem 0 0.5rem; color: #8899a6; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">
             <i class="fas fa-chart-pie"></i> Analisis Detallado por Sector
         </div>
 
@@ -463,6 +481,249 @@ if(document.getElementById("chart-heatmap")){
                 </div>
             </div>
         </section>
+
+        <!-- Separador -->
+        <div id="section-contexto" style="text-align:center; margin: 2rem 0 0.5rem; color: #8899a6; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">
+            <i class="fas fa-globe-americas"></i> Contexto Nacional: PEA y Regiones
+        </div>
+
+        <!-- Disclaimer -->
+        <div style="background: #fff8e1; border-left: 4px solid #f39c12; padding: 1rem 1.25rem; margin: 0 0 1rem; border-radius: 6px; color: #5d4037; font-size: 0.92rem; line-height: 1.5;">
+            <strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong>
+            Los 2,068 registros del dashboard provienen de empresas <strong>formales</strong>, mayoritariamente en Lima. Representan apenas una fracción del empleo formal peruano (~28% de la PEA según INEI). La realidad nacional incluye <strong>~72% de empleo informal</strong> con ingresos muy distintos. Los siguientes gráficos contextualizan esa diferencia.
+        </div>
+
+        <section class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-button active" onclick="showTab('pea')">
+                    <i class="fas fa-users"></i> PEA &amp; Informalidad
+                </button>
+                <button class="tab-button" onclick="showTab('mapa-regiones')">
+                    <i class="fas fa-map-marked-alt"></i> Mapa Regional
+                </button>
+                <button class="tab-button" onclick="showTab('brecha')">
+                    <i class="fas fa-balance-scale"></i> Brecha vs Dashboard
+                </button>
+                <button class="tab-button" onclick="showTab('ranking-regiones')">
+                    <i class="fas fa-list-ol"></i> Ranking Regiones
+                </button>
+            </div>
+
+            <div class="tabs-content">
+                <div id="pea-tab" class="tab-content active">
+                    <h3 class="chart-title"><i class="fas fa-users"></i> Empleo Formal vs Informal en Per&uacute;</h3>
+                    <p class="chart-description">PEA ocupada ~17.5M (INEI 2024). Solo el ~28% tiene empleo formal; el resto es informal, autoempleo o subempleo.</p>
+                    <div id="chart-pea" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+                </div>
+
+                <div id="mapa-regiones-tab" class="tab-content">
+                    <h3 class="chart-title"><i class="fas fa-map-marked-alt"></i> Ingreso Laboral Promedio por Departamento</h3>
+                    <p class="chart-description">Mediana mensual de ingreso laboral (ENAHO 2023, INEI). Incluye formal e informal. Lima, Moquegua y Madre de Dios lideran; Huancavelica y Cajamarca al fondo.</p>
+                    <div id="chart-mapa-peru" class="plotly-graph-div" style="height:600px; width:100%;"></div>
+                </div>
+
+                <div id="brecha-tab" class="tab-content">
+                    <h3 class="chart-title"><i class="fas fa-balance-scale"></i> Brecha: Dashboard vs Realidad Nacional</h3>
+                    <p class="chart-description">Mediana del dashboard (S/ 5,600, formal urbano Lima) vs mediana nacional ENAHO (S/ 1,837, todos los trabajadores). El dashboard sobrerepresenta los segmentos altos.</p>
+                    <div id="chart-brecha" class="plotly-graph-div" style="height:450px; width:100%;"></div>
+                </div>
+
+                <div id="ranking-regiones-tab" class="tab-content">
+                    <h3 class="chart-title"><i class="fas fa-list-ol"></i> Ranking de Ingreso Laboral por Regi&oacute;n</h3>
+                    <p class="chart-description">25 departamentos ordenados por ingreso laboral promedio mensual. Fuente: INEI ENAHO 2023.</p>
+                    <div id="chart-ranking-regiones" class="plotly-graph-div" style="height:650px; width:100%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <p style="text-align:center; font-size:0.78rem; color:#95a5a6; margin: 0.5rem 0 1.5rem;">
+            <i class="fas fa-info-circle"></i> Datos PEA: INEI - Encuesta Permanente de Empleo Nacional 2024 &middot;
+            Ingresos regionales: INEI ENAHO 2023, ingreso laboral mensual promedio &middot;
+            GeoJSON: <a href="https://github.com/juaneladio/peru-geojson" target="_blank" rel="noopener" style="color:#3498db;">juaneladio/peru-geojson</a>
+        </p>
+
+        <script>
+        (function(){
+            const PEA_TOTAL = 17.5;
+            const FORMAL = 4.9;
+            const INFORMAL = 12.6;
+
+            if(document.getElementById("chart-pea")){
+                Plotly.newPlot("chart-pea", [
+                    {
+                        type: "pie",
+                        labels: ["Empleo Formal", "Empleo Informal"],
+                        values: [FORMAL, INFORMAL],
+                        hole: 0.55,
+                        marker: { colors: ["#27ae60", "#e74c3c"], line: {color: "white", width: 2} },
+                        textinfo: "label+percent",
+                        textfont: { size: 14, color: "white" },
+                        hovertemplate: "%{label}<br>%{value} millones<br>%{percent}<extra></extra>",
+                        domain: { x: [0, 0.45] }
+                    },
+                    {
+                        type: "bar",
+                        orientation: "h",
+                        y: ["Dashboard (2,068)", "Empleo formal (~4.9M)", "PEA ocupada (~17.5M)"],
+                        x: [0.002068, 4.9, 17.5],
+                        marker: { color: ["#3498db", "#27ae60", "#34495e"] },
+                        text: ["2,068 registros", "4.9 M trabajadores", "17.5 M trabajadores"],
+                        textposition: "auto",
+                        xaxis: "x2",
+                        yaxis: "y2",
+                        hovertemplate: "%{y}<br>%{x:.3f} M<extra></extra>",
+                        showlegend: false
+                    }
+                ], {
+                    title: { text: "El dashboard refleja solo una fracción del mercado laboral peruano", x: 0.5 },
+                    annotations: [
+                        { text: "<b>17.5M</b><br>PEA ocupada", x: 0.21, y: 0.5, font: {size: 16, color: "#2c3e50"}, showarrow: false, xref: "paper", yref: "paper" }
+                    ],
+                    xaxis2: { domain: [0.55, 1], type: "log", title: "Trabajadores (millones, escala log)", gridcolor: "#f0f0f0" },
+                    yaxis2: { domain: [0, 1], anchor: "x2", automargin: true },
+                    paper_bgcolor: "white",
+                    plot_bgcolor: "white",
+                    height: 450,
+                    margin: {l: 30, r: 30, t: 70, b: 60},
+                    showlegend: false
+                }, { responsive: true, displaylogo: false });
+            }
+
+            const REGIONES = [
+                {name: "LIMA",          ingreso: 2326},
+                {name: "MOQUEGUA",      ingreso: 2158},
+                {name: "MADRE DE DIOS", ingreso: 2090},
+                {name: "CALLAO",        ingreso: 2041},
+                {name: "AREQUIPA",      ingreso: 1978},
+                {name: "ICA",           ingreso: 1837},
+                {name: "TACNA",         ingreso: 1805},
+                {name: "TUMBES",        ingreso: 1612},
+                {name: "ANCASH",        ingreso: 1594},
+                {name: "LA LIBERTAD",   ingreso: 1547},
+                {name: "JUNIN",         ingreso: 1448},
+                {name: "PASCO",         ingreso: 1419},
+                {name: "LAMBAYEQUE",    ingreso: 1398},
+                {name: "CUSCO",         ingreso: 1398},
+                {name: "UCAYALI",       ingreso: 1395},
+                {name: "SAN MARTIN",    ingreso: 1389},
+                {name: "PIURA",         ingreso: 1346},
+                {name: "LORETO",        ingreso: 1247},
+                {name: "AMAZONAS",      ingreso: 1140},
+                {name: "PUNO",          ingreso: 1065},
+                {name: "HUANUCO",       ingreso: 1058},
+                {name: "AYACUCHO",      ingreso: 1055},
+                {name: "APURIMAC",      ingreso: 1038},
+                {name: "CAJAMARCA",     ingreso: 980},
+                {name: "HUANCAVELICA",  ingreso: 889}
+            ];
+
+            if(document.getElementById("chart-ranking-regiones")){
+                const sorted = [...REGIONES].sort((a,b) => a.ingreso - b.ingreso);
+                Plotly.newPlot("chart-ranking-regiones", [{
+                    type: "bar",
+                    orientation: "h",
+                    y: sorted.map(r => r.name.charAt(0) + r.name.slice(1).toLowerCase()),
+                    x: sorted.map(r => r.ingreso),
+                    marker: {
+                        color: sorted.map(r => r.ingreso),
+                        colorscale: [[0, "#e74c3c"], [0.5, "#f39c12"], [1, "#27ae60"]],
+                        showscale: false,
+                        line: { width: 0 }
+                    },
+                    text: sorted.map(r => "S/ " + r.ingreso.toLocaleString()),
+                    textposition: "auto",
+                    hovertemplate: "%{y}<br>Ingreso laboral: S/ %{x:,.0f}<extra></extra>"
+                }], {
+                    title: { text: "Ingreso Laboral Promedio Mensual por Departamento<br><sub>ENAHO 2023 · 25 departamentos</sub>", x: 0.5 },
+                    xaxis: { title: "Ingreso Laboral (S/)", tickformat: ",.0f", gridcolor: "#f0f0f0" },
+                    yaxis: { automargin: true },
+                    shapes: [{
+                        type: "line", x0: 1837, x1: 1837, y0: -0.5, y1: 24.5,
+                        line: { color: "#2c3e50", width: 2, dash: "dash" }
+                    }],
+                    annotations: [{
+                        x: 1837, y: 24, text: "Promedio nacional: S/ 1,837",
+                        showarrow: false, xanchor: "left", xshift: 8,
+                        font: { color: "#2c3e50", size: 11 }
+                    }],
+                    paper_bgcolor: "white",
+                    plot_bgcolor: "white",
+                    height: 650,
+                    margin: { l: 120, r: 30, t: 70, b: 50 },
+                    showlegend: false
+                }, { responsive: true, displaylogo: false });
+            }
+
+            if(document.getElementById("chart-brecha")){
+                Plotly.newPlot("chart-brecha", [{
+                    type: "bar",
+                    x: ["Mediana Dashboard<br>(formal urbano)", "Mediana Nacional<br>(ENAHO 2023)", "Mediana Sierra Rural<br>(ENAHO 2023)", "Salario Mínimo<br>(2025)"],
+                    y: [5600, 1837, 920, 1130],
+                    marker: { color: ["#3498db", "#27ae60", "#e74c3c", "#95a5a6"], line: { width: 0 } },
+                    text: ["S/ 5,600", "S/ 1,837", "S/ 920", "S/ 1,130"],
+                    textposition: "auto",
+                    textfont: { size: 14, color: "white" },
+                    hovertemplate: "%{x}<br>S/ %{y:,.0f}<extra></extra>"
+                }], {
+                    title: { text: "El salario \"promedio peruano\" depende de qué mires", x: 0.5 },
+                    yaxis: { title: "Soles mensuales (S/)", tickformat: ",.0f", gridcolor: "#f0f0f0" },
+                    xaxis: { title: "" },
+                    paper_bgcolor: "white",
+                    plot_bgcolor: "white",
+                    height: 450,
+                    margin: { l: 70, r: 30, t: 80, b: 80 },
+                    annotations: [{
+                        x: 0, y: 5600, text: "3x el promedio nacional",
+                        showarrow: true, arrowhead: 2, ax: 0, ay: -30,
+                        font: { color: "#2c3e50", size: 11 }
+                    }],
+                    showlegend: false
+                }, { responsive: true, displaylogo: false });
+            }
+
+            if(document.getElementById("chart-mapa-peru")){
+                const mapaDiv = document.getElementById("chart-mapa-peru");
+                mapaDiv.innerHTML = '<div style="text-align:center; padding: 2rem; color:#8899a6;"><i class="fas fa-spinner fa-spin"></i> Cargando mapa de Perú...</div>';
+
+                fetch("https://raw.githubusercontent.com/juaneladio/peru-geojson/master/peru_departamental_simple.geojson")
+                    .then(r => r.json())
+                    .then(geojson => {
+                        mapaDiv.innerHTML = "";
+                        const locations = REGIONES.map(r => r.name === "CALLAO" ? "LIMA" : r.name);
+                        const values    = REGIONES.map(r => r.ingreso);
+                        const labels    = REGIONES.map(r => r.name.charAt(0) + r.name.slice(1).toLowerCase());
+
+                        Plotly.newPlot("chart-mapa-peru", [{
+                            type: "choropleth",
+                            geojson: geojson,
+                            locations: locations,
+                            z: values,
+                            text: labels,
+                            featureidkey: "properties.NOMBDEP",
+                            colorscale: [[0, "#e74c3c"], [0.4, "#f39c12"], [0.7, "#f1c40f"], [1, "#27ae60"]],
+                            colorbar: { title: "Ingreso (S/)", tickformat: ",.0f" },
+                            hovertemplate: "<b>%{text}</b><br>Ingreso laboral: S/ %{z:,.0f}<extra></extra>",
+                            marker: { line: { color: "white", width: 0.5 } }
+                        }], {
+                            title: { text: "Mapa: Ingreso Laboral Promedio por Departamento<br><sub>Soles mensuales · ENAHO 2023</sub>", x: 0.5 },
+                            geo: {
+                                fitbounds: "locations",
+                                visible: false,
+                                projection: { type: "mercator" },
+                                bgcolor: "white"
+                            },
+                            paper_bgcolor: "white",
+                            height: 600,
+                            margin: { l: 0, r: 0, t: 70, b: 10 }
+                        }, { responsive: true, displaylogo: false });
+                    })
+                    .catch(err => {
+                        mapaDiv.innerHTML = '<div style="text-align:center; padding:2rem; color:#e74c3c;">No se pudo cargar el GeoJSON. Revisa el ranking en la pesta&ntilde;a siguiente.</div>';
+                        console.error("GeoJSON load error:", err);
+                    });
+            }
+        })();
+        </script>
     </main>
 
     <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -495,15 +756,20 @@ if(document.getElementById("chart-heatmap")){
 
     <script>
         function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-
             const tab = document.getElementById(tabName + '-tab');
-            if (tab) tab.classList.add('active');
+            if (!tab) return;
 
-            // Find the correct button (handles clicks on icon inside button)
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabName)) {
+            const container = tab.closest('.tabs-container');
+            if (!container) return;
+
+            container.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            container.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+
+            tab.classList.add('active');
+
+            container.querySelectorAll('.tab-button').forEach(btn => {
+                const onclick = btn.getAttribute('onclick') || '';
+                if (onclick.includes("'" + tabName + "'")) {
                     btn.classList.add('active');
                 }
             });
@@ -538,8 +804,33 @@ if(document.getElementById("chart-heatmap")){
             if (btn) btn.classList.toggle('visible', window.scrollY > 400);
         });
 
+        function setupNavbarScrollSpy() {
+            const links = document.querySelectorAll('.navbar a.nav-link');
+            const map = {};
+            links.forEach(a => {
+                const id = a.getAttribute('href').slice(1);
+                const el = document.getElementById(id);
+                if (el) map[id] = a;
+            });
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        links.forEach(l => l.classList.remove('active'));
+                        const link = map[entry.target.id];
+                        if (link) link.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+            Object.values(map).forEach(link => {
+                const id = link.getAttribute('href').slice(1);
+                const el = document.getElementById(id);
+                if (el) observer.observe(el);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             loadVisitCounter();
+            setupNavbarScrollSpy();
             setTimeout(resizeAllPlotlyGraphs, 800);
             let resizeTimer;
             window.addEventListener('resize', function() {
