@@ -227,7 +227,14 @@
         [data-theme="dark"] .tldr__close { color: #7f8c8d; }
         [data-theme="dark"] .tldr__close:hover { background: #2d3a48; color: #ecf0f1; }
         [data-theme="dark"] .sector-banner__title { color: #ecf0f1; }
-        [data-theme="dark"] .sector-banner__subtitle { color: #95a5a6; }
+        [data-theme="dark"] .sector-banner__subtitle { color: #b0bec5; }
+        /* Banners en dark mode: gradient oscuro con tinte del color del sector */
+        [data-theme="dark"] .sector-banner { background: linear-gradient(90deg, rgba(52,73,94,0.4) 0%, transparent 80%); }
+        [data-theme="dark"] .sector-banner--privado { background: linear-gradient(90deg, rgba(52,152,219,0.18) 0%, transparent 75%); }
+        [data-theme="dark"] .sector-banner--publico { background: linear-gradient(90deg, rgba(243,156,18,0.18) 0%, transparent 75%); }
+        [data-theme="dark"] .sector-banner--comparativa { background: linear-gradient(90deg, rgba(155,89,182,0.20) 0%, transparent 75%); }
+        [data-theme="dark"] .sector-banner--nse { background: linear-gradient(90deg, rgba(22,160,133,0.20) 0%, transparent 75%); }
+        [data-theme="dark"] .sector-banner--contexto { background: linear-gradient(90deg, rgba(127,140,141,0.25) 0%, transparent 75%); }
         [data-theme="dark"] .tabs-container { background: #1a232e; border-color: #2d3a48; }
         [data-theme="dark"] .tabs-header { background: #0f1419; border-bottom-color: #2d3a48; }
         [data-theme="dark"] .tab-button { color: #7f8c8d; }
@@ -410,6 +417,7 @@
         .accordion-section.closed .accordion-body { max-height: 0; }
         .accordion-section.closed .sector-banner { margin-bottom: 0; }
         .sector-banner--nse { background: linear-gradient(90deg, #e8f8f5 0%, transparent 80%); border-left: 4px solid #16a085; }
+        .sector-banner--contexto { background: linear-gradient(90deg, #eef5fc 0%, transparent 80%); border-left: 4px solid #5d6d7e; }
         /* TL;DR Resumen Ejecutivo */
         .tldr { background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border: 1px solid #e8ecf1; border-radius: 12px; padding: 1.2rem 1.4rem; margin: 1.2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.04); transition: padding 0.5s ease, background 0.5s ease, border-radius 0.5s ease; }
         .tldr.hidden { display: none; }
@@ -1613,7 +1621,7 @@ if(document.getElementById("chart-heatmap")){
 
         <!-- Acordeón Contexto Nacional -->
         <div class="accordion-section closed" id="acc-contexto" data-acc-group="sector">
-            <div class="sector-banner accordion-header" id="section-contexto" onclick="toggleAccordion('acc-contexto')" style="background: linear-gradient(90deg, #eef5fc 0%, transparent 80%); border-left: 4px solid #5d6d7e;">
+            <div class="sector-banner sector-banner--contexto accordion-header" id="section-contexto" onclick="toggleAccordion('acc-contexto')">
                 <span class="sector-banner__icon">&#127758;</span>
                 <div>
                     <div class="sector-banner__title">Contexto Nacional: PEA y Regiones</div>
