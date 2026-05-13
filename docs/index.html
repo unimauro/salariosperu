@@ -1122,16 +1122,24 @@ if(document.getElementById("chart-heatmap")){
                 textposition: 'outside',
                 hovertemplate: '<b>NSE %{x}</b><br>%{y}% de Lima Metro<extra></extra>'
             }];
-            Plotly.newPlot('nse-chart', traces, {
-                title: { text: 'Tú estás aquí → <b style="color:' + nse.color + '">NSE ' + nse.letter + '</b><br><sub>Distribución NSE Lima Metropolitana 2024 (APEIM)</sub>', x: 0.5 },
-                yaxis: { title: '% de Población', ticksuffix: '%', gridcolor: '#f0f0f0', range: [0, 50] },
-                xaxis: { title: 'Nivel Socioeconómico' },
-                paper_bgcolor: 'white', plot_bgcolor: 'white',
-                height: 280, margin: { l: 50, r: 20, t: 70, b: 50 }, showlegend: false
-            }, { responsive: true, displaylogo: false, displayModeBar: false });
+            // IMPORTANTE: mostrar el contenedor ANTES de renderizar Plotly,
+            // si no, el div tiene tamaño 0 y el chart sale roto (intermitente
+            // entre primera y segunda vez que se calcula).
+            const resultEl = document.getElementById('nse-result');
+            resultEl.classList.add('open');
 
-            // Mostrar resultado y share
-            document.getElementById('nse-result').classList.add('open');
+            // Esperar un frame para que el browser pinte y mida bien el div
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    Plotly.newPlot('nse-chart', traces, {
+                        title: { text: 'Tú estás aquí → <b style="color:' + nse.color + '">NSE ' + nse.letter + '</b><br><sub>Distribución NSE Lima Metropolitana 2024 (APEIM)</sub>', x: 0.5 },
+                        yaxis: { title: '% de Población', ticksuffix: '%', gridcolor: '#f0f0f0', range: [0, 50] },
+                        xaxis: { title: 'Nivel Socioeconómico' },
+                        paper_bgcolor: 'white', plot_bgcolor: 'white',
+                        height: 280, margin: { l: 50, r: 20, t: 70, b: 50 }, showlegend: false
+                    }, { responsive: true, displaylogo: false, displayModeBar: false });
+                });
+            });
 
             // Actualizar badge persistente en navbar
             updateNavbarNSEBadge(nse, sal);
