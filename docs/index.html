@@ -79,6 +79,36 @@
         .accordion-body { max-height: 20000px; overflow: hidden; transition: max-height 0.4s ease; }
         .accordion-section.closed .accordion-body { max-height: 0; }
         .accordion-section.closed .sector-banner { margin-bottom: 0; }
+        .sector-banner--nse { background: linear-gradient(90deg, #e8f8f5 0%, transparent 80%); border-left: 4px solid #16a085; }
+        .nse-calc { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8ecf1; }
+        .nse-calc__input-wrap { display: flex; gap: 0.6rem; align-items: stretch; flex-wrap: wrap; margin: 0.8rem 0 1.2rem; }
+        .nse-calc__currency { display: flex; align-items: center; padding: 0 0.7rem; background: #f0f2f5; border-radius: 8px; font-weight: 700; font-size: 1.4rem; color: #2c3e50; flex-shrink: 0; }
+        .nse-calc__input { flex: 1; min-width: 180px; padding: 0.6rem 0.9rem; font-size: 1.6rem; font-weight: 700; border: 2px solid #dde3e8; border-radius: 8px; outline: none; transition: all 0.2s ease; color: #2c3e50; }
+        .nse-calc__input:focus { border-color: #16a085; box-shadow: 0 0 0 3px rgba(22,160,133,0.1); }
+        .nse-calc__cta { padding: 0 1.4rem; background: #16a085; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem; flex-shrink: 0; }
+        .nse-calc__cta:hover { background: #138a72; transform: translateY(-1px); }
+        .nse-result { display: none; padding: 1.5rem; border-radius: 10px; margin-top: 1rem; background: #f8f9fa; }
+        .nse-result.open { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .nse-result__main { display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: center; margin-bottom: 1.2rem; }
+        .nse-result__badge { width: 90px; height: 90px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; font-weight: 700; box-shadow: 0 4px 16px rgba(0,0,0,0.12); flex-shrink: 0; }
+        .nse-result__badge-letter { font-size: 2.2rem; line-height: 1; }
+        .nse-result__badge-label { font-size: 0.7rem; opacity: 0.9; margin-top: 2px; }
+        .nse-result__headline { font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.3rem; }
+        .nse-result__sub { color: #5d6d7e; font-size: 0.95rem; line-height: 1.5; }
+        .nse-result__sub strong { color: #2c3e50; }
+        .nse-comparisons { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.6rem; margin-top: 1rem; }
+        .nse-comp-card { background: white; padding: 0.7rem 0.8rem; border-radius: 8px; border: 1px solid #e8ecf1; }
+        .nse-comp-card__label { font-size: 0.72rem; color: #95a5a6; text-transform: uppercase; letter-spacing: 0.3px; }
+        .nse-comp-card__value { font-size: 1rem; font-weight: 700; color: #2c3e50; margin-top: 0.2rem; }
+        .nse-comp-card__delta { font-size: 0.75rem; margin-top: 0.15rem; }
+        .nse-comp-card__delta.up { color: #27ae60; }
+        .nse-comp-card__delta.down { color: #e74c3c; }
+        .nse-share { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+        .nse-share a { padding: 0.5rem 0.9rem; background: white; border: 1px solid #e8ecf1; border-radius: 6px; color: #5d6d7e; text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: all 0.2s ease; }
+        .nse-share a:hover { background: #f0f2f5; color: #2c3e50; }
+        .nse-share a.wa { background: #25d366; color: white; border-color: #25d366; }
+        .nse-share a.wa:hover { background: #1ebd5d; }
         .footer { background: #1a2332; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.85rem; }
         .footer a { color: #3498db; text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
@@ -224,6 +254,7 @@
             <a href="#section-privado-banner" class="nav-link" title="Sector Privado"><i class="fas fa-building"></i><span class="nav-label"> Privado</span></a>
             <a href="#section-publico" class="nav-link" title="Sector P&uacute;blico CAS"><i class="fas fa-landmark"></i><span class="nav-label"> P&uacute;blico</span></a>
             <a href="#section-comparativa" class="nav-link" title="Comparativa P&uacute;blico vs Privado"><i class="fas fa-balance-scale"></i><span class="nav-label"> Comparativa</span></a>
+            <a href="#section-nse" class="nav-link" title="Calculadora NSE A-E"><i class="fas fa-bullseye"></i><span class="nav-label"> Tu NSE</span></a>
             <a href="#section-contexto" class="nav-link" title="Contexto Nacional"><i class="fas fa-globe-americas"></i><span class="nav-label"> Contexto</span></a>
             <div class="navbar-search">
                 <i class="fas fa-search search-icon"></i>
@@ -752,6 +783,224 @@ if(document.getElementById("chart-heatmap")){
         })();
         </script>
 
+        <!-- Acordeón NSE / Calculadora -->
+        <div class="accordion-section closed" id="acc-nse" data-acc-group="sector">
+            <div class="sector-banner sector-banner--nse accordion-header" id="section-nse" onclick="toggleAccordion('acc-nse')">
+                <span class="sector-banner__icon">&#127919;</span>
+                <div>
+                    <div class="sector-banner__title">&iquest;En qu&eacute; NSE est&aacute;s? Calculadora</div>
+                    <div class="sector-banner__subtitle">Ingresa tu sueldo y te decimos a qu&eacute; nivel socioecon&oacute;mico perteneces y qu&eacute; % de peruanos est&aacute; abajo &middot; fuente: APEIM 2024 + INEI ENAHO</div>
+                </div>
+                <i class="fas fa-chevron-down accordion-chevron"></i>
+            </div>
+            <div class="accordion-body">
+
+        <section class="tabs-container" style="margin-bottom: 1.5rem;">
+            <div class="tabs-content" style="padding: 1.5rem;">
+                <div class="nse-calc">
+                    <h3 class="chart-title" style="margin: 0;"><i class="fas fa-calculator"></i> &iquest;A qu&eacute; nivel socioecon&oacute;mico corresponde tu salario?</h3>
+                    <p class="chart-description">Ingresa tu salario mensual personal (no familiar) en soles. Calculamos tu NSE seg&uacute;n APEIM Lima Metro 2024 y tu percentil nacional seg&uacute;n INEI ENAHO 2023.</p>
+
+                    <div class="nse-calc__input-wrap">
+                        <div class="nse-calc__currency">S/</div>
+                        <input type="number" id="nse-input" class="nse-calc__input" placeholder="3000" min="0" step="100" />
+                        <button class="nse-calc__cta" onclick="calcularNSE()"><i class="fas fa-search"></i> Calcular</button>
+                    </div>
+
+                    <div class="nse-result" id="nse-result">
+                        <div class="nse-result__main">
+                            <div class="nse-result__badge" id="nse-badge">
+                                <div class="nse-result__badge-letter" id="nse-letter">C</div>
+                                <div class="nse-result__badge-label">NSE</div>
+                            </div>
+                            <div>
+                                <div class="nse-result__headline" id="nse-headline">Est&aacute;s en NSE C</div>
+                                <div class="nse-result__sub" id="nse-sub">Detalle aqu&iacute;</div>
+                            </div>
+                        </div>
+
+                        <div id="nse-chart" class="plotly-graph-div" style="height: 280px; width: 100%; margin: 1rem 0;"></div>
+
+                        <div class="nse-comparisons" id="nse-comparisons"></div>
+
+                        <div class="nse-share" id="nse-share" style="display:none;">
+                            <a href="#" id="nse-share-wa" class="wa" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Comp&aacute;rtelo</a>
+                            <a href="#" id="nse-share-tw" target="_blank" rel="noopener"><i class="fab fa-twitter"></i> Twitter / X</a>
+                            <a href="#" id="nse-share-copy" onclick="copiarResultadoNSE(event)"><i class="fas fa-link"></i> Copiar link</a>
+                        </div>
+                    </div>
+
+                    <details style="margin-top: 1.5rem;">
+                        <summary style="cursor: pointer; color: #5d6d7e; font-size: 0.88rem; font-weight: 500;">&iquest;C&oacute;mo se calcula?</summary>
+                        <div style="margin-top: 0.8rem; padding: 1rem; background: #f8f9fa; border-radius: 6px; font-size: 0.85rem; color: #5d6d7e; line-height: 1.6;">
+                            <p><strong>NSE (Nivel Socioecon&oacute;mico)</strong> seg&uacute;n APEIM Lima Metropolitana 2024, usando ingreso personal mensual del trabajo:</p>
+                            <ul style="margin: 0.5rem 0 0.5rem 1.5rem; line-height: 1.7;">
+                                <li><strong>NSE A</strong>: m&aacute;s de S/ 8,000 mensual (~4.5% de Lima Metro)</li>
+                                <li><strong>NSE B</strong>: S/ 4,500 - S/ 8,000 (~25.6%)</li>
+                                <li><strong>NSE C</strong>: S/ 2,500 - S/ 4,500 (~42.7%)</li>
+                                <li><strong>NSE D</strong>: S/ 1,500 - S/ 2,500 (~21.0%)</li>
+                                <li><strong>NSE E</strong>: menos de S/ 1,500 (~6.2%)</li>
+                            </ul>
+                            <p style="margin-top: 0.8rem;">El <strong>percentil nacional</strong> compara tu ingreso con todos los trabajadores del Per&uacute; (ENAHO 2023, INEI). Por ejemplo, percentil 80 significa que ganas m&aacute;s que el 80% de peruanos.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <script>
+        // Datos NSE APEIM Lima Metropolitana 2024
+        const NSE_BANDS = [
+            { letter: 'A', min: 8000,  max: Infinity, pct: 4.5,  color: '#9b59b6', label: 'NSE A - Alto' },
+            { letter: 'B', min: 4500,  max: 8000,     pct: 25.6, color: '#3498db', label: 'NSE B - Medio Alto' },
+            { letter: 'C', min: 2500,  max: 4500,     pct: 42.7, color: '#27ae60', label: 'NSE C - Medio' },
+            { letter: 'D', min: 1500,  max: 2500,     pct: 21.0, color: '#f39c12', label: 'NSE D - Medio Bajo' },
+            { letter: 'E', min: 0,     max: 1500,     pct: 6.2,  color: '#e74c3c', label: 'NSE E - Bajo' }
+        ];
+        // Percentiles de ingreso laboral Peru (ENAHO 2023, INEI)
+        const PERCENTILES = [
+            [500, 10], [930, 25], [1300, 50], [1837, 60], [2100, 75],
+            [2800, 80], [3800, 90], [5500, 95], [9000, 98], [15000, 99]
+        ];
+
+        function getNSE(salario) {
+            return NSE_BANDS.find(b => salario >= b.min && salario < b.max) || NSE_BANDS[NSE_BANDS.length - 1];
+        }
+
+        function getPercentil(salario) {
+            // Interpolación lineal entre percentiles conocidos
+            if (salario <= PERCENTILES[0][0]) return PERCENTILES[0][1];
+            for (let i = 0; i < PERCENTILES.length - 1; i++) {
+                const [s1, p1] = PERCENTILES[i];
+                const [s2, p2] = PERCENTILES[i+1];
+                if (salario >= s1 && salario <= s2) {
+                    return p1 + (p2 - p1) * (salario - s1) / (s2 - s1);
+                }
+            }
+            return 99.5;
+        }
+
+        function fmtMoney(v) { return 'S/ ' + Math.round(v).toLocaleString('es-PE'); }
+
+        function calcularNSE() {
+            const sal = parseFloat(document.getElementById('nse-input').value);
+            if (!sal || sal <= 0) {
+                alert('Ingresa un salario v&aacute;lido');
+                return;
+            }
+            const nse = getNSE(sal);
+            const pct = getPercentil(sal);
+
+            // Acumulado de % poblacion DEBAJO del NSE en Lima
+            const idx = NSE_BANDS.indexOf(nse);
+            const pctEncima = NSE_BANDS.slice(0, idx).reduce((a, b) => a + b.pct, 0);
+            const pctTuNivel = nse.pct;
+            const pctDebajo = NSE_BANDS.slice(idx + 1).reduce((a, b) => a + b.pct, 0);
+
+            // Renderizar
+            const badge = document.getElementById('nse-badge');
+            badge.style.background = nse.color;
+            document.getElementById('nse-letter').textContent = nse.letter;
+            document.getElementById('nse-headline').textContent = nse.label;
+            const rangeText = nse.max === Infinity
+                ? 'm&aacute;s de ' + fmtMoney(nse.min) + ' mensual'
+                : fmtMoney(nse.min) + ' - ' + fmtMoney(nse.max) + ' mensual';
+            document.getElementById('nse-sub').innerHTML =
+                'Tu salario (<strong>' + fmtMoney(sal) + '/mes</strong>) cae en el rango <strong>' + rangeText + '</strong>. ' +
+                'En el Per&uacute;, ganas m&aacute;s que el <strong>' + pct.toFixed(0) + '%</strong> de los trabajadores formales e informales ' +
+                '(ENAHO 2023).';
+
+            // Comparativas
+            const comps = [
+                { label: 'Salario M&iacute;nimo (RMV)',    val: 1130, low: false },
+                { label: 'Mediana Nacional ENAHO', val: 1837, low: false },
+                { label: 'Mediana P&uacute;blico CAS',     val: 3270, low: false },
+                { label: 'Mediana Privado Lima',   val: 5600, low: false }
+            ];
+            const compsHtml = comps.map(c => {
+                const delta = ((sal - c.val) / c.val * 100);
+                const cls = delta >= 0 ? 'up' : 'down';
+                const arrow = delta >= 0 ? '&uarr;' : '&darr;';
+                return '<div class="nse-comp-card">' +
+                    '<div class="nse-comp-card__label">' + c.label + '</div>' +
+                    '<div class="nse-comp-card__value">' + fmtMoney(c.val) + '</div>' +
+                    '<div class="nse-comp-card__delta ' + cls + '">' + arrow + ' ' + Math.abs(delta).toFixed(0) + '% ' + (delta >= 0 ? 'arriba' : 'abajo') + '</div>' +
+                    '</div>';
+            }).join('');
+            document.getElementById('nse-comparisons').innerHTML = compsHtml;
+
+            // Chart: distribución NSE con marcador
+            const traces = [{
+                type: 'bar',
+                x: NSE_BANDS.map(b => b.letter),
+                y: NSE_BANDS.map(b => b.pct),
+                marker: {
+                    color: NSE_BANDS.map(b => b.letter === nse.letter ? b.color : '#e0e6ed'),
+                    line: { width: 0 }
+                },
+                text: NSE_BANDS.map(b => b.pct + '%'),
+                textposition: 'outside',
+                hovertemplate: '<b>NSE %{x}</b><br>%{y}% de Lima Metro<extra></extra>'
+            }];
+            Plotly.newPlot('nse-chart', traces, {
+                title: { text: 'T&uacute; est&aacute;s aqu&iacute; &rarr; <b style="color:' + nse.color + '">NSE ' + nse.letter + '</b><br><sub>Distribuci&oacute;n NSE Lima Metropolitana 2024 (APEIM)</sub>', x: 0.5 },
+                yaxis: { title: '% de Poblaci&oacute;n', ticksuffix: '%', gridcolor: '#f0f0f0', range: [0, 50] },
+                xaxis: { title: 'Nivel Socioecon&oacute;mico' },
+                paper_bgcolor: 'white', plot_bgcolor: 'white',
+                height: 280, margin: { l: 50, r: 20, t: 70, b: 50 }, showlegend: false
+            }, { responsive: true, displaylogo: false, displayModeBar: false });
+
+            // Mostrar resultado y share
+            document.getElementById('nse-result').classList.add('open');
+
+            // Setup share links
+            const shareText = 'Seg&uacute;n el dashboard salariosperu, con S/' + Math.round(sal) +
+                '/mes estoy en NSE ' + nse.letter + ' y gano m&aacute;s que el ' + pct.toFixed(0) + '% de peruanos';
+            const url = 'https://unimauro.github.io/salariosperu/#nse=' + Math.round(sal);
+            document.getElementById('nse-share-wa').href = 'https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + url);
+            document.getElementById('nse-share-tw').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(url);
+            document.getElementById('nse-share').style.display = 'flex';
+
+            // Update URL hash
+            history.replaceState(null, '', '#nse=' + Math.round(sal));
+        }
+
+        function copiarResultadoNSE(e) {
+            e.preventDefault();
+            const url = 'https://unimauro.github.io/salariosperu/' + location.hash;
+            navigator.clipboard?.writeText(url).then(() => {
+                const link = e.target.closest('a');
+                const original = link.innerHTML;
+                link.innerHTML = '<i class="fas fa-check"></i> Copiado';
+                setTimeout(() => link.innerHTML = original, 1500);
+            });
+        }
+
+        // Enter en el input dispara cálculo
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('nse-input');
+            if (input) {
+                input.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') calcularNSE();
+                });
+            }
+            // Deeplink: #nse=3500
+            const m = (location.hash || '').match(/^#nse=(\d+)/);
+            if (m && input) {
+                input.value = m[1];
+                // Abre el acordeón NSE
+                toggleAccordion('acc-nse', { fromNav: true });
+                setTimeout(() => {
+                    calcularNSE();
+                    document.getElementById('section-nse').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 400);
+            }
+        });
+        </script>
+
+            </div><!-- /accordion-body NSE -->
+        </div><!-- /accordion-section NSE -->
+
         <!-- Separador -->
         <div id="section-contexto" style="text-align:center; margin: 2rem 0 0.5rem; color: #8899a6; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">
             <i class="fas fa-globe-americas"></i> Contexto Nacional: PEA y Regiones
@@ -1210,7 +1459,8 @@ if(document.getElementById("chart-heatmap")){
             const NAV_TO_ACC = {
                 'section-privado-banner': 'acc-privado',
                 'section-publico': 'acc-publico',
-                'section-comparativa': 'acc-comparativa'
+                'section-comparativa': 'acc-comparativa',
+                'section-nse': 'acc-nse'
             };
             const accId = NAV_TO_ACC[targetId];
             if (accId) {
