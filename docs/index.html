@@ -47,6 +47,21 @@
         .navbar a:hover { background: #eaf3fb; color: #2980b9; }
         .navbar a.active { background: #3498db; color: white; }
         .navbar a i { margin-right: 0.35rem; }
+        .navbar-search { position: relative; margin-left: auto; flex-shrink: 0; }
+        .navbar-search input { width: 220px; padding: 0.5rem 0.8rem 0.5rem 2rem; border: 1px solid #dde3e8; border-radius: 6px; font-size: 0.85rem; outline: none; transition: all 0.2s ease; background: #f8f9fa; }
+        .navbar-search input:focus { width: 280px; border-color: #3498db; background: white; box-shadow: 0 0 0 3px rgba(52,152,219,0.1); }
+        .navbar-search .search-icon { position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%); color: #95a5a6; font-size: 0.85rem; pointer-events: none; }
+        .navbar-search .search-results { position: absolute; top: calc(100% + 4px); right: 0; left: 0; background: white; border: 1px solid #e8ecf1; border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); max-height: 320px; overflow-y: auto; z-index: 1000; display: none; }
+        .navbar-search .search-results.open { display: block; }
+        .navbar-search .search-results .sr-item { padding: 0.5rem 0.8rem; cursor: pointer; font-size: 0.85rem; border-bottom: 1px solid #f5f6f8; display: flex; align-items: center; gap: 0.5rem; }
+        .navbar-search .search-results .sr-item:hover, .navbar-search .search-results .sr-item.hl { background: #eaf3fb; }
+        .navbar-search .search-results .sr-item:last-child { border-bottom: none; }
+        .navbar-search .sr-type { font-size: 0.65rem; color: #95a5a6; text-transform: uppercase; font-weight: 600; padding: 0.1rem 0.4rem; background: #f0f2f5; border-radius: 3px; }
+        .navbar-search .sr-empty { padding: 0.8rem; color: #95a5a6; font-size: 0.85rem; text-align: center; }
+        @media (max-width: 768px) {
+            .navbar-search { margin-left: 0.5rem; width: 100%; }
+            .navbar-search input, .navbar-search input:focus { width: 100%; }
+        }
         html { scroll-behavior: smooth; scroll-padding-top: 70px; }
         @media (max-width: 768px) { .navbar a { padding: 0.5rem 0.7rem; font-size: 0.8rem; } }
         .footer { background: #1a2332; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.85rem; }
@@ -161,6 +176,11 @@
             <a href="#section-complementario" class="nav-link"><i class="fas fa-search-dollar"></i> Complementario</a>
             <a href="#section-detallado" class="nav-link"><i class="fas fa-chart-pie"></i> Por Sector</a>
             <a href="#section-contexto" class="nav-link"><i class="fas fa-globe-americas"></i> Contexto Nacional</a>
+            <div class="navbar-search">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="Buscar empresa, rol, sector..." autocomplete="off" />
+                <div class="search-results" id="search-results"></div>
+            </div>
         </div>
     </nav>
 
@@ -316,6 +336,9 @@ if(document.getElementById("chart-heatmap")){
                 <button class="tab-button" onclick="showTab('radar')">
                     <i class="fas fa-broadcast-tower"></i> Radar
                 </button>
+                <button class="tab-button" onclick="showTab('burbujas')">
+                    <i class="fas fa-circle"></i> Burbujas
+                </button>
             </div>
 
             <div class="tabs-content">
@@ -345,6 +368,13 @@ if(document.getElementById("chart-heatmap")){
                     <p class="chart-description">Perfil comparativo: la diferencia entre mediana y promedio revela la desigualdad salarial de cada sector.</p>
                     <div id="chart-radar" class="plotly-graph-div" style="height:480px; width:100%;"></div>
 <script>if(document.getElementById("chart-radar")){Plotly.newPlot("chart-radar",[{"type": "scatterpolar", "r": [59.56112852664577, 100.0, 65.56948798328108, 61.86520376175548, 57.1055381400209, 73.14524555903866, 45.97701149425287, 59.56112852664577], "theta": ["Banca", "Mineria", "Consultoria", "Fintech", "Consumo", "Cosmeticos", "Retail", "Banca"], "fill": "toself", "fillcolor": "rgba(52,152,219,0.2)", "line": {"color": "#3498db", "width": 2}, "name": "Mediana Salarial", "text": ["S/ 5,700", "S/ 9,570", "S/ 6,275", "S/ 5,920", "S/ 5,465", "S/ 7,000", "S/ 4,400", "S/ 5,700"], "hovertemplate": "%{theta}<br>Mediana: %{text}<extra></extra>"}, {"type": "scatterpolar", "r": [70.65870212148643, 100.0, 71.99658227132176, 44.910341853665194, 66.82171282640267, 50.85792172319514, 36.313299875242876, 70.65870212148643], "theta": ["Banca", "Mineria", "Consultoria", "Fintech", "Consumo", "Cosmeticos", "Retail", "Banca"], "fill": "toself", "fillcolor": "rgba(231,76,60,0.1)", "line": {"color": "#e74c3c", "width": 2, "dash": "dash"}, "name": "Promedio Salarial", "text": ["S/ 11,407", "S/ 16,143", "S/ 11,623", "S/ 7,250", "S/ 10,787", "S/ 8,210", "S/ 5,862", "S/ 11,407"], "hovertemplate": "%{theta}<br>Promedio: %{text}<extra></extra>"}],{"title": {"text": "Perfil Salarial por Sector<br><sub>Mediana vs Promedio (normalizado, 100 = maximo)</sub>", "x": 0.5}, "polar": {"radialaxis": {"visible": true, "range": [0, 105], "ticksuffix": "%", "gridcolor": "#eee"}, "angularaxis": {"gridcolor": "#ddd"}}, "legend": {"orientation": "h", "yanchor": "bottom", "y": -0.15, "xanchor": "center", "x": 0.5}, "paper_bgcolor": "white", "height": 480, "margin": {"l": 60, "r": 60, "t": 80, "b": 60}},{"responsive": true, "displayModeBar": true, "modeBarButtonsToRemove": ["lasso2d", "select2d"], "displaylogo": false});}</script>
+                </div>
+
+                <div id="burbujas-tab" class="tab-content">
+                    <h3 class="chart-title"><i class="fas fa-circle"></i> Burbujas: Empresas por Salario Promedio</h3>
+                    <p class="chart-description">Cada burbuja es una empresa. X = salario promedio (log), Y = cantidad de puestos, tamaño = volumen. Hover muestra mediana, máximo y dispersión salarial. Mínimo 5 puestos por empresa.</p>
+                    <div id="chart-burbujas" class="plotly-graph-div" style="height:560px; width:100%;"></div>
+<script>if(document.getElementById("chart-burbujas")){Plotly.newPlot("chart-burbujas",[{"type": "scatter", "mode": "markers", "name": "Banca", "x": [14066, 13689, 10121, 10013, 9474, 6869, 4894, 4628], "y": [68, 9, 137, 33, 25, 9, 5, 5], "text": ["Interbank", "Mibanco, banco de la Microempresa", "Banco de Cr\u00e9dito BCP", "BBVA en Per\u00fa", "Credicorp", "Scotiabank", "Credicorp Capital", "BBVA"], "customdata": [[6000, 155000, 24689], [3300, 93000, 29834], [4600, 149500, 16817], [7857, 36786, 7365], [6000, 40000, 9728], [5000, 16000, 4467], [4600, 7370, 1965], [5500, 5823, 1395]], "marker": {"size": [42, 15, 60, 29, 25, 15, 11, 11], "color": "#27ae60", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Banca</extra>"}, {"type": "scatter", "mode": "markers", "name": "Consultoria", "x": [23884, 8712, 8155, 6801, 6708, 6248], "y": [27, 8, 11, 7, 12, 32], "text": ["McKinsey & Company", "NTT DATA Europe & Latam", "STRACON", "Deloitte", "Ferreyros S.A.", "Ernst & Young (EY)"], "customdata": [[13570, 191399, 35043], [9093, 15700, 5546], [7000, 17358, 5111], [4250, 21700, 6741], [5001, 20600, 6242], [5192, 15500, 4249]], "marker": {"size": [26, 14, 17, 13, 17, 28], "color": "#2c3e50", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Consultoria</extra>"}, {"type": "scatter", "mode": "markers", "name": "Consumo Masivo", "x": [12506, 8916, 7124, 6023, 3720], "y": [55, 25, 5, 11, 5], "text": ["Alicorp", "AB InBev", "Mondel\u0113z International", "San Fernando", "Grupo AJE"], "customdata": [[5103, 80093, 18413], [6310, 28375, 6455], [7210, 9300, 1458], [4800, 14000, 3573], [3500, 5500, 1221]], "marker": {"size": [38, 25, 11, 17, 11], "color": "#e67e22", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Consumo Masivo</extra>"}, {"type": "scatter", "mode": "markers", "name": "Cosmeticos", "x": [11475, 7016, 6480, 6467], "y": [20, 5, 26, 31], "text": ["Procter & Gamble", "Colgate-Palmolive", "L'Or\u00e9al", "Belcorp"], "customdata": [[9224, 24133, 5692], [6600, 10522, 2520], [6000, 15977, 2943], [5890, 13000, 2660]], "marker": {"size": [22, 11, 26, 28], "color": "#e91e8c", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Cosmeticos</extra>"}, {"type": "scatter", "mode": "markers", "name": "Fintech / Tech", "x": [8151, 6748, 4948, 4362], "y": [40, 44, 5, 6], "text": ["Culqi", "Yape", "Indra", "izipay"], "customdata": [[7000, 29103, 5679], [5300, 28000, 6079], [6100, 8000, 3223], [5200, 5874, 1563]], "marker": {"size": [32, 34, 11, 12], "color": "#3498db", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Fintech / Tech</extra>"}, {"type": "scatter", "mode": "markers", "name": "Logistica", "x": [6953], "y": [10], "text": ["LATAM Airlines"], "customdata": [[4894, 18000, 5068]], "marker": {"size": [16], "color": "#2980b9", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Logistica</extra>"}, {"type": "scatter", "mode": "markers", "name": "Mineria", "x": [40460, 11748, 5700], "y": [5, 32, 5], "text": ["Glencore", "Minsur S.A.", "Volcan Cia Minera SAA"], "customdata": [[7500, 170000, 72487], [10913, 36000, 5801], [6000, 7500, 1304]], "marker": {"size": [11, 28, 11], "color": "#f39c12", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Mineria</extra>"}, {"type": "scatter", "mode": "markers", "name": "Otros", "x": [7722, 7700, 6367, 5160, 4686, 4090, 3464, 3217], "y": [5, 5, 6, 5, 5, 5, 7, 6], "text": ["cbc Per\u00fa", "Misti Capital", "Auna", "NGR S.A.", "Divemotor", "Farmacias Peruanas", "Grupo Coril", "Qu\u00edmica Suiza"], "customdata": [[8500, 9750, 2108], [7000, 12500, 2907], [7200, 13000, 3891], [5000, 8000, 2242], [4400, 6871, 1385], [4700, 5000, 1350], [2750, 6750, 1928], [3100, 4500, 930]], "marker": {"size": [11, 11, 12, 11, 11, 11, 13, 12], "color": "#95a5a6", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Otros</extra>"}, {"type": "scatter", "mode": "markers", "name": "Retail", "x": [8024, 6937, 5974, 5495, 4086], "y": [14, 13, 7, 10, 7], "text": ["adidas", "Sodimac", "Tottus", "Saga Falabella", "Falabella"], "customdata": [[6600, 16900, 4286], [7893, 11000, 2811], [6840, 8380, 1898], [5700, 13000, 3143], [3500, 6600, 1196]], "marker": {"size": [19, 18, 13, 16, 13], "color": "#d35400", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Retail</extra>"}, {"type": "scatter", "mode": "markers", "name": "Seguros", "x": [21913, 5183], "y": [8, 6], "text": ["Rimac Seguros y Reaseguros", "Pac\u00edfico Seguros"], "customdata": [[7000, 124893, 41737], [5000, 10000, 2732]], "marker": {"size": [14, 12], "color": "#8e44ad", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Seguros</extra>"}, {"type": "scatter", "mode": "markers", "name": "Telecom", "x": [6278], "y": [32], "text": ["Entel Per\u00fa"], "customdata": [[4500, 20903, 4819]], "marker": {"size": [28], "color": "#16a085", "opacity": 0.75, "line": {"width": 1.5, "color": "white"}}, "hovertemplate": "<b>%{text}</b><br>Salario promedio: S/ %{x:,.0f}<br>Mediana: S/ %{customdata[0]:,.0f}<br>Max: S/ %{customdata[1]:,.0f}<br>Dispersion (sd): S/ %{customdata[2]:,.0f}<br>Puestos: %{y}<extra>Telecom</extra>"}],{"title": {"text": "Empresas: Salario Promedio vs Cantidad de Puestos<br><sub>Tamano = volumen, color = sector \u00b7 min. 5 puestos \u00b7 escala log en X</sub>", "x": 0.5}, "xaxis": {"title": "Salario Promedio (S/, escala log)", "tickformat": ",.0f", "gridcolor": "#f0f0f0", "type": "log"}, "yaxis": {"title": "Cantidad de Puestos Reportados", "gridcolor": "#f0f0f0"}, "legend": {"orientation": "h", "yanchor": "bottom", "y": 1.04, "xanchor": "center", "x": 0.5}, "paper_bgcolor": "white", "plot_bgcolor": "white", "height": 560, "margin": {"l": 80, "r": 30, "t": 100, "b": 60}, "hovermode": "closest"},{"responsive": true, "displaylogo": false, "modeBarButtonsToRemove": ["lasso2d", "select2d"]});}</script>
                 </div>
             </div>
         </section>
@@ -755,7 +785,8 @@ if(document.getElementById("chart-heatmap")){
     </footer>
 
     <script>
-        function showTab(tabName) {
+        function showTab(tabName, opts) {
+            opts = opts || {};
             const tab = document.getElementById(tabName + '-tab');
             if (!tab) return;
 
@@ -774,7 +805,24 @@ if(document.getElementById("chart-heatmap")){
                 }
             });
 
+            if (!opts.skipHash) {
+                history.replaceState(null, '', '#tab=' + tabName);
+            }
+
             setTimeout(resizeAllPlotlyGraphs, 150);
+        }
+
+        function openTabFromHash() {
+            const m = (location.hash || '').match(/^#tab=([a-z-]+)/i);
+            if (!m) return false;
+            const tabName = m[1];
+            const tab = document.getElementById(tabName + '-tab');
+            if (!tab) return false;
+            showTab(tabName, { skipHash: true });
+            setTimeout(() => {
+                tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 250);
+            return true;
         }
 
         function resizeAllPlotlyGraphs() {
@@ -804,6 +852,88 @@ if(document.getElementById("chart-heatmap")){
             if (btn) btn.classList.toggle('visible', window.scrollY > 400);
         });
 
+
+        var DASHBOARD_SEARCH_INDEX = [{"t": "empresa", "l": "Banco de Crédito BCP", "tab": "burbujas"}, {"t": "empresa", "l": "Interbank", "tab": "burbujas"}, {"t": "empresa", "l": "Alicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Yape", "tab": "burbujas"}, {"t": "empresa", "l": "Culqi", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA en Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Entel Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Ernst & Young (EY)", "tab": "burbujas"}, {"t": "empresa", "l": "Minsur S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Belcorp", "tab": "burbujas"}, {"t": "empresa", "l": "McKinsey & Company", "tab": "burbujas"}, {"t": "empresa", "l": "L'Oréal", "tab": "burbujas"}, {"t": "empresa", "l": "AB InBev", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Procter & Gamble", "tab": "burbujas"}, {"t": "empresa", "l": "adidas", "tab": "burbujas"}, {"t": "empresa", "l": "Sodimac", "tab": "burbujas"}, {"t": "empresa", "l": "Ferreyros S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "San Fernando", "tab": "burbujas"}, {"t": "empresa", "l": "STRACON", "tab": "burbujas"}, {"t": "empresa", "l": "Saga Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "LATAM Airlines", "tab": "burbujas"}, {"t": "empresa", "l": "Mibanco, banco de la Microempresa", "tab": "burbujas"}, {"t": "empresa", "l": "Scotiabank", "tab": "burbujas"}, {"t": "empresa", "l": "NTT DATA Europe & Latam", "tab": "burbujas"}, {"t": "empresa", "l": "Rimac Seguros y Reaseguros", "tab": "burbujas"}, {"t": "empresa", "l": "Deloitte", "tab": "burbujas"}, {"t": "empresa", "l": "Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo Coril", "tab": "burbujas"}, {"t": "empresa", "l": "Tottus", "tab": "burbujas"}, {"t": "empresa", "l": "Auna", "tab": "burbujas"}, {"t": "empresa", "l": "izipay", "tab": "burbujas"}, {"t": "empresa", "l": "Pacífico Seguros", "tab": "burbujas"}, {"t": "empresa", "l": "Química Suiza", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo AJE", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA", "tab": "burbujas"}, {"t": "empresa", "l": "cbc Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Colgate-Palmolive", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Divemotor", "tab": "burbujas"}, {"t": "empresa", "l": "Farmacias Peruanas", "tab": "burbujas"}, {"t": "empresa", "l": "Glencore", "tab": "burbujas"}, {"t": "empresa", "l": "Indra", "tab": "burbujas"}, {"t": "empresa", "l": "Misti Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Mondelēz International", "tab": "burbujas"}, {"t": "empresa", "l": "NGR S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Volcan Cia Minera SAA", "tab": "burbujas"}, {"t": "empresa", "l": "BanBif - Banco Interamericano de Finanzas", "tab": "burbujas"}, {"t": "empresa", "l": "Banco Pichincha Perú", "tab": "burbujas"}, {"t": "empresa", "l": "BP Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Clínica Internacional", "tab": "burbujas"}, {"t": "empresa", "l": "Los Portales", "tab": "burbujas"}, {"t": "empresa", "l": "LUCHA", "tab": "burbujas"}, {"t": "empresa", "l": "Favo", "tab": "burbujas"}, {"t": "empresa", "l": "Nexa Resources", "tab": "burbujas"}, {"t": "empresa", "l": "OXXO Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Perfumerías Unidas", "tab": "burbujas"}, {"t": "empresa", "l": "Prima AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sociedad Minera Cerro Verde S.A.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Telefónica", "tab": "burbujas"}, {"t": "empresa", "l": "Aon", "tab": "burbujas"}, {"t": "empresa", "l": "APOYO Consultoría", "tab": "burbujas"}, {"t": "empresa", "l": "astara", "tab": "burbujas"}, {"t": "empresa", "l": "Backus", "tab": "burbujas"}, {"t": "empresa", "l": "Cencosud S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Cisco", "tab": "burbujas"}, {"t": "empresa", "l": "Claro Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Crece Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Endeavor Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Lucky", "tab": "burbujas"}, {"t": "empresa", "l": "Intercorp Retail", "tab": "burbujas"}, {"t": "empresa", "l": "Nexus Group - Peru", "tab": "burbujas"}, {"t": "empresa", "l": "Profuturo AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sodexo", "tab": "burbujas"}, {"t": "empresa", "l": "Wally", "tab": "burbujas"}, {"t": "empresa", "l": "YURA S.A.", "tab": "burbujas"}, {"t": "rol", "l": "CEO", "tab": "roles"}, {"t": "rol", "l": "Gerente", "tab": "roles"}, {"t": "rol", "l": "Director", "tab": "roles"}, {"t": "rol", "l": "Senior", "tab": "roles"}, {"t": "rol", "l": "Analista", "tab": "roles"}, {"t": "rol", "l": "Junior", "tab": "roles"}, {"t": "rol", "l": "Practicante", "tab": "roles"}, {"t": "rol", "l": "Software", "tab": "roles"}, {"t": "rol", "l": "Data", "tab": "roles"}, {"t": "rol", "l": "Marketing", "tab": "roles"}, {"t": "rol", "l": "Ventas", "tab": "roles"}, {"t": "rol", "l": "Finanzas", "tab": "roles"}, {"t": "rol", "l": "RRHH", "tab": "roles"}, {"t": "rol", "l": "Legal", "tab": "roles"}, {"t": "rol", "l": "Product Manager", "tab": "roles"}, {"t": "sector", "l": "Banca", "tab": "sectores"}, {"t": "sector", "l": "Mineria", "tab": "sectores"}, {"t": "sector", "l": "Cosmeticos", "tab": "sectores"}, {"t": "sector", "l": "Consultoria", "tab": "sectores"}, {"t": "sector", "l": "Fintech", "tab": "sectores"}, {"t": "sector", "l": "Consumo Masivo", "tab": "sectores"}, {"t": "sector", "l": "Retail", "tab": "sectores"}, {"t": "sector", "l": "Seguros", "tab": "sectores"}, {"t": "sector", "l": "Telecom", "tab": "sectores"}, {"t": "sector", "l": "Tecnologia", "tab": "tecnologia"}, {"t": "sector", "l": "Ventas", "tab": "ventas"}, {"t": "region", "l": "Lima", "tab": "mapa-regiones"}, {"t": "region", "l": "Arequipa", "tab": "mapa-regiones"}, {"t": "region", "l": "Cusco", "tab": "mapa-regiones"}, {"t": "region", "l": "Piura", "tab": "mapa-regiones"}, {"t": "region", "l": "La Libertad", "tab": "mapa-regiones"}, {"t": "region", "l": "Lambayeque", "tab": "mapa-regiones"}, {"t": "region", "l": "Junín", "tab": "mapa-regiones"}, {"t": "region", "l": "Cajamarca", "tab": "mapa-regiones"}, {"t": "region", "l": "Áncash", "tab": "mapa-regiones"}, {"t": "region", "l": "Loreto", "tab": "mapa-regiones"}, {"t": "region", "l": "Ica", "tab": "mapa-regiones"}, {"t": "region", "l": "Tacna", "tab": "mapa-regiones"}, {"t": "region", "l": "Moquegua", "tab": "mapa-regiones"}, {"t": "region", "l": "Madre de Dios", "tab": "mapa-regiones"}, {"t": "region", "l": "Huancavelica", "tab": "mapa-regiones"}, {"t": "region", "l": "Apurímac", "tab": "mapa-regiones"}, {"t": "region", "l": "Ayacucho", "tab": "mapa-regiones"}, {"t": "region", "l": "Puno", "tab": "mapa-regiones"}, {"t": "region", "l": "Huánuco", "tab": "mapa-regiones"}, {"t": "region", "l": "San Martín", "tab": "mapa-regiones"}, {"t": "region", "l": "Pasco", "tab": "mapa-regiones"}, {"t": "region", "l": "Ucayali", "tab": "mapa-regiones"}, {"t": "region", "l": "Tumbes", "tab": "mapa-regiones"}, {"t": "region", "l": "Amazonas", "tab": "mapa-regiones"}, {"t": "region", "l": "Callao", "tab": "mapa-regiones"}];
+
+        function setupSearch() {
+            const input = document.getElementById('search-input');
+            const results = document.getElementById('search-results');
+            if (!input || !results) return;
+
+            const normalize = s => s.toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+            const ICON = { empresa: 'fa-building', rol: 'fa-user-tie',
+                           sector: 'fa-industry', region: 'fa-map-marker-alt' };
+            let highlighted = -1;
+            let currentMatches = [];
+
+            function render(matches) {
+                if (matches.length === 0) {
+                    results.innerHTML = '<div class="sr-empty">Sin coincidencias</div>';
+                } else {
+                    results.innerHTML = matches.slice(0, 12).map((m, i) =>
+                        '<div class="sr-item" data-idx="' + i + '">' +
+                        '<i class="fas ' + (ICON[m.t] || 'fa-search') + '" style="color:#95a5a6;font-size:0.75rem;"></i>' +
+                        '<span style="flex:1;">' + m.l + '</span>' +
+                        '<span class="sr-type">' + m.t + '</span>' +
+                        '</div>'
+                    ).join('');
+                }
+                results.classList.add('open');
+                highlighted = -1;
+                currentMatches = matches.slice(0, 12);
+                results.querySelectorAll('.sr-item').forEach(el => {
+                    el.addEventListener('click', () => goTo(currentMatches[parseInt(el.dataset.idx)]));
+                });
+            }
+
+            function goTo(item) {
+                if (!item) return;
+                results.classList.remove('open');
+                input.value = '';
+                showTab(item.tab);
+                const tab = document.getElementById(item.tab + '-tab');
+                if (tab) setTimeout(() => tab.scrollIntoView({behavior:'smooth', block:'start'}), 200);
+            }
+
+            input.addEventListener('input', () => {
+                const q = normalize(input.value.trim());
+                if (q.length < 1) {
+                    results.classList.remove('open');
+                    return;
+                }
+                const matches = DASHBOARD_SEARCH_INDEX.filter(item => normalize(item.l).includes(q));
+                render(matches);
+            });
+
+            input.addEventListener('keydown', e => {
+                const items = results.querySelectorAll('.sr-item');
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    highlighted = Math.min(highlighted + 1, items.length - 1);
+                    items.forEach((el, i) => el.classList.toggle('hl', i === highlighted));
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    highlighted = Math.max(highlighted - 1, 0);
+                    items.forEach((el, i) => el.classList.toggle('hl', i === highlighted));
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const pick = highlighted >= 0 ? currentMatches[highlighted] : currentMatches[0];
+                    goTo(pick);
+                } else if (e.key === 'Escape') {
+                    results.classList.remove('open');
+                    input.blur();
+                }
+            });
+
+            document.addEventListener('click', e => {
+                if (!input.contains(e.target) && !results.contains(e.target)) {
+                    results.classList.remove('open');
+                }
+            });
+        }
+
         function setupNavbarScrollSpy() {
             const links = document.querySelectorAll('.navbar a.nav-link');
             const map = {};
@@ -831,6 +961,9 @@ if(document.getElementById("chart-heatmap")){
         document.addEventListener('DOMContentLoaded', function() {
             loadVisitCounter();
             setupNavbarScrollSpy();
+            setupSearch();
+            openTabFromHash();
+            window.addEventListener('hashchange', openTabFromHash);
             setTimeout(resizeAllPlotlyGraphs, 800);
             let resizeTimer;
             window.addEventListener('resize', function() {
