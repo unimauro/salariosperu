@@ -7,37 +7,39 @@
     <title>Dashboard Análisis Salarial Perú 2026</title>
     <link rel="icon" type="image/x-icon" href="https://unimauro.github.io/salariosperu/favicon.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
-    // ===== Plotly data decryption wrapper =====
-    // Datos cifrados con AES-128 GCM. Clave hardcoded (security through obscurity:
-    // frena scrapers automaticos, NO impide extraccion por humanos con DevTools).
+    // ===== Plotly async loader + lazy chart decryption =====
+    // 1) Plotly se carga async (no bloquea el HTML).
+    // 2) plotlyEnc(divId, enc, layout, config) registra el chart pero NO lo
+    //    renderiza inmediato. Espera a que: a) Plotly este listo, y b) el div
+    //    sea visible (IntersectionObserver) o el accordion contenedor se abra.
+    // 3) Datos cifrados con AES-128 GCM. Clave hardcoded por diseno (sitio
+    //    estatico — security through obscurity).
     (function(){
         const KEY_HEX = "5a6c3d8e9f1b2a4c7e8d5f3a2b1c0e9d";
         let cryptoKey = null;
+        let plotlyReady = false;
+        const pendingByDiv = new Map();  // divId -> {enc, layout, config}
+        const queuedToRender = [];        // divIds esperando que Plotly cargue
 
         function hexToBytes(hex) {
             const out = new Uint8Array(hex.length / 2);
             for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i*2, 2), 16);
             return out;
         }
-
         function b64ToBytes(b64) {
             const bin = atob(b64);
             const out = new Uint8Array(bin.length);
             for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
             return out;
         }
-
         async function getKey() {
             if (cryptoKey) return cryptoKey;
             cryptoKey = await crypto.subtle.importKey(
-                "raw", hexToBytes(KEY_HEX),
-                { name: "AES-GCM" }, false, ["decrypt"]
+                "raw", hexToBytes(KEY_HEX), { name: "AES-GCM" }, false, ["decrypt"]
             );
             return cryptoKey;
         }
-
         async function decryptData(encB64) {
             const data = b64ToBytes(encB64);
             const nonce = data.slice(0, 12);
@@ -49,16 +51,82 @@
             return JSON.parse(new TextDecoder().decode(plain));
         }
 
-        // API publica
-        window.plotlyEnc = function(divId, encB64, layout, config) {
-            return decryptData(encB64).then(data => {
-                return Plotly.newPlot(divId, data, layout, config);
+        // Renderiza el chart en el div ahora (Plotly y div ya listos)
+        function renderChart(divId) {
+            const entry = pendingByDiv.get(divId);
+            if (!entry) return;
+            pendingByDiv.delete(divId);
+            const div = document.getElementById(divId);
+            if (!div) return;
+            // Placeholder de "cargando"
+            div.innerHTML = '<div style="padding:1rem;text-align:center;color:#95a5a6;font-size:0.85rem;"><i class="fas fa-spinner fa-spin"></i> Cargando gr&aacute;fico...</div>';
+            decryptData(entry.enc).then(data => {
+                div.innerHTML = '';
+                return Plotly.newPlot(divId, data, entry.layout, entry.config);
             }).catch(err => {
                 console.error("plotlyEnc failed for " + divId + ":", err);
-                const div = document.getElementById(divId);
-                if (div) div.innerHTML = '<div style="padding:1rem;text-align:center;color:#e74c3c;font-size:0.85rem;">No se pudo cargar el gr&aacute;fico.</div>';
+                div.innerHTML = '<div style="padding:1rem;text-align:center;color:#e74c3c;font-size:0.85rem;">No se pudo cargar el gr&aacute;fico.</div>';
+            });
+        }
+
+        // IntersectionObserver: dispara render cuando el div se vuelve visible
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting && pendingByDiv.has(e.target.id)) {
+                    io.unobserve(e.target);
+                    if (plotlyReady) renderChart(e.target.id);
+                    else queuedToRender.push(e.target.id);
+                }
+            });
+        }, { rootMargin: '100px 0px', threshold: 0.01 });
+
+        // API publica: registra el chart, sin renderizar todavia.
+        window.plotlyEnc = function(divId, encB64, layout, config) {
+            pendingByDiv.set(divId, { enc: encB64, layout: layout, config: config });
+            const div = document.getElementById(divId);
+            if (!div) {
+                // Div aun no en DOM (script inline antes de su div); reintentar
+                setTimeout(() => {
+                    const d = document.getElementById(divId);
+                    if (d) io.observe(d);
+                }, 0);
+                return;
+            }
+            io.observe(div);
+        };
+
+        // Forzar render de todos los charts dentro de un container (ej. al
+        // abrir un accordion-section que estaba cerrado).
+        window.renderChartsInContainer = function(container) {
+            if (!container) return;
+            container.querySelectorAll('.plotly-graph-div').forEach(div => {
+                if (pendingByDiv.has(div.id)) {
+                    io.unobserve(div);
+                    if (plotlyReady) renderChart(div.id);
+                    else queuedToRender.push(div.id);
+                }
             });
         };
+
+        // Cargar Plotly async, sin bloquear el HTML
+        const plotlyScript = document.createElement('script');
+        plotlyScript.src = 'https://cdn.plot.ly/plotly-latest.min.js';
+        plotlyScript.async = true;
+        plotlyScript.onload = () => {
+            plotlyReady = true;
+            // Procesar cola con un pequeno stagger para no bloquear el main thread
+            const drain = () => {
+                if (queuedToRender.length === 0) return;
+                const batch = queuedToRender.splice(0, 3);
+                batch.forEach(id => renderChart(id));
+                if (queuedToRender.length > 0) requestAnimationFrame(drain);
+            };
+            drain();
+        };
+        plotlyScript.onerror = () => {
+            console.error('Plotly failed to load from CDN');
+        };
+        document.head.appendChild(plotlyScript);
     })();
     </script>
     
@@ -1886,6 +1954,10 @@ if(document.getElementById("chart-heatmap")){
                         .forEach(sec => { if (sec !== target) sec.classList.add('closed'); });
                 }
                 target.classList.remove('closed');
+                // Lazy load: renderizar charts que estaban en espera dentro
+                if (typeof renderChartsInContainer === 'function') {
+                    setTimeout(() => renderChartsInContainer(target), 100);
+                }
                 if (typeof trackEvent === 'function') {
                     trackEvent('accordion_open', { section: accId, from_nav: opts.fromNav === true });
                 }
