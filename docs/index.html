@@ -71,24 +71,33 @@
         .sector-banner--privado { background: linear-gradient(90deg, #eaf3fb 0%, transparent 80%); border-left: 4px solid #3498db; }
         .sector-banner--publico { background: linear-gradient(90deg, #fdf6e3 0%, transparent 80%); border-left: 4px solid #f39c12; }
         .sector-banner--comparativa { background: linear-gradient(90deg, #f3eafa 0%, transparent 80%); border-left: 4px solid #9b59b6; }
+        .accordion-section { margin: 1rem 0; scroll-margin-top: 70px; }
+        .accordion-header { cursor: pointer; user-select: none; transition: background 0.2s ease; }
+        .accordion-header:hover { filter: brightness(0.97); }
+        .accordion-chevron { margin-left: auto; font-size: 1.1rem; color: #5d6d7e; transition: transform 0.3s ease; flex-shrink: 0; padding-left: 0.5rem; }
+        .accordion-section.closed .accordion-chevron { transform: rotate(-90deg); }
+        .accordion-body { max-height: 20000px; overflow: hidden; transition: max-height 0.4s ease; }
+        .accordion-section.closed .accordion-body { max-height: 0; }
+        .accordion-section.closed .sector-banner { margin-bottom: 0; }
         .footer { background: #1a2332; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.85rem; }
         .footer a { color: #3498db; text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
 
         /* KPIs */
         .kpi-section { margin: 0 0 1.5rem 0; }
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 0; }
-        .kpi-card-modern { background: white; border-radius: 10px; padding: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid; display: flex; align-items: center; gap: 0.8rem; transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e8ecf1; border-left-width: 4px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.6rem; margin-bottom: 0; }
+        .kpi-card-modern { background: white; border-radius: 10px; padding: 0.75rem 0.8rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid; display: flex; align-items: center; gap: 0.55rem; transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e8ecf1; border-left-width: 4px; min-width: 0; }
         .kpi-card-modern:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
         .kpi-card-modern.primary { border-left-color: #3498db; }
         .kpi-card-modern.success { border-left-color: #2ecc71; }
         .kpi-card-modern.purple { border-left-color: #9b59b6; }
         .kpi-card-modern.orange { border-left-color: #e67e22; }
-        .kpi-icon { font-size: 1.8rem; min-width: 45px; text-align: center; }
-        .kpi-content { flex: 1; }
-        .kpi-title { font-size: 0.78rem; color: #888; margin-bottom: 0.2rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-        .kpi-value { font-size: 1.6rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.15rem; }
-        .kpi-trend { font-size: 0.72rem; font-weight: 500; }
+        .kpi-icon { font-size: 1.4rem; min-width: 30px; text-align: center; }
+        .kpi-content { flex: 1; min-width: 0; }
+        .kpi-title { font-size: 0.66rem; color: #888; margin-bottom: 0.15rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .kpi-value { font-size: 1.25rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.1rem; line-height: 1.1; white-space: nowrap; }
+        .kpi-unit { font-size: 0.58em; color: #95a5a6; font-weight: 500; margin-left: 2px; }
+        .kpi-trend { font-size: 0.66rem; font-weight: 500; line-height: 1.2; }
         .kpi-trend.positive { color: #27ae60; }
         .kpi-trend.neutral { color: #95a5a6; }
 
@@ -116,8 +125,18 @@
         .scroll-top:hover { background: #2980b9; }
         .scroll-top.visible { display: flex; align-items: center; justify-content: center; }
 
+        @media (max-width: 1280px) {
+            .kpi-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.45rem; }
+            .kpi-card-modern { padding: 0.6rem 0.55rem; gap: 0.4rem; }
+            .kpi-icon { font-size: 1.2rem; min-width: 24px; }
+            .kpi-value { font-size: 1.05rem; }
+            .kpi-title { font-size: 0.6rem; }
+            .kpi-trend { font-size: 0.6rem; }
+        }
         @media (max-width: 1024px) {
-            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+            .kpi-grid { grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
+            .kpi-icon { font-size: 1.4rem; min-width: 30px; }
+            .kpi-value { font-size: 1.2rem; }
         }
         @media (max-width: 768px) {
             .header { position: static; }
@@ -221,71 +240,74 @@
                 <div class="kpi-card-modern primary">
                     <div class="kpi-icon">💰</div>
                     <div class="kpi-content">
-                        <div class="kpi-title">Salario Promedio</div>
-                        <div class="kpi-value">S/ 8,990</div>
+                        <div class="kpi-title" title="Salario promedio mensual privado">Sal. Prom. Privado</div>
+                        <div class="kpi-value">S/ 8,990<span class="kpi-unit">/mes</span></div>
                         <div class="kpi-trend neutral">Mediana: S/ 5,500</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern success">
                     <div class="kpi-icon">🏢</div>
                     <div class="kpi-content">
-                        <div class="kpi-title">Empresas Analizadas</div>
+                        <div class="kpi-title" title="Empresas privadas analizadas">Empresas Priv.</div>
                         <div class="kpi-value">416</div>
-                        <div class="kpi-trend positive">+164 vs anterior</div>
+                        <div class="kpi-trend positive">+164 vs ant.</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern purple">
                     <div class="kpi-icon">🚀</div>
                     <div class="kpi-content">
-                        <div class="kpi-title">Salario Más Alto</div>
-                        <div class="kpi-value">S/ 191,399</div>
-                        <div class="kpi-trend neutral">Senior Partner, McKinsey</div>
+                        <div class="kpi-title" title="Salario más alto registrado">Sal. Más Alto</div>
+                        <div class="kpi-value">S/ 191k<span class="kpi-unit">/mes</span></div>
+                        <div class="kpi-trend neutral">McKinsey Sr. Partner</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern orange">
                     <div class="kpi-icon">💼</div>
                     <div class="kpi-content">
-                        <div class="kpi-title">Posiciones Registradas</div>
+                        <div class="kpi-title" title="Posiciones registradas (privado)">Posiciones Priv.</div>
                         <div class="kpi-value">2,068</div>
-                        <div class="kpi-trend positive">1,192 con salario</div>
+                        <div class="kpi-trend positive">1,192 c/ salario</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern" style="border-left-color: #f39c12;">
                     <div class="kpi-icon">🏛️</div>
                     <div class="kpi-content">
-                        <div class="kpi-title">Vacantes CAS Activas</div>
+                        <div class="kpi-title" title="Vacantes CAS activas hoy">Vacantes CAS</div>
                         <div class="kpi-value">1,194</div>
-                        <div class="kpi-trend neutral">Sector p&uacute;blico, hoy</div>
+                        <div class="kpi-trend neutral">P&uacute;blico, hoy</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern" style="border-left-color: #e74c3c;">
                     <div class="kpi-icon">📉</div>
                     <div class="kpi-content">
-                        <div class="kpi-title">Mediana CAS</div>
-                        <div class="kpi-value">S/ 3,270</div>
-                        <div class="kpi-trend negative">-42% vs privado</div>
+                        <div class="kpi-title" title="Mediana salarial sector publico">Mediana CAS</div>
+                        <div class="kpi-value">S/ 3,270<span class="kpi-unit">/mes</span></div>
+                        <div class="kpi-trend negative">-42% vs priv.</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern" style="border-left-color: #2c3e50;">
                     <div class="kpi-icon">🌎</div>
                     <div class="kpi-content">
-                        <div class="kpi-title">Mediana Nacional</div>
-                        <div class="kpi-value">S/ 1,837</div>
-                        <div class="kpi-trend neutral">ENAHO 2023 INEI</div>
+                        <div class="kpi-title" title="Mediana nacional INEI ENAHO">Mediana Nacional</div>
+                        <div class="kpi-value">S/ 1,837<span class="kpi-unit">/mes</span></div>
+                        <div class="kpi-trend neutral">ENAHO 2023</div>
                     </div>
                 </div>
             </div>
         </section>
 
 
-        <!-- Banner sector PRIVADO -->
-        <div id="section-privado-banner" class="sector-banner sector-banner--privado">
-            <span class="sector-banner__icon">&#127970;</span>
-            <div>
-                <div class="sector-banner__title">Sector PRIVADO</div>
-                <div class="sector-banner__subtitle">2,068 registros de 416 empresas formales &middot; fuente: salariosperu.com</div>
+        <!-- Acordeón Sector PRIVADO -->
+        <div class="accordion-section" id="acc-privado" data-acc-group="sector">
+            <div class="sector-banner sector-banner--privado accordion-header" id="section-privado-banner" onclick="toggleAccordion('acc-privado')">
+                <span class="sector-banner__icon">&#127970;</span>
+                <div>
+                    <div class="sector-banner__title">Sector PRIVADO</div>
+                    <div class="sector-banner__subtitle">2,068 registros de 416 empresas formales &middot; fuente: salariosperu.com</div>
+                </div>
+                <i class="fas fa-chevron-down accordion-chevron"></i>
             </div>
-        </div>
+            <div class="accordion-body">
 
         <!-- Analisis General -->
         <section class="tabs-container" id="section-general" style="margin-bottom: 1.5rem;">
@@ -576,14 +598,20 @@ if(document.getElementById("chart-heatmap")){
         </section>
 
 
-        <!-- Banner sector PUBLICO -->
-        <div id="section-publico" class="sector-banner sector-banner--publico">
-            <span class="sector-banner__icon">&#127963;&#65039;</span>
-            <div>
-                <div class="sector-banner__title">Sector P&Uacute;BLICO (CAS)</div>
-                <div class="sector-banner__subtitle">1,194 convocatorias CAS vigentes &middot; fuente: convocatoriasdetrabajo.com</div>
+            </div><!-- /accordion-body Privado -->
+        </div><!-- /accordion-section Privado -->
+
+        <!-- Acordeón Sector PUBLICO (CAS) -->
+        <div class="accordion-section closed" id="acc-publico" data-acc-group="sector">
+            <div class="sector-banner sector-banner--publico accordion-header" id="section-publico" onclick="toggleAccordion('acc-publico')">
+                <span class="sector-banner__icon">&#127963;&#65039;</span>
+                <div>
+                    <div class="sector-banner__title">Sector P&Uacute;BLICO (CAS)</div>
+                    <div class="sector-banner__subtitle">1,194 convocatorias CAS vigentes &middot; fuente: convocatoriasdetrabajo.com</div>
+                </div>
+                <i class="fas fa-chevron-down accordion-chevron"></i>
             </div>
-        </div>
+            <div class="accordion-body">
 
         <section class="tabs-container" style="margin-bottom: 1.5rem;">
             <div class="tabs-header">
@@ -628,14 +656,20 @@ if(document.getElementById("chart-heatmap")){
             </div>
         </section>
 
-        <!-- Banner COMPARATIVA -->
-        <div id="section-comparativa" class="sector-banner sector-banner--comparativa">
-            <span class="sector-banner__icon">&#9878;&#65039;</span>
-            <div>
-                <div class="sector-banner__title">Comparativa P&uacute;blico vs Privado</div>
-                <div class="sector-banner__subtitle">Lo que nadie te cuenta: d&oacute;nde paga m&aacute;s cada sector y por qu&eacute;</div>
+            </div><!-- /accordion-body Publico -->
+        </div><!-- /accordion-section Publico -->
+
+        <!-- Acordeón COMPARATIVA -->
+        <div class="accordion-section closed" id="acc-comparativa" data-acc-group="sector">
+            <div class="sector-banner sector-banner--comparativa accordion-header" id="section-comparativa" onclick="toggleAccordion('acc-comparativa')">
+                <span class="sector-banner__icon">&#9878;&#65039;</span>
+                <div>
+                    <div class="sector-banner__title">Comparativa P&uacute;blico vs Privado</div>
+                    <div class="sector-banner__subtitle">Lo que nadie te cuenta: d&oacute;nde paga m&aacute;s cada sector y por qu&eacute;</div>
+                </div>
+                <i class="fas fa-chevron-down accordion-chevron"></i>
             </div>
-        </div>
+            <div class="accordion-body">
 
         <section class="tabs-container" style="margin-bottom: 1.5rem;">
             <div class="tabs-header">
@@ -662,6 +696,9 @@ if(document.getElementById("chart-heatmap")){
                 </div>
             </div>
         </section>
+
+            </div><!-- /accordion-body Comparativa -->
+        </div><!-- /accordion-section Comparativa -->
 
         <!-- Script para mapa CAS (necesita fetch del geojson) -->
         <script>
@@ -996,6 +1033,12 @@ if(document.getElementById("chart-heatmap")){
             const container = tab.closest('.tabs-container');
             if (!container) return;
 
+            // If the tab is inside a closed accordion, open it first
+            const acc = tab.closest('.accordion-section');
+            if (acc && acc.classList.contains('closed')) {
+                toggleAccordion(acc.id, { fromNav: true });
+            }
+
             container.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             container.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
 
@@ -1021,10 +1064,13 @@ if(document.getElementById("chart-heatmap")){
             const tabName = m[1];
             const tab = document.getElementById(tabName + '-tab');
             if (!tab) return false;
+            // Open the accordion containing this tab (if any)
+            const acc = tab.closest('.accordion-section');
+            if (acc) toggleAccordion(acc.id, { fromNav: true });
             showTab(tabName, { skipHash: true });
             setTimeout(() => {
                 tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 250);
+            }, 350);
             return true;
         }
 
@@ -1137,6 +1183,59 @@ if(document.getElementById("chart-heatmap")){
             });
         }
 
+        function toggleAccordion(accId, opts) {
+            opts = opts || {};
+            const target = document.getElementById(accId);
+            if (!target) return;
+            const group = target.dataset.accGroup;
+            const isClosed = target.classList.contains('closed');
+
+            // Always open the requested one (exclusive mode in group)
+            if (group && opts.exclusive !== false) {
+                document.querySelectorAll('.accordion-section[data-acc-group="' + group + '"]')
+                    .forEach(sec => { if (sec.id !== accId) sec.classList.add('closed'); });
+                target.classList.remove('closed');
+            } else {
+                target.classList.toggle('closed');
+            }
+            // If user clicked an already-open header, allow toggle-close (only if not from nav)
+            if (!isClosed && opts.fromNav !== true && opts.exclusive === false) {
+                target.classList.add('closed');
+            }
+            setTimeout(resizeAllPlotlyGraphs, 450);
+        }
+
+        function openAccordionForNav(targetId) {
+            // navbar links that point to an accordion's banner should open it
+            const NAV_TO_ACC = {
+                'section-privado-banner': 'acc-privado',
+                'section-publico': 'acc-publico',
+                'section-comparativa': 'acc-comparativa'
+            };
+            const accId = NAV_TO_ACC[targetId];
+            if (accId) {
+                toggleAccordion(accId, { fromNav: true });
+                return true;
+            }
+            return false;
+        }
+
+        function setupNavbarAccordionLinks() {
+            document.querySelectorAll('.navbar a.nav-link').forEach(link => {
+                link.addEventListener('click', e => {
+                    const id = link.getAttribute('href').slice(1);
+                    if (openAccordionForNav(id)) {
+                        e.preventDefault();
+                        setTimeout(() => {
+                            const el = document.getElementById(id);
+                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                        history.replaceState(null, '', '#' + id);
+                    }
+                });
+            });
+        }
+
         function setupNavbarScrollSpy() {
             const links = document.querySelectorAll('.navbar a.nav-link');
             const map = {};
@@ -1164,6 +1263,7 @@ if(document.getElementById("chart-heatmap")){
         document.addEventListener('DOMContentLoaded', function() {
             loadVisitCounter();
             setupNavbarScrollSpy();
+            setupNavbarAccordionLinks();
             setupSearch();
             openTabFromHash();
             window.addEventListener('hashchange', openTabFromHash);
