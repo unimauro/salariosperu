@@ -141,6 +141,62 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Dark mode CSS variables — solo afectan body/cards/navbar/tabs base */
+        [data-theme="dark"] body { background: #0f1419; color: #d4dde6; }
+        [data-theme="dark"] .navbar { background: #1a232e; border-bottom-color: #2d3a48; }
+        [data-theme="dark"] .navbar a { color: #b0bec5; }
+        [data-theme="dark"] .navbar a:hover { background: #2d3a48; color: #5fb8ff; }
+        [data-theme="dark"] .navbar a.active { background: #3498db; color: white; }
+        [data-theme="dark"] .navbar-search input { background: #2d3a48; border-color: #3d4a58; color: #d4dde6; }
+        [data-theme="dark"] .navbar-search input:focus { background: #1a232e; }
+        [data-theme="dark"] .navbar-search .search-icon { color: #7f8c8d; }
+        [data-theme="dark"] .search-results { background: #1a232e; border-color: #2d3a48; }
+        [data-theme="dark"] .sr-item { color: #d4dde6; }
+        [data-theme="dark"] .sr-item:hover, [data-theme="dark"] .sr-item.hl { background: #2d3a48; }
+        [data-theme="dark"] .nav-dropdown-menu { background: #1a232e; border-color: #2d3a48; }
+        [data-theme="dark"] .nav-dd-item { color: #b0bec5 !important; }
+        [data-theme="dark"] .nav-dd-item:hover { background: #2d3a48 !important; color: #5fb8ff !important; }
+        [data-theme="dark"] .nav-dd-title { color: #7f8c8d; }
+        [data-theme="dark"] .nav-dd-group + .nav-dd-group { border-top-color: #2d3a48; }
+        [data-theme="dark"] .kpi-card-modern { background: #1a232e; border-color: #2d3a48; color: #d4dde6; }
+        [data-theme="dark"] .kpi-title, [data-theme="dark"] .kpi-trend.neutral { color: #95a5a6; }
+        [data-theme="dark"] .kpi-value { color: #ecf0f1; }
+        [data-theme="dark"] .kpi-unit { color: #7f8c8d; }
+        [data-theme="dark"] .tldr { background: linear-gradient(135deg, #1a232e 0%, #1f2935 100%); border-color: #2d3a48; }
+        [data-theme="dark"] .tldr__title { color: #ecf0f1; }
+        [data-theme="dark"] .tldr__item { background: #1f2935; border-color: #2d3a48; }
+        [data-theme="dark"] .tldr__item:hover { border-color: #3d4a58; }
+        [data-theme="dark"] .tldr__metric { color: #ecf0f1; }
+        [data-theme="dark"] .tldr__detail { color: #95a5a6; }
+        [data-theme="dark"] .tldr__close { color: #7f8c8d; }
+        [data-theme="dark"] .tldr__close:hover { background: #2d3a48; color: #ecf0f1; }
+        [data-theme="dark"] .sector-banner__title { color: #ecf0f1; }
+        [data-theme="dark"] .sector-banner__subtitle { color: #95a5a6; }
+        [data-theme="dark"] .tabs-container { background: #1a232e; border-color: #2d3a48; }
+        [data-theme="dark"] .tabs-header { background: #0f1419; border-bottom-color: #2d3a48; }
+        [data-theme="dark"] .tab-button { color: #7f8c8d; }
+        [data-theme="dark"] .tab-button:hover { background: #2d3a48; color: #b0bec5; }
+        [data-theme="dark"] .tab-button.active { background: #1a232e; color: #ecf0f1; }
+        [data-theme="dark"] .chart-title, [data-theme="dark"] h3 { color: #ecf0f1; }
+        [data-theme="dark"] .chart-description, [data-theme="dark"] p { color: #95a5a6; }
+        [data-theme="dark"] .toc-side { background: #1a232e; border-color: #2d3a48; color: #d4dde6; }
+        [data-theme="dark"] .toc-side__title { color: #ecf0f1; }
+        [data-theme="dark"] .toc-item { color: #b0bec5; }
+        [data-theme="dark"] .toc-item:hover { background: #2d3a48; color: #ecf0f1; }
+        [data-theme="dark"] .toc-item.active { background: #2d3a48; color: #5fb8ff; }
+        [data-theme="dark"] .nse-calc { background: #1a232e; border-color: #2d3a48; }
+        [data-theme="dark"] .nse-calc__input { background: #2d3a48; border-color: #3d4a58; color: #ecf0f1; }
+        [data-theme="dark"] .nse-calc__currency { background: #2d3a48; color: #ecf0f1; }
+        [data-theme="dark"] .nse-result { background: #1f2935; }
+        [data-theme="dark"] .nse-comp-card { background: #1a232e; border-color: #2d3a48; }
+        [data-theme="dark"] .nse-comp-card__value { color: #ecf0f1; }
+        [data-theme="dark"] .nse-result__headline { color: #ecf0f1; }
+        [data-theme="dark"] .nse-result__sub, [data-theme="dark"] .nse-result__sub strong { color: #d4dde6; }
+        /* Boton dark mode toggle */
+        .dark-toggle { background: none; border: 1px solid transparent; color: #5d6d7e; cursor: pointer; padding: 0.5rem 0.7rem; font-size: 0.95rem; border-radius: 6px; transition: all 0.2s; margin: 0 0.2rem; flex-shrink: 0; }
+        .dark-toggle:hover { background: #f0f2f5; color: #2c3e50; }
+        [data-theme="dark"] .dark-toggle { color: #b0bec5; }
+        [data-theme="dark"] .dark-toggle:hover { background: #2d3a48; color: #ecf0f1; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; color: #333; line-height: 1.6; }
         .header { background: linear-gradient(135deg, #1a2332, #2c3e50); color: white; padding: 1.2rem 0; margin-bottom: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: sticky; top: 0; z-index: 100; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
@@ -297,6 +353,26 @@
         .accordion-section.closed .accordion-body { max-height: 0; }
         .accordion-section.closed .sector-banner { margin-bottom: 0; }
         .sector-banner--nse { background: linear-gradient(90deg, #e8f8f5 0%, transparent 80%); border-left: 4px solid #16a085; }
+        /* TL;DR Resumen Ejecutivo */
+        .tldr { background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border: 1px solid #e8ecf1; border-radius: 12px; padding: 1.2rem 1.4rem; margin: 1.2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+        .tldr.hidden { display: none; }
+        .tldr__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+        .tldr__title { font-size: 1.05rem; font-weight: 700; color: #2c3e50; margin: 0; }
+        .tldr__title i { color: #e74c3c; margin-right: 0.4rem; }
+        .tldr__close { background: none; border: none; cursor: pointer; color: #95a5a6; font-size: 1.4rem; padding: 0 0.4rem; line-height: 1; border-radius: 4px; }
+        .tldr__close:hover { background: #f0f2f5; color: #2c3e50; }
+        .tldr__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.85rem; }
+        .tldr__item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.6rem 0.7rem; background: white; border-radius: 8px; border: 1px solid #f0f2f5; transition: all 0.2s ease; }
+        .tldr__item:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.06); border-color: #e0e6ed; }
+        .tldr__icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.5px; }
+        .tldr__metric { font-size: 0.88rem; font-weight: 600; color: #2c3e50; line-height: 1.3; margin-bottom: 0.2rem; }
+        .tldr__detail { font-size: 0.78rem; color: #7f8c8d; line-height: 1.45; }
+        @media (max-width: 768px) {
+            .tldr { padding: 1rem; }
+            .tldr__icon { width: 40px; height: 40px; font-size: 0.9rem; }
+            .tldr__metric { font-size: 0.82rem; }
+            .tldr__detail { font-size: 0.72rem; }
+        }
         .nse-calc { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8ecf1; }
         .nse-calc__input-wrap { display: flex; gap: 0.6rem; align-items: stretch; flex-wrap: wrap; margin: 0.8rem 0 1.2rem; }
         .nse-calc__currency { display: flex; align-items: center; padding: 0 0.7rem; background: #f0f2f5; border-radius: 8px; font-weight: 700; font-size: 1.4rem; color: #2c3e50; flex-shrink: 0; }
@@ -443,7 +519,7 @@
                 </div>
                 <div class="header-right">
                     <div class="update-info">
-                        <div>🏢 Privado: <strong>2,068 reg.</strong> · 416 empresas <span style="opacity:0.7;">(28/03/2026)</span></div>
+                        <div>🏢 Privado: <strong>2,068 reg.</strong> · 416 empresas <span style="opacity:0.7;">(snapshot 28/03/2026 · fuente off)</span></div>
                         <div>🏛️ Público CAS: <strong>1,194 vac.</strong> <span style="opacity:0.7;">(actualizado diario)</span></div>
                         <div>📚 Fuentes: salariosperu.com · convocatoriasdetrabajo.com · INEI ENAHO · APEIM</div>
                     </div>
@@ -597,18 +673,76 @@
             </div>
         </section>
 
+        <!-- Resumen Ejecutivo TL;DR -->
+        <section class="tldr" id="tldr">
+            <div class="tldr__header">
+                <h2 class="tldr__title"><i class="fas fa-fire"></i> Lo que vas a encontrar aqu&iacute;</h2>
+                <button class="tldr__close" id="tldr-close" title="Ocultar" aria-label="Ocultar resumen">&times;</button>
+            </div>
+            <div class="tldr__grid">
+                <div class="tldr__item">
+                    <div class="tldr__icon" style="background:#3498db;">3x</div>
+                    <div>
+                        <div class="tldr__metric">El privado paga 3x m&aacute;s que la mediana nacional</div>
+                        <div class="tldr__detail">Mediana privado S/5,600 vs mediana nacional INEI S/1,837.</div>
+                    </div>
+                </div>
+                <div class="tldr__item">
+                    <div class="tldr__icon" style="background:#27ae60;">+43%</div>
+                    <div>
+                        <div class="tldr__metric">CAS paga m&aacute;s a niveles bajos</div>
+                        <div class="tldr__detail">Asistente CAS S/3,000 vs privado S/2,100. El Estado tiene piso m&aacute;s alto.</div>
+                    </div>
+                </div>
+                <div class="tldr__item">
+                    <div class="tldr__icon" style="background:#e74c3c;">-66%</div>
+                    <div>
+                        <div class="tldr__metric">Pero CAS paga mucho menos arriba</div>
+                        <div class="tldr__detail">Gerente CAS S/3,500 vs privado S/10,220. Hay techo en el Estado.</div>
+                    </div>
+                </div>
+                <div class="tldr__item">
+                    <div class="tldr__icon" style="background:#f39c12;">25</div>
+                    <div>
+                        <div class="tldr__metric">Mapa nacional de ingresos</div>
+                        <div class="tldr__detail">25 departamentos con datos ENAHO. Brecha 2.6x entre Lima y Huancavelica.</div>
+                    </div>
+                </div>
+                <div class="tldr__item">
+                    <div class="tldr__icon" style="background:#9b59b6;">A++</div>
+                    <div>
+                        <div class="tldr__metric">Calculadora NSE</div>
+                        <div class="tldr__detail">Ingresa tu sueldo, te decimos a qu&eacute; nivel APEIM perteneces y qu&eacute; % gana menos.</div>
+                    </div>
+                </div>
+                <div class="tldr__item">
+                    <div class="tldr__icon" style="background:#1abc9c;">CAS</div>
+                    <div>
+                        <div class="tldr__metric">1,194 vacantes p&uacute;blicas activas</div>
+                        <div class="tldr__detail">Scrapeadas diariamente. Filtrables por instituci&oacute;n, rol y regi&oacute;n.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- Acordeón Sector PRIVADO -->
         <div class="accordion-section" id="acc-privado" data-acc-group="sector">
             <div class="sector-banner sector-banner--privado accordion-header" id="section-privado-banner" onclick="toggleAccordion('acc-privado')">
                 <span class="sector-banner__icon">&#127970;</span>
                 <div>
-                    <div class="sector-banner__title">Sector PRIVADO</div>
-                    <div class="sector-banner__subtitle">2,068 registros de 416 empresas formales &middot; fuente: salariosperu.com</div>
+                    <div class="sector-banner__title">Sector PRIVADO <span style="font-size:0.7rem; background:#e74c3c; color:white; padding:0.15rem 0.5rem; border-radius:10px; font-weight:600; margin-left:0.4rem; vertical-align:middle;">SNAPSHOT</span></div>
+                    <div class="sector-banner__subtitle">2,068 registros &middot; 416 empresas &middot; <strong>fuente original cerró</strong> &middot; congelado en 28/03/2026</div>
                 </div>
                 <i class="fas fa-chevron-down accordion-chevron"></i>
             </div>
             <div class="accordion-body">
+
+        <!-- Disclaimer snapshot historico -->
+        <div style="background:#fff3e0; border-left:4px solid #e67e22; padding:0.7rem 1rem; margin:0 0 1rem; border-radius:6px; color:#5d4037; font-size:0.85rem; line-height:1.5;">
+            <i class="fas fa-archive" style="color:#e67e22; margin-right:5px;"></i>
+            <strong>Snapshot hist&oacute;rico:</strong> El sitio fuente (salariosperu.com) cerr&oacute; despu&eacute;s del scrape de marzo 2026. Estos datos no se actualizan. El sector p&uacute;blico (CAS) s&iacute; sigue actualiz&aacute;ndose diariamente.
+        </div>
 
         <!-- Analisis General -->
         <section class="tabs-container" id="section-general" style="margin-bottom: 1.5rem;">
@@ -2186,6 +2320,71 @@ if(document.getElementById("chart-heatmap")){
             updateVisibility();
         }
 
+        // TL;DR ejecutivo - dismissible
+        function setupTldr() {
+            const tldr = document.getElementById('tldr');
+            const closeBtn = document.getElementById('tldr-close');
+            if (!tldr || !closeBtn) return;
+            try {
+                if (localStorage.getItem('tldr_dismissed') === '1') {
+                    tldr.classList.add('hidden');
+                }
+            } catch(e) {}
+            closeBtn.addEventListener('click', () => {
+                tldr.classList.add('hidden');
+                try { localStorage.setItem('tldr_dismissed', '1'); } catch(e) {}
+                if (typeof trackEvent === 'function') trackEvent('tldr_dismissed', {});
+            });
+        }
+
+        // Dark mode toggle
+        function setupDarkMode() {
+            const KEY = 'theme_preference';
+            const root = document.documentElement;
+
+            function apply(theme) {
+                if (theme === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                } else {
+                    root.removeAttribute('data-theme');
+                }
+                const btn = document.getElementById('dark-mode-toggle');
+                if (btn) {
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                    btn.title = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
+                }
+            }
+
+            // Determinar tema inicial: localStorage > prefers-color-scheme > light
+            let saved = null;
+            try { saved = localStorage.getItem(KEY); } catch(e) {}
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initial = saved || (prefersDark ? 'dark' : 'light');
+            apply(initial);
+
+            // Crear boton en el navbar (antes del buscador)
+            const navbar = document.querySelector('.navbar-inner');
+            if (!navbar) return;
+            const btn = document.createElement('button');
+            btn.id = 'dark-mode-toggle';
+            btn.className = 'dark-toggle';
+            btn.setAttribute('aria-label', 'Cambiar tema');
+            btn.innerHTML = '<i class="fas ' + (initial === 'dark' ? 'fa-sun' : 'fa-moon') + '"></i>';
+            btn.title = initial === 'dark' ? 'Modo claro' : 'Modo oscuro';
+            const search = navbar.querySelector('.navbar-search');
+            if (search) navbar.insertBefore(btn, search);
+            else navbar.appendChild(btn);
+
+            btn.addEventListener('click', () => {
+                const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                const next = current === 'dark' ? 'light' : 'dark';
+                apply(next);
+                try { localStorage.setItem(KEY, next); } catch(e) {}
+                if (typeof trackEvent === 'function') trackEvent('theme_change', { theme: next });
+            });
+        }
+
         function setupNavbarDropdowns() {
             document.querySelectorAll('.nav-dropdown').forEach(dd => {
                 const link = dd.querySelector('.nav-link');
@@ -2290,6 +2489,8 @@ if(document.getElementById("chart-heatmap")){
             setupNavbarDropdowns();
             setupPrivadoTOC();
             setupSearch();
+            setupTldr();
+            setupDarkMode();
             // Aplica fixes de UI tras unos segundos para asegurar que los
             // charts cifrados ya se renderizaron
             setTimeout(fixChartLayouts, 2000);
