@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SalariosPerú · Dashboard de Sueldos Perú 2026 (Privado, Público CAS, NSE)</title>
-    <meta name="description" content="Dashboard público con análisis de salarios en Perú: sector privado (2,068 registros, 416 empresas), sector público CAS (1,194 vacantes actualizadas a diario), calculadora NSE APEIM A-E, mapa regional INEI ENAHO, comparativa público vs privado.">
+    <meta name="description" content="¿Cuánto se gana realmente en Perú? Compara salarios del sector privado (empresas grandes formales) con el público CAS, calcula tu NSE APEIM, ve la mediana real INEI (S/1,837) vs el promedio inflado. 2,068 registros privados + 1,194 vacantes CAS actualizadas a diario.">
     <meta name="author" content="Carlos Mauro Cárdenas">
-    <meta name="keywords" content="salarios Peru, sueldos Peru 2026, salario promedio Peru, salario CAS, NSE Peru, APEIM, calculadora salario Peru, dashboard salarios, mediana salarial Peru, INEI ENAHO, brecha salarial, ingreso laboral Peru">
+    <meta name="keywords" content="salarios Peru, sueldos Peru 2026, cuanto se gana en Peru, salario promedio Peru, salario CAS, NSE Peru, APEIM, calculadora salario Peru, dashboard salarios, mediana salarial Peru, INEI ENAHO, brecha salarial, ingreso laboral Peru">
     <link rel="canonical" href="https://unimauro.github.io/salariosperu/">
     <link rel="icon" type="image/x-icon" href="https://unimauro.github.io/salariosperu/favicon.ico">
 
@@ -16,11 +16,14 @@
     <meta name="googlebot" content="index, follow">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="SalariosPerú · Dashboard de Sueldos Perú 2026">
-    <meta property="og:description" content="Análisis de salarios en Perú: privado vs público CAS, calculadora NSE, mapa regional, brecha salarial. Datos INEI + APEIM.">
+    <meta property="og:title" content="¿Cuánto se gana realmente en Perú? · SalariosPerú">
+    <meta property="og:description" content="Privado vs Público CAS · Calculadora NSE A-E · Mediana real INEI (S/1,837) vs promedio inflado empresas grandes (S/8,990). El dashboard que te ayuda a entender el mercado laboral peruano sin filtros.">
     <meta property="og:url" content="https://unimauro.github.io/salariosperu/">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://unimauro.github.io/salariosperu/yape.png">
+    <meta property="og:image" content="https://unimauro.github.io/salariosperu/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="SalariosPerú · ¿Cuánto se gana realmente en Perú? KPIs: privado S/8,990 vs CAS S/3,270 vs mediana real S/1,837">
     <meta property="og:locale" content="es_PE">
     <meta property="og:site_name" content="SalariosPerú">
 
@@ -28,8 +31,10 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@unimauro">
     <meta name="twitter:creator" content="@unimauro">
-    <meta name="twitter:title" content="SalariosPerú · Dashboard de Sueldos Perú 2026">
-    <meta name="twitter:description" content="Análisis salarial Perú: privado vs público CAS + calculadora NSE + mapa regional INEI.">
+    <meta name="twitter:title" content="¿Cuánto se gana realmente en Perú? · SalariosPerú">
+    <meta name="twitter:description" content="Privado · Público CAS · Calculadora NSE · Mediana real INEI vs promedio inflado. El dashboard sin filtros del mercado laboral peruano.">
+    <meta name="twitter:image" content="https://unimauro.github.io/salariosperu/og-preview.png">
+    <meta name="twitter:image:alt" content="SalariosPerú: privado S/8,990 vs CAS S/3,270 vs mediana real S/1,837">
 
     <!-- Schema.org Dataset + WebSite -->
     <script type="application/ld+json">
@@ -541,39 +546,71 @@
         }
         [data-theme="dark"] .kpi-card-modern .kpi-warning { color: #ff6b6b; background: rgba(231,76,60,0.2); }
 
-        /* Banner critico de sesgo */
+        /* Banner contexto del dataset (info, no alerta agresiva) */
         .bias-alert {
-            background: linear-gradient(90deg, #fef2f2 0%, #fff7ed 100%);
-            border: 1px solid #fecaca;
-            border-left: 4px solid #dc2626;
+            background: linear-gradient(90deg, #fff8e1 0%, #fffaf0 100%);
+            border: 1px solid #fde68a;
+            border-left: 4px solid #f59e0b;
             border-radius: 10px;
             padding: 0.85rem 1.1rem;
             margin: 1rem 0;
-            box-shadow: 0 2px 8px rgba(220,38,38,0.08);
+            box-shadow: 0 2px 8px rgba(245,158,11,0.08);
             animation: biasAlertSlideIn 0.5s ease-out;
+            overflow: hidden;
+            transition: padding 0.5s ease, border-radius 0.5s ease, background 0.5s ease;
         }
         @keyframes biasAlertSlideIn {
             from { opacity: 0; transform: translateY(-8px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .bias-alert.dismissed { display: none; }
-        .bias-alert__inner { display: flex; gap: 0.9rem; align-items: flex-start; }
-        .bias-alert__icon { flex-shrink: 0; font-size: 1.4rem; color: #dc2626; margin-top: 0.1rem; }
-        .bias-alert__body { flex: 1; }
-        .bias-alert__title { font-size: 0.95rem; color: #7f1d1d; margin-bottom: 0.25rem; line-height: 1.4; }
-        .bias-alert__text { font-size: 0.86rem; color: #5c1f1f; line-height: 1.55; }
-        .bias-alert__text a { color: #b91c1c; font-weight: 600; }
+        .bias-alert__inner { display: flex; gap: 0.9rem; align-items: flex-start; transition: gap 0.5s ease; }
+        .bias-alert__icon { flex-shrink: 0; font-size: 1.4rem; color: #d97706; margin-top: 0.1rem; transition: font-size 0.4s ease; }
+        .bias-alert__body { flex: 1; min-width: 0; }
+        .bias-alert__title { font-size: 0.95rem; color: #78350f; margin-bottom: 0.25rem; line-height: 1.4; transition: margin-bottom 0.4s ease; }
+        .bias-alert__hint { font-size: 0.72rem; color: #a16207; font-weight: 400; opacity: 0; transition: opacity 0.3s ease; }
+        .bias-alert__text { font-size: 0.86rem; color: #5c3a0e; line-height: 1.55; transition: max-height 0.5s ease, opacity 0.35s ease; overflow: hidden; max-height: 400px; }
+        .bias-alert__text a { color: #b45309; font-weight: 600; }
         .bias-alert__text a:hover { text-decoration: underline; }
-        .bias-alert__close { background: none; border: none; cursor: pointer; color: #b91c1c; font-size: 1.4rem; padding: 0 0.4rem; line-height: 1; flex-shrink: 0; border-radius: 4px; }
-        .bias-alert__close:hover { background: rgba(220,38,38,0.1); }
-        [data-theme="dark"] .bias-alert {
-            background: linear-gradient(90deg, rgba(220,38,38,0.12) 0%, rgba(234,88,12,0.08) 100%);
-            border-color: rgba(220,38,38,0.3);
-            border-left-color: #dc2626;
+        .bias-alert__close { background: none; border: none; cursor: pointer; color: #b45309; font-size: 1.4rem; padding: 0 0.4rem; line-height: 1; flex-shrink: 0; border-radius: 4px; }
+        .bias-alert__close:hover { background: rgba(245,158,11,0.15); }
+
+        /* Estado evaporando: el texto se va con stagger */
+        .bias-alert.evaporating .bias-alert__text {
+            opacity: 0;
+            transform: translateY(-15px);
+            filter: blur(4px);
+            max-height: 0;
+            margin-top: 0;
         }
-        [data-theme="dark"] .bias-alert__title { color: #fecaca; }
-        [data-theme="dark"] .bias-alert__text { color: #fca5a5; }
+        /* Colapsado: chip compacto reabrible */
+        .bias-alert.collapsed {
+            padding: 0.5rem 0.95rem;
+            margin: 0.5rem 0;
+            border-radius: 30px;
+            cursor: pointer;
+            display: inline-flex;
+            max-width: fit-content;
+        }
+        .bias-alert.collapsed:hover { background: #fff3c4; border-color: #d97706; box-shadow: 0 4px 12px rgba(245,158,11,0.18); }
+        .bias-alert.collapsed .bias-alert__inner { gap: 0.5rem; align-items: center; }
+        .bias-alert.collapsed .bias-alert__icon { font-size: 1rem; margin-top: 0; }
+        .bias-alert.collapsed .bias-alert__title { font-size: 0.82rem; margin-bottom: 0; display: flex; align-items: center; gap: 0.4rem; }
+        .bias-alert.collapsed .bias-alert__hint { opacity: 1; }
+        .bias-alert.collapsed .bias-alert__text { max-height: 0; opacity: 0; }
+        .bias-alert.collapsed .bias-alert__close { display: none; }
+
+        [data-theme="dark"] .bias-alert {
+            background: linear-gradient(90deg, rgba(245,158,11,0.12) 0%, rgba(234,88,12,0.05) 100%);
+            border-color: rgba(245,158,11,0.3);
+            border-left-color: #f59e0b;
+        }
+        [data-theme="dark"] .bias-alert__icon { color: #fbbf24; }
+        [data-theme="dark"] .bias-alert__title { color: #fde68a; }
+        [data-theme="dark"] .bias-alert__hint { color: #d97706; }
+        [data-theme="dark"] .bias-alert__text { color: #fcd34d; }
         [data-theme="dark"] .bias-alert__text a { color: #fbbf24; }
+        [data-theme="dark"] .bias-alert.collapsed:hover { background: rgba(245,158,11,0.18); border-color: #f59e0b; }
         .kpi-trend { font-size: 0.66rem; font-weight: 500; line-height: 1.2; }
         .kpi-trend.positive { color: #27ae60; }
         .kpi-trend.neutral { color: #95a5a6; }
@@ -766,17 +803,21 @@
     </nav>
 
     <main class="container">
-        <!-- BANNER CRITICO: sesgo del dashboard -->
+        <!-- Banner: contexto del dataset -->
         <div class="bias-alert" id="bias-alert">
             <div class="bias-alert__inner">
-                <div class="bias-alert__icon"><i class="fas fa-triangle-exclamation"></i></div>
+                <div class="bias-alert__icon"><i class="fas fa-circle-info"></i></div>
                 <div class="bias-alert__body">
-                    <div class="bias-alert__title"><strong>Este dashboard est&aacute; SESGADO hacia empresas formales grandes de Lima.</strong></div>
+                    <div class="bias-alert__title">
+                        <i class="fas fa-fire" style="margin-right:6px; color:#dc2626;"></i>
+                        <strong>L&eacute;eme antes de mirar los n&uacute;meros</strong>
+                        <span class="bias-alert__hint">&middot; se compacta solo en unos segundos</span>
+                    </div>
                     <div class="bias-alert__text">
-                        El promedio S/ 8,990 que ver&aacute;s abajo NO es el sueldo del peruano promedio.
-                        Seg&uacute;n <a href="https://m.inei.gob.pe/media/MenuRecursivo/boletines/02-informe-tecnico-empleo-laboral-de-lima-metropolitanal.pdf" target="_blank" rel="noopener">INEI ENAHO 2023</a>,
-                        la mediana nacional real es <strong>S/ 1,837</strong> (~5x menos). El dataset cubre solo ~28% de empleo formal urbano. Mira el
-                        <a href="#section-contexto" onclick="toggleAccordion('acc-contexto',{fromNav:true});">Contexto Nacional</a> para la realidad.
+                        Los datos del privado vienen de las <strong>empresas m&aacute;s grandes del pa&iacute;s</strong> (formales, mayoritariamente Lima).
+                        Por eso el promedio S/ 8,990 sale alto: refleja a esas empresas, no al peruano promedio.
+                        La mediana nacional real seg&uacute;n <a href="https://m.inei.gob.pe/media/MenuRecursivo/boletines/02-informe-tecnico-empleo-laboral-de-lima-metropolitanal.pdf" target="_blank" rel="noopener">INEI ENAHO 2023</a> es <strong>S/ 1,837</strong> &mdash; ese KPI tambi&eacute;n est&aacute; abajo en verde.
+                        Para la realidad completa mir&aacute; el <a href="#section-contexto" onclick="toggleAccordion('acc-contexto',{fromNav:true});">Contexto Nacional</a>.
                     </div>
                 </div>
                 <button class="bias-alert__close" id="bias-alert-close" aria-label="Entendido">&times;</button>
@@ -789,10 +830,10 @@
                 <div class="kpi-card-modern primary">
                     <div class="kpi-icon">💰</div>
                     <div class="kpi-content">
-                        <div class="kpi-title" title="Salario promedio mensual privado">Sal. Prom. Privado</div>
+                        <div class="kpi-title" title="Salario promedio mensual privado en empresas grandes">Sal. Prom. Privado</div>
                         <div class="kpi-value">S/ 8,990<span class="kpi-unit">/mes</span></div>
                         <div class="kpi-trend neutral">Mediana: S/ 5,500</div>
-                        <div class="kpi-warning" title="Muestra sesgada: empresas formales grandes de Lima">⚠ muestra sesgada</div>
+                        <div class="kpi-warning" title="Datos de empresas grandes formales de Lima · no representa al peruano promedio">empresas grandes</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern success">
@@ -858,10 +899,10 @@
             </div>
             <div class="tldr__grid">
                 <div class="tldr__item">
-                    <div class="tldr__icon" style="background:#e74c3c;">⚠</div>
+                    <div class="tldr__icon" style="background:#3498db;">5x</div>
                     <div>
-                        <div class="tldr__metric">Este dashboard est&aacute; sesgado &mdash; ojo</div>
-                        <div class="tldr__detail">El promedio S/8,990 viene de empresas formales grandes de Lima. La mediana real Per&uacute; es S/1,837 (INEI). Casi 5x menos.</div>
+                        <div class="tldr__metric">Promedio empresas grandes vs mediana real Per&uacute;</div>
+                        <div class="tldr__detail">Privado en empresas grandes paga S/8,990 prom. La mediana nacional INEI es S/1,837 (~5x menos). Los datos cubren formal urbano.</div>
                     </div>
                 </div>
                 <div class="tldr__item">
@@ -2539,21 +2580,75 @@ if(document.getElementById("chart-heatmap")){
             updateVisibility();
         }
 
-        // Banner critico de sesgo - dismissible (persiste hasta proxima sesion)
+        // Banner contexto - efecto evaporacion + colapso a chip
         function setupBiasAlert() {
             const banner = document.getElementById('bias-alert');
             const closeBtn = document.getElementById('bias-alert-close');
-            if (!banner || !closeBtn) return;
+            if (!banner) return;
+            const AUTO_DELAY = 9000;        // auto-colapso tras 9s
+            const SCROLL_THRESHOLD = 400;
+            let collapsed = false;
+            let autoTimer = null;
+
             try {
-                if (sessionStorage.getItem('bias_alert_dismissed') === '1') {
-                    banner.classList.add('dismissed');
+                if (sessionStorage.getItem('bias_collapsed') === '1') {
+                    banner.classList.add('collapsed');
+                    collapsed = true;
                 }
             } catch(e) {}
-            closeBtn.addEventListener('click', () => {
-                banner.classList.add('dismissed');
-                try { sessionStorage.setItem('bias_alert_dismissed', '1'); } catch(e) {}
-                if (typeof trackEvent === 'function') trackEvent('bias_alert_dismissed', {});
+
+            function evaporateAndCollapse() {
+                if (collapsed) return;
+                banner.classList.add('evaporating');
+                setTimeout(() => {
+                    banner.classList.remove('evaporating');
+                    banner.classList.add('collapsed');
+                    collapsed = true;
+                    try { sessionStorage.setItem('bias_collapsed', '1'); } catch(e) {}
+                    if (typeof trackEvent === 'function') trackEvent('bias_alert_evaporated', {});
+                }, 600);
+            }
+
+            function expand() {
+                if (!collapsed) return;
+                banner.classList.remove('collapsed');
+                collapsed = false;
+                try { sessionStorage.removeItem('bias_collapsed'); } catch(e) {}
+                if (typeof trackEvent === 'function') trackEvent('bias_alert_reopened', {});
+                scheduleAuto();
+            }
+
+            function scheduleAuto() {
+                if (autoTimer) clearTimeout(autoTimer);
+                autoTimer = setTimeout(() => { if (!collapsed) evaporateAndCollapse(); }, AUTO_DELAY);
+            }
+
+            if (!collapsed) scheduleAuto();
+
+            // Tambien colapsa al scroll
+            let scrollWatched = !collapsed;
+            window.addEventListener('scroll', () => {
+                if (!scrollWatched) return;
+                if (window.scrollY > SCROLL_THRESHOLD && !collapsed) {
+                    scrollWatched = false;
+                    if (autoTimer) clearTimeout(autoTimer);
+                    evaporateAndCollapse();
+                }
+            }, { passive: true });
+
+            // Click en chip reabre
+            banner.addEventListener('click', (e) => {
+                if (collapsed) expand();
             });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    banner.classList.add('dismissed');
+                    try { sessionStorage.setItem('bias_collapsed', '1'); } catch(e) {}
+                    if (typeof trackEvent === 'function') trackEvent('bias_alert_dismissed', {});
+                });
+            }
         }
 
         // TL;DR ejecutivo - efecto evaporacion + colapso a titulo
