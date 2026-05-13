@@ -286,6 +286,18 @@
         .navbar a { flex-shrink: 0; padding: 0.55rem 0.95rem; color: #5d6d7e; text-decoration: none; font-size: 0.88rem; font-weight: 500; border-radius: 6px; transition: all 0.2s ease; white-space: nowrap; }
         .navbar a:hover { background: #eaf3fb; color: #2980b9; }
         .navbar a.active { background: #3498db; color: white; }
+        /* Link diferenciado: link a otra página (no tab interno) */
+        .navbar a.nav-link--guide {
+            border: 1px solid #3498db;
+            color: #3498db;
+            font-weight: 600;
+        }
+        .navbar a.nav-link--guide:hover {
+            background: #3498db;
+            color: white;
+        }
+        [data-theme="dark"] .navbar a.nav-link--guide { border-color: #5fb8ff; color: #5fb8ff; }
+        [data-theme="dark"] .navbar a.nav-link--guide:hover { background: #5fb8ff; color: #1a232e; }
         .nav-nse-badge { display: none; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 6px; margin-left: 6px; border-radius: 10px; background: #16a085; color: white; font-size: 0.7rem; font-weight: 700; line-height: 1; vertical-align: middle; letter-spacing: -0.3px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
         .nav-nse-badge.show { display: inline-flex; }
         .navbar a.active .nav-nse-badge { background: white; color: #16a085; }
@@ -697,7 +709,7 @@
                 <span id="nav-nse-badge" class="nav-nse-badge" style="display:none;"></span>
             </a>
             <a href="#section-contexto" class="nav-link" title="Contexto Nacional"><i class="fas fa-globe-americas"></i><span class="nav-label"> Contexto</span></a>
-            <a href="transparencia.html" class="nav-link" title="Gu&iacute;a y FAQ: por qu&eacute; existe este dashboard"><i class="fas fa-circle-info"></i><span class="nav-label"> Gu&iacute;a</span></a>
+            <a href="transparencia.html" class="nav-link nav-link--guide" title="Gu&iacute;a y FAQ: por qu&eacute; existe este dashboard"><i class="fas fa-circle-info"></i><span class="nav-label"> Gu&iacute;a &amp; FAQ</span></a>
             <div class="navbar-search">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" id="search-input" placeholder="Buscar empresa, rol, sector..." autocomplete="off" />
