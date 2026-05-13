@@ -64,7 +64,8 @@
             .navbar-search { margin-left: 0.5rem; width: 100%; }
             .navbar-search input, .navbar-search input:focus { width: 100%; }
         }
-        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+        .kpi-section, .tabs-container, [id^="section-"] { scroll-margin-top: 90px; }
         @media (max-width: 768px) { .navbar a { padding: 0.5rem 0.7rem; font-size: 0.8rem; } }
         .sector-banner { display: flex; align-items: center; gap: 0.7rem; margin: 1.5rem 0 0.5rem; padding: 0.7rem 1rem; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
         .sector-banner__icon { font-size: 1.6rem; line-height: 1; }
@@ -73,7 +74,7 @@
         .sector-banner--privado { background: linear-gradient(90deg, #eaf3fb 0%, transparent 80%); border-left: 4px solid #3498db; }
         .sector-banner--publico { background: linear-gradient(90deg, #fdf6e3 0%, transparent 80%); border-left: 4px solid #f39c12; }
         .sector-banner--comparativa { background: linear-gradient(90deg, #f3eafa 0%, transparent 80%); border-left: 4px solid #9b59b6; }
-        .accordion-section { margin: 1rem 0; scroll-margin-top: 70px; }
+        .accordion-section { margin: 1rem 0; scroll-margin-top: 90px; }
         .accordion-header { cursor: pointer; user-select: none; transition: background 0.2s ease; }
         .accordion-header:hover { filter: brightness(0.97); }
         .accordion-chevron { margin-left: auto; font-size: 1.1rem; color: #5d6d7e; transition: transform 0.3s ease; flex-shrink: 0; padding-left: 0.5rem; }
@@ -228,9 +229,9 @@
                 </div>
                 <div class="header-right">
                     <div class="update-info">
-                        <div>📊 Actualizado: 28/03/2026</div>
-                        <div>📁 Fuente: salariosperu.com</div>
-                        <div>📈 2,068 registros | 416 empresas</div>
+                        <div>🏢 Privado: <strong>2,068 reg.</strong> · 416 empresas <span style="opacity:0.7;">(28/03/2026)</span></div>
+                        <div>🏛️ Público CAS: <strong>1,194 vac.</strong> <span style="opacity:0.7;">(actualizado diario)</span></div>
+                        <div>📚 Fuentes: salariosperu.com · convocatoriasdetrabajo.com · INEI ENAHO · APEIM</div>
                         <div id="visit-counter">👁️ Cargando visitas...</div>
                     </div>
                     <div class="support-buttons">
@@ -1103,10 +1104,14 @@ if(document.getElementById("chart-heatmap")){
             </div>
         </section>
 
-        <p style="text-align:center; font-size:0.78rem; color:#95a5a6; margin: 0.5rem 0 1.5rem;">
-            <i class="fas fa-info-circle"></i> Datos PEA: INEI - Encuesta Permanente de Empleo Nacional 2024 &middot;
-            Ingresos regionales: INEI ENAHO 2023, ingreso laboral mensual promedio &middot;
-            GeoJSON: <a href="https://github.com/juaneladio/peru-geojson" target="_blank" rel="noopener" style="color:#3498db;">juaneladio/peru-geojson</a>
+        <p style="text-align:center; font-size:0.78rem; color:#95a5a6; margin: 0.5rem 0 1.5rem; line-height: 1.7;">
+            <i class="fas fa-info-circle"></i> <strong>Fuentes:</strong><br>
+            <span style="color:#3498db;">Sector privado:</span> <a href="https://salariosperu.com" target="_blank" rel="noopener" style="color:#5fb8ff;">salariosperu.com</a> &middot; 2,068 registros &middot; ene-mar 2026 &middot;
+            <span style="color:#f39c12;">Sector p&uacute;blico:</span> <a href="https://www.convocatoriasdetrabajo.com/convocatorias-cas-vigentes.php" target="_blank" rel="noopener" style="color:#5fb8ff;">convocatoriasdetrabajo.com</a> &middot; 1,194 vacantes &middot; actualizado diario v&iacute;a GitHub Actions<br>
+            <span style="color:#16a085;">PEA &amp; PEA ocupada:</span> <a href="https://m.inei.gob.pe" target="_blank" rel="noopener" style="color:#5fb8ff;">INEI</a> Encuesta Permanente de Empleo 2024 &middot;
+            <span style="color:#16a085;">Ingresos regionales:</span> INEI <a href="https://m.inei.gob.pe" target="_blank" rel="noopener" style="color:#5fb8ff;">ENAHO 2023</a> ingreso laboral mensual promedio<br>
+            <span style="color:#9b59b6;">NSE A-E:</span> <a href="http://apeim.com.pe" target="_blank" rel="noopener" style="color:#5fb8ff;">APEIM 2024</a> Lima Metropolitana &middot;
+            <span style="color:#7f8c8d;">GeoJSON Per&uacute;:</span> <a href="https://github.com/juaneladio/peru-geojson" target="_blank" rel="noopener" style="color:#5fb8ff;">juaneladio/peru-geojson</a>
         </p>
 
         <script>
@@ -1301,22 +1306,25 @@ if(document.getElementById("chart-heatmap")){
         <div class="container">
             <p>
                 <i class="fas fa-database"></i>
-                Dashboard Análisis Salarial - Estudio de Sueldos Peru 2026
+                Dashboard Análisis Salarial Perú 2026
                 |
                 <a href="https://github.com/unimauro/salariosperu" target="_blank">
                     <i class="fab fa-github"></i> GitHub
-                </a>
-                |
-                <a href="https://salariosperu.com" target="_blank">
-                    Fuente: salariosperu.com
                 </a>
                 |
                 <a href="https://buymeacoffee.com/unimauro" target="_blank" style="color: #FFDD00;">
                     ☕ Buy me a coffee
                 </a>
             </p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">
-                Basado en 2,068 registros de sueldos reales de 416 empresas. Sin datos simulados.
+            <p style="margin-top: 0.7rem; font-size: 0.78rem; opacity: 0.75; line-height: 1.6;">
+                <strong>Fuentes:</strong>
+                <a href="https://salariosperu.com" target="_blank" style="color: #5fb8ff;">salariosperu.com</a> (2,068 reg. privado, 28/03/2026) ·
+                <a href="https://www.convocatoriasdetrabajo.com/convocatorias-cas-vigentes.php" target="_blank" style="color: #5fb8ff;">convocatoriasdetrabajo.com</a> (1,194 vac. CAS, actualizado diario por GitHub Actions) ·
+                <a href="https://www.inei.gob.pe" target="_blank" style="color: #5fb8ff;">INEI ENAHO 2023</a> (ingresos regionales) ·
+                <a href="http://apeim.com.pe" target="_blank" style="color: #5fb8ff;">APEIM 2024</a> (clasificación NSE)
+            </p>
+            <p style="margin-top: 0.4rem; font-size: 0.72rem; opacity: 0.55;">
+                Sin datos simulados · Salarios mensuales en soles peruanos (S/) · MIT License
             </p>
         </div>
     </footer>
@@ -1484,19 +1492,20 @@ if(document.getElementById("chart-heatmap")){
             opts = opts || {};
             const target = document.getElementById(accId);
             if (!target) return;
-            const group = target.dataset.accGroup;
             const isClosed = target.classList.contains('closed');
+            const group = target.dataset.accGroup;
 
-            // Always open the requested one (exclusive mode in group)
-            if (group && opts.exclusive !== false) {
-                document.querySelectorAll('.accordion-section[data-acc-group="' + group + '"]')
-                    .forEach(sec => { if (sec.id !== accId) sec.classList.add('closed'); });
+            if (isClosed) {
+                // Estaba cerrado → abrir este y cerrar los demás del grupo
+                if (group) {
+                    document.querySelectorAll('.accordion-section[data-acc-group="' + group + '"]')
+                        .forEach(sec => { if (sec !== target) sec.classList.add('closed'); });
+                }
                 target.classList.remove('closed');
+            } else if (opts.fromNav === true) {
+                // Click desde navbar y ya está abierto → no cerrar, solo dejar y scrollear
             } else {
-                target.classList.toggle('closed');
-            }
-            // If user clicked an already-open header, allow toggle-close (only if not from nav)
-            if (!isClosed && opts.fromNav !== true && opts.exclusive === false) {
+                // Estaba abierto y el usuario clickeó el header → cerrarlo
                 target.classList.add('closed');
             }
             setTimeout(resizeAllPlotlyGraphs, 450);
