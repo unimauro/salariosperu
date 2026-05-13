@@ -11,6 +11,9 @@
 *.sqlite
 *.sqlite3
 
+# Excepcion: data scrapeada que SI queremos versionar
+!cas_vigentes.csv
+
 # Archivos de texto con datos
 empresas_encontradas.txt
 scraping.log

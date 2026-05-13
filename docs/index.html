@@ -64,13 +64,20 @@
         }
         html { scroll-behavior: smooth; scroll-padding-top: 70px; }
         @media (max-width: 768px) { .navbar a { padding: 0.5rem 0.7rem; font-size: 0.8rem; } }
+        .sector-banner { display: flex; align-items: center; gap: 0.7rem; margin: 1.5rem 0 0.5rem; padding: 0.7rem 1rem; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+        .sector-banner__icon { font-size: 1.6rem; line-height: 1; }
+        .sector-banner__title { font-weight: 700; font-size: 1rem; color: #2c3e50; }
+        .sector-banner__subtitle { font-size: 0.82rem; color: #5d6d7e; margin-top: 0.1rem; }
+        .sector-banner--privado { background: linear-gradient(90deg, #eaf3fb 0%, transparent 80%); border-left: 4px solid #3498db; }
+        .sector-banner--publico { background: linear-gradient(90deg, #fdf6e3 0%, transparent 80%); border-left: 4px solid #f39c12; }
+        .sector-banner--comparativa { background: linear-gradient(90deg, #f3eafa 0%, transparent 80%); border-left: 4px solid #9b59b6; }
         .footer { background: #1a2332; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.85rem; }
         .footer a { color: #3498db; text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
 
         /* KPIs */
         .kpi-section { margin: 0 0 1.5rem 0; }
-        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 0; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 0; }
         .kpi-card-modern { background: white; border-radius: 10px; padding: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid; display: flex; align-items: center; gap: 0.8rem; transition: transform 0.2s ease, box-shadow 0.2s ease; border: 1px solid #e8ecf1; border-left-width: 4px; }
         .kpi-card-modern:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
         .kpi-card-modern.primary { border-left-color: #3498db; }
@@ -110,27 +117,50 @@
         .scroll-top.visible { display: flex; align-items: center; justify-content: center; }
 
         @media (max-width: 1024px) {
-            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .kpi-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
         }
         @media (max-width: 768px) {
             .header { position: static; }
             .container { padding: 0 12px; }
             .header-content { flex-direction: column; align-items: flex-start; }
-            .header-right { flex-direction: column; align-items: flex-start; width: 100%; }
-            .update-info { text-align: left; }
-            .yape-section { width: 100%; }
-            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-            .kpi-card-modern { padding: 0.8rem; }
-            .kpi-icon { font-size: 1.5rem; min-width: 35px; }
-            .kpi-value { font-size: 1.3rem; }
-            .kpi-title { font-size: 0.7rem; }
+            .header-right { flex-direction: row; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 0.5rem; }
+            .update-info { text-align: left; font-size: 0.72rem; }
+            .update-info > div:nth-child(2),
+            .update-info > div:nth-child(4) { display: none; }
+            .yape-section { width: auto; padding: 0.3rem 0.5rem; }
+            .yape-qr { width: 35px; height: 35px; }
+            .bmc-btn { padding: 6px 10px; font-size: 0.72rem; }
+            .bmc-btn img { height: 16px; width: 16px; }
+            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+            .kpi-card-modern { padding: 0.7rem; }
+            .kpi-icon { font-size: 1.4rem; min-width: 32px; }
+            .kpi-value { font-size: 1.2rem; }
+            .kpi-title { font-size: 0.68rem; }
+            .kpi-trend { font-size: 0.7rem; }
             .tabs-header { flex-wrap: nowrap; }
-            .tab-button { padding: 0.7rem 0.8rem; font-size: 0.8rem; min-width: 100px; }
-            .tabs-content { padding: 1rem; }
+            .tab-button { padding: 0.65rem 0.75rem; font-size: 0.78rem; min-width: 100px; }
+            .tab-button i { margin-right: 0.25rem; }
+            .tabs-content { padding: 0.85rem; }
+            .nav-label { display: none; }
+            .navbar a { padding: 0.55rem 0.7rem; }
+            .navbar a i { margin-right: 0; font-size: 1rem; }
+            .navbar-inner { padding: 0.45rem 0.6rem; gap: 0.15rem; }
+            .navbar-search { order: 100; width: 100%; margin-left: 0; margin-top: 0.4rem; }
+            .navbar-search input, .navbar-search input:focus { width: 100%; }
+            .sector-banner { margin: 1rem 0 0.4rem; padding: 0.55rem 0.75rem; }
+            .sector-banner__icon { font-size: 1.3rem; }
+            .sector-banner__title { font-size: 0.9rem; }
+            .sector-banner__subtitle { font-size: 0.72rem; }
+            .plotly-graph-div { min-height: 380px; }
         }
         @media (max-width: 480px) {
-            .kpi-grid { grid-template-columns: 1fr; }
-            .logo h1 { font-size: 1.2rem; }
+            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+            .kpi-card-modern { padding: 0.55rem; gap: 0.5rem; }
+            .kpi-value { font-size: 1.05rem; }
+            .kpi-title { font-size: 0.62rem; }
+            .logo h1 { font-size: 1.15rem; }
+            .logo-subtitle { font-size: 0.72rem; }
+            .tab-button { min-width: 80px; padding: 0.55rem 0.55rem; font-size: 0.72rem; }
         }
     </style>
 </head>
@@ -171,11 +201,11 @@
 
     <nav class="navbar" id="navbar">
         <div class="navbar-inner">
-            <a href="#kpis" class="nav-link"><i class="fas fa-tachometer-alt"></i> KPIs</a>
-            <a href="#section-general" class="nav-link"><i class="fas fa-chart-bar"></i> An&aacute;lisis General</a>
-            <a href="#section-complementario" class="nav-link"><i class="fas fa-search-dollar"></i> Complementario</a>
-            <a href="#section-detallado" class="nav-link"><i class="fas fa-chart-pie"></i> Por Sector</a>
-            <a href="#section-contexto" class="nav-link"><i class="fas fa-globe-americas"></i> Contexto Nacional</a>
+            <a href="#kpis" class="nav-link" title="KPIs"><i class="fas fa-tachometer-alt"></i><span class="nav-label"> KPIs</span></a>
+            <a href="#section-privado-banner" class="nav-link" title="Sector Privado"><i class="fas fa-building"></i><span class="nav-label"> Privado</span></a>
+            <a href="#section-publico" class="nav-link" title="Sector P&uacute;blico CAS"><i class="fas fa-landmark"></i><span class="nav-label"> P&uacute;blico</span></a>
+            <a href="#section-comparativa" class="nav-link" title="Comparativa P&uacute;blico vs Privado"><i class="fas fa-balance-scale"></i><span class="nav-label"> Comparativa</span></a>
+            <a href="#section-contexto" class="nav-link" title="Contexto Nacional"><i class="fas fa-globe-americas"></i><span class="nav-label"> Contexto</span></a>
             <div class="navbar-search">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" id="search-input" placeholder="Buscar empresa, rol, sector..." autocomplete="off" />
@@ -220,9 +250,42 @@
                         <div class="kpi-trend positive">1,192 con salario</div>
                     </div>
                 </div>
+                <div class="kpi-card-modern" style="border-left-color: #f39c12;">
+                    <div class="kpi-icon">🏛️</div>
+                    <div class="kpi-content">
+                        <div class="kpi-title">Vacantes CAS Activas</div>
+                        <div class="kpi-value">1,194</div>
+                        <div class="kpi-trend neutral">Sector p&uacute;blico, hoy</div>
+                    </div>
+                </div>
+                <div class="kpi-card-modern" style="border-left-color: #e74c3c;">
+                    <div class="kpi-icon">📉</div>
+                    <div class="kpi-content">
+                        <div class="kpi-title">Mediana CAS</div>
+                        <div class="kpi-value">S/ 3,270</div>
+                        <div class="kpi-trend negative">-42% vs privado</div>
+                    </div>
+                </div>
+                <div class="kpi-card-modern" style="border-left-color: #2c3e50;">
+                    <div class="kpi-icon">🌎</div>
+                    <div class="kpi-content">
+                        <div class="kpi-title">Mediana Nacional</div>
+                        <div class="kpi-value">S/ 1,837</div>
+                        <div class="kpi-trend neutral">ENAHO 2023 INEI</div>
+                    </div>
+                </div>
             </div>
         </section>
 
+
+        <!-- Banner sector PRIVADO -->
+        <div id="section-privado-banner" class="sector-banner sector-banner--privado">
+            <span class="sector-banner__icon">&#127970;</span>
+            <div>
+                <div class="sector-banner__title">Sector PRIVADO</div>
+                <div class="sector-banner__subtitle">2,068 registros de 416 empresas formales &middot; fuente: salariosperu.com</div>
+            </div>
+        </div>
 
         <!-- Analisis General -->
         <section class="tabs-container" id="section-general" style="margin-bottom: 1.5rem;">
@@ -511,6 +574,146 @@ if(document.getElementById("chart-heatmap")){
                 </div>
             </div>
         </section>
+
+
+        <!-- Banner sector PUBLICO -->
+        <div id="section-publico" class="sector-banner sector-banner--publico">
+            <span class="sector-banner__icon">&#127963;&#65039;</span>
+            <div>
+                <div class="sector-banner__title">Sector P&Uacute;BLICO (CAS)</div>
+                <div class="sector-banner__subtitle">1,194 convocatorias CAS vigentes &middot; fuente: convocatoriasdetrabajo.com</div>
+            </div>
+        </div>
+
+        <section class="tabs-container" style="margin-bottom: 1.5rem;">
+            <div class="tabs-header">
+                <button class="tab-button active" onclick="showTab('cas-distribucion')">
+                    <i class="fas fa-chart-area"></i> Distribuci&oacute;n
+                </button>
+                <button class="tab-button" onclick="showTab('cas-roles')">
+                    <i class="fas fa-user-tie"></i> Por Rol
+                </button>
+                <button class="tab-button" onclick="showTab('cas-mapa')">
+                    <i class="fas fa-map-marked-alt"></i> Mapa Regional
+                </button>
+                <button class="tab-button" onclick="showTab('cas-instituciones')">
+                    <i class="fas fa-landmark"></i> Top Instituciones
+                </button>
+            </div>
+
+            <div class="tabs-content">
+                <div id="cas-distribucion-tab" class="tab-content active">
+                    <h3 class="chart-title"><i class="fas fa-chart-area"></i> Distribuci&oacute;n Salarial Sector P&uacute;blico</h3>
+                    <p class="chart-description">Histograma de salarios CAS. La mediana es S/ 3,270, muy por debajo del sector privado (S/ 5,600).</p>
+                    <div id="chart-cas-distribucion" class="plotly-graph-div" style="width:100%;"></div>
+<script>if(document.getElementById("chart-cas-distribucion")){Plotly.newPlot("chart-cas-distribucion",[{"type": "histogram", "x": [5500.0, 3000.0, 3000.0, 4500.0, 4500.0, 3270.0, 2700.0, 2700.0, 2400.0, 2400.0, 3270.0, 2400.0, 3000.0, 2400.0, 2400.0, 1600.0, 2699.0, 2699.0, 2699.0, 2699.0, 2226.0, 4675.0, 2221.0, 2996.0, 4675.0, 4675.0, 5959.0, 4675.0, 7935.0, 2699.0, 2699.0, 2699.0, 5663.0, 4500.0, 5663.0, 2699.0, 5663.0, 5663.0, 5663.0, 5663.0, 5663.0, 5663.0, 7935.0, 5663.0, 7935.0, 7935.0, 7935.0, 1500.0, 1500.0, 1800.0, 1700.0, 1283.0, 2258.0, 1458.0, 1708.0, 2258.0, 3200.0, 2000.0, 1500.0, 3000.0, 2500.0, 5364.0, 4864.0, 1714.0, 3165.0, 3000.0, 5364.0, 3500.0, 4000.0, 4000.0, 4735.0, 5435.0, 4435.0, 2435.0, 4235.0, 1200.0, 2100.0, 3600.0, 9000.0, 3100.0, 5000.0, 4000.0, 4000.0, 2500.0, 5000.0, 5000.0, 5000.0, 4000.0, 4000.0, 4364.0, 4364.0, 2864.0, 2864.0, 1964.0, 4764.0, 2514.0, 2514.0, 2464.0, 2514.0, 1389.0, 1464.0, 3264.0, 2864.0, 3800.0, 3264.0, 5564.0, 3100.0, 7400.0, 2864.0, 8500.0, 4000.0, 2000.0, 4000.0, 6000.0, 4364.0, 5364.0, 2865.0, 3165.0, 3364.0, 3064.0, 2964.0, 1900.0, 3064.0, 2800.0, 9000.0, 9000.0, 1514.0, 1714.0, 2864.0, 3465.0, 2864.0, 3564.0, 1700.0, 2500.0, 1700.0, 2500.0, 2500.0, 2500.0, 8364.0, 10364.0, 4864.0, 7364.0, 2364.0, 2364.0, 4000.0, 4500.0, 4500.0, 4500.0, 4500.0, 2400.0, 1800.0, 3000.0, 3864.0, 2864.0, 1514.0, 2000.0, 1600.0, 1500.0, 3200.0, 3000.0, 2500.0, 2700.0, 2500.0, 2000.0, 2475.0, 2464.0, 2164.0, 1389.0, 3629.0, 3629.0, 3629.0, 3629.0, 3629.0, 3629.0, 3500.0, 2500.0, 2200.0, 6000.0, 8585.0, 1800.0, 1800.0, 1800.0, 1800.0, 1800.0, 2900.0, 2900.0, 2900.0, 2900.0, 5200.0, 5200.0, 5200.0, 5200.0, 5200.0, 1800.0, 1514.0, 1714.0, 2865.0, 1514.0, 1714.0, 1800.0, 3364.0, 3500.0, 5364.0, 3864.0, 3864.0, 3864.0, 2014.0, 2750.0, 2800.0, 3300.0, 3800.0, 5500.0, 6000.0, 8500.0, 3500.0, 1714.0, 8000.0, 4000.0, 3000.0, 3500.0, 3000.0, 5000.0, 2500.0, 3500.0, 1600.0, 4000.0, 4000.0, 3064.0, 7364.0, 8000.0, 6000.0, 2464.0, 4364.0, 1800.0, 2800.0, 5500.0, 6500.0, 1350.0, 1350.0, 1350.0, 1350.0, 1400.0, 1400.0, 1350.0, 1950.0, 1800.0, 2000.0, 2150.0, 1350.0, 1350.0, 1350.0, 1350.0, 1350.0, 1400.0, 1850.0, 1700.0, 1350.0, 1400.0, 1850.0, 1350.0, 1400.0, 1350.0, 1900.0, 1350.0, 1800.0, 1550.0, 2150.0, 1350.0, 2350.0, 1700.0, 1500.0, 1600.0, 1350.0, 1600.0, 1350.0, 1350.0, 2350.0, 1350.0, 1850.0, 1850.0, 1750.0, 2000.0, 1800.0, 2000.0, 3000.0, 1514.0, 3500.0, 4864.0, 1800.0, 10364.0, 8364.0, 3264.0, 3064.0, 1714.0, 3800.0, 2000.0, 2864.0, 2203.0, 5500.0, 5500.0, 5000.0, 4500.0, 3500.0, 3800.0, 5500.0, 1514.0, 2300.0, 1400.0, 1500.0, 2000.0, 4800.0, 2000.0, 3000.0, 3464.0, 3464.0, 3464.0, 3464.0, 3064.0, 3564.0, 3164.0, 3564.0, 4364.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3164.0, 3164.0, 7500.0, 4000.0, 2000.0, 2000.0, 5000.0, 6000.0, 3500.0, 3000.0, 4000.0, 8000.0, 6000.0, 4000.0, 2500.0, 4500.0, 3000.0, 2000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 3000.0, 2500.0, 4000.0, 3000.0, 2000.0, 2950.0, 3500.0, 2950.0, 2500.0, 2750.0, 3967.0, 2300.0, 3200.0, 3200.0, 3200.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 7300.0, 4000.0, 9000.0, 1100.0, 2000.0, 4064.0, 5564.0, 2483.0, 3350.0, 5000.0, 1714.0, 10000.0, 7000.0, 1514.0, 3165.0, 4965.0, 4000.0, 3200.0, 3964.0, 8250.0, 8250.0, 1714.0, 2212.0, 1950.0, 2500.0, 3722.0, 6010.0, 2972.0, 2064.0, 2364.0, 1300.0, 3464.0, 2064.0, 3464.0, 2364.0, 3464.0, 2364.0, 6700.0, 2364.0, 4750.0, 2572.0, 1520.0, 3590.0, 4500.0, 2772.0, 2572.0, 2242.0, 1300.0, 2120.0, 3470.0, 3850.0, 2972.0, 3722.0, 2972.0, 1300.0, 2572.0, 3722.0, 2900.0, 2572.0, 2972.0, 1300.0, 2772.0, 3722.0, 3722.0, 4750.0, 4750.0, 1300.0, 1300.0, 1300.0, 1750.0, 5364.0, 1950.0, 1950.0, 6931.0, 4750.0, 8721.0, 8721.0, 8721.0, 3722.0, 2700.0, 3700.0, 1500.0, 3700.0, 3700.0, 3700.0, 3700.0, 1700.0, 3700.0, 2700.0, 3700.0, 3700.0, 2700.0, 1500.0, 2126.0, 2500.0, 3700.0, 2700.0, 2900.0, 3700.0, 2900.0, 1500.0, 1700.0, 2700.0, 2700.0, 2050.0, 3700.0, 2700.0, 3700.0, 3700.0, 2050.0, 3700.0, 6000.0, 6364.0, 4000.0, 1564.0, 5564.0, 3264.0, 2164.0, 2514.0, 2164.0, 3964.0, 7664.0, 3264.0, 6364.0, 2164.0, 3929.0, 7664.0, 3064.0, 3164.0, 2864.0, 1714.0, 1764.0, 2564.0, 4954.0, 3164.0, 1514.0, 7714.0, 10364.0, 3364.0, 3364.0, 1389.0, 2664.0, 2664.0, 3264.0, 5564.0, 5564.0, 6000.0, 2700.0, 8500.0, 12364.0, 1514.0, 1714.0, 5000.0, 3364.0, 3364.0, 3500.0, 5500.0, 7364.0, 5364.0, 2000.0, 3200.0, 6500.0, 5000.0, 5000.0, 2200.0, 1600.0, 2500.0, 5000.0, 6000.0, 2500.0, 2500.0, 2600.0, 2500.0, 3100.0, 3000.0, 4000.0, 5000.0, 6000.0, 6000.0, 6000.0, 7000.0, 7000.0, 2000.0, 7000.0, 7000.0, 2000.0, 7000.0, 7000.0, 1500.0, 8000.0, 1500.0, 3100.0, 4000.0, 5000.0, 7100.0, 3164.0, 3964.0, 3164.0, 7864.0, 1864.0, 4364.0, 10000.0, 8000.0, 2890.0, 2890.0, 2890.0, 1564.0, 2864.0, 1564.0, 12364.0, 12364.0, 5257.0, 3185.0, 3185.0, 3185.0, 6049.0, 6049.0, 6049.0, 5257.0, 6049.0, 7799.0, 9013.0, 2400.0, 2600.0, 2700.0, 2200.0, 7000.0, 7300.0, 1800.0, 4000.0, 4000.0, 2500.0, 4900.0, 6000.0, 2150.0, 3500.0, 4500.0, 3600.0, 7000.0, 2400.0, 3000.0, 8000.0, 2800.0, 2000.0, 2000.0, 2000.0, 2300.0, 2000.0, 2000.0, 2000.0, 2000.0, 2300.0, 2000.0, 2500.0, 2500.0, 2500.0, 2500.0, 2500.0, 1389.0, 5664.0, 2364.0, 1389.0, 1389.0, 1389.0, 1389.0, 1864.0, 1389.0, 1864.0, 1389.0, 1864.0, 3264.0, 2114.0, 4764.0, 1864.0, 2064.0, 10000.0, 1514.0, 6000.0, 3000.0, 6000.0, 11500.0, 4000.0, 3200.0, 2364.0, 2364.0, 2964.0, 1864.0, 6364.0, 12364.0, 1864.0, 5364.0, 6664.0, 2364.0, 2000.0, 5864.0, 8000.0, 4364.0, 10000.0, 1864.0, 10000.0, 4000.0, 8364.0, 4864.0, 4364.0, 4250.0, 6000.0, 2000.0, 7000.0, 5564.0, 1764.0, 2364.0, 1564.0, 2164.0, 3928.0, 2864.0, 3864.0, 3864.0, 3864.0, 2514.0, 3864.0, 3929.0, 5564.0, 2164.0, 3264.0, 2404.0, 3864.0, 3864.0, 2514.0, 3264.0, 2014.0, 2364.0, 3364.0, 2404.0, 2404.0, 3264.0, 2514.0, 3264.0, 3364.0, 3364.0, 5864.0, 7364.0, 1864.0, 4364.0, 2364.0, 1564.0, 2564.0, 4864.0, 6364.0, 3364.0, 4364.0, 3564.0, 2264.0, 6364.0, 2364.0, 2264.0, 5364.0, 2164.0, 4364.0, 2564.0, 5864.0, 5864.0, 1864.0, 2364.0, 5364.0, 2864.0, 1864.0, 6364.0, 8364.0, 6364.0, 8364.0, 9364.0, 2564.0, 2164.0, 3264.0, 3264.0, 2864.0, 13000.0, 2000.0, 4000.0, 2164.0, 2164.0, 2164.0, 3964.0, 3264.0, 2164.0, 1864.0, 10300.0, 2000.0, 3135.0, 3135.0, 3135.0, 3000.0, 3000.0, 3000.0, 5500.0, 3164.0, 1514.0, 4000.0, 4000.0, 5000.0, 4000.0, 7364.0, 3364.0, 2864.0, 6364.0, 1700.0, 7364.0, 1500.0, 2864.0, 1500.0, 6364.0, 2064.0, 2800.0, 3864.0, 3864.0, 2500.0, 3864.0, 3500.0, 2164.0, 3500.0, 3500.0, 3864.0, 3500.0, 8364.0, 3500.0, 7364.0, 7364.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 2464.0, 3764.0, 3764.0, 3764.0, 3764.0, 3764.0, 3764.0, 3764.0, 6264.0, 6364.0, 6364.0, 6364.0, 6364.0, 6364.0, 6364.0, 6364.0, 6364.0, 7764.0, 3664.0, 3664.0, 3664.0, 3664.0, 3664.0, 3664.0, 3764.0, 2500.0, 4000.0, 1389.0, 1864.0, 2114.0, 2764.0, 1389.0, 1864.0, 2164.0, 2164.0, 1389.0, 3864.0, 2864.0, 3164.0, 2864.0, 3164.0, 3164.0, 4864.0, 3164.0, 2364.0, 2364.0, 3364.0, 3264.0, 3264.0, 2364.0, 2364.0, 2364.0, 2364.0, 3264.0, 3064.0, 3064.0, 3264.0, 3264.0, 3929.0, 3264.0, 3264.0, 2164.0, 2364.0, 2364.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 7664.0, 5564.0, 5564.0, 5564.0, 5564.0, 7664.0, 5564.0, 5564.0, 5564.0, 3365.0, 1514.0, 7000.0, 11000.0, 2500.0, 7500.0, 1800.0, 1700.0, 1700.0, 1700.0, 2000.0, 2000.0, 2000.0, 2000.0, 2000.0, 2300.0, 2300.0, 2300.0, 2300.0, 2300.0, 2300.0, 2300.0, 2300.0, 2300.0, 2300.0, 2500.0, 2300.0, 2000.0, 4200.0, 2500.0, 3000.0, 3000.0, 2800.0, 3500.0, 6000.0, 3500.0, 5000.0, 4564.0, 4500.0, 12364.0, 3000.0, 5000.0, 6500.0, 4500.0, 10000.0, 4000.0, 8000.0, 8000.0, 10000.0, 14500.0, 12000.0, 12000.0, 7000.0, 7000.0, 8000.0, 8500.0, 3000.0, 12764.0, 1514.0, 1514.0, 1714.0, 1514.0, 2000.0, 1800.0, 1800.0, 3300.0, 3500.0, 3300.0, 3300.0, 3300.0, 3300.0, 5200.0, 5200.0, 3300.0, 3300.0, 1800.0, 2000.0, 2000.0, 2000.0, 2800.0, 3564.0, 2865.0, 2814.0, 3364.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 1494.0, 3364.0, 3364.0, 1664.0, 1664.0, 3164.0, 3164.0, 3164.0, 3564.0, 3564.0, 4364.0, 6364.0, 6364.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3564.0, 3364.0, 3164.0, 2364.0, 3164.0, 3564.0, 4871.0, 4100.0, 4935.0, 3564.0, 3564.0, 3000.0, 5000.0, 7735.0, 3000.0, 1864.0, 1864.0, 2064.0, 2050.0, 2864.0, 2064.0, 2750.0, 3250.0, 2750.0, 2364.0, 4250.0, 3750.0, 2750.0, 2000.0, 2050.0, 2050.0, 2050.0, 2750.0, 3250.0, 5822.0, 3150.0, 4750.0, 5800.0, 6010.0, 10200.0, 4500.0, 2972.0, 4000.0, 4000.0, 2972.0, 2972.0, 1300.0, 2197.0, 3722.0, 3000.0, 2500.0, 2600.0, 3000.0, 3100.0, 4000.0, 4500.0, 4000.0, 3500.0, 4100.0, 5000.0, 5000.0, 5000.0, 5100.0, 5000.0, 6000.0, 6000.0, 6000.0, 6000.0, 7000.0, 7000.0, 2964.0, 7000.0, 7000.0, 7000.0, 8000.0, 8000.0, 8000.0, 9000.0, 9000.0, 4100.0, 3000.0, 3000.0, 5000.0, 3000.0, 3000.0, 5000.0, 6000.0, 5000.0, 5000.0, 6000.0, 2500.0, 2500.0, 2000.0, 2296.0, 5296.0, 4596.0, 2046.0, 2296.0, 2296.0, 2296.0, 2296.0, 2296.0, 2296.0, 2796.0, 6296.0, 6296.0, 6296.0, 6296.0, 6296.0, 6296.0, 6796.0, 4596.0, 6796.0, 2046.0, 6796.0, 4596.0, 6796.0, 2046.0, 4596.0, 2296.0, 2296.0, 5296.0, 8259.0, 8259.0, 5296.0, 5296.0, 2296.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 5296.0, 8259.0, 8457.0, 8259.0, 8457.0, 2296.0, 8259.0, 5296.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 8259.0, 2296.0, 5296.0, 2296.0, 5296.0, 5296.0, 5296.0, 8259.0, 8259.0, 8259.0, 5296.0, 5296.0, 2296.0, 1700.0], "nbinsx": 30, "marker": {"color": "rgba(243,156,18,0.7)", "line": {"color": "rgba(243,156,18,1)", "width": 1}}, "hovertemplate": "Rango: S/ %{x:,.0f}<br>Puestos: %{y}<extra></extra>"}],{"title": {"text": "Distribuci&oacute;n Salarial Sector P&uacute;blico (CAS)<br><sub>1,193 convocatorias con salario reportado</sub>", "x": 0.5}, "xaxis": {"title": "Salario Mensual (S/)", "tickformat": ",.0f", "gridcolor": "#f0f0f0"}, "yaxis": {"title": "Cantidad de Convocatorias", "gridcolor": "#f0f0f0"}, "paper_bgcolor": "white", "plot_bgcolor": "white", "height": 450, "margin": {"l": 60, "r": 30, "t": 70, "b": 50}, "shapes": [{"type": "line", "x0": 3270.0, "x1": 3270.0, "y0": 0, "y1": 1, "yref": "paper", "line": {"color": "#e74c3c", "width": 2, "dash": "dash"}}, {"type": "line", "x0": 3991.224643755239, "x1": 3991.224643755239, "y0": 0, "y1": 1, "yref": "paper", "line": {"color": "#9b59b6", "width": 2, "dash": "dash"}}], "annotations": [{"x": 3270.0, "y": 1, "yref": "paper", "text": "Mediana: S/ 3,270", "showarrow": false, "font": {"color": "#e74c3c", "size": 11}, "yshift": 10}, {"x": 3991.224643755239, "y": 0.92, "yref": "paper", "text": "Promedio: S/ 3,991", "showarrow": false, "font": {"color": "#9b59b6", "size": 11}, "yshift": 10}]},{"responsive": true, "displaylogo": false, "modeBarButtonsToRemove": ["lasso2d", "select2d"]});}</script>
+                </div>
+                <div id="cas-roles-tab" class="tab-content">
+                    <h3 class="chart-title"><i class="fas fa-user-tie"></i> Salario CAS por Tipo de Rol</h3>
+                    <p class="chart-description">17 categor&iacute;as de rol con al menos 5 convocatorias. Especialistas e ingenieros lideran; choferes y auxiliares al fondo.</p>
+                    <div id="chart-cas-roles" class="plotly-graph-div" style="width:100%;"></div>
+<script>if(document.getElementById("chart-cas-roles")){Plotly.newPlot("chart-cas-roles",[{"type": "bar", "orientation": "h", "y": ["Secretario", "Chofer", "Auxiliar", "T\u00e9cnico", "Operador", "Asistente", "Enfermero", "Gerente", "Jefe", "Psic\u00f3logo", "Abogado", "Profesional", "Analista", "Coordinador", "Ingeniero", "Especialista", "M\u00e9dico"], "x": [1700, 2064, 2114, 2296, 2600, 3000, 3264, 3400, 3500, 3864, 3900, 4000, 4435, 5364, 5648, 6000, 7300], "text": ["S/ 1,700 (n=15)", "S/ 2,064 (n=18)", "S/ 2,114 (n=38)", "S/ 2,296 (n=136)", "S/ 2,600 (n=9)", "S/ 3,000 (n=176)", "S/ 3,264 (n=77)", "S/ 3,400 (n=8)", "S/ 3,500 (n=25)", "S/ 3,864 (n=16)", "S/ 3,900 (n=18)", "S/ 4,000 (n=35)", "S/ 4,435 (n=61)", "S/ 5,364 (n=49)", "S/ 5,648 (n=14)", "S/ 6,000 (n=276)", "S/ 7,300 (n=135)"], "textposition": "auto", "marker": {"color": [1700, 2064, 2114, 2296, 2600, 3000, 3264, 3400, 3500, 3864, 3900, 4000, 4435, 5364, 5648, 6000, 7300], "colorscale": [[0, "#e74c3c"], [0.5, "#f39c12"], [1, "#27ae60"]], "showscale": false, "line": {"width": 0}}, "customdata": [[2206, 1458, 5864], [2424, 1389, 4564], [2144, 1389, 3150], [2484, 1100, 10000], [2551, 1200, 3364], [2959, 1350, 7664], [3138, 1100, 5663], [3596, 2100, 5500], [3844, 2150, 8500], [3988, 2864, 6049], [4419, 1964, 12764], [3926, 2000, 7935], [4704, 1950, 8500], [5938, 1714, 14500], [4881, 2296, 7000], [5830, 1550, 10364], [6973, 2200, 9000]], "hovertemplate": "<b>%{y}</b><br>Mediana: S/ %{x:,.0f}<br>Promedio: S/ %{customdata[0]:,.0f}<br>Min: S/ %{customdata[1]:,.0f}  Max: S/ %{customdata[2]:,.0f}<extra></extra>"}],{"title": {"text": "Sector P&uacute;blico: Salario Mediana por Tipo de Rol<br><sub>1,194 convocatorias CAS vigentes &middot; min. 5 convocatorias por rol</sub>", "x": 0.5}, "xaxis": {"title": "Salario Mediana (S/)", "tickformat": ",.0f", "gridcolor": "#f0f0f0"}, "yaxis": {"automargin": true}, "paper_bgcolor": "white", "plot_bgcolor": "white", "height": 550, "margin": {"l": 140, "r": 30, "t": 80, "b": 50}, "showlegend": false},{"responsive": true, "displaylogo": false, "modeBarButtonsToRemove": ["lasso2d", "select2d"]});}</script>
+                </div>
+                <div id="cas-mapa-tab" class="tab-content">
+                    <h3 class="chart-title"><i class="fas fa-map-marked-alt"></i> Convocatorias CAS por Departamento</h3>
+                    <p class="chart-description">D&oacute;nde est&aacute; el empleo p&uacute;blico activo hoy. Lima concentra ~28%, pero el resto del pa&iacute;s tiene presencia real (a diferencia del sector privado).</p>
+                    <div id="chart-cas-mapa" class="plotly-graph-div" style="height:600px; width:100%;"></div>
+                </div>
+                <div id="cas-instituciones-tab" class="tab-content">
+                    <h3 class="chart-title"><i class="fas fa-landmark"></i> Top Instituciones P&uacute;blicas</h3>
+                    <p class="chart-description">Las 20 instituciones con m&aacute;s vacantes CAS activas: hospitales regionales, ministerios y municipalidades lideran.</p>
+                    <div id="chart-cas-instituciones" class="plotly-graph-div" style="width:100%;"></div>
+<script>if(document.getElementById("chart-cas-instituciones")){Plotly.newPlot("chart-cas-instituciones",[{"type": "bar", "orientation": "h", "y": ["PEIP ESCUELAS BICENTENARIO", "MUNICIPALIDAD PROVINCIAL DE ANTA", "RED DE SALUD TACNA", "UNIVERSIDAD DE HUANCAVELICA", "INABIF", "MIGRACIONES", "HOSPITAL DOCENTE DE CAJAMARCA", "GERENCIA DE SALUD LORETO", "MINISTERIO DE CULTURA", "RED DE SALUD VALLE DEL MANTARO", "RED DE SALUD CA\u00d1ETE YAUYOS", "UNIVERSIDAD NACIONAL DE JULIACA(UNAJ)", "UNIVERSIDAD TECNOL\u00d3GICA DE FRONTERA", "HOSPITAL ANDAHUAYLAS", "MUNICIPALIDAD DE LAMPA", "GOBIERNO REGIONAL LIBERTAD", "MINISTERIO P\u00daBLICO - FISCAL\u00cdA", "INPE", "PODER JUDICIAL", "HOSPITAL DE SULLANA"], "x": [16, 16, 18, 19, 20, 20, 26, 26, 29, 29, 30, 31, 32, 42, 45, 49, 56, 58, 62, 77], "text": ["16 convocatorias &middot; S/ 8,750", "16 convocatorias &middot; S/ 2,850", "18 convocatorias &middot; S/ 3,300", "19 convocatorias &middot; S/ 2,364", "20 convocatorias &middot; S/ 2,350", "20 convocatorias &middot; S/ 3,000", "26 convocatorias &middot; S/ 7,300", "26 convocatorias &middot; S/ 3,564", "29 convocatorias &middot; S/ 3,364", "29 convocatorias &middot; S/ 3,264", "30 convocatorias &middot; S/ 5,169", "31 convocatorias &middot; S/ 2,300", "32 convocatorias &middot; S/ 2,800", "42 convocatorias &middot; S/ 5,564", "45 convocatorias &middot; S/ 1,400", "49 convocatorias &middot; S/ 6,000", "56 convocatorias &middot; S/ 3,564", "58 convocatorias &middot; S/ 3,764", "62 convocatorias &middot; S/ 2,972", "77 convocatorias &middot; S/ 6,296"], "textposition": "auto", "marker": {"color": "#f39c12", "line": {"width": 0}}, "hovertemplate": "<b>%{y}</b><br>Convocatorias: %{x}<extra></extra>"}],{"title": {"text": "Top 20 Instituciones P&uacute;blicas con M&aacute;s Convocatorias CAS<br><sub>Vigentes a hoy &middot; ordenadas por volumen</sub>", "x": 0.5}, "xaxis": {"title": "Convocatorias Activas", "gridcolor": "#f0f0f0"}, "yaxis": {"automargin": true}, "paper_bgcolor": "white", "plot_bgcolor": "white", "height": 700, "margin": {"l": 280, "r": 30, "t": 80, "b": 50}, "showlegend": false},{"responsive": true, "displaylogo": false, "modeBarButtonsToRemove": ["lasso2d", "select2d"]});}</script>
+                </div>
+            </div>
+        </section>
+
+        <!-- Banner COMPARATIVA -->
+        <div id="section-comparativa" class="sector-banner sector-banner--comparativa">
+            <span class="sector-banner__icon">&#9878;&#65039;</span>
+            <div>
+                <div class="sector-banner__title">Comparativa P&uacute;blico vs Privado</div>
+                <div class="sector-banner__subtitle">Lo que nadie te cuenta: d&oacute;nde paga m&aacute;s cada sector y por qu&eacute;</div>
+            </div>
+        </div>
+
+        <section class="tabs-container" style="margin-bottom: 1.5rem;">
+            <div class="tabs-header">
+                <button class="tab-button active" onclick="showTab('comp-salarios')">
+                    <i class="fas fa-balance-scale-right"></i> Salarios por Rol
+                </button>
+                <button class="tab-button" onclick="showTab('comp-cobertura')">
+                    <i class="fas fa-map"></i> Cobertura Regional
+                </button>
+            </div>
+
+            <div class="tabs-content">
+                <div id="comp-salarios-tab" class="tab-content active">
+                    <h3 class="chart-title"><i class="fas fa-balance-scale-right"></i> P&uacute;blico vs Privado: Salario por Rol</h3>
+                    <p class="chart-description">El sector p&uacute;blico paga m&aacute;s en niveles bajos (Asistente, Analista) y mucho menos arriba (Gerente). Hay un techo claro en el Estado: max CAS S/14,500 vs max privado S/191,399.</p>
+                    <div id="chart-comp-salarios" class="plotly-graph-div" style="width:100%;"></div>
+<script>if(document.getElementById("chart-comp-salarios")){Plotly.newPlot("chart-comp-salarios",[{"type": "bar", "name": "Privado", "x": ["Gerente/Manager", "Especialista/Senior", "Coordinador", "Analista", "Asistente", "T\u00e9cnico", "Auxiliar"], "y": [10220, 6150, 7250, 4000, 2100, 0, 0], "marker": {"color": "#3498db"}, "text": ["S/ 10,220", "S/ 6,150", "S/ 7,250", "S/ 4,000", "S/ 2,100", "sin dato", "sin dato"], "textposition": "outside"}, {"type": "bar", "name": "P&uacute;blico (CAS)", "x": ["Gerente/Manager", "Especialista/Senior", "Coordinador", "Analista", "Asistente", "T\u00e9cnico", "Auxiliar"], "y": [3500, 6000, 5364, 4435, 3000, 2464, 2114], "marker": {"color": "#f39c12"}, "text": ["S/ 3,500", "S/ 6,000", "S/ 5,364", "S/ 4,435", "S/ 3,000", "S/ 2,464", "S/ 2,114"], "textposition": "outside"}],{"title": {"text": "Comparativa Salarial: Sector P&uacute;blico vs Privado por Rol<br><sub>Mediana mensual (S/) &middot; barras al lado = mismo rol</sub>", "x": 0.5}, "barmode": "group", "xaxis": {"title": "", "tickangle": -15}, "yaxis": {"title": "Mediana Salarial (S/)", "tickformat": ",.0f", "gridcolor": "#f0f0f0"}, "paper_bgcolor": "white", "plot_bgcolor": "white", "height": 500, "margin": {"l": 70, "r": 30, "t": 80, "b": 80}, "legend": {"orientation": "h", "yanchor": "bottom", "y": 1.02, "xanchor": "right", "x": 1}},{"responsive": true, "displaylogo": false, "modeBarButtonsToRemove": ["lasso2d", "select2d"]});}</script>
+                </div>
+                <div id="comp-cobertura-tab" class="tab-content">
+                    <h3 class="chart-title"><i class="fas fa-map"></i> D&oacute;nde Est&aacute;n las Oportunidades</h3>
+                    <p class="chart-description">El sector privado est&aacute; concentrado en Lima; el p&uacute;blico se distribuye. Top 10 departamentos por convocatorias CAS comparado con registros privados.</p>
+                    <div id="chart-comp-cobertura" class="plotly-graph-div" style="width:100%;"></div>
+<script>if(document.getElementById("chart-comp-cobertura")){Plotly.newPlot("chart-comp-cobertura",[{"type": "bar", "name": "Convocatorias CAS (p&uacute;blico)", "x": ["Lima", "Piura", "Puno", "La Libertad", "Cajamarca", "Apurimac", "Cusco", "Tacna", "Loreto", "Junin"], "y": [351, 101, 81, 80, 76, 61, 53, 50, 47, 45], "marker": {"color": "#f39c12"}}, {"type": "bar", "name": "Registros privado (estimado)", "x": ["Lima", "Piura", "Puno", "La Libertad", "Cajamarca", "Apurimac", "Cusco", "Tacna", "Loreto", "Junin"], "y": [1900, 15, 5, 20, 5, 5, 10, 5, 5, 5], "marker": {"color": "#3498db"}}],{"title": {"text": "Cobertura Regional: D&oacute;nde Est&aacute; el Empleo Reportado<br><sub>Top 10 departamentos por convocatorias CAS &middot; comparado con concentraci&oacute;n privado</sub>", "x": 0.5}, "barmode": "group", "yaxis": {"title": "Cantidad", "gridcolor": "#f0f0f0"}, "xaxis": {"tickangle": -25}, "paper_bgcolor": "white", "plot_bgcolor": "white", "height": 450, "margin": {"l": 60, "r": 30, "t": 80, "b": 80}, "legend": {"orientation": "h", "yanchor": "bottom", "y": 1.02, "xanchor": "right", "x": 1}},{"responsive": true, "displaylogo": false, "modeBarButtonsToRemove": ["lasso2d", "select2d"]});}</script>
+                </div>
+            </div>
+        </section>
+
+        <!-- Script para mapa CAS (necesita fetch del geojson) -->
+        <script>
+        (function(){
+            const CAS_LOCS = ["LIMA", "PIURA", "PUNO", "LA LIBERTAD", "CAJAMARCA", "APURIMAC", "CUSCO", "TACNA", "LORETO", "JUNIN", "AREQUIPA", "AYACUCHO", "HUANCAVELICA", "HUANUCO", "ANCASH", "SAN MARTIN", "UCAYALI", "MADRE DE DIOS", "LIMA", "ICA", "LAMBAYEQUE", "PASCO", "MOQUEGUA", "TUMBES", "AMAZONAS"];
+            const CAS_Z = [351, 101, 81, 80, 76, 61, 53, 50, 47, 45, 26, 26, 26, 24, 22, 22, 19, 19, 14, 12, 11, 10, 8, 7, 3];
+            const CAS_TEXT = ["Lima", "Piura", "Puno", "La Libertad", "Cajamarca", "Apurimac", "Cusco", "Tacna", "Loreto", "Junin", "Arequipa", "Ayacucho", "Huancavelica", "Huanuco", "Ancash", "San Martin", "Ucayali", "Madre De Dios", "Callao", "Ica", "Lambayeque", "Pasco", "Moquegua", "Tumbes", "Amazonas"];
+            const CAS_CUSTOM = [4000, 5296, 1850, 4364, 3600, 5257, 3000, 3300, 3564, 2972, 2482, 2832, 2557, 2500, 3500, 2542, 2500, 3564, 2918, 3164, 2764, 2050, 4300, 2300, 2864];
+
+            function loadCasMapa() {
+                const div = document.getElementById("chart-cas-mapa");
+                if (!div || div.dataset.loaded) return;
+                div.dataset.loaded = "1";
+                div.innerHTML = '<div style="text-align:center;padding:2rem;color:#8899a6;"><i class="fas fa-spinner fa-spin"></i> Cargando mapa CAS...</div>';
+                fetch("https://raw.githubusercontent.com/juaneladio/peru-geojson/master/peru_departamental_simple.geojson")
+                    .then(r => r.json())
+                    .then(geo => {
+                        div.innerHTML = "";
+                        Plotly.newPlot("chart-cas-mapa", [{
+                            type: "choropleth",
+                            geojson: geo,
+                            locations: CAS_LOCS,
+                            z: CAS_Z,
+                            text: CAS_TEXT,
+                            customdata: CAS_CUSTOM,
+                            featureidkey: "properties.NOMBDEP",
+                            colorscale: [[0, "#fff7e6"], [0.3, "#f6c068"], [0.7, "#e67e22"], [1, "#c0392b"]],
+                            colorbar: { title: "# Convocatorias", tickformat: ",.0f" },
+                            hovertemplate: "<b>%{text}</b><br>Convocatorias CAS: %{z:,.0f}<br>Mediana salarial: S/ %{customdata:,.0f}<extra></extra>",
+                            marker: { line: { color: "white", width: 0.5 } }
+                        }], {
+                            title: { text: "Convocatorias CAS Activas por Departamento", x: 0.5 },
+                            geo: { fitbounds: "locations", visible: false, projection: { type: "mercator" }, bgcolor: "white" },
+                            paper_bgcolor: "white",
+                            height: 600,
+                            margin: { l: 0, r: 0, t: 70, b: 10 }
+                        }, { responsive: true, displaylogo: false });
+                    })
+                    .catch(err => {
+                        div.innerHTML = '<div style="text-align:center;padding:2rem;color:#e74c3c;">No se pudo cargar el mapa.</div>';
+                        console.error("CAS mapa error:", err);
+                    });
+            }
+
+            // Carga el mapa cuando el tab se active
+            document.querySelectorAll("[onclick*='cas-mapa']").forEach(btn => {
+                btn.addEventListener('click', () => setTimeout(loadCasMapa, 300));
+            });
+            // O cuando el deeplink lo abra
+            if (location.hash.includes('cas-mapa')) setTimeout(loadCasMapa, 500);
+        })();
+        </script>
 
         <!-- Separador -->
         <div id="section-contexto" style="text-align:center; margin: 2rem 0 0.5rem; color: #8899a6; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">
@@ -853,7 +1056,7 @@ if(document.getElementById("chart-heatmap")){
         });
 
 
-        var DASHBOARD_SEARCH_INDEX = [{"t": "empresa", "l": "Banco de Crédito BCP", "tab": "burbujas"}, {"t": "empresa", "l": "Interbank", "tab": "burbujas"}, {"t": "empresa", "l": "Alicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Yape", "tab": "burbujas"}, {"t": "empresa", "l": "Culqi", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA en Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Entel Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Ernst & Young (EY)", "tab": "burbujas"}, {"t": "empresa", "l": "Minsur S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Belcorp", "tab": "burbujas"}, {"t": "empresa", "l": "McKinsey & Company", "tab": "burbujas"}, {"t": "empresa", "l": "L'Oréal", "tab": "burbujas"}, {"t": "empresa", "l": "AB InBev", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Procter & Gamble", "tab": "burbujas"}, {"t": "empresa", "l": "adidas", "tab": "burbujas"}, {"t": "empresa", "l": "Sodimac", "tab": "burbujas"}, {"t": "empresa", "l": "Ferreyros S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "San Fernando", "tab": "burbujas"}, {"t": "empresa", "l": "STRACON", "tab": "burbujas"}, {"t": "empresa", "l": "Saga Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "LATAM Airlines", "tab": "burbujas"}, {"t": "empresa", "l": "Mibanco, banco de la Microempresa", "tab": "burbujas"}, {"t": "empresa", "l": "Scotiabank", "tab": "burbujas"}, {"t": "empresa", "l": "NTT DATA Europe & Latam", "tab": "burbujas"}, {"t": "empresa", "l": "Rimac Seguros y Reaseguros", "tab": "burbujas"}, {"t": "empresa", "l": "Deloitte", "tab": "burbujas"}, {"t": "empresa", "l": "Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo Coril", "tab": "burbujas"}, {"t": "empresa", "l": "Tottus", "tab": "burbujas"}, {"t": "empresa", "l": "Auna", "tab": "burbujas"}, {"t": "empresa", "l": "izipay", "tab": "burbujas"}, {"t": "empresa", "l": "Pacífico Seguros", "tab": "burbujas"}, {"t": "empresa", "l": "Química Suiza", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo AJE", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA", "tab": "burbujas"}, {"t": "empresa", "l": "cbc Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Colgate-Palmolive", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Divemotor", "tab": "burbujas"}, {"t": "empresa", "l": "Farmacias Peruanas", "tab": "burbujas"}, {"t": "empresa", "l": "Glencore", "tab": "burbujas"}, {"t": "empresa", "l": "Indra", "tab": "burbujas"}, {"t": "empresa", "l": "Misti Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Mondelēz International", "tab": "burbujas"}, {"t": "empresa", "l": "NGR S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Volcan Cia Minera SAA", "tab": "burbujas"}, {"t": "empresa", "l": "BanBif - Banco Interamericano de Finanzas", "tab": "burbujas"}, {"t": "empresa", "l": "Banco Pichincha Perú", "tab": "burbujas"}, {"t": "empresa", "l": "BP Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Clínica Internacional", "tab": "burbujas"}, {"t": "empresa", "l": "Los Portales", "tab": "burbujas"}, {"t": "empresa", "l": "LUCHA", "tab": "burbujas"}, {"t": "empresa", "l": "Favo", "tab": "burbujas"}, {"t": "empresa", "l": "Nexa Resources", "tab": "burbujas"}, {"t": "empresa", "l": "OXXO Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Perfumerías Unidas", "tab": "burbujas"}, {"t": "empresa", "l": "Prima AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sociedad Minera Cerro Verde S.A.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Telefónica", "tab": "burbujas"}, {"t": "empresa", "l": "Aon", "tab": "burbujas"}, {"t": "empresa", "l": "APOYO Consultoría", "tab": "burbujas"}, {"t": "empresa", "l": "astara", "tab": "burbujas"}, {"t": "empresa", "l": "Backus", "tab": "burbujas"}, {"t": "empresa", "l": "Cencosud S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Cisco", "tab": "burbujas"}, {"t": "empresa", "l": "Claro Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Crece Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Endeavor Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Lucky", "tab": "burbujas"}, {"t": "empresa", "l": "Intercorp Retail", "tab": "burbujas"}, {"t": "empresa", "l": "Nexus Group - Peru", "tab": "burbujas"}, {"t": "empresa", "l": "Profuturo AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sodexo", "tab": "burbujas"}, {"t": "empresa", "l": "Wally", "tab": "burbujas"}, {"t": "empresa", "l": "YURA S.A.", "tab": "burbujas"}, {"t": "rol", "l": "CEO", "tab": "roles"}, {"t": "rol", "l": "Gerente", "tab": "roles"}, {"t": "rol", "l": "Director", "tab": "roles"}, {"t": "rol", "l": "Senior", "tab": "roles"}, {"t": "rol", "l": "Analista", "tab": "roles"}, {"t": "rol", "l": "Junior", "tab": "roles"}, {"t": "rol", "l": "Practicante", "tab": "roles"}, {"t": "rol", "l": "Software", "tab": "roles"}, {"t": "rol", "l": "Data", "tab": "roles"}, {"t": "rol", "l": "Marketing", "tab": "roles"}, {"t": "rol", "l": "Ventas", "tab": "roles"}, {"t": "rol", "l": "Finanzas", "tab": "roles"}, {"t": "rol", "l": "RRHH", "tab": "roles"}, {"t": "rol", "l": "Legal", "tab": "roles"}, {"t": "rol", "l": "Product Manager", "tab": "roles"}, {"t": "sector", "l": "Banca", "tab": "sectores"}, {"t": "sector", "l": "Mineria", "tab": "sectores"}, {"t": "sector", "l": "Cosmeticos", "tab": "sectores"}, {"t": "sector", "l": "Consultoria", "tab": "sectores"}, {"t": "sector", "l": "Fintech", "tab": "sectores"}, {"t": "sector", "l": "Consumo Masivo", "tab": "sectores"}, {"t": "sector", "l": "Retail", "tab": "sectores"}, {"t": "sector", "l": "Seguros", "tab": "sectores"}, {"t": "sector", "l": "Telecom", "tab": "sectores"}, {"t": "sector", "l": "Tecnologia", "tab": "tecnologia"}, {"t": "sector", "l": "Ventas", "tab": "ventas"}, {"t": "region", "l": "Lima", "tab": "mapa-regiones"}, {"t": "region", "l": "Arequipa", "tab": "mapa-regiones"}, {"t": "region", "l": "Cusco", "tab": "mapa-regiones"}, {"t": "region", "l": "Piura", "tab": "mapa-regiones"}, {"t": "region", "l": "La Libertad", "tab": "mapa-regiones"}, {"t": "region", "l": "Lambayeque", "tab": "mapa-regiones"}, {"t": "region", "l": "Junín", "tab": "mapa-regiones"}, {"t": "region", "l": "Cajamarca", "tab": "mapa-regiones"}, {"t": "region", "l": "Áncash", "tab": "mapa-regiones"}, {"t": "region", "l": "Loreto", "tab": "mapa-regiones"}, {"t": "region", "l": "Ica", "tab": "mapa-regiones"}, {"t": "region", "l": "Tacna", "tab": "mapa-regiones"}, {"t": "region", "l": "Moquegua", "tab": "mapa-regiones"}, {"t": "region", "l": "Madre de Dios", "tab": "mapa-regiones"}, {"t": "region", "l": "Huancavelica", "tab": "mapa-regiones"}, {"t": "region", "l": "Apurímac", "tab": "mapa-regiones"}, {"t": "region", "l": "Ayacucho", "tab": "mapa-regiones"}, {"t": "region", "l": "Puno", "tab": "mapa-regiones"}, {"t": "region", "l": "Huánuco", "tab": "mapa-regiones"}, {"t": "region", "l": "San Martín", "tab": "mapa-regiones"}, {"t": "region", "l": "Pasco", "tab": "mapa-regiones"}, {"t": "region", "l": "Ucayali", "tab": "mapa-regiones"}, {"t": "region", "l": "Tumbes", "tab": "mapa-regiones"}, {"t": "region", "l": "Amazonas", "tab": "mapa-regiones"}, {"t": "region", "l": "Callao", "tab": "mapa-regiones"}];
+        var DASHBOARD_SEARCH_INDEX = [{"t": "empresa", "l": "Banco de Crédito BCP", "tab": "burbujas"}, {"t": "empresa", "l": "Interbank", "tab": "burbujas"}, {"t": "empresa", "l": "Alicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Yape", "tab": "burbujas"}, {"t": "empresa", "l": "Culqi", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA en Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Entel Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Ernst & Young (EY)", "tab": "burbujas"}, {"t": "empresa", "l": "Minsur S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Belcorp", "tab": "burbujas"}, {"t": "empresa", "l": "McKinsey & Company", "tab": "burbujas"}, {"t": "empresa", "l": "L'Oréal", "tab": "burbujas"}, {"t": "empresa", "l": "AB InBev", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Procter & Gamble", "tab": "burbujas"}, {"t": "empresa", "l": "adidas", "tab": "burbujas"}, {"t": "empresa", "l": "Sodimac", "tab": "burbujas"}, {"t": "empresa", "l": "Ferreyros S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "San Fernando", "tab": "burbujas"}, {"t": "empresa", "l": "STRACON", "tab": "burbujas"}, {"t": "empresa", "l": "Saga Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "LATAM Airlines", "tab": "burbujas"}, {"t": "empresa", "l": "Mibanco, banco de la Microempresa", "tab": "burbujas"}, {"t": "empresa", "l": "Scotiabank", "tab": "burbujas"}, {"t": "empresa", "l": "NTT DATA Europe & Latam", "tab": "burbujas"}, {"t": "empresa", "l": "Rimac Seguros y Reaseguros", "tab": "burbujas"}, {"t": "empresa", "l": "Deloitte", "tab": "burbujas"}, {"t": "empresa", "l": "Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo Coril", "tab": "burbujas"}, {"t": "empresa", "l": "Tottus", "tab": "burbujas"}, {"t": "empresa", "l": "Auna", "tab": "burbujas"}, {"t": "empresa", "l": "izipay", "tab": "burbujas"}, {"t": "empresa", "l": "Pacífico Seguros", "tab": "burbujas"}, {"t": "empresa", "l": "Química Suiza", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo AJE", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA", "tab": "burbujas"}, {"t": "empresa", "l": "cbc Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Colgate-Palmolive", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Divemotor", "tab": "burbujas"}, {"t": "empresa", "l": "Farmacias Peruanas", "tab": "burbujas"}, {"t": "empresa", "l": "Glencore", "tab": "burbujas"}, {"t": "empresa", "l": "Indra", "tab": "burbujas"}, {"t": "empresa", "l": "Misti Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Mondelēz International", "tab": "burbujas"}, {"t": "empresa", "l": "NGR S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Volcan Cia Minera SAA", "tab": "burbujas"}, {"t": "empresa", "l": "BanBif - Banco Interamericano de Finanzas", "tab": "burbujas"}, {"t": "empresa", "l": "Banco Pichincha Perú", "tab": "burbujas"}, {"t": "empresa", "l": "BP Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Clínica Internacional", "tab": "burbujas"}, {"t": "empresa", "l": "Los Portales", "tab": "burbujas"}, {"t": "empresa", "l": "LUCHA", "tab": "burbujas"}, {"t": "empresa", "l": "Favo", "tab": "burbujas"}, {"t": "empresa", "l": "Nexa Resources", "tab": "burbujas"}, {"t": "empresa", "l": "OXXO Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Perfumerías Unidas", "tab": "burbujas"}, {"t": "empresa", "l": "Prima AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sociedad Minera Cerro Verde S.A.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Telefónica", "tab": "burbujas"}, {"t": "empresa", "l": "Aon", "tab": "burbujas"}, {"t": "empresa", "l": "APOYO Consultoría", "tab": "burbujas"}, {"t": "empresa", "l": "astara", "tab": "burbujas"}, {"t": "empresa", "l": "Backus", "tab": "burbujas"}, {"t": "empresa", "l": "Cencosud S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Cisco", "tab": "burbujas"}, {"t": "empresa", "l": "Claro Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Crece Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Endeavor Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Lucky", "tab": "burbujas"}, {"t": "empresa", "l": "Intercorp Retail", "tab": "burbujas"}, {"t": "empresa", "l": "Nexus Group - Peru", "tab": "burbujas"}, {"t": "empresa", "l": "Profuturo AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sodexo", "tab": "burbujas"}, {"t": "empresa", "l": "Wally", "tab": "burbujas"}, {"t": "empresa", "l": "YURA S.A.", "tab": "burbujas"}, {"t": "rol", "l": "CEO", "tab": "roles"}, {"t": "rol", "l": "Gerente", "tab": "roles"}, {"t": "rol", "l": "Director", "tab": "roles"}, {"t": "rol", "l": "Senior", "tab": "roles"}, {"t": "rol", "l": "Analista", "tab": "roles"}, {"t": "rol", "l": "Junior", "tab": "roles"}, {"t": "rol", "l": "Practicante", "tab": "roles"}, {"t": "rol", "l": "Software", "tab": "roles"}, {"t": "rol", "l": "Data", "tab": "roles"}, {"t": "rol", "l": "Marketing", "tab": "roles"}, {"t": "rol", "l": "Ventas", "tab": "roles"}, {"t": "rol", "l": "Finanzas", "tab": "roles"}, {"t": "rol", "l": "RRHH", "tab": "roles"}, {"t": "rol", "l": "Legal", "tab": "roles"}, {"t": "rol", "l": "Product Manager", "tab": "roles"}, {"t": "sector", "l": "Banca", "tab": "sectores"}, {"t": "sector", "l": "Mineria", "tab": "sectores"}, {"t": "sector", "l": "Cosmeticos", "tab": "sectores"}, {"t": "sector", "l": "Consultoria", "tab": "sectores"}, {"t": "sector", "l": "Fintech", "tab": "sectores"}, {"t": "sector", "l": "Consumo Masivo", "tab": "sectores"}, {"t": "sector", "l": "Retail", "tab": "sectores"}, {"t": "sector", "l": "Seguros", "tab": "sectores"}, {"t": "sector", "l": "Telecom", "tab": "sectores"}, {"t": "sector", "l": "Tecnologia", "tab": "tecnologia"}, {"t": "sector", "l": "Ventas", "tab": "ventas"}, {"t": "region", "l": "Lima", "tab": "mapa-regiones"}, {"t": "region", "l": "Arequipa", "tab": "mapa-regiones"}, {"t": "region", "l": "Cusco", "tab": "mapa-regiones"}, {"t": "region", "l": "Piura", "tab": "mapa-regiones"}, {"t": "region", "l": "La Libertad", "tab": "mapa-regiones"}, {"t": "region", "l": "Lambayeque", "tab": "mapa-regiones"}, {"t": "region", "l": "Junín", "tab": "mapa-regiones"}, {"t": "region", "l": "Cajamarca", "tab": "mapa-regiones"}, {"t": "region", "l": "Áncash", "tab": "mapa-regiones"}, {"t": "region", "l": "Loreto", "tab": "mapa-regiones"}, {"t": "region", "l": "Ica", "tab": "mapa-regiones"}, {"t": "region", "l": "Tacna", "tab": "mapa-regiones"}, {"t": "region", "l": "Moquegua", "tab": "mapa-regiones"}, {"t": "region", "l": "Madre de Dios", "tab": "mapa-regiones"}, {"t": "region", "l": "Huancavelica", "tab": "mapa-regiones"}, {"t": "region", "l": "Apurímac", "tab": "mapa-regiones"}, {"t": "region", "l": "Ayacucho", "tab": "mapa-regiones"}, {"t": "region", "l": "Puno", "tab": "mapa-regiones"}, {"t": "region", "l": "Huánuco", "tab": "mapa-regiones"}, {"t": "region", "l": "San Martín", "tab": "mapa-regiones"}, {"t": "region", "l": "Pasco", "tab": "mapa-regiones"}, {"t": "region", "l": "Ucayali", "tab": "mapa-regiones"}, {"t": "region", "l": "Tumbes", "tab": "mapa-regiones"}, {"t": "region", "l": "Amazonas", "tab": "mapa-regiones"}, {"t": "region", "l": "Callao", "tab": "mapa-regiones"}, {"t": "inst CAS", "l": "HOSPITAL DE SULLANA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "PODER JUDICIAL", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "INPE", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MINISTERIO PÚBLICO - FISCALÍA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "GOBIERNO REGIONAL LIBERTAD", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MUNICIPALIDAD DE LAMPA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "HOSPITAL ANDAHUAYLAS", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD TECNOLÓGICA DE FRONTERA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD NACIONAL DE JULIACA(UNAJ)", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD CAÑETE YAUYOS", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD VALLE DEL MANTARO", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MINISTERIO DE CULTURA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "GERENCIA DE SALUD LORETO", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "HOSPITAL DOCENTE DE CAJAMARCA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MIGRACIONES", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "INABIF", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD DE HUANCAVELICA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD TACNA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MUNICIPALIDAD PROVINCIAL DE ANTA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "PEIP ESCUELAS BICENTENARIO", "tab": "cas-instituciones"}, {"t": "rol CAS", "l": "Médico (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Especialista (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Ingeniero (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Coordinador (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Analista (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Profesional (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Abogado (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Psicólogo (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Jefe (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Gerente (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Enfermero (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Asistente (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Operador (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Técnico (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Auxiliar (CAS)", "tab": "cas-roles"}];
 
         function setupSearch() {
             const input = document.getElementById('search-input');
