@@ -6,13 +6,11 @@
 # ============================
 
 # Archivos de datos principales
+# (Los CSVs se mantienen en repo privado unimauro/salariosperu-data)
 *.csv
 *.db
 *.sqlite
 *.sqlite3
-
-# Excepcion: data scrapeada que SI queremos versionar
-!cas_vigentes.csv
 
 # Archivos de texto con datos
 empresas_encontradas.txt

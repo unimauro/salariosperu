@@ -99,7 +99,8 @@
         .navbar a { flex-shrink: 0; padding: 0.55rem 0.95rem; color: #5d6d7e; text-decoration: none; font-size: 0.88rem; font-weight: 500; border-radius: 6px; transition: all 0.2s ease; white-space: nowrap; }
         .navbar a:hover { background: #eaf3fb; color: #2980b9; }
         .navbar a.active { background: #3498db; color: white; }
-        .nav-nse-badge { display: inline-flex !important; align-items: center; justify-content: center; min-width: 26px; height: 22px; padding: 0 7px; margin-left: 6px; border-radius: 11px; background: #16a085; color: white; font-size: 0.72rem; font-weight: 700; line-height: 1; vertical-align: middle; }
+        .nav-nse-badge { display: none; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 6px; margin-left: 6px; border-radius: 10px; background: #16a085; color: white; font-size: 0.7rem; font-weight: 700; line-height: 1; vertical-align: middle; letter-spacing: -0.3px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .nav-nse-badge.show { display: inline-flex; }
         .navbar a.active .nav-nse-badge { background: white; color: #16a085; }
         .navbar a i { margin-right: 0.35rem; }
         .navbar-search { position: relative; margin-left: auto; flex-shrink: 0; }
@@ -1032,38 +1033,49 @@ if(document.getElementById("chart-heatmap")){
             history.replaceState(null, '', '#nse=' + Math.round(sal));
         }
 
+        function isValidNSELetter(l) {
+            return typeof l === 'string' && /^A\+?\+?$|^[BCDE]$/.test(l);
+        }
+
         function updateNavbarNSEBadge(nse, sal) {
             const badge = document.getElementById('nav-nse-badge');
             if (!badge) return;
+            if (!nse || !isValidNSELetter(nse.letter)) {
+                badge.classList.remove('show');
+                badge.textContent = '';
+                return;
+            }
             badge.textContent = nse.letter;
-            badge.style.background = nse.color;
-            badge.style.display = 'inline-flex';
-            // Update text of nav link (only the label) to make it clear
+            badge.style.background = nse.color || '#16a085';
+            badge.classList.add('show');
             const navLink = document.getElementById('nav-nse');
             if (navLink) {
-                navLink.title = 'Tu NSE: ' + nse.letter + ' (S/ ' + Math.round(sal).toLocaleString('es-PE') + '/mes)';
+                navLink.title = 'Tu NSE: ' + nse.letter + ' (S/ ' + Math.round(sal).toLocaleString('es-PE') + '/mes) · click para volver';
             }
+        }
+
+        function clearNavbarNSEBadge() {
+            const badge = document.getElementById('nav-nse-badge');
+            if (badge) { badge.classList.remove('show'); badge.textContent = ''; }
+            try { localStorage.removeItem('salariosperu_nse'); } catch(e) {}
         }
 
         function restoreNavbarNSEBadge() {
             try {
-                const saved = JSON.parse(localStorage.getItem('salariosperu_nse') || 'null');
-                if (saved && saved.letter && saved.color) {
-                    const badge = document.getElementById('nav-nse-badge');
-                    if (badge) {
-                        badge.textContent = saved.letter;
-                        badge.style.background = saved.color;
-                        badge.style.display = 'inline-flex';
-                    }
-                    const navLink = document.getElementById('nav-nse');
-                    if (navLink && saved.sal) {
-                        navLink.title = 'Tu NSE: ' + saved.letter + ' (S/ ' + Math.round(saved.sal).toLocaleString('es-PE') + '/mes)';
-                    }
-                    // Pre-fill input
-                    const input = document.getElementById('nse-input');
-                    if (input && saved.sal) input.value = Math.round(saved.sal);
+                const raw = localStorage.getItem('salariosperu_nse');
+                if (!raw) return;
+                const saved = JSON.parse(raw);
+                if (!saved || !isValidNSELetter(saved.letter) || !saved.color) {
+                    // Datos corruptos o de version vieja → limpiar
+                    localStorage.removeItem('salariosperu_nse');
+                    return;
                 }
-            } catch(e) {}
+                updateNavbarNSEBadge(saved, saved.sal || 0);
+                const input = document.getElementById('nse-input');
+                if (input && saved.sal) input.value = Math.round(saved.sal);
+            } catch(e) {
+                try { localStorage.removeItem('salariosperu_nse'); } catch(_) {}
+            }
         }
 
         function copiarResultadoNSE(e) {
