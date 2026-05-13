@@ -527,6 +527,53 @@
         .kpi-title { font-size: 0.66rem; color: #888; margin-bottom: 0.15rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .kpi-value { font-size: 1.25rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.1rem; line-height: 1.1; white-space: nowrap; }
         .kpi-unit { font-size: 0.58em; color: #95a5a6; font-weight: 500; margin-left: 2px; }
+        .kpi-card-modern .kpi-warning {
+            display: inline-block;
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: #c0392b;
+            background: rgba(231,76,60,0.12);
+            padding: 0.1rem 0.4rem;
+            border-radius: 8px;
+            margin-top: 0.2rem;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        [data-theme="dark"] .kpi-card-modern .kpi-warning { color: #ff6b6b; background: rgba(231,76,60,0.2); }
+
+        /* Banner critico de sesgo */
+        .bias-alert {
+            background: linear-gradient(90deg, #fef2f2 0%, #fff7ed 100%);
+            border: 1px solid #fecaca;
+            border-left: 4px solid #dc2626;
+            border-radius: 10px;
+            padding: 0.85rem 1.1rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 8px rgba(220,38,38,0.08);
+            animation: biasAlertSlideIn 0.5s ease-out;
+        }
+        @keyframes biasAlertSlideIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .bias-alert.dismissed { display: none; }
+        .bias-alert__inner { display: flex; gap: 0.9rem; align-items: flex-start; }
+        .bias-alert__icon { flex-shrink: 0; font-size: 1.4rem; color: #dc2626; margin-top: 0.1rem; }
+        .bias-alert__body { flex: 1; }
+        .bias-alert__title { font-size: 0.95rem; color: #7f1d1d; margin-bottom: 0.25rem; line-height: 1.4; }
+        .bias-alert__text { font-size: 0.86rem; color: #5c1f1f; line-height: 1.55; }
+        .bias-alert__text a { color: #b91c1c; font-weight: 600; }
+        .bias-alert__text a:hover { text-decoration: underline; }
+        .bias-alert__close { background: none; border: none; cursor: pointer; color: #b91c1c; font-size: 1.4rem; padding: 0 0.4rem; line-height: 1; flex-shrink: 0; border-radius: 4px; }
+        .bias-alert__close:hover { background: rgba(220,38,38,0.1); }
+        [data-theme="dark"] .bias-alert {
+            background: linear-gradient(90deg, rgba(220,38,38,0.12) 0%, rgba(234,88,12,0.08) 100%);
+            border-color: rgba(220,38,38,0.3);
+            border-left-color: #dc2626;
+        }
+        [data-theme="dark"] .bias-alert__title { color: #fecaca; }
+        [data-theme="dark"] .bias-alert__text { color: #fca5a5; }
+        [data-theme="dark"] .bias-alert__text a { color: #fbbf24; }
         .kpi-trend { font-size: 0.66rem; font-weight: 500; line-height: 1.2; }
         .kpi-trend.positive { color: #27ae60; }
         .kpi-trend.neutral { color: #95a5a6; }
@@ -719,6 +766,23 @@
     </nav>
 
     <main class="container">
+        <!-- BANNER CRITICO: sesgo del dashboard -->
+        <div class="bias-alert" id="bias-alert">
+            <div class="bias-alert__inner">
+                <div class="bias-alert__icon"><i class="fas fa-triangle-exclamation"></i></div>
+                <div class="bias-alert__body">
+                    <div class="bias-alert__title"><strong>Este dashboard est&aacute; SESGADO hacia empresas formales grandes de Lima.</strong></div>
+                    <div class="bias-alert__text">
+                        El promedio S/ 8,990 que ver&aacute;s abajo NO es el sueldo del peruano promedio.
+                        Seg&uacute;n <a href="https://m.inei.gob.pe/media/MenuRecursivo/boletines/02-informe-tecnico-empleo-laboral-de-lima-metropolitanal.pdf" target="_blank" rel="noopener">INEI ENAHO 2023</a>,
+                        la mediana nacional real es <strong>S/ 1,837</strong> (~5x menos). El dataset cubre solo ~28% de empleo formal urbano. Mira el
+                        <a href="#section-contexto" onclick="toggleAccordion('acc-contexto',{fromNav:true});">Contexto Nacional</a> para la realidad.
+                    </div>
+                </div>
+                <button class="bias-alert__close" id="bias-alert-close" aria-label="Entendido">&times;</button>
+            </div>
+        </div>
+
         <!-- KPIs Principales -->
         <section class="kpi-section" id="kpis">
             <div class="kpi-grid">
@@ -728,6 +792,7 @@
                         <div class="kpi-title" title="Salario promedio mensual privado">Sal. Prom. Privado</div>
                         <div class="kpi-value">S/ 8,990<span class="kpi-unit">/mes</span></div>
                         <div class="kpi-trend neutral">Mediana: S/ 5,500</div>
+                        <div class="kpi-warning" title="Muestra sesgada: empresas formales grandes de Lima">⚠ muestra sesgada</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern success">
@@ -741,9 +806,9 @@
                 <div class="kpi-card-modern purple">
                     <div class="kpi-icon">🚀</div>
                     <div class="kpi-content">
-                        <div class="kpi-title" title="Salario más alto registrado">Sal. Más Alto</div>
+                        <div class="kpi-title" title="Salario más alto registrado (outlier)">Sal. M&aacute;s Alto</div>
                         <div class="kpi-value">S/ 191k<span class="kpi-unit">/mes</span></div>
-                        <div class="kpi-trend neutral">Sr. Partner consultor&iacute;a</div>
+                        <div class="kpi-trend neutral">Outlier &middot; Sr. Partner</div>
                     </div>
                 </div>
                 <div class="kpi-card-modern orange">
@@ -770,12 +835,12 @@
                         <div class="kpi-trend negative">-42% vs priv.</div>
                     </div>
                 </div>
-                <div class="kpi-card-modern" style="border-left-color: #2c3e50;">
-                    <div class="kpi-icon">🌎</div>
+                <div class="kpi-card-modern" style="border-left-color: #27ae60; background: linear-gradient(135deg, rgba(39,174,96,0.04) 0%, transparent 60%);">
+                    <div class="kpi-icon">🇵🇪</div>
                     <div class="kpi-content">
-                        <div class="kpi-title" title="Mediana nacional INEI ENAHO">Mediana Nacional</div>
+                        <div class="kpi-title" title="DATO REAL: mediana nacional según INEI ENAHO 2023" style="color:#27ae60;">Mediana Real Per&uacute;</div>
                         <div class="kpi-value">S/ 1,837<span class="kpi-unit">/mes</span></div>
-                        <div class="kpi-trend neutral">ENAHO 2023</div>
+                        <div class="kpi-trend" style="color:#27ae60; font-weight:600;">✓ INEI ENAHO 2023</div>
                     </div>
                 </div>
             </div>
@@ -793,10 +858,10 @@
             </div>
             <div class="tldr__grid">
                 <div class="tldr__item">
-                    <div class="tldr__icon" style="background:#3498db;">3x</div>
+                    <div class="tldr__icon" style="background:#e74c3c;">⚠</div>
                     <div>
-                        <div class="tldr__metric">El privado paga 3x m&aacute;s que la mediana nacional</div>
-                        <div class="tldr__detail">Mediana privado S/5,600 vs mediana nacional INEI S/1,837.</div>
+                        <div class="tldr__metric">Este dashboard est&aacute; sesgado &mdash; ojo</div>
+                        <div class="tldr__detail">El promedio S/8,990 viene de empresas formales grandes de Lima. La mediana real Per&uacute; es S/1,837 (INEI). Casi 5x menos.</div>
                     </div>
                 </div>
                 <div class="tldr__item">
@@ -1697,7 +1762,7 @@ if(document.getElementById("chart-heatmap")){
             <i class="fas fa-info-circle"></i> <strong>Fuentes:</strong><br>
             <span style="color:#3498db;">Sector privado:</span> <a href="https://salariosperu.com" target="_blank" rel="noopener" style="color:#5fb8ff;">salariosperu.com</a> &middot; 2,068 registros &middot; ene-mar 2026 &middot;
             <span style="color:#f39c12;">Sector p&uacute;blico:</span> <a href="https://www.convocatoriasdetrabajo.com/convocatorias-cas-vigentes.php" target="_blank" rel="noopener" style="color:#5fb8ff;">convocatoriasdetrabajo.com</a> &middot; 1,194 vacantes &middot; actualizado diario v&iacute;a GitHub Actions<br>
-            <span style="color:#16a085;">PEA &amp; PEA ocupada:</span> <a href="https://m.inei.gob.pe" target="_blank" rel="noopener" style="color:#5fb8ff;">INEI</a> Encuesta Permanente de Empleo 2024 &middot;
+            <span style="color:#16a085;">PEA &amp; PEA ocupada:</span> <a href="https://m.inei.gob.pe" target="_blank" rel="noopener" style="color:#5fb8ff;">INEI</a> Encuesta Permanente de Empleo 2024 (<a href="https://m.inei.gob.pe/media/MenuRecursivo/boletines/02-informe-tecnico-empleo-laboral-de-lima-metropolitanal.pdf" target="_blank" rel="noopener" style="color:#5fb8ff;">PDF Lima Metro</a>) &middot;
             <span style="color:#16a085;">Ingresos regionales:</span> INEI <a href="https://m.inei.gob.pe" target="_blank" rel="noopener" style="color:#5fb8ff;">ENAHO 2023</a> ingreso laboral mensual promedio<br>
             <span style="color:#9b59b6;">NSE A-E:</span> <a href="http://apeim.com.pe" target="_blank" rel="noopener" style="color:#5fb8ff;">APEIM 2024</a> Lima Metropolitana &middot;
             <span style="color:#7f8c8d;">GeoJSON Per&uacute;:</span> <a href="https://github.com/juaneladio/peru-geojson" target="_blank" rel="noopener" style="color:#5fb8ff;">juaneladio/peru-geojson</a>
@@ -1959,7 +2024,16 @@ if(document.getElementById("chart-heatmap")){
             if (typeof trackEvent === 'function') {
                 trackEvent('tab_change', { tab_name: tabName });
             }
+            // Forzar resize de los charts del tab recien activado.
+            // Critico para charts creados con width 0 cuando su tab no era el active.
             setTimeout(() => {
+                if (window.Plotly) {
+                    tab.querySelectorAll('.plotly-graph-div').forEach(div => {
+                        if (div.layout) {
+                            try { Plotly.Plots.resize(div); } catch(e) {}
+                        }
+                    });
+                }
                 resizeAllPlotlyGraphs();
                 fixChartLayouts();
             }, 200);
@@ -1984,12 +2058,19 @@ if(document.getElementById("chart-heatmap")){
         function resizeAllPlotlyGraphs() {
             document.querySelectorAll('.plotly-graph-div').forEach(div => {
                 if (!window.Plotly || !div.layout) return;
+                // Solo procesar si el div es visible (no en accordion cerrado ni tab oculto)
+                const rect = div.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) return;
                 try {
-                    Plotly.relayout(div, {
-                        width: div.parentElement.offsetWidth,
-                        autosize: true
-                    });
-                } catch (e) { /* noop */ }
+                    // Plotly.Plots.resize recalcula desde cero las dimensiones
+                    // segun el contenedor actual. Mas robusto que relayout
+                    // para charts creados con tamano 0 al cargar.
+                    Plotly.Plots.resize(div);
+                } catch (e) {
+                    try {
+                        Plotly.relayout(div, { autosize: true });
+                    } catch (e2) { /* noop */ }
+                }
             });
         }
 
@@ -2281,6 +2362,16 @@ if(document.getElementById("chart-heatmap")){
                 if (typeof renderChartsInContainer === 'function') {
                     setTimeout(() => renderChartsInContainer(target), 100);
                 }
+                // Forzar resize de los charts ya renderizados dentro del accordion
+                // (importante para charts no-cifrados como los del Contexto que
+                // se crearon con width 0 al cargar la pagina).
+                setTimeout(() => {
+                    if (!window.Plotly) return;
+                    target.querySelectorAll('.plotly-graph-div').forEach(div => {
+                        if (!div.layout) return;
+                        try { Plotly.Plots.resize(div); } catch(e) {}
+                    });
+                }, 500);
                 if (typeof trackEvent === 'function') {
                     trackEvent('accordion_open', { section: accId, from_nav: opts.fromNav === true });
                 }
@@ -2446,6 +2537,23 @@ if(document.getElementById("chart-heatmap")){
             }, { passive: true });
 
             updateVisibility();
+        }
+
+        // Banner critico de sesgo - dismissible (persiste hasta proxima sesion)
+        function setupBiasAlert() {
+            const banner = document.getElementById('bias-alert');
+            const closeBtn = document.getElementById('bias-alert-close');
+            if (!banner || !closeBtn) return;
+            try {
+                if (sessionStorage.getItem('bias_alert_dismissed') === '1') {
+                    banner.classList.add('dismissed');
+                }
+            } catch(e) {}
+            closeBtn.addEventListener('click', () => {
+                banner.classList.add('dismissed');
+                try { sessionStorage.setItem('bias_alert_dismissed', '1'); } catch(e) {}
+                if (typeof trackEvent === 'function') trackEvent('bias_alert_dismissed', {});
+            });
         }
 
         // TL;DR ejecutivo - efecto evaporacion + colapso a titulo
@@ -2701,6 +2809,7 @@ if(document.getElementById("chart-heatmap")){
             setupNavbarDropdowns();
             setupPrivadoTOC();
             setupSearch();
+            setupBiasAlert();
             setupTldr();
             setupDarkMode();
             // Aplica fixes de UI tras unos segundos para asegurar que los
