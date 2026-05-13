@@ -411,25 +411,55 @@
         .accordion-section.closed .sector-banner { margin-bottom: 0; }
         .sector-banner--nse { background: linear-gradient(90deg, #e8f8f5 0%, transparent 80%); border-left: 4px solid #16a085; }
         /* TL;DR Resumen Ejecutivo */
-        .tldr { background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border: 1px solid #e8ecf1; border-radius: 12px; padding: 1.2rem 1.4rem; margin: 1.2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+        .tldr { background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); border: 1px solid #e8ecf1; border-radius: 12px; padding: 1.2rem 1.4rem; margin: 1.2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.04); transition: padding 0.5s ease, background 0.5s ease, border-radius 0.5s ease; }
         .tldr.hidden { display: none; }
-        .tldr__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-        .tldr__title { font-size: 1.05rem; font-weight: 700; color: #2c3e50; margin: 0; }
-        .tldr__title i { color: #e74c3c; margin-right: 0.4rem; }
+        .tldr__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; transition: margin-bottom 0.5s ease; cursor: default; }
+        .tldr__title { font-size: 1.05rem; font-weight: 700; color: #2c3e50; margin: 0; transition: font-size 0.5s ease; display: flex; align-items: center; gap: 0.5rem; }
+        .tldr__title i { color: #e74c3c; }
+        .tldr__title .tldr__hint { font-size: 0.72rem; color: #95a5a6; font-weight: 500; opacity: 0; transition: opacity 0.3s ease 0.4s; }
         .tldr__close { background: none; border: none; cursor: pointer; color: #95a5a6; font-size: 1.4rem; padding: 0 0.4rem; line-height: 1; border-radius: 4px; }
         .tldr__close:hover { background: #f0f2f5; color: #2c3e50; }
-        .tldr__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.85rem; }
-        .tldr__item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.6rem 0.7rem; background: white; border-radius: 8px; border: 1px solid #f0f2f5; transition: all 0.2s ease; }
+        .tldr__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.85rem; transition: max-height 0.5s ease, opacity 0.4s ease; overflow: hidden; max-height: 1000px; }
+        .tldr__item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.6rem 0.7rem; background: white; border-radius: 8px; border: 1px solid #f0f2f5; transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.32, 0, 0.67, 0), filter 0.6s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
         .tldr__item:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.06); border-color: #e0e6ed; }
         .tldr__icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.5px; }
         .tldr__metric { font-size: 0.88rem; font-weight: 600; color: #2c3e50; line-height: 1.3; margin-bottom: 0.2rem; }
         .tldr__detail { font-size: 0.78rem; color: #7f8c8d; line-height: 1.45; }
+
+        /* Evaporacion: cada card sube, se desvanece y se difumina */
+        .tldr.evaporating .tldr__item {
+            opacity: 0;
+            transform: translateY(-30px) scale(0.92);
+            filter: blur(6px);
+        }
+        /* Colapsado: el container se vuelve un chip clickeable */
+        .tldr.collapsed {
+            padding: 0.5rem 0.9rem;
+            margin: 0.6rem 0;
+            border-radius: 30px;
+            cursor: pointer;
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border-color: #e0e6ed;
+            display: inline-flex;
+            align-items: center;
+            max-width: fit-content;
+        }
+        .tldr.collapsed:hover { background: #eaf3fb; border-color: #3498db; box-shadow: 0 4px 12px rgba(52,152,219,0.15); }
+        .tldr.collapsed .tldr__header { margin-bottom: 0; cursor: pointer; }
+        .tldr.collapsed .tldr__title { font-size: 0.85rem; }
+        .tldr.collapsed .tldr__title .tldr__hint { opacity: 0.8; }
+        .tldr.collapsed .tldr__close { display: none; }
+        .tldr.collapsed .tldr__grid { max-height: 0; opacity: 0; margin: 0; }
+
         @media (max-width: 768px) {
             .tldr { padding: 1rem; }
             .tldr__icon { width: 40px; height: 40px; font-size: 0.9rem; }
             .tldr__metric { font-size: 0.82rem; }
             .tldr__detail { font-size: 0.72rem; }
         }
+        /* Dark mode evaporacion */
+        [data-theme="dark"] .tldr.collapsed { background: linear-gradient(135deg, #1a232e 0%, #1f2935 100%); border-color: #2d3a48; }
+        [data-theme="dark"] .tldr.collapsed:hover { background: #2d3a48; border-color: #3498db; }
         .nse-calc { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8ecf1; }
         .nse-calc__input-wrap { display: flex; gap: 0.6rem; align-items: stretch; flex-wrap: wrap; margin: 0.8rem 0 1.2rem; }
         .nse-calc__currency { display: flex; align-items: center; padding: 0 0.7rem; background: #f0f2f5; border-radius: 8px; font-weight: 700; font-size: 1.4rem; color: #2c3e50; flex-shrink: 0; }
@@ -733,7 +763,11 @@
         <!-- Resumen Ejecutivo TL;DR -->
         <section class="tldr" id="tldr">
             <div class="tldr__header">
-                <h2 class="tldr__title"><i class="fas fa-fire"></i> Lo que vas a encontrar aqu&iacute;</h2>
+                <h2 class="tldr__title">
+                    <i class="fas fa-fire"></i>
+                    <span>Lo que vas a encontrar aqu&iacute;</span>
+                    <span class="tldr__hint">&middot; click para expandir</span>
+                </h2>
                 <button class="tldr__close" id="tldr-close" title="Ocultar" aria-label="Ocultar resumen">&times;</button>
             </div>
             <div class="tldr__grid">
@@ -2389,21 +2423,105 @@ if(document.getElementById("chart-heatmap")){
             updateVisibility();
         }
 
-        // TL;DR ejecutivo - dismissible
+        // TL;DR ejecutivo - efecto evaporacion + colapso a titulo
         function setupTldr() {
             const tldr = document.getElementById('tldr');
             const closeBtn = document.getElementById('tldr-close');
-            if (!tldr || !closeBtn) return;
+            if (!tldr) return;
+
+            const items = tldr.querySelectorAll('.tldr__item');
+            const header = tldr.querySelector('.tldr__header');
+            let collapsed = false;
+            let triggered = false;
+            const AUTO_DELAY = 8000;   // ms antes de auto-colapsar
+            const SCROLL_THRESHOLD = 500;
+            let autoTimer = null;
+
             try {
-                if (localStorage.getItem('tldr_dismissed') === '1') {
-                    tldr.classList.add('hidden');
+                if (sessionStorage.getItem('tldr_collapsed') === '1') {
+                    // Restaurar como colapsado sin animar
+                    tldr.classList.add('collapsed');
+                    collapsed = true;
+                    triggered = true;
                 }
             } catch(e) {}
-            closeBtn.addEventListener('click', () => {
-                tldr.classList.add('hidden');
-                try { localStorage.setItem('tldr_dismissed', '1'); } catch(e) {}
-                if (typeof trackEvent === 'function') trackEvent('tldr_dismissed', {});
+
+            function evaporateAndCollapse() {
+                if (triggered) return;
+                triggered = true;
+                // Stagger: cada card se evapora con un delay propio
+                items.forEach((item, i) => {
+                    setTimeout(() => {
+                        item.style.transitionDelay = '0s';
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(-30px) scale(0.92)';
+                        item.style.filter = 'blur(6px)';
+                    }, i * 80);
+                });
+                // Tras la ultima card evaporada, colapsar el container
+                setTimeout(() => {
+                    tldr.classList.add('collapsed');
+                    collapsed = true;
+                    try { sessionStorage.setItem('tldr_collapsed', '1'); } catch(e) {}
+                    if (typeof trackEvent === 'function') trackEvent('tldr_evaporated', {});
+                }, items.length * 80 + 600);
+            }
+
+            function expand() {
+                if (!collapsed) return;
+                tldr.classList.remove('collapsed');
+                collapsed = false;
+                triggered = false;
+                // Restaurar items
+                items.forEach(item => {
+                    item.style.transitionDelay = '0s';
+                    item.style.opacity = '';
+                    item.style.transform = '';
+                    item.style.filter = '';
+                });
+                try { sessionStorage.removeItem('tldr_collapsed'); } catch(e) {}
+                if (typeof trackEvent === 'function') trackEvent('tldr_reopened', {});
+                // Volver a programar auto-colapso
+                scheduleAuto();
+            }
+
+            function scheduleAuto() {
+                if (autoTimer) clearTimeout(autoTimer);
+                autoTimer = setTimeout(() => {
+                    if (!collapsed) evaporateAndCollapse();
+                }, AUTO_DELAY);
+            }
+
+            // Auto-colapso despues de AUTO_DELAY
+            if (!collapsed) scheduleAuto();
+
+            // O al scroll mas alla del threshold
+            let scrollWatched = !collapsed;
+            window.addEventListener('scroll', () => {
+                if (!scrollWatched) return;
+                if (window.scrollY > SCROLL_THRESHOLD && !collapsed) {
+                    scrollWatched = false;
+                    if (autoTimer) clearTimeout(autoTimer);
+                    evaporateAndCollapse();
+                }
+            }, { passive: true });
+
+            // Click en el container colapsado lo re-expande
+            tldr.addEventListener('click', (e) => {
+                if (collapsed) {
+                    expand();
+                }
             });
+
+            // Click en boton X cierra para siempre la sesion actual
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    tldr.classList.add('hidden');
+                    try { sessionStorage.setItem('tldr_collapsed', '1'); } catch(e) {}
+                    if (typeof trackEvent === 'function') trackEvent('tldr_dismissed', {});
+                });
+            }
         }
 
         // Dark mode toggle
