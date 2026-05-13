@@ -300,14 +300,13 @@
                         <div>🏢 Privado: <strong>2,068 reg.</strong> · 416 empresas <span style="opacity:0.7;">(28/03/2026)</span></div>
                         <div>🏛️ Público CAS: <strong>1,194 vac.</strong> <span style="opacity:0.7;">(actualizado diario)</span></div>
                         <div>📚 Fuentes: salariosperu.com · convocatoriasdetrabajo.com · INEI ENAHO · APEIM</div>
-                        <div id="visit-counter">👁️ Cargando visitas...</div>
                     </div>
                     <div class="support-buttons">
-                        <a href="https://buymeacoffee.com/unimauro" target="_blank" class="bmc-btn">
+                        <a href="https://buymeacoffee.com/unimauro" target="_blank" class="bmc-btn" onclick="trackEvent('support_click', {channel:'bmc', location:'header'})">
                             <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee" />
                             Buy me a coffee
                         </a>
-                        <div class="yape-section">
+                        <div class="yape-section" onclick="trackEvent('support_click', {channel:'yape', location:'header'})" style="cursor:pointer;" title="Yape QR">
                             <img src="https://unimauro.github.io/salariosperu/yape.png" alt="Yape QR" class="yape-qr" loading="lazy" />
                             <div class="yape-text">
                                 Yape
@@ -1035,12 +1034,28 @@ if(document.getElementById("chart-heatmap")){
             updateNavbarNSEBadge(nse, sal);
             try { localStorage.setItem('salariosperu_nse', JSON.stringify({ letter: nse.letter, color: nse.color, sal: sal })); } catch(e) {}
 
+            // GA4: track calculo de NSE
+            trackEvent('nse_calculated', {
+                nse_letter: nse.letter,
+                salary_bucket: sal < 1500 ? 'lt_1500' :
+                               sal < 2500 ? '1500_2500' :
+                               sal < 4500 ? '2500_4500' :
+                               sal < 8000 ? '4500_8000' :
+                               sal < 15000 ? '8000_15k' :
+                               sal < 30000 ? '15k_30k' : 'gte_30k',
+                percentile_bucket: Math.floor(getPercentil(sal) / 10) * 10
+            });
+
             // Setup share links
             const shareText = 'Seg&uacute;n el dashboard salariosperu, con S/' + Math.round(sal) +
                 '/mes estoy en NSE ' + nse.letter + ' y gano m&aacute;s que el ' + pct.toFixed(0) + '% de peruanos';
             const url = 'https://unimauro.github.io/salariosperu/#nse=' + Math.round(sal);
-            document.getElementById('nse-share-wa').href = 'https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + url);
-            document.getElementById('nse-share-tw').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(url);
+            const waLink = document.getElementById('nse-share-wa');
+            const twLink = document.getElementById('nse-share-tw');
+            waLink.href = 'https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + url);
+            twLink.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(url);
+            waLink.onclick = () => trackEvent('nse_share', { channel: 'whatsapp', nse_letter: nse.letter });
+            twLink.onclick = () => trackEvent('nse_share', { channel: 'twitter', nse_letter: nse.letter });
             document.getElementById('nse-share').style.display = 'flex';
 
             // Update URL hash
@@ -1439,6 +1454,9 @@ if(document.getElementById("chart-heatmap")){
                 history.replaceState(null, '', '#tab=' + tabName);
             }
 
+            if (typeof trackEvent === 'function') {
+                trackEvent('tab_change', { tab_name: tabName });
+            }
             setTimeout(resizeAllPlotlyGraphs, 150);
         }
 
@@ -1466,17 +1484,15 @@ if(document.getElementById("chart-heatmap")){
             });
         }
 
-        async function loadVisitCounter() {
+        // ===== GA4 custom event tracking =====
+        // Helper para disparar eventos personalizados a Google Analytics 4.
+        // Si gtag no esta disponible (ad-blockers), falla silenciosamente.
+        function trackEvent(name, params) {
             try {
-                const response = await fetch('https://api.countapi.xyz/hit/salariosperu-dashboard/visits');
-                const data = await response.json();
-                document.getElementById('visit-counter').innerHTML = '👁️ ' + data.value.toLocaleString() + ' visitas';
-                localStorage.setItem('dashboard-visits', data.value);
-            } catch (e) {
-                let visits = parseInt(localStorage.getItem('dashboard-visits') || '0') + 1;
-                localStorage.setItem('dashboard-visits', visits);
-                document.getElementById('visit-counter').innerHTML = '👁️ ' + visits.toLocaleString() + ' visitas';
-            }
+                if (typeof gtag === 'function') {
+                    gtag('event', name, params || {});
+                }
+            } catch (e) { /* noop */ }
         }
 
         // Scroll to top button
@@ -1597,8 +1613,11 @@ if(document.getElementById("chart-heatmap")){
                 showToast('<i class="fas fa-location-arrow"></i> Te llevamos a <b>' +
                     item.l + '</b> <span style="opacity:0.7;">(' + typeLabel + ')</span>',
                     { type: 'info', duration: 2500 });
+                // GA4: track seleccion de resultado de busqueda
+                trackEvent('search_select', { result_type: item.t, result_label: item.l, target_tab: item.tab });
             }
 
+            let searchDebounce;
             input.addEventListener('input', () => {
                 const raw = input.value.trim();
                 const q = normalize(raw);
@@ -1610,6 +1629,15 @@ if(document.getElementById("chart-heatmap")){
                     .filter(item => normalize(item.l).includes(q))
                     .sort((a, b) => score(a.l, q) - score(b.l, q));
                 render(matches, raw);
+                // GA4: track busqueda (debounce 800ms para no spamear con cada tecla)
+                clearTimeout(searchDebounce);
+                searchDebounce = setTimeout(() => {
+                    trackEvent('search', {
+                        search_term: raw.toLowerCase().slice(0, 80),
+                        result_count: matches.length,
+                        has_results: matches.length > 0
+                    });
+                }, 800);
             });
 
             input.addEventListener('focus', () => {
@@ -1665,11 +1693,17 @@ if(document.getElementById("chart-heatmap")){
                         .forEach(sec => { if (sec !== target) sec.classList.add('closed'); });
                 }
                 target.classList.remove('closed');
+                if (typeof trackEvent === 'function') {
+                    trackEvent('accordion_open', { section: accId, from_nav: opts.fromNav === true });
+                }
             } else if (opts.fromNav === true) {
                 // Click desde navbar y ya está abierto → no cerrar, solo dejar y scrollear
             } else {
                 // Estaba abierto y el usuario clickeó el header → cerrarlo
                 target.classList.add('closed');
+                if (typeof trackEvent === 'function') {
+                    trackEvent('accordion_close', { section: accId });
+                }
             }
             setTimeout(resizeAllPlotlyGraphs, 450);
         }
@@ -1731,7 +1765,7 @@ if(document.getElementById("chart-heatmap")){
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            loadVisitCounter();
+            trackEvent('dashboard_loaded', { device: window.innerWidth < 768 ? 'mobile' : 'desktop' });
             setupNavbarScrollSpy();
             setupNavbarAccordionLinks();
             setupSearch();
