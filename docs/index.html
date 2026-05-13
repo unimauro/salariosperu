@@ -102,6 +102,20 @@
         .nav-nse-badge { display: none; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 6px; margin-left: 6px; border-radius: 10px; background: #16a085; color: white; font-size: 0.7rem; font-weight: 700; line-height: 1; vertical-align: middle; letter-spacing: -0.3px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
         .nav-nse-badge.show { display: inline-flex; }
         .navbar a.active .nav-nse-badge { background: white; color: #16a085; }
+        /* Toast notification */
+        .app-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); background: #2c3e50; color: white; padding: 0.7rem 1.1rem; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); font-size: 0.88rem; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease; z-index: 2000; max-width: 90vw; }
+        .app-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .app-toast--info { background: #3498db; }
+        .app-toast--success { background: #27ae60; }
+        .app-toast--error { background: #e74c3c; }
+        .app-toast i { margin-right: 0.4rem; }
+        /* Flash effect para destino de navegacion */
+        .flash-target { animation: flashTarget 1.4s ease-out; }
+        @keyframes flashTarget {
+            0%   { box-shadow: 0 0 0 0 rgba(52,152,219,0.5); background-color: rgba(52,152,219,0.06); }
+            40%  { box-shadow: 0 0 0 8px rgba(52,152,219,0.15); }
+            100% { box-shadow: 0 0 0 0 rgba(52,152,219,0); background-color: transparent; }
+        }
         .navbar a i { margin-right: 0.35rem; }
         .navbar-search { position: relative; margin-left: auto; flex-shrink: 0; }
         .navbar-search input { width: 220px; padding: 0.5rem 0.8rem 0.5rem 2rem; border: 1px solid #dde3e8; border-radius: 6px; font-size: 0.85rem; outline: none; transition: all 0.2s ease; background: #f8f9fa; }
@@ -1472,7 +1486,29 @@ if(document.getElementById("chart-heatmap")){
         });
 
 
-        var DASHBOARD_SEARCH_INDEX = [{"t": "empresa", "l": "Banco de Crédito BCP", "tab": "burbujas"}, {"t": "empresa", "l": "Interbank", "tab": "burbujas"}, {"t": "empresa", "l": "Alicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Yape", "tab": "burbujas"}, {"t": "empresa", "l": "Culqi", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA en Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Entel Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Ernst & Young (EY)", "tab": "burbujas"}, {"t": "empresa", "l": "Minsur S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Belcorp", "tab": "burbujas"}, {"t": "empresa", "l": "McKinsey & Company", "tab": "burbujas"}, {"t": "empresa", "l": "L'Oréal", "tab": "burbujas"}, {"t": "empresa", "l": "AB InBev", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Procter & Gamble", "tab": "burbujas"}, {"t": "empresa", "l": "adidas", "tab": "burbujas"}, {"t": "empresa", "l": "Sodimac", "tab": "burbujas"}, {"t": "empresa", "l": "Ferreyros S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "San Fernando", "tab": "burbujas"}, {"t": "empresa", "l": "STRACON", "tab": "burbujas"}, {"t": "empresa", "l": "Saga Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "LATAM Airlines", "tab": "burbujas"}, {"t": "empresa", "l": "Mibanco, banco de la Microempresa", "tab": "burbujas"}, {"t": "empresa", "l": "Scotiabank", "tab": "burbujas"}, {"t": "empresa", "l": "NTT DATA Europe & Latam", "tab": "burbujas"}, {"t": "empresa", "l": "Rimac Seguros y Reaseguros", "tab": "burbujas"}, {"t": "empresa", "l": "Deloitte", "tab": "burbujas"}, {"t": "empresa", "l": "Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo Coril", "tab": "burbujas"}, {"t": "empresa", "l": "Tottus", "tab": "burbujas"}, {"t": "empresa", "l": "Auna", "tab": "burbujas"}, {"t": "empresa", "l": "izipay", "tab": "burbujas"}, {"t": "empresa", "l": "Pacífico Seguros", "tab": "burbujas"}, {"t": "empresa", "l": "Química Suiza", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo AJE", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA", "tab": "burbujas"}, {"t": "empresa", "l": "cbc Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Colgate-Palmolive", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Divemotor", "tab": "burbujas"}, {"t": "empresa", "l": "Farmacias Peruanas", "tab": "burbujas"}, {"t": "empresa", "l": "Glencore", "tab": "burbujas"}, {"t": "empresa", "l": "Indra", "tab": "burbujas"}, {"t": "empresa", "l": "Misti Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Mondelēz International", "tab": "burbujas"}, {"t": "empresa", "l": "NGR S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Volcan Cia Minera SAA", "tab": "burbujas"}, {"t": "empresa", "l": "BanBif - Banco Interamericano de Finanzas", "tab": "burbujas"}, {"t": "empresa", "l": "Banco Pichincha Perú", "tab": "burbujas"}, {"t": "empresa", "l": "BP Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Clínica Internacional", "tab": "burbujas"}, {"t": "empresa", "l": "Los Portales", "tab": "burbujas"}, {"t": "empresa", "l": "LUCHA", "tab": "burbujas"}, {"t": "empresa", "l": "Favo", "tab": "burbujas"}, {"t": "empresa", "l": "Nexa Resources", "tab": "burbujas"}, {"t": "empresa", "l": "OXXO Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Perfumerías Unidas", "tab": "burbujas"}, {"t": "empresa", "l": "Prima AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sociedad Minera Cerro Verde S.A.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Telefónica", "tab": "burbujas"}, {"t": "empresa", "l": "Aon", "tab": "burbujas"}, {"t": "empresa", "l": "APOYO Consultoría", "tab": "burbujas"}, {"t": "empresa", "l": "astara", "tab": "burbujas"}, {"t": "empresa", "l": "Backus", "tab": "burbujas"}, {"t": "empresa", "l": "Cencosud S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Cisco", "tab": "burbujas"}, {"t": "empresa", "l": "Claro Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Crece Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Endeavor Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Lucky", "tab": "burbujas"}, {"t": "empresa", "l": "Intercorp Retail", "tab": "burbujas"}, {"t": "empresa", "l": "Nexus Group - Peru", "tab": "burbujas"}, {"t": "empresa", "l": "Profuturo AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sodexo", "tab": "burbujas"}, {"t": "empresa", "l": "Wally", "tab": "burbujas"}, {"t": "empresa", "l": "YURA S.A.", "tab": "burbujas"}, {"t": "rol", "l": "CEO", "tab": "roles"}, {"t": "rol", "l": "Gerente", "tab": "roles"}, {"t": "rol", "l": "Director", "tab": "roles"}, {"t": "rol", "l": "Senior", "tab": "roles"}, {"t": "rol", "l": "Analista", "tab": "roles"}, {"t": "rol", "l": "Junior", "tab": "roles"}, {"t": "rol", "l": "Practicante", "tab": "roles"}, {"t": "rol", "l": "Software", "tab": "roles"}, {"t": "rol", "l": "Data", "tab": "roles"}, {"t": "rol", "l": "Marketing", "tab": "roles"}, {"t": "rol", "l": "Ventas", "tab": "roles"}, {"t": "rol", "l": "Finanzas", "tab": "roles"}, {"t": "rol", "l": "RRHH", "tab": "roles"}, {"t": "rol", "l": "Legal", "tab": "roles"}, {"t": "rol", "l": "Product Manager", "tab": "roles"}, {"t": "sector", "l": "Banca", "tab": "sectores"}, {"t": "sector", "l": "Mineria", "tab": "sectores"}, {"t": "sector", "l": "Cosmeticos", "tab": "sectores"}, {"t": "sector", "l": "Consultoria", "tab": "sectores"}, {"t": "sector", "l": "Fintech", "tab": "sectores"}, {"t": "sector", "l": "Consumo Masivo", "tab": "sectores"}, {"t": "sector", "l": "Retail", "tab": "sectores"}, {"t": "sector", "l": "Seguros", "tab": "sectores"}, {"t": "sector", "l": "Telecom", "tab": "sectores"}, {"t": "sector", "l": "Tecnologia", "tab": "tecnologia"}, {"t": "sector", "l": "Ventas", "tab": "ventas"}, {"t": "region", "l": "Lima", "tab": "mapa-regiones"}, {"t": "region", "l": "Arequipa", "tab": "mapa-regiones"}, {"t": "region", "l": "Cusco", "tab": "mapa-regiones"}, {"t": "region", "l": "Piura", "tab": "mapa-regiones"}, {"t": "region", "l": "La Libertad", "tab": "mapa-regiones"}, {"t": "region", "l": "Lambayeque", "tab": "mapa-regiones"}, {"t": "region", "l": "Junín", "tab": "mapa-regiones"}, {"t": "region", "l": "Cajamarca", "tab": "mapa-regiones"}, {"t": "region", "l": "Áncash", "tab": "mapa-regiones"}, {"t": "region", "l": "Loreto", "tab": "mapa-regiones"}, {"t": "region", "l": "Ica", "tab": "mapa-regiones"}, {"t": "region", "l": "Tacna", "tab": "mapa-regiones"}, {"t": "region", "l": "Moquegua", "tab": "mapa-regiones"}, {"t": "region", "l": "Madre de Dios", "tab": "mapa-regiones"}, {"t": "region", "l": "Huancavelica", "tab": "mapa-regiones"}, {"t": "region", "l": "Apurímac", "tab": "mapa-regiones"}, {"t": "region", "l": "Ayacucho", "tab": "mapa-regiones"}, {"t": "region", "l": "Puno", "tab": "mapa-regiones"}, {"t": "region", "l": "Huánuco", "tab": "mapa-regiones"}, {"t": "region", "l": "San Martín", "tab": "mapa-regiones"}, {"t": "region", "l": "Pasco", "tab": "mapa-regiones"}, {"t": "region", "l": "Ucayali", "tab": "mapa-regiones"}, {"t": "region", "l": "Tumbes", "tab": "mapa-regiones"}, {"t": "region", "l": "Amazonas", "tab": "mapa-regiones"}, {"t": "region", "l": "Callao", "tab": "mapa-regiones"}, {"t": "inst CAS", "l": "HOSPITAL DE SULLANA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "PODER JUDICIAL", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "INPE", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MINISTERIO PÚBLICO - FISCALÍA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "GOBIERNO REGIONAL LIBERTAD", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MUNICIPALIDAD DE LAMPA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "HOSPITAL ANDAHUAYLAS", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD TECNOLÓGICA DE FRONTERA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD NACIONAL DE JULIACA(UNAJ)", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD CAÑETE YAUYOS", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD VALLE DEL MANTARO", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MINISTERIO DE CULTURA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "GERENCIA DE SALUD LORETO", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "HOSPITAL DOCENTE DE CAJAMARCA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MIGRACIONES", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "INABIF", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD DE HUANCAVELICA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD TACNA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MUNICIPALIDAD PROVINCIAL DE ANTA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "PEIP ESCUELAS BICENTENARIO", "tab": "cas-instituciones"}, {"t": "rol CAS", "l": "Médico (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Especialista (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Ingeniero (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Coordinador (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Analista (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Profesional (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Abogado (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Psicólogo (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Jefe (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Gerente (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Enfermero (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Asistente (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Operador (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Técnico (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Auxiliar (CAS)", "tab": "cas-roles"}];
+        var DASHBOARD_SEARCH_INDEX = [{"t": "empresa", "l": "Banco de Crédito BCP", "tab": "burbujas"}, {"t": "empresa", "l": "Interbank", "tab": "burbujas"}, {"t": "empresa", "l": "Alicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Yape", "tab": "burbujas"}, {"t": "empresa", "l": "Culqi", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA en Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Entel Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Ernst & Young (EY)", "tab": "burbujas"}, {"t": "empresa", "l": "Minsur S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Belcorp", "tab": "burbujas"}, {"t": "empresa", "l": "McKinsey & Company", "tab": "burbujas"}, {"t": "empresa", "l": "L'Oréal", "tab": "burbujas"}, {"t": "empresa", "l": "AB InBev", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp", "tab": "burbujas"}, {"t": "empresa", "l": "Procter & Gamble", "tab": "burbujas"}, {"t": "empresa", "l": "adidas", "tab": "burbujas"}, {"t": "empresa", "l": "Sodimac", "tab": "burbujas"}, {"t": "empresa", "l": "Ferreyros S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "San Fernando", "tab": "burbujas"}, {"t": "empresa", "l": "STRACON", "tab": "burbujas"}, {"t": "empresa", "l": "Saga Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "LATAM Airlines", "tab": "burbujas"}, {"t": "empresa", "l": "Mibanco, banco de la Microempresa", "tab": "burbujas"}, {"t": "empresa", "l": "Scotiabank", "tab": "burbujas"}, {"t": "empresa", "l": "NTT DATA Europe & Latam", "tab": "burbujas"}, {"t": "empresa", "l": "Rimac Seguros y Reaseguros", "tab": "burbujas"}, {"t": "empresa", "l": "Deloitte", "tab": "burbujas"}, {"t": "empresa", "l": "Falabella", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo Coril", "tab": "burbujas"}, {"t": "empresa", "l": "Tottus", "tab": "burbujas"}, {"t": "empresa", "l": "Auna", "tab": "burbujas"}, {"t": "empresa", "l": "izipay", "tab": "burbujas"}, {"t": "empresa", "l": "Pacífico Seguros", "tab": "burbujas"}, {"t": "empresa", "l": "Química Suiza", "tab": "burbujas"}, {"t": "empresa", "l": "Grupo AJE", "tab": "burbujas"}, {"t": "empresa", "l": "BBVA", "tab": "burbujas"}, {"t": "empresa", "l": "cbc Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Colgate-Palmolive", "tab": "burbujas"}, {"t": "empresa", "l": "Credicorp Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Divemotor", "tab": "burbujas"}, {"t": "empresa", "l": "Farmacias Peruanas", "tab": "burbujas"}, {"t": "empresa", "l": "Glencore", "tab": "burbujas"}, {"t": "empresa", "l": "Indra", "tab": "burbujas"}, {"t": "empresa", "l": "Misti Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Mondelēz International", "tab": "burbujas"}, {"t": "empresa", "l": "NGR S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Volcan Cia Minera SAA", "tab": "burbujas"}, {"t": "empresa", "l": "BanBif - Banco Interamericano de Finanzas", "tab": "burbujas"}, {"t": "empresa", "l": "Banco Pichincha Perú", "tab": "burbujas"}, {"t": "empresa", "l": "BP Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Clínica Internacional", "tab": "burbujas"}, {"t": "empresa", "l": "Los Portales", "tab": "burbujas"}, {"t": "empresa", "l": "LUCHA", "tab": "burbujas"}, {"t": "empresa", "l": "Favo", "tab": "burbujas"}, {"t": "empresa", "l": "Nexa Resources", "tab": "burbujas"}, {"t": "empresa", "l": "OXXO Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Perfumerías Unidas", "tab": "burbujas"}, {"t": "empresa", "l": "Prima AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sociedad Minera Cerro Verde S.A.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Telefónica", "tab": "burbujas"}, {"t": "empresa", "l": "Aon", "tab": "burbujas"}, {"t": "empresa", "l": "APOYO Consultoría", "tab": "burbujas"}, {"t": "empresa", "l": "astara", "tab": "burbujas"}, {"t": "empresa", "l": "Backus", "tab": "burbujas"}, {"t": "empresa", "l": "Cencosud S.A.", "tab": "burbujas"}, {"t": "empresa", "l": "Cisco", "tab": "burbujas"}, {"t": "empresa", "l": "Claro Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Crece Capital", "tab": "burbujas"}, {"t": "empresa", "l": "Endeavor Perú", "tab": "burbujas"}, {"t": "empresa", "l": "Lucky", "tab": "burbujas"}, {"t": "empresa", "l": "Intercorp Retail", "tab": "burbujas"}, {"t": "empresa", "l": "Nexus Group - Peru", "tab": "burbujas"}, {"t": "empresa", "l": "Profuturo AFP", "tab": "burbujas"}, {"t": "empresa", "l": "Sodexo", "tab": "burbujas"}, {"t": "empresa", "l": "Wally", "tab": "burbujas"}, {"t": "empresa", "l": "YURA S.A.", "tab": "burbujas"}, {"t": "rol", "l": "CEO", "tab": "roles"}, {"t": "rol", "l": "Gerente", "tab": "roles"}, {"t": "rol", "l": "Director", "tab": "roles"}, {"t": "rol", "l": "Senior", "tab": "roles"}, {"t": "rol", "l": "Analista", "tab": "roles"}, {"t": "rol", "l": "Junior", "tab": "roles"}, {"t": "rol", "l": "Practicante", "tab": "roles"}, {"t": "rol", "l": "Software", "tab": "roles"}, {"t": "rol", "l": "Data", "tab": "roles"}, {"t": "rol", "l": "Marketing", "tab": "roles"}, {"t": "rol", "l": "Ventas", "tab": "roles"}, {"t": "rol", "l": "Finanzas", "tab": "roles"}, {"t": "rol", "l": "RRHH", "tab": "roles"}, {"t": "rol", "l": "Legal", "tab": "roles"}, {"t": "rol", "l": "Product Manager", "tab": "roles"}, {"t": "sector", "l": "Banca", "tab": "sectores"}, {"t": "sector", "l": "Mineria", "tab": "sectores"}, {"t": "sector", "l": "Cosmeticos", "tab": "sectores"}, {"t": "sector", "l": "Consultoria", "tab": "sectores"}, {"t": "sector", "l": "Fintech", "tab": "sectores"}, {"t": "sector", "l": "Consumo Masivo", "tab": "sectores"}, {"t": "sector", "l": "Retail", "tab": "sectores"}, {"t": "sector", "l": "Seguros", "tab": "sectores"}, {"t": "sector", "l": "Telecom", "tab": "sectores"}, {"t": "sector", "l": "Tecnologia", "tab": "tecnologia"}, {"t": "sector", "l": "Ventas", "tab": "ventas"}, {"t": "region", "l": "Lima", "tab": "mapa-regiones"}, {"t": "region", "l": "Arequipa", "tab": "mapa-regiones"}, {"t": "region", "l": "Cusco", "tab": "mapa-regiones"}, {"t": "region", "l": "Piura", "tab": "mapa-regiones"}, {"t": "region", "l": "La Libertad", "tab": "mapa-regiones"}, {"t": "region", "l": "Lambayeque", "tab": "mapa-regiones"}, {"t": "region", "l": "Junín", "tab": "mapa-regiones"}, {"t": "region", "l": "Cajamarca", "tab": "mapa-regiones"}, {"t": "region", "l": "Áncash", "tab": "mapa-regiones"}, {"t": "region", "l": "Loreto", "tab": "mapa-regiones"}, {"t": "region", "l": "Ica", "tab": "mapa-regiones"}, {"t": "region", "l": "Tacna", "tab": "mapa-regiones"}, {"t": "region", "l": "Moquegua", "tab": "mapa-regiones"}, {"t": "region", "l": "Madre de Dios", "tab": "mapa-regiones"}, {"t": "region", "l": "Huancavelica", "tab": "mapa-regiones"}, {"t": "region", "l": "Apurímac", "tab": "mapa-regiones"}, {"t": "region", "l": "Ayacucho", "tab": "mapa-regiones"}, {"t": "region", "l": "Puno", "tab": "mapa-regiones"}, {"t": "region", "l": "Huánuco", "tab": "mapa-regiones"}, {"t": "region", "l": "San Martín", "tab": "mapa-regiones"}, {"t": "region", "l": "Pasco", "tab": "mapa-regiones"}, {"t": "region", "l": "Ucayali", "tab": "mapa-regiones"}, {"t": "region", "l": "Tumbes", "tab": "mapa-regiones"}, {"t": "region", "l": "Amazonas", "tab": "mapa-regiones"}, {"t": "region", "l": "Callao", "tab": "mapa-regiones"}, {"t": "inst CAS", "l": "HOSPITAL DE SULLANA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "PODER JUDICIAL", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "INPE", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MINISTERIO PÚBLICO - FISCALÍA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "GOBIERNO REGIONAL LIBERTAD", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MUNICIPALIDAD DE LAMPA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "HOSPITAL ANDAHUAYLAS", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD TECNOLÓGICA DE FRONTERA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD NACIONAL DE JULIACA(UNAJ)", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD CAÑETE YAUYOS", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD VALLE DEL MANTARO", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MINISTERIO DE CULTURA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "GERENCIA DE SALUD LORETO", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "HOSPITAL DOCENTE DE CAJAMARCA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MIGRACIONES", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "INABIF", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "UNIVERSIDAD DE HUANCAVELICA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "RED DE SALUD TACNA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "MUNICIPALIDAD PROVINCIAL DE ANTA", "tab": "cas-instituciones"}, {"t": "inst CAS", "l": "PEIP ESCUELAS BICENTENARIO", "tab": "cas-instituciones"}, {"t": "rol CAS", "l": "Médico (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Especialista (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Ingeniero (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Coordinador (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Analista (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Profesional (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Abogado (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Psicólogo (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Jefe (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Gerente (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Enfermero (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Asistente (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Operador (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Técnico (CAS)", "tab": "cas-roles"}, {"t": "rol CAS", "l": "Auxiliar (CAS)", "tab": "cas-roles"}, {"t": "sector", "l": "Logística", "tab": "sectores"}, {"t": "sector", "l": "Logistica", "tab": "sectores"}, {"t": "sector", "l": "Tecnología", "tab": "tecnologia"}, {"t": "sector", "l": "IT", "tab": "tecnologia"}, {"t": "sector", "l": "Comercial", "tab": "ventas"}, {"t": "sector", "l": "Retail Comercial", "tab": "ventas"}, {"t": "sector", "l": "Salud", "tab": "cas-instituciones"}, {"t": "sector", "l": "Hospitales", "tab": "cas-instituciones"}, {"t": "sector", "l": "Educación", "tab": "cas-instituciones"}, {"t": "sector", "l": "Gobierno", "tab": "cas-instituciones"}, {"t": "sector", "l": "Estado", "tab": "cas-instituciones"}, {"t": "sector", "l": "Construcción", "tab": "sectores"}, {"t": "sector", "l": "Inmobiliario", "tab": "sectores"}, {"t": "sector", "l": "Pesca", "tab": "sectores"}, {"t": "sector", "l": "Agroindustria", "tab": "sectores"}, {"t": "sector", "l": "Energía", "tab": "sectores"}, {"t": "sector", "l": "Petróleo", "tab": "sectores"}, {"t": "sector", "l": "Automotriz", "tab": "sectores"}, {"t": "sector", "l": "Aerolíneas", "tab": "sectores"}, {"t": "sector", "l": "Farmacéutica", "tab": "sectores"}, {"t": "sector", "l": "Universidades", "tab": "cas-instituciones"}, {"t": "sector", "l": "Municipalidad", "tab": "cas-instituciones"}, {"t": "sector", "l": "Ministerio", "tab": "cas-instituciones"}, {"t": "rol", "l": "Contador", "tab": "cas-roles"}, {"t": "rol", "l": "Médico", "tab": "cas-roles"}, {"t": "rol", "l": "Enfermero", "tab": "cas-roles"}, {"t": "rol", "l": "Psicólogo", "tab": "cas-roles"}, {"t": "rol", "l": "Abogado", "tab": "cas-roles"}, {"t": "rol", "l": "Ingeniero", "tab": "cas-roles"}, {"t": "rol", "l": "Profesor", "tab": "cas-roles"}, {"t": "rol", "l": "Diseñador", "tab": "roles"}, {"t": "rol", "l": "Designer", "tab": "roles"}, {"t": "rol", "l": "Developer", "tab": "roles"}, {"t": "rol", "l": "Programador", "tab": "roles"}, {"t": "rol", "l": "Backend", "tab": "tecnologia"}, {"t": "rol", "l": "Frontend", "tab": "tecnologia"}, {"t": "rol", "l": "Fullstack", "tab": "tecnologia"}, {"t": "rol", "l": "DevOps", "tab": "tecnologia"}, {"t": "rol", "l": "QA", "tab": "tecnologia"}, {"t": "rol", "l": "Data Scientist", "tab": "tecnologia"}, {"t": "rol", "l": "Data Engineer", "tab": "tecnologia"}, {"t": "NSE", "l": "NSE A++", "tab": "pea"}, {"t": "NSE", "l": "NSE A+", "tab": "pea"}, {"t": "NSE", "l": "NSE A", "tab": "pea"}, {"t": "NSE", "l": "NSE B", "tab": "pea"}, {"t": "NSE", "l": "NSE C", "tab": "pea"}, {"t": "NSE", "l": "NSE D", "tab": "pea"}, {"t": "NSE", "l": "NSE E", "tab": "pea"}, {"t": "NSE", "l": "Calculadora NSE", "tab": "pea"}, {"t": "NSE", "l": "Nivel socioeconómico", "tab": "pea"}, {"t": "concepto", "l": "PEA", "tab": "pea"}, {"t": "concepto", "l": "Empleo formal", "tab": "pea"}, {"t": "concepto", "l": "Empleo informal", "tab": "pea"}, {"t": "concepto", "l": "Salario mínimo", "tab": "brecha"}, {"t": "concepto", "l": "RMV", "tab": "brecha"}, {"t": "concepto", "l": "Brecha salarial", "tab": "comp-salarios"}, {"t": "concepto", "l": "Comparativa público privado", "tab": "comp-salarios"}, {"t": "concepto", "l": "CAS", "tab": "cas-distribucion"}, {"t": "concepto", "l": "Convocatorias CAS", "tab": "cas-distribucion"}, {"t": "concepto", "l": "Sector público", "tab": "cas-distribucion"}, {"t": "concepto", "l": "Sector privado", "tab": "overview"}, {"t": "concepto", "l": "Distribución salarial", "tab": "overview"}, {"t": "concepto", "l": "Top empresas", "tab": "ranking"}, {"t": "concepto", "l": "Ranking salarial", "tab": "ranking"}, {"t": "concepto", "l": "Mapa Perú", "tab": "mapa-regiones"}, {"t": "concepto", "l": "Heatmap", "tab": "matriz"}, {"t": "concepto", "l": "Burbujas", "tab": "burbujas"}, {"t": "concepto", "l": "Histograma", "tab": "overview"}, {"t": "empresa", "l": "BCP", "tab": "burbujas"}, {"t": "empresa", "l": "McKinsey", "tab": "burbujas"}, {"t": "empresa", "l": "Pacifico", "tab": "burbujas"}, {"t": "empresa", "l": "Rimac", "tab": "burbujas"}];
+
+        // Toast notification global
+        function showToast(html, opts) {
+            opts = opts || {};
+            let toast = document.getElementById('app-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'app-toast';
+                toast.className = 'app-toast';
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = html;
+            toast.className = 'app-toast show' + (opts.type ? ' app-toast--' + opts.type : '');
+            clearTimeout(toast._t);
+            toast._t = setTimeout(() => toast.classList.remove('show'), opts.duration || 2400);
+        }
+
+        function flashTarget(el) {
+            if (!el) return;
+            el.classList.add('flash-target');
+            setTimeout(() => el.classList.remove('flash-target'), 1600);
+        }
 
         function setupSearch() {
             const input = document.getElementById('search-input');
@@ -1483,25 +1519,61 @@ if(document.getElementById("chart-heatmap")){
                 .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
             const ICON = { empresa: 'fa-building', rol: 'fa-user-tie',
-                           sector: 'fa-industry', region: 'fa-map-marker-alt' };
+                           sector: 'fa-industry', region: 'fa-map-marker-alt',
+                           'inst CAS': 'fa-landmark', 'rol CAS': 'fa-user-tie',
+                           NSE: 'fa-bullseye', concepto: 'fa-bookmark' };
             let highlighted = -1;
             let currentMatches = [];
 
-            function render(matches) {
+            // Score por relevancia: exacto > empieza con > contiene
+            function score(label, q) {
+                const n = normalize(label);
+                if (n === q) return 0;
+                if (n.startsWith(q)) return 1;
+                if (n.includes(q)) return 2;
+                return 99;
+            }
+
+            // Sugerencias por defecto cuando no hay match
+            function getSuggestions(q) {
+                const SUGGESTIONS = [
+                    'Banca', 'Mineria', 'Tecnolog\u00eda', 'NSE A', 'BCP', 'McKinsey',
+                    'PEA', 'Lima', 'CAS', 'Comparativa'
+                ];
+                return SUGGESTIONS.map(s =>
+                    DASHBOARD_SEARCH_INDEX.find(it => normalize(it.l) === normalize(s))
+                ).filter(Boolean).slice(0, 6);
+            }
+
+            function renderItem(m, i) {
+                return '<div class="sr-item" data-idx="' + i + '">' +
+                    '<i class="fas ' + (ICON[m.t] || 'fa-search') + '" style="color:#95a5a6;font-size:0.75rem;"></i>' +
+                    '<span style="flex:1;">' + m.l + '</span>' +
+                    '<span class="sr-type">' + m.t + '</span>' +
+                    '</div>';
+            }
+
+            function render(matches, q) {
                 if (matches.length === 0) {
-                    results.innerHTML = '<div class="sr-empty">Sin coincidencias</div>';
+                    const suggestions = getSuggestions(q);
+                    let html = '<div class="sr-empty">' +
+                        '<div style="font-weight:600; color:#5d6d7e; margin-bottom:0.4rem;">' +
+                        '<i class="fas fa-search-minus" style="margin-right:5px; color:#bdc3c7;"></i>' +
+                        'No encontramos "<span style="color:#2c3e50;">' + q + '</span>"</div>' +
+                        '<div style="font-size:0.78rem; color:#95a5a6; margin-bottom:0.8rem;">' +
+                        'Prob\u00e1 con un sector, empresa, rol, departamento o NSE. Sugerencias:' +
+                        '</div></div>';
+                    if (suggestions.length) {
+                        html += suggestions.map((m, i) => renderItem(m, i)).join('');
+                    }
+                    results.innerHTML = html;
+                    currentMatches = suggestions;
                 } else {
-                    results.innerHTML = matches.slice(0, 12).map((m, i) =>
-                        '<div class="sr-item" data-idx="' + i + '">' +
-                        '<i class="fas ' + (ICON[m.t] || 'fa-search') + '" style="color:#95a5a6;font-size:0.75rem;"></i>' +
-                        '<span style="flex:1;">' + m.l + '</span>' +
-                        '<span class="sr-type">' + m.t + '</span>' +
-                        '</div>'
-                    ).join('');
+                    results.innerHTML = matches.slice(0, 12).map(renderItem).join('');
+                    currentMatches = matches.slice(0, 12);
                 }
                 results.classList.add('open');
                 highlighted = -1;
-                currentMatches = matches.slice(0, 12);
                 results.querySelectorAll('.sr-item').forEach(el => {
                     el.addEventListener('click', () => goTo(currentMatches[parseInt(el.dataset.idx)]));
                 });
@@ -1513,17 +1585,43 @@ if(document.getElementById("chart-heatmap")){
                 input.value = '';
                 showTab(item.tab);
                 const tab = document.getElementById(item.tab + '-tab');
-                if (tab) setTimeout(() => tab.scrollIntoView({behavior:'smooth', block:'start'}), 200);
+                if (tab) {
+                    setTimeout(() => {
+                        tab.scrollIntoView({behavior:'smooth', block:'start'});
+                        flashTarget(tab);
+                    }, 250);
+                }
+                const typeLabel = ({empresa:'empresa', rol:'rol', sector:'sector', region:'regi\u00f3n',
+                                    'inst CAS':'instituci\u00f3n p\u00fablica', 'rol CAS':'rol CAS',
+                                    NSE:'NSE', concepto:'concepto'})[item.t] || item.t;
+                showToast('<i class="fas fa-location-arrow"></i> Te llevamos a <b>' +
+                    item.l + '</b> <span style="opacity:0.7;">(' + typeLabel + ')</span>',
+                    { type: 'info', duration: 2500 });
             }
 
             input.addEventListener('input', () => {
-                const q = normalize(input.value.trim());
+                const raw = input.value.trim();
+                const q = normalize(raw);
                 if (q.length < 1) {
                     results.classList.remove('open');
                     return;
                 }
-                const matches = DASHBOARD_SEARCH_INDEX.filter(item => normalize(item.l).includes(q));
-                render(matches);
+                const matches = DASHBOARD_SEARCH_INDEX
+                    .filter(item => normalize(item.l).includes(q))
+                    .sort((a, b) => score(a.l, q) - score(b.l, q));
+                render(matches, raw);
+            });
+
+            input.addEventListener('focus', () => {
+                if (input.value.trim().length >= 1) {
+                    // Re-render to reopen
+                    const raw = input.value.trim();
+                    const q = normalize(raw);
+                    const matches = DASHBOARD_SEARCH_INDEX
+                        .filter(item => normalize(item.l).includes(q))
+                        .sort((a, b) => score(a.l, q) - score(b.l, q));
+                    render(matches, raw);
+                }
             });
 
             input.addEventListener('keydown', e => {
