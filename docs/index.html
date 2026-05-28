@@ -1261,11 +1261,60 @@ if(document.getElementById("chart-heatmap")){
                 <span class="sector-banner__icon">&#127963;&#65039;</span>
                 <div>
                     <div class="sector-banner__title">Sector P&Uacute;BLICO (CAS)</div>
-                    <div class="sector-banner__subtitle">1,123 convocatorias CAS vigentes &middot; fuente: convocatoriasdetrabajo.com &middot; <a href="cas-nuevas.atom" style="color:inherit;text-decoration:underline;" title="Feed Atom/RSS con las últimas convocatorias CAS"><i class="fas fa-rss"></i> RSS</a> &middot; <a href="estado.html" style="color:inherit;text-decoration:underline;font-weight:600;" title="Ver el panorama completo del empleo en el Estado peruano (1.3M servidores, datos MEF)"><i class="fas fa-chart-pie"></i> Empleo Estatal Completo →</a></div>
+                    <div class="sector-banner__subtitle">1,123 convocatorias CAS vigentes &middot; fuente: convocatoriasdetrabajo.com &middot; <a href="cas-nuevas.atom" style="color:inherit;text-decoration:underline;" title="Feed Atom/RSS con las últimas convocatorias CAS"><i class="fas fa-rss"></i> RSS</a></div>
                 </div>
                 <i class="fas fa-chevron-down accordion-chevron"></i>
             </div>
             <div class="accordion-body">
+
+        <!-- ╔══════════ CTA HACIA dashboard macro de Estado ══════════╗ -->
+        <a href="estado.html" class="estado-cta" style="
+            display: flex; align-items: center; gap: 1rem;
+            text-decoration: none; color: inherit;
+            background: linear-gradient(135deg, #0B2545 0%, #1a3a6e 50%, #f39c12 130%);
+            border-radius: 14px;
+            padding: 1.1rem 1.4rem;
+            margin: 0 0 1.5rem 0;
+            box-shadow: 0 4px 14px rgba(11, 37, 69, 0.18);
+            position: relative; overflow: hidden;
+            transition: transform 0.18s, box-shadow 0.18s;
+        ">
+            <div style="
+                width: 56px; height: 56px; flex-shrink: 0;
+                background: rgba(255,255,255,0.18);
+                border-radius: 12px;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 1.6rem; color: #ffdb70;
+            ">📊</div>
+            <div style="flex: 1; color: white;">
+                <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #ffdb70; font-weight: 700; margin-bottom: 0.2rem;">
+                    ✨ NUEVO · Datos oficiales MEF
+                </div>
+                <div style="font-size: 1.18rem; font-weight: 700; line-height: 1.25; margin-bottom: 0.15rem;">
+                    Mira el panorama completo: Empleo en el Estado Peruano
+                </div>
+                <div style="font-size: 0.92rem; color: #d6e0f0; line-height: 1.4;">
+                    <strong>1.33 millones de servidores</strong> · 8 regímenes · 197 instituciones · Diplomáticos S/45k vs Auxiliares S/2.2k
+                </div>
+            </div>
+            <div style="
+                color: white; font-weight: 700;
+                background: rgba(255,255,255,0.2);
+                padding: 0.6rem 1rem; border-radius: 999px;
+                white-space: nowrap; font-size: 0.92rem;
+                flex-shrink: 0;
+                animation: estadoPulse 2.2s ease-in-out infinite;
+            ">Ver dashboard <i class="fas fa-arrow-right" style="margin-left:0.3rem;"></i></div>
+        </a>
+        <style>
+            @keyframes estadoPulse {
+                0%, 100% { box-shadow: 0 0 0 0 rgba(243,156,18,0.55); transform: translateY(0); }
+                50% { box-shadow: 0 0 0 10px rgba(243,156,18,0); transform: translateY(-2px); }
+            }
+            .estado-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(11,37,69,0.28); }
+            .estado-cta:hover { text-decoration: none; }
+        </style>
+        <!-- ╚══════════ /CTA ══════════╝ -->
 
         <section class="tabs-container" style="margin-bottom: 1.5rem;">
             <div class="tabs-header">
