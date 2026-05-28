@@ -304,6 +304,42 @@ def update_counters(html, total, total_sal):
     return new_html, replacements
 
 
+SPANISH_MONTHS = {1: "ene", 2: "feb", 3: "mar", 4: "abr", 5: "may", 6: "jun",
+                  7: "jul", 8: "ago", 9: "set", 10: "oct", 11: "nov", 12: "dic"}
+
+
+def format_fecha(iso_str):
+    """'2026-05-28T03:39:48' → '28-may-2026'."""
+    from datetime import datetime
+    try:
+        dt = datetime.fromisoformat(str(iso_str))
+        return f"{dt.day:02d}-{SPANISH_MONTHS[dt.month]}-{dt.year}"
+    except (ValueError, TypeError):
+        return str(iso_str)[:10] if iso_str else "—"
+
+
+def update_actualizado(html, fecha):
+    """Reemplaza 'actualizado diario' por la fecha real del scrape.
+    Idempotente: si ya está reemplazado con un patrón 'actualizado al', el
+    primer pase no encuentra match y se hace un segundo barrido con regex."""
+    repls = [
+        ("(actualizado diario)",                            f"(actualizado al {fecha})"),
+        ("actualizado diario vía GitHub Actions",           f"actualizado al {fecha} vía GitHub Actions"),
+        ("actualizado diario v&iacute;a GitHub Actions",    f"actualizado al {fecha} v&iacute;a GitHub Actions"),
+        ("actualizado diario por GitHub Actions",           f"actualizado al {fecha} por GitHub Actions"),
+        ("actualizadas a diario",                           f"actualizadas al {fecha}"),
+    ]
+    n_total = 0
+    for old, new in repls:
+        html, n = re.subn(re.escape(old), new, html)
+        n_total += n
+    # Segundo barrido: si en una corrida previa ya quedó 'actualizado al <fecha vieja>',
+    # lo refrescamos a la fecha nueva.
+    html, n2 = re.subn(r"actualizado al \d{2}-[a-z]{3}-\d{4}", f"actualizado al {fecha}", html)
+    html, n3 = re.subn(r"actualizadas al \d{2}-[a-z]{3}-\d{4}", f"actualizadas al {fecha}", html)
+    return html, n_total + n2 + n3
+
+
 def main():
     if not CSV.exists():
         print(f"ERROR: {CSV} no existe", file=sys.stderr)
@@ -347,6 +383,12 @@ def main():
 
     html, n_counters = update_counters(html, total, total_sal)
     print(f"   ✓ Contadores actualizados: {n_counters} reemplazos (1,194→{total:,}, 1,193→{total_sal:,})")
+
+    # Fecha de última extracción (del primer row del CSV)
+    fecha_raw = df["fecha_extraccion"].iloc[0] if len(df) else None
+    fecha = format_fecha(fecha_raw)
+    html, n_fecha = update_actualizado(html, fecha)
+    print(f"   ✓ Fecha del scrape actualizada: {fecha} ({n_fecha} reemplazos)")
 
     HTML.write_text(html)
     print(f"\nListo. docs/index.html escrito ({patched_count} charts patcheados).")
