@@ -134,6 +134,51 @@ def main():
     print(f"\n[8] Nivel de gobierno:")
     print(nivel)
 
+    # ──────── Mapa por departamento (extraído de pliegos regionales) ────────
+    DEPTOS = ["AMAZONAS", "ANCASH", "APURIMAC", "AREQUIPA", "AYACUCHO",
+              "CAJAMARCA", "CALLAO", "CUSCO", "HUANCAVELICA", "HUANUCO",
+              "ICA", "JUNIN", "LA LIBERTAD", "LAMBAYEQUE", "LIMA",
+              "LORETO", "MADRE DE DIOS", "MOQUEGUA", "PASCO", "PIURA",
+              "PUNO", "SAN MARTIN", "TACNA", "TUMBES", "UCAYALI"]
+
+    def depto_from_pliego(p):
+        u = str(p).upper()
+        for d in DEPTOS:
+            if d in u:
+                return d
+        return None  # Nacional / sin asignación territorial
+
+    activos_geo = activos.copy()
+    activos_geo["DEPTO"] = activos_geo["PLIEGO"].apply(depto_from_pliego)
+
+    geo = (activos_geo.dropna(subset=["DEPTO"])
+                       .groupby("DEPTO")
+                       .apply(lambda g: pd.Series({
+                           "cantidad": int(g["CANTIDAD"].sum()),
+                           "ing_prom": ingreso_promedio(g),
+                       }))
+                       .sort_values("cantidad", ascending=False))
+    print(f"\n[9] Por departamento (extraído de pliego):")
+    print(geo)
+
+    # ──────── Sector × Régimen (matriz para burbujas) ────────
+    sec_reg = (activos.groupby(["SECTOR", "DESC_REGIMEN_LABORAL"])
+                       .apply(lambda g: pd.Series({
+                           "cantidad": int(g["CANTIDAD"].sum()),
+                           "ing_prom": ingreso_promedio(g),
+                       })))
+    print(f"\n[10] Sector × Régimen: {len(sec_reg)} pares")
+
+    # ──────── Lista completa de pliegos (para buscador) ────────
+    pliegos_full = (activos.groupby(["PLIEGO", "NIVEL", "SECTOR"])
+                            .apply(lambda g: pd.Series({
+                                "cantidad": int(g["CANTIDAD"].sum()),
+                                "ing_prom": ingreso_promedio(g),
+                            }))
+                            .reset_index()
+                            .sort_values("cantidad", ascending=False))
+    print(f"\n[11] Lista completa de pliegos: {len(pliegos_full)}")
+
     # ──────── Construir JSON output ────────
     def df_to_records(df, name_col="name", value_cols=None):
         if value_cols is None:
@@ -150,10 +195,38 @@ def main():
             records.append(r)
         return records
 
+    # Burbujas: pliegos con n>=200 (manejable y representativo)
+    pliegos_burbujas = pliego[pliego["cantidad"] >= 200].copy()
+
+    # Sector × Régimen records (para chart de burbujas Sector×Régimen)
+    sec_reg_records = []
+    for (sec, reg_name), row in sec_reg.iterrows():
+        if row["cantidad"] < 100:
+            continue
+        sec_reg_records.append({
+            "sector": sec,
+            "regimen": reg_name,
+            "cantidad": int(row["cantidad"]),
+            "ing_prom": float(row["ing_prom"]),
+        })
+
+    # Pliegos en formato JSON compacto para buscador (campos cortos: n=nombre, l=nivel, s=sector, c=cantidad, i=ing)
+    pliegos_search = []
+    for _, row in pliegos_full.iterrows():
+        if row["cantidad"] < 5:  # filtrar ruido
+            continue
+        pliegos_search.append({
+            "n": str(row["PLIEGO"])[:120],
+            "l": str(row["NIVEL"]),
+            "s": str(row["SECTOR"]),
+            "c": int(row["cantidad"]),
+            "i": round(float(row["ing_prom"]), 0),
+        })
+
     output = {
         "fuente": "MEF — Aplicativo Informático para el Registro Centralizado de Planillas (AIRHSP)",
         "fuente_url": "https://www.datosabiertos.gob.pe/dataset/personal-activo-y-pensionista-del-sector-p%C3%BAblico-registrado-en-el-airhsp",
-        "csv_url": "https://fs.datosabiertos.mef.gob.pe/datastorefiles/PERSONALSP_2025.csv",
+        "csv_url": f"https://fs.datosabiertos.mef.gob.pe/datastorefiles/PERSONALSP_{snap['EJERCICIO'].iloc[0]}.csv",
         "periodo": latest,
         "kpis": {
             "total_servidores": total_serv,
@@ -166,7 +239,11 @@ def main():
         "por_sector": df_to_records(sector, "sector"),
         "por_grupo_ocupacional": df_to_records(grupo, "grupo"),
         "top_pliegos": df_to_records(pliego.head(30), "pliego"),
+        "pliegos_burbujas": df_to_records(pliegos_burbujas, "pliego"),
         "por_nivel": df_to_records(nivel, "nivel"),
+        "por_depto": df_to_records(geo, "depto"),
+        "sector_x_regimen": sec_reg_records,
+        "pliegos_search": pliegos_search,
     }
 
     OUT.write_text(json.dumps(output, ensure_ascii=False, indent=2))

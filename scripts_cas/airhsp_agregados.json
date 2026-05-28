@@ -558,6 +558,823 @@
       "ing_prom": 4139.636149215434
     }
   ],
+  "pliegos_burbujas": [
+    {
+      "pliego": "M. DEL INTERIOR",
+      "cantidad": 145000.0,
+      "ing_prom": 4232.941855241379
+    },
+    {
+      "pliego": "M. DE DEFENSA",
+      "cantidad": 102698.0,
+      "ing_prom": 3274.5903834544006
+    },
+    {
+      "pliego": "M. DE EDUCACION",
+      "cantidad": 86264.0,
+      "ing_prom": 3996.979472549383
+    },
+    {
+      "pliego": "M. DE SALUD",
+      "cantidad": 73916.0,
+      "ing_prom": 4962.79975012176
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PIURA",
+      "cantidad": 48366.0,
+      "ing_prom": 3939.084393995782
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CAJAMARCA",
+      "cantidad": 47713.0,
+      "ing_prom": 4226.987658709367
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LA LIBERTAD",
+      "cantidad": 44612.0,
+      "ing_prom": 4109.852645252398
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LORETO",
+      "cantidad": 43677.0,
+      "ing_prom": 3731.541859788905
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE JUNIN",
+      "cantidad": 39649.0,
+      "ing_prom": 4062.7393702237127
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PUNO",
+      "cantidad": 38783.0,
+      "ing_prom": 4180.0903388082415
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CUSCO",
+      "cantidad": 38198.0,
+      "ing_prom": 4143.659581129902
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ANCASH",
+      "cantidad": 35902.0,
+      "ing_prom": 4112.738812043897
+    },
+    {
+      "pliego": "PODER JUDICIAL",
+      "cantidad": 34489.0,
+      "ing_prom": 6255.2888886311575
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AREQUIPA",
+      "cantidad": 30885.0,
+      "ing_prom": 4177.464638497652
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE SAN MARTIN",
+      "cantidad": 30522.0,
+      "ing_prom": 3848.718338247821
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LIMA",
+      "cantidad": 28578.0,
+      "ing_prom": 3985.532380152565
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANUCO",
+      "cantidad": 28201.0,
+      "ing_prom": 4004.8858196517854
+    },
+    {
+      "pliego": "MINISTERIO PUBLICO",
+      "cantidad": 27967.0,
+      "ing_prom": 7017.175875138557
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AYACUCHO",
+      "cantidad": 27264.0,
+      "ing_prom": 4166.20184235622
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LAMBAYEQUE",
+      "cantidad": 23909.0,
+      "ing_prom": 4187.4124894391225
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ICA",
+      "cantidad": 21630.0,
+      "ing_prom": 4102.243325473879
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANCAVELICA",
+      "cantidad": 20375.0,
+      "ing_prom": 4111.143629447853
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "cantidad": 20148.0,
+      "ing_prom": 3840.5505896366885
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE APURIMAC",
+      "cantidad": 19757.0,
+      "ing_prom": 4151.96115250291
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DE LA PROVINCIA CONSTITUCIONAL DEL CALLAO",
+      "cantidad": 19417.0,
+      "ing_prom": 3937.8794190657677
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AMAZONAS",
+      "cantidad": 19202.0,
+      "ing_prom": 4004.7172888240807
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE ADUANAS Y DE ADMINISTRACION TRIBUTARIA",
+      "cantidad": 12882.0,
+      "ing_prom": 7252.730363297626
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL PENITENCIARIO",
+      "cantidad": 11503.0,
+      "ing_prom": 3209.484551856038
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PASCO",
+      "cantidad": 11140.0,
+      "ing_prom": 3941.5883473967683
+    },
+    {
+      "pliego": "MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES",
+      "cantidad": 10133.0,
+      "ing_prom": 4139.636149215434
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TACNA",
+      "cantidad": 9887.0,
+      "ing_prom": 4343.629984828563
+    },
+    {
+      "pliego": "MINISTERIO DE DESARROLLO E INCLUSION SOCIAL",
+      "cantidad": 9246.0,
+      "ing_prom": 3949.206048020766
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TUMBES",
+      "cantidad": 8996.0,
+      "ing_prom": 3850.3332192085372
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MOQUEGUA",
+      "cantidad": 8002.0,
+      "ing_prom": 4120.256957010747
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MADRE DE DIOS",
+      "cantidad": 6299.0,
+      "ing_prom": 3922.5739450706456
+    },
+    {
+      "pliego": "CONTRALORIA GENERAL",
+      "cantidad": 5682.0,
+      "ing_prom": 7487.5820028159105
+    },
+    {
+      "pliego": "U.N. MAYOR DE SAN MARCOS",
+      "cantidad": 5559.0,
+      "ing_prom": 3952.5178557294475
+    },
+    {
+      "pliego": "M. DE JUSTICIA Y DERECHOS HUMANOS",
+      "cantidad": 4708.0,
+      "ing_prom": 5399.2809855565
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE LOS REGISTROS PUBLICOS",
+      "cantidad": 4487.0,
+      "ing_prom": 5400.813429908625
+    },
+    {
+      "pliego": "M. DE CULTURA",
+      "cantidad": 4151.0,
+      "ing_prom": 4036.5381811611664
+    },
+    {
+      "pliego": "CONGRESO DE LA REPUBLICA",
+      "cantidad": 3819.0,
+      "ing_prom": 10490.828342498036
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL DE ENFERMEDADES NEOPLASICAS - INEN",
+      "cantidad": 3807.0,
+      "ing_prom": 4284.577160493827
+    },
+    {
+      "pliego": "U.N. DE SAN AGUSTIN",
+      "cantidad": 3537.0,
+      "ing_prom": 4291.080008481764
+    },
+    {
+      "pliego": "REGISTRO NACIONAL DE IDENTIFICACION Y ESTADO CIVIL",
+      "cantidad": 3299.0,
+      "ing_prom": 3773.0116611094263
+    },
+    {
+      "pliego": "MINISTERIO DE TRANSPORTES Y COMUNICACIONES",
+      "cantidad": 3107.0,
+      "ing_prom": 5835.091406501449
+    },
+    {
+      "pliego": "U.N. FEDERICO VILLARREAL",
+      "cantidad": 2772.0,
+      "ing_prom": 3940.808939393939
+    },
+    {
+      "pliego": "SERVICIO NACIONAL DE SANIDAD AGRARIA - SENASA",
+      "cantidad": 2637.0,
+      "ing_prom": 3771.6616609783846
+    },
+    {
+      "pliego": "MINISTERIO DE DESARROLLO AGRARIO Y RIEGO",
+      "cantidad": 2594.0,
+      "ing_prom": 6158.167143407864
+    },
+    {
+      "pliego": "U.N. DEL ALTIPLANO",
+      "cantidad": 2555.0,
+      "ing_prom": 4598.036544031312
+    },
+    {
+      "pliego": "M. DE ECONOMIA Y FINANZAS",
+      "cantidad": 2397.0,
+      "ing_prom": 9037.93332081769
+    },
+    {
+      "pliego": "U.N. DE INGENIERIA",
+      "cantidad": 2358.0,
+      "ing_prom": 3861.601675148431
+    },
+    {
+      "pliego": "U.N. DE TRUJILLO",
+      "cantidad": 2252.0,
+      "ing_prom": 4532.019880106572
+    },
+    {
+      "pliego": "SUPERINTENDENCIA DE TRANSPORTE TERRESTRE DE PERSONAS, CARGA Y MERCANCIAS - SUTRAN",
+      "cantidad": 2178.0,
+      "ing_prom": 4073.564361799817
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE MIGRACIONES",
+      "cantidad": 2057.0,
+      "ing_prom": 4074.3394701020907
+    },
+    {
+      "pliego": "U.N. DE SAN ANTONIO ABAD DEL CUSCO",
+      "cantidad": 2050.0,
+      "ing_prom": 4396.603419512194
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE FISCALIZACION LABORAL",
+      "cantidad": 1986.0,
+      "ing_prom": 6388.198423967775
+    },
+    {
+      "pliego": "MINISTERIO DE VIVIENDA, CONSTRUCCION Y SANEAMIENTO",
+      "cantidad": 1839.0,
+      "ing_prom": 7970.976759108211
+    },
+    {
+      "pliego": "OFICINA DE NORMALIZACION PREVISIONAL-ONP",
+      "cantidad": 1747.0,
+      "ing_prom": 5438.330417859187
+    },
+    {
+      "pliego": "U.N. SAN LUIS GONZAGA DE ICA",
+      "cantidad": 1729.0,
+      "ing_prom": 4321.483562753036
+    },
+    {
+      "pliego": "M. DE RELACIONES EXTERIORES",
+      "cantidad": 1701.0,
+      "ing_prom": 24576.804679600238
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL DE DEFENSA DE LA COMPETENCIA Y DE LA PROTECCION DE LA PROPIEDAD INTELECTUAL",
+      "cantidad": 1586.0,
+      "ing_prom": 5765.96213114754
+    },
+    {
+      "pliego": "AUTORIDAD DE TRANSPORTE URBANO PARA LIMA Y CALLAO - ATU",
+      "cantidad": 1525.0,
+      "ing_prom": 4253.810675409835
+    },
+    {
+      "pliego": "U.N. DE PIURA",
+      "cantidad": 1523.0,
+      "ing_prom": 4486.647235718975
+    },
+    {
+      "pliego": "M. DE TRABAJO Y PROMOCION DEL EMPLEO",
+      "cantidad": 1478.0,
+      "ing_prom": 5249.141664411367
+    },
+    {
+      "pliego": "U.N. PEDRO RUIZ GALLO",
+      "cantidad": 1473.0,
+      "ing_prom": 4930.835885947046
+    },
+    {
+      "pliego": "U.N. AGRARIA LA MOLINA",
+      "cantidad": 1466.0,
+      "ing_prom": 4474.804406548432
+    },
+    {
+      "pliego": "SERVICIO NACIONAL DE AREAS NATURALES PROTEGIDAS POR EL ESTADO - SERNANP",
+      "cantidad": 1436.0,
+      "ing_prom": 4164.337409470752
+    },
+    {
+      "pliego": "U.N. DEL CENTRO DEL PERU",
+      "cantidad": 1402.0,
+      "ing_prom": 4619.997539229673
+    },
+    {
+      "pliego": "AUTORIDAD NACIONAL DEL AGUA - ANA",
+      "cantidad": 1389.0,
+      "ing_prom": 5111.575759539237
+    },
+    {
+      "pliego": "U.N. DE LA AMAZONIA PERUANA",
+      "cantidad": 1387.0,
+      "ing_prom": 4524.260021629416
+    },
+    {
+      "pliego": "U.N. JOSE FAUSTINO SANCHEZ CARRION",
+      "cantidad": 1344.0,
+      "ing_prom": 4174.367321428571
+    },
+    {
+      "pliego": "U.N. DE EDUCACION ENRIQUE GUZMAN Y VALLE",
+      "cantidad": 1340.0,
+      "ing_prom": 4895.730365671641
+    },
+    {
+      "pliego": "U.N. JORGE BASADRE GROHMANN",
+      "cantidad": 1320.0,
+      "ing_prom": 4148.775333333334
+    },
+    {
+      "pliego": "U.N. SAN CRISTOBAL DE HUAMANGA",
+      "cantidad": 1261.0,
+      "ing_prom": 4404.350190325139
+    },
+    {
+      "pliego": "U.N. DE CAJAMARCA",
+      "cantidad": 1256.0,
+      "ing_prom": 4307.981536624204
+    },
+    {
+      "pliego": "MINISTERIO DE LA PRODUCCION",
+      "cantidad": 1224.0,
+      "ing_prom": 6954.89763888889
+    },
+    {
+      "pliego": "U.N. HERMILIO VALDIZAN",
+      "cantidad": 1208.0,
+      "ing_prom": 3892.3240066225167
+    },
+    {
+      "pliego": "U.N. DANIEL ALCIDES CARRION",
+      "cantidad": 1156.0,
+      "ing_prom": 4677.491643598616
+    },
+    {
+      "pliego": "SERVICIO NACIONAL DE METEOROLOGIA E HIDROLOGIA",
+      "cantidad": 1137.0,
+      "ing_prom": 3227.268962181179
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL DE ESTADISTICA E INFORMATICA",
+      "cantidad": 1125.0,
+      "ing_prom": 3551.4678666666664
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL DE SALUD",
+      "cantidad": 1120.0,
+      "ing_prom": 5174.274839285715
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL DE INNOVACION AGRARIA",
+      "cantidad": 1086.0,
+      "ing_prom": 4643.856068139963
+    },
+    {
+      "pliego": "ORGANISMO SUPERVISOR DE LA INVERSION EN ENERGIA Y MINERIA",
+      "cantidad": 986.0,
+      "ing_prom": 9097.4342494929
+    },
+    {
+      "pliego": "U.N. DE HUANCAVELICA",
+      "cantidad": 973.0,
+      "ing_prom": 3640.1368961973276
+    },
+    {
+      "pliego": "ORGANISMO DE FORMALIZACION DE LA PROPIEDAD INFORMAL",
+      "cantidad": 970.0,
+      "ing_prom": 4004.957103092783
+    },
+    {
+      "pliego": "U.N. DEL CALLAO",
+      "cantidad": 942.0,
+      "ing_prom": 4914.536571125265
+    },
+    {
+      "pliego": "ORGANISMO DE EVALUACION Y FISCALIZACION AMBIENTAL - OEFA",
+      "cantidad": 906.0,
+      "ing_prom": 7893.448432671083
+    },
+    {
+      "pliego": "U.N. DE TUMBES",
+      "cantidad": 878.0,
+      "ing_prom": 4403.020592255125
+    },
+    {
+      "pliego": "DEFENSORIA DEL PUEBLO",
+      "cantidad": 867.0,
+      "ing_prom": 6571.453621683969
+    },
+    {
+      "pliego": "PRESIDENCIA DEL CONSEJO DE MINISTROS",
+      "cantidad": 867.0,
+      "ing_prom": 7331.796770472894
+    },
+    {
+      "pliego": "SEGURO INTEGRAL DE SALUD",
+      "cantidad": 866.0,
+      "ing_prom": 5281.589076212471
+    },
+    {
+      "pliego": "CUERPO GENERAL DE BOMBEROS VOLUNTARIOS DEL PERU",
+      "cantidad": 865.0,
+      "ing_prom": 3010.389421965318
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL DE RADIO Y TELEVISION DEL PERU - IRTP",
+      "cantidad": 861.0,
+      "ing_prom": 3647.349361207898
+    },
+    {
+      "pliego": "PROCURADURIA GENERAL DEL ESTADO",
+      "cantidad": 852.0,
+      "ing_prom": 7392.764166666667
+    },
+    {
+      "pliego": "INSTITUTO PERUANO DEL DEPORTE",
+      "cantidad": 847.0,
+      "ing_prom": 3884.7323848878395
+    },
+    {
+      "pliego": "M. DE ENERGIA Y MINAS",
+      "cantidad": 837.0,
+      "ing_prom": 7936.836057347669
+    },
+    {
+      "pliego": "U.N. SANTIAGO ANTUNEZ DE MAYOLO",
+      "cantidad": 823.0,
+      "ing_prom": 4887.834191980559
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE SERVICIOS DE SANEAMIENTO",
+      "cantidad": 814.0,
+      "ing_prom": 7365.725073710075
+    },
+    {
+      "pliego": "U.N. DE SAN MARTIN",
+      "cantidad": 769.0,
+      "ing_prom": 4155.794499349805
+    },
+    {
+      "pliego": "CONSEJO NACIONAL PARA LA INTEGRACION DE LA PERSONA CON DISCAPACIDAD - CONADIS",
+      "cantidad": 761.0,
+      "ing_prom": 3359.8926149802887
+    },
+    {
+      "pliego": "ORGANISMO SUPERVISOR DE LAS CONTRATACIONES DEL ESTADO",
+      "cantidad": 754.0,
+      "ing_prom": 7038.161206896551
+    },
+    {
+      "pliego": "ORGANISMO TECNICO DE LA ADMINISTRACION DE LOS SERVICIOS DE SANEAMIENTO",
+      "cantidad": 752.0,
+      "ing_prom": 6943.726250000001
+    },
+    {
+      "pliego": "M. DEL AMBIENTE",
+      "cantidad": 688.0,
+      "ing_prom": 7178.618720930235
+    },
+    {
+      "pliego": "MINISTERIO DE COMERCIO EXTERIOR Y TURISMO",
+      "cantidad": 686.0,
+      "ing_prom": 7725.787288629737
+    },
+    {
+      "pliego": "U.N. AGRARIA DE LA SELVA",
+      "cantidad": 685.0,
+      "ing_prom": 4160.0222189781025
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL DE DEFENSA CIVIL",
+      "cantidad": 670.0,
+      "ing_prom": 5103.479223880597
+    },
+    {
+      "pliego": "U.N. TORIBIO RODRIGUEZ DE MENDOZA DE AMAZONAS",
+      "cantidad": 661.0,
+      "ing_prom": 4875.233948562784
+    },
+    {
+      "pliego": "SERVICIO NACIONAL FORESTAL Y DE FAUNA SILVESTRE - SERFOR",
+      "cantidad": 656.0,
+      "ing_prom": 6250.2541768292685
+    },
+    {
+      "pliego": "INSTITUTO DEL MAR DEL PERU - IMARPE",
+      "cantidad": 651.0,
+      "ing_prom": 5034.774792626728
+    },
+    {
+      "pliego": "INSTITUTO TECNOLOGICO DE LA PRODUCCION - ITP",
+      "cantidad": 623.0,
+      "ing_prom": 6174.786404494382
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE SALUD",
+      "cantidad": 602.0,
+      "ing_prom": 6198.290797342192
+    },
+    {
+      "pliego": "U.N. DE UCAYALI",
+      "cantidad": 589.0,
+      "ing_prom": 4269.337826825127
+    },
+    {
+      "pliego": "U.N. DEL SANTA",
+      "cantidad": 570.0,
+      "ing_prom": 4209.5171929824555
+    },
+    {
+      "pliego": "AUTORIDAD NACIONAL DEL SERVICIO CIVIL",
+      "cantidad": 555.0,
+      "ing_prom": 7942.451063063063
+    },
+    {
+      "pliego": "U.N. AMAZONICA DE MADRE DE DIOS",
+      "cantidad": 554.0,
+      "ing_prom": 3516.8778158844766
+    },
+    {
+      "pliego": "ORGANISMO SUPERVISOR DE LA INVERSION PRIVADA EN TELECOMUNICACIONES",
+      "cantidad": 538.0,
+      "ing_prom": 7410.378773234201
+    },
+    {
+      "pliego": "AUTORIDAD NACIONAL DE INFRAESTRUCTURA",
+      "cantidad": 487.0,
+      "ing_prom": 11332.480369609855
+    },
+    {
+      "pliego": "COMISION NACIONAL PARA EL DESARROLLO Y VIDA SIN DROGAS - DEVIDA",
+      "cantidad": 475.0,
+      "ing_prom": 6508.071052631579
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE CONTROL DE SERVICIOS DE SEGURIDAD, ARMAS, MUNICIONES Y EXPLOSIVOS DE USO CIVIL",
+      "cantidad": 469.0,
+      "ing_prom": 4943.3678891258
+    },
+    {
+      "pliego": "JURADO NACIONAL DE ELECCIONES",
+      "cantidad": 456.0,
+      "ing_prom": 8122.618223684211
+    },
+    {
+      "pliego": "COMISION DE PROMOCION DEL PERU PARA LA EXPORTACION Y EL TURISMO - PROMPERU",
+      "cantidad": 453.0,
+      "ing_prom": 8961.55830022075
+    },
+    {
+      "pliego": "U.N. MICAELA BASTIDAS DE APURIMAC",
+      "cantidad": 452.0,
+      "ing_prom": 4371.180752212389
+    },
+    {
+      "pliego": "SERVICIO NACIONAL DE CAPACITACION PARA LA INDUSTRIA DE LA CONSTRUCCION",
+      "cantidad": 441.0,
+      "ing_prom": 4321.385215419501
+    },
+    {
+      "pliego": "INSTITUTO GEOLOGICO MINERO Y METALURGICO",
+      "cantidad": 387.0,
+      "ing_prom": 6138.642093023256
+    },
+    {
+      "pliego": "FUERO MILITAR POLICIAL",
+      "cantidad": 387.0,
+      "ing_prom": 3003.348811369509
+    },
+    {
+      "pliego": "ORGANISMO SUPERVISOR DE LA INVERSION EN INFRAESTRUCTURA DE TRANSPORTE DE USO PUBLICO",
+      "cantidad": 386.0,
+      "ing_prom": 10177.246269430052
+    },
+    {
+      "pliego": "U.N. DE MOQUEGUA",
+      "cantidad": 385.0,
+      "ing_prom": 3804.4941038961038
+    },
+    {
+      "pliego": "U.N. JOSE MARIA ARGUEDAS",
+      "cantidad": 376.0,
+      "ing_prom": 4030.087287234042
+    },
+    {
+      "pliego": "OFICINA NACIONAL DE PROCESOS ELECTORALES",
+      "cantidad": 375.0,
+      "ing_prom": 6104.023520000001
+    },
+    {
+      "pliego": "U.N. DE FRONTERA",
+      "cantidad": 373.0,
+      "ing_prom": 4844.024155495978
+    },
+    {
+      "pliego": "DIRECCION NACIONAL DE INTELIGENCIA",
+      "cantidad": 369.0,
+      "ing_prom": 5617.001300813008
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE EDUCACION SUPERIOR UNIVERSITARIA",
+      "cantidad": 362.0,
+      "ing_prom": 8528.617099447514
+    },
+    {
+      "pliego": "BIBLIOTECA NACIONAL DEL PERU",
+      "cantidad": 361.0,
+      "ing_prom": 4746.675180055402
+    },
+    {
+      "pliego": "U.N. TECNOLOGICA DE LIMA SUR",
+      "cantidad": 357.0,
+      "ing_prom": 4559.473333333332
+    },
+    {
+      "pliego": "U.N. DE BARRANCA",
+      "cantidad": 348.0,
+      "ing_prom": 3882.5493103448266
+    },
+    {
+      "pliego": "U.N. DE JULIACA",
+      "cantidad": 342.0,
+      "ing_prom": 4012.160701754386
+    },
+    {
+      "pliego": "U.N. DE JAEN",
+      "cantidad": 339.0,
+      "ing_prom": 4007.1486430678465
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE BIENES ESTATALES",
+      "cantidad": 331.0,
+      "ing_prom": 4999.1226888217525
+    },
+    {
+      "pliego": "SERVICIO NACIONAL DE CERTIFICACION AMBIENTAL PARA LAS INVERSIONES SOSTENIBLES -SENACE",
+      "cantidad": 323.0,
+      "ing_prom": 8591.545448916406
+    },
+    {
+      "pliego": "U.N. AUTÓNOMA DE CHOTA",
+      "cantidad": 321.0,
+      "ing_prom": 3727.6432398753896
+    },
+    {
+      "pliego": "SUPERINTENDENCIA DEL MERCADO DE VALORES",
+      "cantidad": 302.0,
+      "ing_prom": 7769.365198675497
+    },
+    {
+      "pliego": "U.N. INTERCULTURAL DE LA AMAZONIA",
+      "cantidad": 299.0,
+      "ing_prom": 4684.439230769231
+    },
+    {
+      "pliego": "CENTRAL DE COMPRAS PÚBLICAS - PERÚ COMPRAS",
+      "cantidad": 283.0,
+      "ing_prom": 7948.580035335689
+    },
+    {
+      "pliego": "U.N. DE CAÑETE",
+      "cantidad": 277.0,
+      "ing_prom": 4265.51223826715
+    },
+    {
+      "pliego": "ORGANISMO NACIONAL DE SANIDAD PESQUERA - SANIPES",
+      "cantidad": 277.0,
+      "ing_prom": 6784.929566787004
+    },
+    {
+      "pliego": "AUTORIDAD PORTUARIA NACIONAL",
+      "cantidad": 275.0,
+      "ing_prom": 6246.381381818182
+    },
+    {
+      "pliego": "U.N. INTERCULTURAL FABIOLA SALAZAR LEGUIA DE BAGUA",
+      "cantidad": 272.0,
+      "ing_prom": 3664.5547794117647
+    },
+    {
+      "pliego": "DESPACHO PRESIDENCIAL",
+      "cantidad": 269.0,
+      "ing_prom": 5656.09063197026
+    },
+    {
+      "pliego": "INSTITUTO PERUANO DE ENERGIA NUCLEAR",
+      "cantidad": 267.0,
+      "ing_prom": 5315.106067415731
+    },
+    {
+      "pliego": "CONSEJO NACIONAL DE CIENCIA, TECNOLOGIA E INNOVACION TECNOLOGICA",
+      "cantidad": 251.0,
+      "ing_prom": 7197.957450199203
+    },
+    {
+      "pliego": "INSTITUTO DE INVESTIGACIONES DE LA AMAZONIA PERUANA",
+      "cantidad": 246.0,
+      "ing_prom": 3498.2075609756093
+    },
+    {
+      "pliego": "AGENCIA DE PROMOCION DE LA INVERSION PRIVADA",
+      "cantidad": 245.0,
+      "ing_prom": 10240.238653061224
+    },
+    {
+      "pliego": "CAJA DE PENSIONES MILITAR POLICIAL",
+      "cantidad": 244.0,
+      "ing_prom": 3470.8284426229507
+    },
+    {
+      "pliego": "U.N. DE MÚSICA",
+      "cantidad": 237.0,
+      "ing_prom": 3903.073797468354
+    },
+    {
+      "pliego": "TRIBUNAL CONSTITUCIONAL",
+      "cantidad": 233.0,
+      "ing_prom": 12114.07227467811
+    },
+    {
+      "pliego": "CENTRO DE FORMACION EN TURISMO",
+      "cantidad": 230.0,
+      "ing_prom": 4203.07252173913
+    },
+    {
+      "pliego": "ORGANISMO DE SUPERVISION DE LOS RECURSOS FORESTALES Y DE FAUNA SILVESTRE",
+      "cantidad": 229.0,
+      "ing_prom": 6824.033144104804
+    },
+    {
+      "pliego": "MUNICIPALIDAD METROPOLITANA DE LIMA",
+      "cantidad": 224.0,
+      "ing_prom": 5089.405535714286
+    },
+    {
+      "pliego": "INSTITUTO GEOFISICO DEL PERU",
+      "cantidad": 218.0,
+      "ing_prom": 4699.777660550459
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL DE CALIDAD - INACAL",
+      "cantidad": 214.0,
+      "ing_prom": 7194.610654205609
+    },
+    {
+      "pliego": "U.N. AUTÓNOMA DE ALTO AMAZONAS",
+      "cantidad": 210.0,
+      "ing_prom": 4927.0339523809525
+    },
+    {
+      "pliego": "JUNTA NACIONAL DE JUSTICIA",
+      "cantidad": 204.0,
+      "ing_prom": 9345.380147058822
+    },
+    {
+      "pliego": "U.N. DE ARTE DIEGO QUISPE TITO DEL CUSCO",
+      "cantidad": 202.0,
+      "ing_prom": 4024.9398019801984
+    }
+  ],
   "por_nivel": [
     {
       "nivel": "GOBIERNO REGIONAL",
@@ -568,6 +1385,2811 @@
       "nivel": "GOBIERNO NACIONAL",
       "cantidad": 662124.0,
       "ing_prom": 4691.663200865699
+    }
+  ],
+  "por_depto": [
+    {
+      "depto": "PIURA",
+      "cantidad": 49889.0,
+      "ing_prom": 3955.8002673936135
+    },
+    {
+      "depto": "CAJAMARCA",
+      "cantidad": 48969.0,
+      "ing_prom": 4229.065060956932
+    },
+    {
+      "depto": "LA LIBERTAD",
+      "cantidad": 44612.0,
+      "ing_prom": 4109.852645252398
+    },
+    {
+      "depto": "LORETO",
+      "cantidad": 43677.0,
+      "ing_prom": 3731.541859788905
+    },
+    {
+      "depto": "ICA",
+      "cantidad": 41286.0,
+      "ing_prom": 4945.664351596183
+    },
+    {
+      "depto": "CUSCO",
+      "cantidad": 40450.0,
+      "ing_prom": 4155.885872187886
+    },
+    {
+      "depto": "JUNIN",
+      "cantidad": 39649.0,
+      "ing_prom": 4062.7393702237127
+    },
+    {
+      "depto": "PUNO",
+      "cantidad": 38783.0,
+      "ing_prom": 4180.0903388082415
+    },
+    {
+      "depto": "ANCASH",
+      "cantidad": 35902.0,
+      "ing_prom": 4112.738812043897
+    },
+    {
+      "depto": "SAN MARTIN",
+      "cantidad": 31291.0,
+      "ing_prom": 3856.2649672429775
+    },
+    {
+      "depto": "AREQUIPA",
+      "cantidad": 30885.0,
+      "ing_prom": 4177.464638497652
+    },
+    {
+      "depto": "LIMA",
+      "cantidad": 28802.0,
+      "ing_prom": 3994.1174640649956
+    },
+    {
+      "depto": "HUANUCO",
+      "cantidad": 28201.0,
+      "ing_prom": 4004.8858196517854
+    },
+    {
+      "depto": "AYACUCHO",
+      "cantidad": 27264.0,
+      "ing_prom": 4166.20184235622
+    },
+    {
+      "depto": "LAMBAYEQUE",
+      "cantidad": 23909.0,
+      "ing_prom": 4187.4124894391225
+    },
+    {
+      "depto": "CALLAO",
+      "cantidad": 21884.0,
+      "ing_prom": 4001.935633796381
+    },
+    {
+      "depto": "HUANCAVELICA",
+      "cantidad": 21348.0,
+      "ing_prom": 4089.6760656735996
+    },
+    {
+      "depto": "UCAYALI",
+      "cantidad": 20737.0,
+      "ing_prom": 3852.7295780488985
+    },
+    {
+      "depto": "APURIMAC",
+      "cantidad": 20209.0,
+      "ing_prom": 4156.864277797021
+    },
+    {
+      "depto": "AMAZONAS",
+      "cantidad": 20073.0,
+      "ing_prom": 4043.0323394609677
+    },
+    {
+      "depto": "PASCO",
+      "cantidad": 11140.0,
+      "ing_prom": 3941.5883473967683
+    },
+    {
+      "depto": "TACNA",
+      "cantidad": 9887.0,
+      "ing_prom": 4343.629984828563
+    },
+    {
+      "depto": "TUMBES",
+      "cantidad": 9874.0,
+      "ing_prom": 3899.478399837958
+    },
+    {
+      "depto": "MOQUEGUA",
+      "cantidad": 8387.0,
+      "ing_prom": 4105.762060331466
+    },
+    {
+      "depto": "MADRE DE DIOS",
+      "cantidad": 6299.0,
+      "ing_prom": 3922.5739450706456
+    }
+  ],
+  "sector_x_regimen": [
+    {
+      "sector": "AGRARIO Y DE RIEGO",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 7587,
+      "ing_prom": 4408.747818637143
+    },
+    {
+      "sector": "AGRARIO Y DE RIEGO",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 2371,
+      "ing_prom": 3293.40315478701
+    },
+    {
+      "sector": "AGRARIO Y DE RIEGO",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 2033,
+      "ing_prom": 5955.053703885883
+    },
+    {
+      "sector": "AMBIENTAL",
+      "regimen": "Carreras Especiales",
+      "cantidad": 770,
+      "ing_prom": 3055.12987012987
+    },
+    {
+      "sector": "AMBIENTAL",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 3291,
+      "ing_prom": 6276.897459738681
+    },
+    {
+      "sector": "AMBIENTAL",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 547,
+      "ing_prom": 1850.9984277879341
+    },
+    {
+      "sector": "AMBIENTAL",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 319,
+      "ing_prom": 5090.179059561129
+    },
+    {
+      "sector": "AMBIENTAL",
+      "regimen": "Ley Nº 30057 SERVIR",
+      "cantidad": 120,
+      "ing_prom": 12126.833500000002
+    },
+    {
+      "sector": "CAJA DE PENSIONES MILITAR POLICIAL",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 244,
+      "ing_prom": 3470.8284426229507
+    },
+    {
+      "sector": "COMERCIO EXTERIOR Y TURISMO",
+      "regimen": "Carreras Especiales",
+      "cantidad": 117,
+      "ing_prom": 2941.8471794871793
+    },
+    {
+      "sector": "COMERCIO EXTERIOR Y TURISMO",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 1129,
+      "ing_prom": 7331.750327723649
+    },
+    {
+      "sector": "CONGRESO DE LA REPUBLICA",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 135,
+      "ing_prom": 15600.0
+    },
+    {
+      "sector": "CONGRESO DE LA REPUBLICA",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 3619,
+      "ing_prom": 10353.836167449568
+    },
+    {
+      "sector": "CONTRALORIA GENERAL",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 783,
+      "ing_prom": 6522.235977011496
+    },
+    {
+      "sector": "CONTRALORIA GENERAL",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 4899,
+      "ing_prom": 7641.871845274546
+    },
+    {
+      "sector": "CULTURA",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 4727,
+      "ing_prom": 3865.31003807912
+    },
+    {
+      "sector": "CULTURA",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 464,
+      "ing_prom": 5094.389137931034
+    },
+    {
+      "sector": "CULTURA",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 285,
+      "ing_prom": 4636.614877192983
+    },
+    {
+      "sector": "DEFENSA",
+      "regimen": "Asistenciales",
+      "cantidad": 2104,
+      "ing_prom": 2962.072243346008
+    },
+    {
+      "sector": "DEFENSA",
+      "regimen": "Carreras Especiales",
+      "cantidad": 4775,
+      "ing_prom": 5736.116732984293
+    },
+    {
+      "sector": "DEFENSA",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 2035,
+      "ing_prom": 4717.755144963145
+    },
+    {
+      "sector": "DEFENSA",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 10470,
+      "ing_prom": 3122.8247201528175
+    },
+    {
+      "sector": "DEFENSA",
+      "regimen": "Fuerzas Armadas y Policiales",
+      "cantidad": 50197,
+      "ing_prom": 5003.4838823037235
+    },
+    {
+      "sector": "DEFENSA",
+      "regimen": "Sin Regimen Laboral",
+      "cantidad": 34079,
+      "ing_prom": 412.957187710907
+    },
+    {
+      "sector": "DEFENSORIA DEL PUEBLO",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 535,
+      "ing_prom": 4636.828953271029
+    },
+    {
+      "sector": "DEFENSORIA DEL PUEBLO",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 331,
+      "ing_prom": 9671.13836858006
+    },
+    {
+      "sector": "DESARROLLO E INCLUSION SOCIAL",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 9044,
+      "ing_prom": 3950.344011499336
+    },
+    {
+      "sector": "DESARROLLO E INCLUSION SOCIAL",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 338,
+      "ing_prom": 4855.41325443787
+    },
+    {
+      "sector": "ECONOMIA Y FINANZAS",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 6569,
+      "ing_prom": 5764.257314659766
+    },
+    {
+      "sector": "ECONOMIA Y FINANZAS",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 240,
+      "ing_prom": 6177.7657500000005
+    },
+    {
+      "sector": "ECONOMIA Y FINANZAS",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 9608,
+      "ing_prom": 8174.192105537052
+    },
+    {
+      "sector": "ECONOMIA Y FINANZAS",
+      "regimen": "Ley Nº 30057 SERVIR",
+      "cantidad": 2168,
+      "ing_prom": 8742.934769372692
+    },
+    {
+      "sector": "EDUCACION",
+      "regimen": "Carreras Especiales",
+      "cantidad": 497740,
+      "ing_prom": 4256.006232189497
+    },
+    {
+      "sector": "EDUCACION",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 40275,
+      "ing_prom": 3009.0867277467414
+    },
+    {
+      "sector": "EDUCACION",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 59361,
+      "ing_prom": 2753.3296964336855
+    },
+    {
+      "sector": "EDUCACION",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 115,
+      "ing_prom": 3195.8191304347833
+    },
+    {
+      "sector": "EDUCACION",
+      "regimen": "Ley Nº 30057 SERVIR",
+      "cantidad": 118,
+      "ing_prom": 22977.27906779661
+    },
+    {
+      "sector": "ENERGIA Y MINAS",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 1044,
+      "ing_prom": 7131.103630268199
+    },
+    {
+      "sector": "ENERGIA Y MINAS",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 322,
+      "ing_prom": 5975.0183229813665
+    },
+    {
+      "sector": "FUERO MILITAR POLICIAL",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 221,
+      "ing_prom": 3443.194524886878
+    },
+    {
+      "sector": "FUERO MILITAR POLICIAL",
+      "regimen": "Fuerzas Armadas y Policiales",
+      "cantidad": 110,
+      "ing_prom": 3339.5454545454545
+    },
+    {
+      "sector": "GOBIERNOS REGIONALES",
+      "regimen": "Asistenciales",
+      "cantidad": 288,
+      "ing_prom": 3832.6111111111113
+    },
+    {
+      "sector": "GOBIERNOS REGIONALES",
+      "regimen": "Carreras Especiales",
+      "cantidad": 372,
+      "ing_prom": 6812.623655913979
+    },
+    {
+      "sector": "GOBIERNOS REGIONALES",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 7814,
+      "ing_prom": 3524.38605067827
+    },
+    {
+      "sector": "GOBIERNOS REGIONALES",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 6257,
+      "ing_prom": 3953.3964807415696
+    },
+    {
+      "sector": "GOBIERNOS REGIONALES",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 2132,
+      "ing_prom": 5292.989235459661
+    },
+    {
+      "sector": "GOBIERNOS REGIONALES",
+      "regimen": "Sin Regimen Laboral",
+      "cantidad": 339,
+      "ing_prom": 4286.283185840708
+    },
+    {
+      "sector": "INTERIOR",
+      "regimen": "Carreras Especiales",
+      "cantidad": 292,
+      "ing_prom": 5055.616712328768
+    },
+    {
+      "sector": "INTERIOR",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 5715,
+      "ing_prom": 4237.7839737532795
+    },
+    {
+      "sector": "INTERIOR",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 2747,
+      "ing_prom": 3352.821619949034
+    },
+    {
+      "sector": "INTERIOR",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 248,
+      "ing_prom": 2266.8559677419353
+    },
+    {
+      "sector": "INTERIOR",
+      "regimen": "Fuerzas Armadas y Policiales",
+      "cantidad": 139379,
+      "ing_prom": 4243.748017491875
+    },
+    {
+      "sector": "JUNTA NACIONAL DE JUSTICIA",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 122,
+      "ing_prom": 7636.946885245901
+    },
+    {
+      "sector": "JURADO NACIONAL DE ELECCIONES",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 328,
+      "ing_prom": 7327.2132317073165
+    },
+    {
+      "sector": "JURADO NACIONAL DE ELECCIONES",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 122,
+      "ing_prom": 8949.411475409835
+    },
+    {
+      "sector": "JUSTICIA",
+      "regimen": "Carreras Especiales",
+      "cantidad": 7136,
+      "ing_prom": 3221.1509921524657
+    },
+    {
+      "sector": "JUSTICIA",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 9760,
+      "ing_prom": 4655.883233606557
+    },
+    {
+      "sector": "JUSTICIA",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 2423,
+      "ing_prom": 3133.855270326042
+    },
+    {
+      "sector": "JUSTICIA",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 2212,
+      "ing_prom": 7449.624891500905
+    },
+    {
+      "sector": "MINISTERIO PUBLICO",
+      "regimen": "Carreras Especiales",
+      "cantidad": 9104,
+      "ing_prom": 12244.228400702988
+    },
+    {
+      "sector": "MINISTERIO PUBLICO",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 10507,
+      "ing_prom": 3522.298353478633
+    },
+    {
+      "sector": "MINISTERIO PUBLICO",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 361,
+      "ing_prom": 4482.415623268699
+    },
+    {
+      "sector": "MINISTERIO PUBLICO",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 7995,
+      "ing_prom": 5772.477986241401
+    },
+    {
+      "sector": "MUJER Y POBLACIONES VULNERABLES",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 10422,
+      "ing_prom": 4029.59761658031
+    },
+    {
+      "sector": "MUJER Y POBLACIONES VULNERABLES",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 165,
+      "ing_prom": 4893.543575757575
+    },
+    {
+      "sector": "MUJER Y POBLACIONES VULNERABLES",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 303,
+      "ing_prom": 5243.928481848184
+    },
+    {
+      "sector": "OFICINA NACIONAL DE PROCESOS ELECTORALES",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 230,
+      "ing_prom": 4802.755217391303
+    },
+    {
+      "sector": "OFICINA NACIONAL DE PROCESOS ELECTORALES",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 144,
+      "ing_prom": 8051.21611111111
+    },
+    {
+      "sector": "PODER JUDICIAL",
+      "regimen": "Carreras Especiales",
+      "cantidad": 3605,
+      "ing_prom": 20838.048360610264
+    },
+    {
+      "sector": "PODER JUDICIAL",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 13202,
+      "ing_prom": 3400.5589668232083
+    },
+    {
+      "sector": "PODER JUDICIAL",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 17759,
+      "ing_prom": 5411.38886649023
+    },
+    {
+      "sector": "PRESIDENCIA CONSEJO MINISTROS",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 5765,
+      "ing_prom": 6581.330046834345
+    },
+    {
+      "sector": "PRESIDENCIA CONSEJO MINISTROS",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 409,
+      "ing_prom": 5388.901687041566
+    },
+    {
+      "sector": "PRESIDENCIA CONSEJO MINISTROS",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 2057,
+      "ing_prom": 7872.749183276616
+    },
+    {
+      "sector": "PRESIDENCIA CONSEJO MINISTROS",
+      "regimen": "Ley Nº 30057 SERVIR",
+      "cantidad": 600,
+      "ing_prom": 10124.466183333334
+    },
+    {
+      "sector": "PRESIDENCIA CONSEJO MINISTROS",
+      "regimen": "Sin Regimen Laboral",
+      "cantidad": 210,
+      "ing_prom": 4147.0952380952385
+    },
+    {
+      "sector": "PRODUCCION",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 2741,
+      "ing_prom": 6567.572105071142
+    },
+    {
+      "sector": "PRODUCCION",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 287,
+      "ing_prom": 3674.702508710802
+    },
+    {
+      "sector": "PRODUCCION",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 270,
+      "ing_prom": 5968.757777777777
+    },
+    {
+      "sector": "REGISTRO NACIONAL DE IDENTIFICACION Y ESTADO CIVIL",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 385,
+      "ing_prom": 2963.9302597402593
+    },
+    {
+      "sector": "REGISTRO NACIONAL DE IDENTIFICACION Y ESTADO CIVIL",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 2913,
+      "ing_prom": 3872.657851012701
+    },
+    {
+      "sector": "RELACIONES EXTERIORES",
+      "regimen": "Carreras Especiales",
+      "cantidad": 745,
+      "ing_prom": 45069.53432214766
+    },
+    {
+      "sector": "RELACIONES EXTERIORES",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 764,
+      "ing_prom": 5234.723547120419
+    },
+    {
+      "sector": "RELACIONES EXTERIORES",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 270,
+      "ing_prom": 17239.58214814815
+    },
+    {
+      "sector": "SALUD",
+      "regimen": "Asistenciales",
+      "cantidad": 60049,
+      "ing_prom": 3189.326982963913
+    },
+    {
+      "sector": "SALUD",
+      "regimen": "Carreras Especiales",
+      "cantidad": 93575,
+      "ing_prom": 6728.850438899278
+    },
+    {
+      "sector": "SALUD",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 99073,
+      "ing_prom": 3273.23214851675
+    },
+    {
+      "sector": "SALUD",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 17758,
+      "ing_prom": 3134.4780594661556
+    },
+    {
+      "sector": "SALUD",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 190,
+      "ing_prom": 5175.254157894737
+    },
+    {
+      "sector": "TRABAJO Y PROMOCION DEL EMPLEO",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 2474,
+      "ing_prom": 5101.275533548908
+    },
+    {
+      "sector": "TRABAJO Y PROMOCION DEL EMPLEO",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 178,
+      "ing_prom": 4660.324494382023
+    },
+    {
+      "sector": "TRABAJO Y PROMOCION DEL EMPLEO",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 875,
+      "ing_prom": 8083.272731428571
+    },
+    {
+      "sector": "TRANSPORTES Y COMUNICACIONES",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 6143,
+      "ing_prom": 5043.766587986325
+    },
+    {
+      "sector": "TRANSPORTES Y COMUNICACIONES",
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 2498,
+      "ing_prom": 3296.864051240993
+    },
+    {
+      "sector": "TRANSPORTES Y COMUNICACIONES",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 1005,
+      "ing_prom": 3960.318328358209
+    },
+    {
+      "sector": "TRIBUNAL CONSTITUCIONAL",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 176,
+      "ing_prom": 14327.954602272728
+    },
+    {
+      "sector": "VIVIENDA CONSTRUCCION Y SANEAMIENTO",
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 3885,
+      "ing_prom": 6527.570342342343
+    },
+    {
+      "sector": "VIVIENDA CONSTRUCCION Y SANEAMIENTO",
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 363,
+      "ing_prom": 4236.231212121212
+    }
+  ],
+  "pliegos_search": [
+    {
+      "n": "M. DEL INTERIOR",
+      "l": "GOBIERNO NACIONAL",
+      "s": "INTERIOR",
+      "c": 145000,
+      "i": 4233.0
+    },
+    {
+      "n": "M. DE DEFENSA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "DEFENSA",
+      "c": 102698,
+      "i": 3275.0
+    },
+    {
+      "n": "M. DE EDUCACION",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 86264,
+      "i": 3997.0
+    },
+    {
+      "n": "M. DE SALUD",
+      "l": "GOBIERNO NACIONAL",
+      "s": "SALUD",
+      "c": 73916,
+      "i": 4963.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CAJAMARCA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 34601,
+      "i": 4302.0
+    },
+    {
+      "n": "PODER JUDICIAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PODER JUDICIAL",
+      "c": 34489,
+      "i": 6255.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PIURA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 33917,
+      "i": 3914.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LORETO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 32837,
+      "i": 3748.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LA LIBERTAD",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 30722,
+      "i": 4001.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PUNO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 28122,
+      "i": 4092.0
+    },
+    {
+      "n": "MINISTERIO PUBLICO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "MINISTERIO PUBLICO",
+      "c": 27967,
+      "i": 7017.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CUSCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 26571,
+      "i": 4037.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE JUNIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 26059,
+      "i": 4026.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ANCASH",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 25763,
+      "i": 4021.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE SAN MARTIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 20893,
+      "i": 3846.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AREQUIPA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 19555,
+      "i": 3935.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANUCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 18622,
+      "i": 3952.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AYACUCHO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 18434,
+      "i": 4120.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LIMA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 18012,
+      "i": 3808.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LAMBAYEQUE",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 16281,
+      "i": 4177.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 14094,
+      "i": 3920.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 13803,
+      "i": 3882.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANCAVELICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 13779,
+      "i": 4157.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AMAZONAS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 13724,
+      "i": 4036.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PIURA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 13359,
+      "i": 4007.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE ADUANAS Y DE ADMINISTRACION TRIBUTARIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ECONOMIA Y FINANZAS",
+      "c": 12882,
+      "i": 7253.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE APURIMAC",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 12698,
+      "i": 4150.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE JUNIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 12586,
+      "i": 4220.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LA LIBERTAD",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 12194,
+      "i": 4351.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CAJAMARCA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 11934,
+      "i": 4082.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL PENITENCIARIO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "JUSTICIA",
+      "c": 11503,
+      "i": 3209.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CUSCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 10479,
+      "i": 4436.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DE LA PROVINCIA CONSTITUCIONAL DEL CALLAO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 10452,
+      "i": 3712.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AREQUIPA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 10182,
+      "i": 4722.0
+    },
+    {
+      "n": "MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "MUJER Y POBLACIONES VULNERABLES",
+      "c": 10133,
+      "i": 4140.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LIMA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 9954,
+      "i": 4342.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PUNO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 9873,
+      "i": 4542.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ANCASH",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 9321,
+      "i": 4317.0
+    },
+    {
+      "n": "MINISTERIO DE DESARROLLO E INCLUSION SOCIAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "DESARROLLO E INCLUSION SOCIAL",
+      "c": 9246,
+      "i": 3949.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LORETO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 9208,
+      "i": 3697.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE SAN MARTIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 8644,
+      "i": 3852.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANUCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 8396,
+      "i": 4179.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DE LA PROVINCIA CONSTITUCIONAL DEL CALLAO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 8386,
+      "i": 4095.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PASCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 8012,
+      "i": 3915.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AYACUCHO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 7778,
+      "i": 4294.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LAMBAYEQUE",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 6959,
+      "i": 4234.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 6833,
+      "i": 4538.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE APURIMAC",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 6262,
+      "i": 4258.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TUMBES",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 6009,
+      "i": 3838.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TACNA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 5972,
+      "i": 4071.0
+    },
+    {
+      "n": "CONTRALORIA GENERAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "CONTRALORIA GENERAL",
+      "c": 5682,
+      "i": 7488.0
+    },
+    {
+      "n": "U.N. MAYOR DE SAN MARCOS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 5559,
+      "i": 3953.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 5372,
+      "i": 3892.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AMAZONAS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 5015,
+      "i": 3923.0
+    },
+    {
+      "n": "M. DE JUSTICIA Y DERECHOS HUMANOS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "JUSTICIA",
+      "c": 4708,
+      "i": 5399.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MOQUEGUA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 4570,
+      "i": 4019.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE LOS REGISTROS PUBLICOS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "JUSTICIA",
+      "c": 4487,
+      "i": 5401.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANCAVELICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 4380,
+      "i": 4191.0
+    },
+    {
+      "n": "M. DE CULTURA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "CULTURA",
+      "c": 4151,
+      "i": 4037.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MADRE DE DIOS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "EDUCACION",
+      "c": 3947,
+      "i": 3820.0
+    },
+    {
+      "n": "CONGRESO DE LA REPUBLICA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "CONGRESO DE LA REPUBLICA",
+      "c": 3819,
+      "i": 10491.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE ENFERMEDADES NEOPLASICAS - INEN",
+      "l": "GOBIERNO NACIONAL",
+      "s": "SALUD",
+      "c": 3807,
+      "i": 4285.0
+    },
+    {
+      "n": "U.N. DE SAN AGUSTIN",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 3537,
+      "i": 4291.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TACNA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 3315,
+      "i": 4770.0
+    },
+    {
+      "n": "REGISTRO NACIONAL DE IDENTIFICACION Y ESTADO CIVIL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "REGISTRO NACIONAL DE IDENTIFICACION Y ESTADO CIVIL",
+      "c": 3299,
+      "i": 3773.0
+    },
+    {
+      "n": "MINISTERIO DE TRANSPORTES Y COMUNICACIONES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 3107,
+      "i": 5835.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MOQUEGUA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 2947,
+      "i": 4418.0
+    },
+    {
+      "n": "U.N. FEDERICO VILLARREAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 2772,
+      "i": 3941.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PASCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 2683,
+      "i": 4190.0
+    },
+    {
+      "n": "SERVICIO NACIONAL DE SANIDAD AGRARIA - SENASA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 2637,
+      "i": 3772.0
+    },
+    {
+      "n": "MINISTERIO DE DESARROLLO AGRARIO Y RIEGO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 2594,
+      "i": 6158.0
+    },
+    {
+      "n": "U.N. DEL ALTIPLANO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 2555,
+      "i": 4598.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TUMBES",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 2452,
+      "i": 3899.0
+    },
+    {
+      "n": "M. DE ECONOMIA Y FINANZAS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ECONOMIA Y FINANZAS",
+      "c": 2397,
+      "i": 9038.0
+    },
+    {
+      "n": "U.N. DE INGENIERIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 2358,
+      "i": 3862.0
+    },
+    {
+      "n": "U.N. DE TRUJILLO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 2252,
+      "i": 4532.0
+    },
+    {
+      "n": "SUPERINTENDENCIA DE TRANSPORTE TERRESTRE DE PERSONAS, CARGA Y MERCANCIAS - SUTRAN",
+      "l": "GOBIERNO NACIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 2178,
+      "i": 4074.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE MIGRACIONES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "INTERIOR",
+      "c": 2057,
+      "i": 4074.0
+    },
+    {
+      "n": "U.N. DE SAN ANTONIO ABAD DEL CUSCO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 2050,
+      "i": 4397.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE FISCALIZACION LABORAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "TRABAJO Y PROMOCION DEL EMPLEO",
+      "c": 1986,
+      "i": 6388.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MADRE DE DIOS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "SALUD",
+      "c": 1845,
+      "i": 4261.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANCAVELICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 1843,
+      "i": 3842.0
+    },
+    {
+      "n": "MINISTERIO DE VIVIENDA, CONSTRUCCION Y SANEAMIENTO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "VIVIENDA CONSTRUCCION Y SANEAMIENTO",
+      "c": 1839,
+      "i": 7971.0
+    },
+    {
+      "n": "OFICINA DE NORMALIZACION PREVISIONAL-ONP",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ECONOMIA Y FINANZAS",
+      "c": 1747,
+      "i": 5438.0
+    },
+    {
+      "n": "U.N. SAN LUIS GONZAGA DE ICA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1729,
+      "i": 4321.0
+    },
+    {
+      "n": "M. DE RELACIONES EXTERIORES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "RELACIONES EXTERIORES",
+      "c": 1701,
+      "i": 24577.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE DEFENSA DE LA COMPETENCIA Y DE LA PROTECCION DE LA PROPIEDAD INTELECTUAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 1586,
+      "i": 5766.0
+    },
+    {
+      "n": "AUTORIDAD DE TRANSPORTE URBANO PARA LIMA Y CALLAO - ATU",
+      "l": "GOBIERNO NACIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 1525,
+      "i": 4254.0
+    },
+    {
+      "n": "U.N. DE PIURA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1523,
+      "i": 4487.0
+    },
+    {
+      "n": "M. DE TRABAJO Y PROMOCION DEL EMPLEO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "TRABAJO Y PROMOCION DEL EMPLEO",
+      "c": 1478,
+      "i": 5249.0
+    },
+    {
+      "n": "U.N. PEDRO RUIZ GALLO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1473,
+      "i": 4931.0
+    },
+    {
+      "n": "U.N. AGRARIA LA MOLINA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1466,
+      "i": 4475.0
+    },
+    {
+      "n": "SERVICIO NACIONAL DE AREAS NATURALES PROTEGIDAS POR EL ESTADO - SERNANP",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AMBIENTAL",
+      "c": 1436,
+      "i": 4164.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LA LIBERTAD",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 1432,
+      "i": 4406.0
+    },
+    {
+      "n": "U.N. DEL CENTRO DEL PERU",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1402,
+      "i": 4620.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LORETO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 1397,
+      "i": 3503.0
+    },
+    {
+      "n": "AUTORIDAD NACIONAL DEL AGUA - ANA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 1389,
+      "i": 5112.0
+    },
+    {
+      "n": "U.N. DE LA AMAZONIA PERUANA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1387,
+      "i": 4524.0
+    },
+    {
+      "n": "U.N. JOSE FAUSTINO SANCHEZ CARRION",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1344,
+      "i": 4174.0
+    },
+    {
+      "n": "U.N. DE EDUCACION ENRIQUE GUZMAN Y VALLE",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1340,
+      "i": 4896.0
+    },
+    {
+      "n": "U.N. JORGE BASADRE GROHMANN",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1320,
+      "i": 4149.0
+    },
+    {
+      "n": "U.N. SAN CRISTOBAL DE HUAMANGA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1261,
+      "i": 4404.0
+    },
+    {
+      "n": "U.N. DE CAJAMARCA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1256,
+      "i": 4308.0
+    },
+    {
+      "n": "MINISTERIO DE LA PRODUCCION",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRODUCCION",
+      "c": 1224,
+      "i": 6955.0
+    },
+    {
+      "n": "U.N. HERMILIO VALDIZAN",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1208,
+      "i": 3892.0
+    },
+    {
+      "n": "U.N. DANIEL ALCIDES CARRION",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 1156,
+      "i": 4677.0
+    },
+    {
+      "n": "SERVICIO NACIONAL DE METEOROLOGIA E HIDROLOGIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AMBIENTAL",
+      "c": 1137,
+      "i": 3227.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE ESTADISTICA E INFORMATICA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 1125,
+      "i": 3551.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE SALUD",
+      "l": "GOBIERNO NACIONAL",
+      "s": "SALUD",
+      "c": 1120,
+      "i": 5174.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE INNOVACION AGRARIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 1086,
+      "i": 4644.0
+    },
+    {
+      "n": "ORGANISMO SUPERVISOR DE LA INVERSION EN ENERGIA Y MINERIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 986,
+      "i": 9097.0
+    },
+    {
+      "n": "U.N. DE HUANCAVELICA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 973,
+      "i": 3640.0
+    },
+    {
+      "n": "ORGANISMO DE FORMALIZACION DE LA PROPIEDAD INFORMAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "VIVIENDA CONSTRUCCION Y SANEAMIENTO",
+      "c": 970,
+      "i": 4005.0
+    },
+    {
+      "n": "U.N. DEL CALLAO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 942,
+      "i": 4915.0
+    },
+    {
+      "n": "ORGANISMO DE EVALUACION Y FISCALIZACION AMBIENTAL - OEFA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AMBIENTAL",
+      "c": 906,
+      "i": 7893.0
+    },
+    {
+      "n": "U.N. DE TUMBES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 878,
+      "i": 4403.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PIURA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 871,
+      "i": 3999.0
+    },
+    {
+      "n": "DEFENSORIA DEL PUEBLO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "DEFENSORIA DEL PUEBLO",
+      "c": 867,
+      "i": 6571.0
+    },
+    {
+      "n": "PRESIDENCIA DEL CONSEJO DE MINISTROS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 867,
+      "i": 7332.0
+    },
+    {
+      "n": "SEGURO INTEGRAL DE SALUD",
+      "l": "GOBIERNO NACIONAL",
+      "s": "SALUD",
+      "c": 866,
+      "i": 5282.0
+    },
+    {
+      "n": "CUERPO GENERAL DE BOMBEROS VOLUNTARIOS DEL PERU",
+      "l": "GOBIERNO NACIONAL",
+      "s": "INTERIOR",
+      "c": 865,
+      "i": 3010.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANUCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 863,
+      "i": 3685.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE RADIO Y TELEVISION DEL PERU - IRTP",
+      "l": "GOBIERNO NACIONAL",
+      "s": "CULTURA",
+      "c": 861,
+      "i": 3647.0
+    },
+    {
+      "n": "PROCURADURIA GENERAL DEL ESTADO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "JUSTICIA",
+      "c": 852,
+      "i": 7393.0
+    },
+    {
+      "n": "INSTITUTO PERUANO DEL DEPORTE",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 847,
+      "i": 3885.0
+    },
+    {
+      "n": "M. DE ENERGIA Y MINAS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ENERGIA Y MINAS",
+      "c": 837,
+      "i": 7937.0
+    },
+    {
+      "n": "U.N. SANTIAGO ANTUNEZ DE MAYOLO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 823,
+      "i": 4888.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE SERVICIOS DE SANEAMIENTO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 814,
+      "i": 7366.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CUSCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 792,
+      "i": 4348.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AREQUIPA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 777,
+      "i": 3904.0
+    },
+    {
+      "n": "U.N. DE SAN MARTIN",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 769,
+      "i": 4156.0
+    },
+    {
+      "n": "CONSEJO NACIONAL PARA LA INTEGRACION DE LA PERSONA CON DISCAPACIDAD - CONADIS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "MUJER Y POBLACIONES VULNERABLES",
+      "c": 761,
+      "i": 3360.0
+    },
+    {
+      "n": "ORGANISMO SUPERVISOR DE LAS CONTRATACIONES DEL ESTADO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ECONOMIA Y FINANZAS",
+      "c": 754,
+      "i": 7038.0
+    },
+    {
+      "n": "ORGANISMO TECNICO DE LA ADMINISTRACION DE LOS SERVICIOS DE SANEAMIENTO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "VIVIENDA CONSTRUCCION Y SANEAMIENTO",
+      "c": 752,
+      "i": 6944.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CAJAMARCA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 744,
+      "i": 3664.0
+    },
+    {
+      "n": "M. DEL AMBIENTE",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AMBIENTAL",
+      "c": 688,
+      "i": 7179.0
+    },
+    {
+      "n": "MINISTERIO DE COMERCIO EXTERIOR Y TURISMO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "COMERCIO EXTERIOR Y TURISMO",
+      "c": 686,
+      "i": 7726.0
+    },
+    {
+      "n": "U.N. AGRARIA DE LA SELVA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 685,
+      "i": 4160.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE DEFENSA CIVIL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "DEFENSA",
+      "c": 670,
+      "i": 5103.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE SAN MARTIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 668,
+      "i": 4297.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ANCASH",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 665,
+      "i": 4974.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 664,
+      "i": 3182.0
+    },
+    {
+      "n": "U.N. TORIBIO RODRIGUEZ DE MENDOZA DE AMAZONAS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 661,
+      "i": 4875.0
+    },
+    {
+      "n": "SERVICIO NACIONAL FORESTAL Y DE FAUNA SILVESTRE - SERFOR",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 656,
+      "i": 6250.0
+    },
+    {
+      "n": "INSTITUTO DEL MAR DEL PERU - IMARPE",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRODUCCION",
+      "c": 651,
+      "i": 5035.0
+    },
+    {
+      "n": "INSTITUTO TECNOLOGICO DE LA PRODUCCION - ITP",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRODUCCION",
+      "c": 623,
+      "i": 6175.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE JUNIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 609,
+      "i": 3436.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE SALUD",
+      "l": "GOBIERNO NACIONAL",
+      "s": "SALUD",
+      "c": 602,
+      "i": 6198.0
+    },
+    {
+      "n": "U.N. DE UCAYALI",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 589,
+      "i": 4269.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AYACUCHO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 580,
+      "i": 5077.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DE LA PROVINCIA CONSTITUCIONAL DEL CALLAO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 579,
+      "i": 5749.0
+    },
+    {
+      "n": "U.N. DEL SANTA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 570,
+      "i": 4210.0
+    },
+    {
+      "n": "AUTORIDAD NACIONAL DEL SERVICIO CIVIL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 555,
+      "i": 7942.0
+    },
+    {
+      "n": "U.N. AMAZONICA DE MADRE DE DIOS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 554,
+      "i": 3517.0
+    },
+    {
+      "n": "ORGANISMO SUPERVISOR DE LA INVERSION PRIVADA EN TELECOMUNICACIONES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 538,
+      "i": 7410.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE APURIMAC",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 509,
+      "i": 3530.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LAMBAYEQUE",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 497,
+      "i": 4285.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 496,
+      "i": 3804.0
+    },
+    {
+      "n": "AUTORIDAD NACIONAL DE INFRAESTRUCTURA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 487,
+      "i": 11332.0
+    },
+    {
+      "n": "COMISION NACIONAL PARA EL DESARROLLO Y VIDA SIN DROGAS - DEVIDA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 475,
+      "i": 6508.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE CONTROL DE SERVICIOS DE SEGURIDAD, ARMAS, MUNICIONES Y EXPLOSIVOS DE USO CIVIL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "INTERIOR",
+      "c": 469,
+      "i": 4943.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LIMA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 466,
+      "i": 3290.0
+    },
+    {
+      "n": "JURADO NACIONAL DE ELECCIONES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "JURADO NACIONAL DE ELECCIONES",
+      "c": 456,
+      "i": 8123.0
+    },
+    {
+      "n": "COMISION DE PROMOCION DEL PERU PARA LA EXPORTACION Y EL TURISMO - PROMPERU",
+      "l": "GOBIERNO NACIONAL",
+      "s": "COMERCIO EXTERIOR Y TURISMO",
+      "c": 453,
+      "i": 8962.0
+    },
+    {
+      "n": "U.N. MICAELA BASTIDAS DE APURIMAC",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 452,
+      "i": 4371.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TACNA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 447,
+      "i": 4681.0
+    },
+    {
+      "n": "SERVICIO NACIONAL DE CAPACITACION PARA LA INDUSTRIA DE LA CONSTRUCCION",
+      "l": "GOBIERNO NACIONAL",
+      "s": "VIVIENDA CONSTRUCCION Y SANEAMIENTO",
+      "c": 441,
+      "i": 4321.0
+    },
+    {
+      "n": "FUERO MILITAR POLICIAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "FUERO MILITAR POLICIAL",
+      "c": 387,
+      "i": 3003.0
+    },
+    {
+      "n": "INSTITUTO GEOLOGICO MINERO Y METALURGICO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ENERGIA Y MINAS",
+      "c": 387,
+      "i": 6139.0
+    },
+    {
+      "n": "ORGANISMO SUPERVISOR DE LA INVERSION EN INFRAESTRUCTURA DE TRANSPORTE DE USO PUBLICO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 386,
+      "i": 10177.0
+    },
+    {
+      "n": "U.N. DE MOQUEGUA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 385,
+      "i": 3804.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TUMBES",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 381,
+      "i": 4130.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MADRE DE DIOS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 377,
+      "i": 3827.0
+    },
+    {
+      "n": "U.N. JOSE MARIA ARGUEDAS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 376,
+      "i": 4030.0
+    },
+    {
+      "n": "OFICINA NACIONAL DE PROCESOS ELECTORALES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "OFICINA NACIONAL DE PROCESOS ELECTORALES",
+      "c": 375,
+      "i": 6104.0
+    },
+    {
+      "n": "U.N. DE FRONTERA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 373,
+      "i": 4844.0
+    },
+    {
+      "n": "DIRECCION NACIONAL DE INTELIGENCIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 369,
+      "i": 5617.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PUNO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 362,
+      "i": 2942.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE EDUCACION SUPERIOR UNIVERSITARIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 362,
+      "i": 8529.0
+    },
+    {
+      "n": "BIBLIOTECA NACIONAL DEL PERU",
+      "l": "GOBIERNO NACIONAL",
+      "s": "CULTURA",
+      "c": 361,
+      "i": 4747.0
+    },
+    {
+      "n": "U.N. TECNOLOGICA DE LIMA SUR",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 357,
+      "i": 4559.0
+    },
+    {
+      "n": "U.N. DE BARRANCA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 348,
+      "i": 3883.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MOQUEGUA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 346,
+      "i": 3503.0
+    },
+    {
+      "n": "U.N. DE JULIACA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 342,
+      "i": 4012.0
+    },
+    {
+      "n": "U.N. DE JAEN",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 339,
+      "i": 4007.0
+    },
+    {
+      "n": "SUPERINTENDENCIA NACIONAL DE BIENES ESTATALES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "VIVIENDA CONSTRUCCION Y SANEAMIENTO",
+      "c": 331,
+      "i": 4999.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PASCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 329,
+      "i": 2869.0
+    },
+    {
+      "n": "SERVICIO NACIONAL DE CERTIFICACION AMBIENTAL PARA LAS INVERSIONES SOSTENIBLES -SENACE",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AMBIENTAL",
+      "c": 323,
+      "i": 8592.0
+    },
+    {
+      "n": "U.N. AUTÓNOMA DE CHOTA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 321,
+      "i": 3728.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AYACUCHO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 315,
+      "i": 2777.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AMAZONAS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 307,
+      "i": 4419.0
+    },
+    {
+      "n": "SUPERINTENDENCIA DEL MERCADO DE VALORES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ECONOMIA Y FINANZAS",
+      "c": 302,
+      "i": 7769.0
+    },
+    {
+      "n": "U.N. INTERCULTURAL DE LA AMAZONIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 299,
+      "i": 4684.0
+    },
+    {
+      "n": "CENTRAL DE COMPRAS PÚBLICAS - PERÚ COMPRAS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ECONOMIA Y FINANZAS",
+      "c": 283,
+      "i": 7949.0
+    },
+    {
+      "n": "U.N. DE CAÑETE",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 277,
+      "i": 4266.0
+    },
+    {
+      "n": "ORGANISMO NACIONAL DE SANIDAD PESQUERA - SANIPES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRODUCCION",
+      "c": 277,
+      "i": 6785.0
+    },
+    {
+      "n": "AUTORIDAD PORTUARIA NACIONAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 275,
+      "i": 6246.0
+    },
+    {
+      "n": "U.N. INTERCULTURAL FABIOLA SALAZAR LEGUIA DE BAGUA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 272,
+      "i": 3665.0
+    },
+    {
+      "n": "DESPACHO PRESIDENCIAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 269,
+      "i": 5656.0
+    },
+    {
+      "n": "INSTITUTO PERUANO DE ENERGIA NUCLEAR",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ENERGIA Y MINAS",
+      "c": 267,
+      "i": 5315.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PUNO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 264,
+      "i": 2594.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CAJAMARCA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 261,
+      "i": 3199.0
+    },
+    {
+      "n": "CONSEJO NACIONAL DE CIENCIA, TECNOLOGIA E INNOVACION TECNOLOGICA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 251,
+      "i": 7198.0
+    },
+    {
+      "n": "INSTITUTO DE INVESTIGACIONES DE LA AMAZONIA PERUANA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AMBIENTAL",
+      "c": 246,
+      "i": 3498.0
+    },
+    {
+      "n": "AGENCIA DE PROMOCION DE LA INVERSION PRIVADA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "ECONOMIA Y FINANZAS",
+      "c": 245,
+      "i": 10240.0
+    },
+    {
+      "n": "CAJA DE PENSIONES MILITAR POLICIAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "CAJA DE PENSIONES MILITAR POLICIAL",
+      "c": 244,
+      "i": 3471.0
+    },
+    {
+      "n": "U.N. DE MÚSICA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 237,
+      "i": 3903.0
+    },
+    {
+      "n": "TRIBUNAL CONSTITUCIONAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "TRIBUNAL CONSTITUCIONAL",
+      "c": 233,
+      "i": 12114.0
+    },
+    {
+      "n": "CENTRO DE FORMACION EN TURISMO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "COMERCIO EXTERIOR Y TURISMO",
+      "c": 230,
+      "i": 4203.0
+    },
+    {
+      "n": "ORGANISMO DE SUPERVISION DE LOS RECURSOS FORESTALES Y DE FAUNA SILVESTRE",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 229,
+      "i": 6824.0
+    },
+    {
+      "n": "MUNICIPALIDAD METROPOLITANA DE LIMA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "GOBIERNOS REGIONALES",
+      "c": 224,
+      "i": 5089.0
+    },
+    {
+      "n": "INSTITUTO GEOFISICO DEL PERU",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AMBIENTAL",
+      "c": 218,
+      "i": 4700.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE CALIDAD - INACAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRODUCCION",
+      "c": 214,
+      "i": 7195.0
+    },
+    {
+      "n": "U.N. AUTÓNOMA DE ALTO AMAZONAS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 210,
+      "i": 4927.0
+    },
+    {
+      "n": "JUNTA NACIONAL DE JUSTICIA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "JUNTA NACIONAL DE JUSTICIA",
+      "c": 204,
+      "i": 9345.0
+    },
+    {
+      "n": "U.N. DE ARTE DIEGO QUISPE TITO DEL CUSCO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 202,
+      "i": 4025.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CUSCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 199,
+      "i": 3081.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANCAVELICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 196,
+      "i": 2939.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 188,
+      "i": 2326.0
+    },
+    {
+      "n": "FONDO NACIONAL DE DESARROLLO PESQUERO - FONDEPES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRODUCCION",
+      "c": 185,
+      "i": 7177.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE JUNIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 185,
+      "i": 2415.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE JUNIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 178,
+      "i": 2442.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANCAVELICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 177,
+      "i": 2654.0
+    },
+    {
+      "n": "AGROMERCADO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 174,
+      "i": 5872.0
+    },
+    {
+      "n": "U.N. AUTÓNOMA DE HUANTA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 174,
+      "i": 4130.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANUCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 174,
+      "i": 3157.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CAJAMARCA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 173,
+      "i": 3139.0
+    },
+    {
+      "n": "SISTEMA NACIONAL DE EVALUACION, ACREDITACION Y CERTIFICACION DE LA CALIDAD EDUCATIVA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 171,
+      "i": 7593.0
+    },
+    {
+      "n": "U.N. INTERCULTURAL DE LA SELVA CENTRAL JUAN SANTOS ATAHUALPA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 169,
+      "i": 4912.0
+    },
+    {
+      "n": "CENTRO NACIONAL DE ESTIMACION, PREVENCION Y REDUCCION DEL RIESGO DE DESASTRES - CENEPRED",
+      "l": "GOBIERNO NACIONAL",
+      "s": "DEFENSA",
+      "c": 168,
+      "i": 6803.0
+    },
+    {
+      "n": "U.N. AUTÓNOMA DE TAYACAJA DANIEL HERNÁNDEZ MORILLO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 167,
+      "i": 4733.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AREQUIPA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 161,
+      "i": 2607.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CUSCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 157,
+      "i": 3027.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AYACUCHO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 157,
+      "i": 2670.0
+    },
+    {
+      "n": "U.N. AUTÓNOMA ALTOANDINA DE TARMA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 155,
+      "i": 4976.0
+    },
+    {
+      "n": "ORGANISMO DE FOCALIZACION E INFORMACION SOCIAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "DESARROLLO E INCLUSION SOCIAL",
+      "c": 155,
+      "i": 8265.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE APURIMAC",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 154,
+      "i": 3057.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PIURA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 150,
+      "i": 3411.0
+    },
+    {
+      "n": "U.N. CIRO ALEGRÍA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 150,
+      "i": 4570.0
+    },
+    {
+      "n": "U.N. INTERCULTURAL DE QUILLABAMBA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 147,
+      "i": 4673.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANUCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 146,
+      "i": 3613.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LIMA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 146,
+      "i": 3757.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE SAN MARTIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 143,
+      "i": 2821.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AREQUIPA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 137,
+      "i": 2378.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE APURIMAC",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 134,
+      "i": 3036.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LA LIBERTAD",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 132,
+      "i": 5535.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LA LIBERTAD",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 132,
+      "i": 2567.0
+    },
+    {
+      "n": "U.N. DANIEL ALOMIA ROBLES",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 130,
+      "i": 3836.0
+    },
+    {
+      "n": "ACADEMIA DE LA MAGISTRATURA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PODER JUDICIAL",
+      "c": 127,
+      "i": 4607.0
+    },
+    {
+      "n": "AGENCIA PERUANA DE COOPERACION INTERNACIONAL - APCI",
+      "l": "GOBIERNO NACIONAL",
+      "s": "RELACIONES EXTERIORES",
+      "c": 123,
+      "i": 6633.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE SAN MARTIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 123,
+      "i": 3148.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PUNO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 122,
+      "i": 2681.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LORETO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 119,
+      "i": 4336.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LORETO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 116,
+      "i": 3924.0
+    },
+    {
+      "n": "ARCHIVO GENERAL DE LA NACION",
+      "l": "GOBIERNO NACIONAL",
+      "s": "CULTURA",
+      "c": 114,
+      "i": 4764.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 112,
+      "i": 2875.0
+    },
+    {
+      "n": "CENTRO VACACIONAL HUAMPANI",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 109,
+      "i": 2915.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AMAZONAS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 107,
+      "i": 2829.0
+    },
+    {
+      "n": "INSTITUTO NACIONAL DE INVESTIGACION EN GLACIARES Y ECOSISTEMAS DE MONTAÑA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "AMBIENTAL",
+      "c": 106,
+      "i": 6924.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LAMBAYEQUE",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 104,
+      "i": 3112.0
+    },
+    {
+      "n": "AGENCIA DE COMPRAS DE LAS FUERZAS ARMADAS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "DEFENSA",
+      "c": 96,
+      "i": 6077.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TACNA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 95,
+      "i": 4716.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ICA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 95,
+      "i": 2744.0
+    },
+    {
+      "n": "CENTRO NACIONAL DE PLANEAMIENTO ESTRATEGICO - CEPLAN",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 92,
+      "i": 8023.0
+    },
+    {
+      "n": "ORGANISMO DE ESTUDIOS Y DISEÑO DE PROYECTOS DE INVERSION",
+      "l": "GOBIERNO NACIONAL",
+      "s": "PRESIDENCIA CONSEJO MINISTROS",
+      "c": 89,
+      "i": 9871.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ANCASH",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 83,
+      "i": 3804.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MOQUEGUA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 81,
+      "i": 2564.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TUMBES",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 78,
+      "i": 2970.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TUMBES",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 76,
+      "i": 2737.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AREQUIPA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRABAJO Y PROMOCION DEL EMPLEO",
+      "c": 73,
+      "i": 2860.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ANCASH",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 70,
+      "i": 2869.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MADRE DE DIOS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 69,
+      "i": 2573.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PASCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "AGRARIO Y DE RIEGO",
+      "c": 69,
+      "i": 2596.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PIURA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 69,
+      "i": 3468.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LAMBAYEQUE",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 68,
+      "i": 2836.0
+    },
+    {
+      "n": "INSTITUTO GEOGRAFICO NACIONAL",
+      "l": "GOBIERNO NACIONAL",
+      "s": "DEFENSA",
+      "c": 63,
+      "i": 3191.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MADRE DE DIOS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 61,
+      "i": 2408.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 59,
+      "i": 2685.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE TACNA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 58,
+      "i": 4815.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE MOQUEGUA",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 58,
+      "i": 2816.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE SAN MARTIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "PRODUCCION",
+      "c": 51,
+      "i": 3070.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AMAZONAS",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 49,
+      "i": 3551.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PASCO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "TRANSPORTES Y COMUNICACIONES",
+      "c": 47,
+      "i": 3691.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PUNO",
+      "l": "GOBIERNO REGIONAL",
+      "s": "PRODUCCION",
+      "c": 40,
+      "i": 2766.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "l": "GOBIERNO REGIONAL",
+      "s": "PRODUCCION",
+      "c": 34,
+      "i": 2966.0
+    },
+    {
+      "n": "U.N. TECNOLÓGICA DE FRONTERA SAN IGNACIO DE LOYOLA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 33,
+      "i": 5255.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE JUNIN",
+      "l": "GOBIERNO REGIONAL",
+      "s": "PRODUCCION",
+      "c": 32,
+      "i": 2945.0
+    },
+    {
+      "n": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "l": "GOBIERNO REGIONAL",
+      "s": "COMERCIO EXTERIOR Y TURISMO",
+      "c": 28,
+      "i": 2953.0
+    },
+    {
+      "n": "U.N. DEL VRAEM",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 17,
+      "i": 8035.0
+    },
+    {
+      "n": "U.N. AUTONOMA DEL DISTRITO DE SAN MARCOS",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 13,
+      "i": 9531.0
+    },
+    {
+      "n": "U.N. TECNOLOGICA DE SAN JUAN DE LURIGANCHO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 12,
+      "i": 11390.0
+    },
+    {
+      "n": "U.N. AUTONOMA DE CHUPACA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 12,
+      "i": 9158.0
+    },
+    {
+      "n": "U.N. AUTONOMA DE CUTERVO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 12,
+      "i": 9517.0
+    },
+    {
+      "n": "U.N. TECNOLOGICA DE CHINCHA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 11,
+      "i": 9791.0
+    },
+    {
+      "n": "UNIVERSIDAD NACIONAL DE CARABAYA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 11,
+      "i": 9782.0
+    },
+    {
+      "n": "U.N. FRONTERIZA AUTONOMA DE YUNGUYO",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 11,
+      "i": 9827.0
+    },
+    {
+      "n": "U.N. DE SECHURA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 10,
+      "i": 10090.0
+    },
+    {
+      "n": "U.N. DE HUANCABAMBA",
+      "l": "GOBIERNO NACIONAL",
+      "s": "EDUCACION",
+      "c": 9,
+      "i": 10300.0
     }
   ]
 }
