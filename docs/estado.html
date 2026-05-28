@@ -274,6 +274,116 @@
             .secnav a { padding: 0.35rem 0.65rem; font-size: 0.78rem; }
         }
 
+        /* ── TLDR estilo dark (mismo lenguaje que el TLDR del index) ── */
+        .tldr-estado {
+            background: linear-gradient(160deg, #1a2540 0%, #0d1a30 100%);
+            color: #e8edf5;
+            border-radius: 14px;
+            padding: 1.6rem 1.75rem 1.75rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+            scroll-margin-top: 120px;
+        }
+        .tldr-estado__title {
+            margin: 0 0 1.2rem;
+            font-size: 1.15rem;
+            color: #ffdb70;
+            font-weight: 700;
+            display: flex; align-items: center; gap: 0.4rem;
+        }
+        .tldr-estado__close {
+            position: absolute; top: 0.9rem; right: 1rem;
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.55);
+            border: 0; width: 32px; height: 32px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 0.95rem;
+            transition: all 0.18s;
+        }
+        .tldr-estado__close:hover {
+            background: rgba(243,156,18,0.25);
+            color: #ffdb70;
+            transform: rotate(90deg);
+        }
+        .tldr-estado__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.85rem;
+        }
+        .tldr-card {
+            display: flex; gap: 0.85rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            transition: background 0.15s, border-color 0.15s, transform 0.15s;
+        }
+        .tldr-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,219,112,0.35);
+            transform: translateY(-2px);
+        }
+        .tldr-card__icon {
+            flex-shrink: 0;
+            width: 54px; height: 54px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 0.95rem;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        }
+        .tldr-card__icon small { font-size: 0.7em; font-weight: 700; }
+        .tldr-card__body { flex: 1; min-width: 0; }
+        .tldr-card__title {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.96rem;
+            margin-bottom: 0.25rem;
+            line-height: 1.25;
+        }
+        .tldr-card__desc {
+            color: #adbacc;
+            font-size: 0.82rem;
+            line-height: 1.45;
+        }
+        .tldr-estado__details {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .tldr-estado__details summary {
+            cursor: pointer;
+            color: #ffdb70;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.4rem 0;
+            list-style: none;
+        }
+        .tldr-estado__details summary::-webkit-details-marker { display: none; }
+        .tldr-estado__details summary::before {
+            content: '▸';
+            display: inline-block;
+            margin-right: 0.4rem;
+            transition: transform 0.2s;
+        }
+        .tldr-estado__details[open] summary::before { transform: rotate(90deg); }
+        .tldr-estado__details p {
+            color: #d6e0f0;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            margin: 0.65rem 0;
+        }
+        .tldr-estado__details strong { color: #ffdb70; }
+
+        @media (max-width: 640px) {
+            .tldr-estado { padding: 1.2rem 1.1rem 1.4rem; }
+            .tldr-estado__grid { grid-template-columns: 1fr; }
+        }
+
         /* ── Evaporable: efecto de cierre con fade + scale + blur ── */
         .evaporable {
             transition: opacity 0.55s ease, transform 0.55s ease, filter 0.55s ease,
@@ -365,31 +475,79 @@
     </section>
 
     <!-- Hallazgos clave en texto plano para SEO -->
-    <section class="card evaporable" id="sec-resumen-prosa" style="position:relative;">
+    <section class="tldr-estado evaporable" id="sec-resumen-prosa">
         <button type="button" aria-label="Cerrar resumen"
                 onclick="(function(b){const c=b.closest('.evaporable');c.classList.add('evaporating');setTimeout(()=>c.remove(),700);try{sessionStorage.setItem('hide-resumen-prosa','1');}catch(e){}})(this);"
-                style="position:absolute;top:0.75rem;right:0.85rem;background:#f1f3f7;color:#5a6478;border:0;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:all 0.18s;z-index:2;"
-                onmouseover="this.style.background='#ffe9b8';this.style.color='#d35400';this.style.transform='rotate(90deg)';"
-                onmouseout="this.style.background='#f1f3f7';this.style.color='#5a6478';this.style.transform='rotate(0)';">
+                class="tldr-estado__close">
             <i class="fas fa-xmark"></i>
         </button>
-        <h2><span class="card__icon"><i class="fas fa-newspaper"></i></span> Resumen</h2>
-        <p>
-            El Estado peruano emplea a <strong>1,333,460 personas</strong> activas a diciembre de 2025, con un ingreso promedio mensual de <strong>S/ 4,370</strong> y un costo anual total de <strong>S/ 77 mil millones</strong>.
-            La planilla se distribuye en 8 regímenes laborales: <strong>Carreras Especiales</strong> es el más grande (618,314 docentes, médicos, FFAA y policías ganando en promedio S/ 4,894),
-            seguido por el régimen <strong>CAS</strong> (256,692 contratos administrativos, S/ 3,824 promedio).
-            El régimen mejor pagado es <strong>Ley Nº 30057 SERVIR</strong> (3,225 personas con S/ 10,286 promedio).
-        </p>
-        <p>
-            Los grupos ocupacionales mejor pagados del Estado son: <strong>Diplomáticos</strong> (745 personas, S/ 45,070 promedio mensual),
-            <strong>Magistrados Provisionales</strong> (36, S/ 30,847), <strong>Funcionarios Públicos</strong> (270, S/ 24,008),
-            <strong>Magistrados Titulares</strong> (3,228, S/ 21,865) y <strong>Fiscales Titulares</strong> (4,184, S/ 17,797).
-            En el otro extremo, los <strong>Auxiliares</strong> (112,701 personas) ganan S/ 2,190 y los <strong>Profesores Contratados</strong> (115,117) S/ 2,752.
-        </p>
-        <p>
-            Los sectores con más servidores son <strong>Educación</strong> (597,631), <strong>Salud</strong> (270,668), <strong>Interior</strong> (148,391) y <strong>Defensa</strong> (103,695).
-            En distribución territorial, <strong>Lima</strong> concentra la mayoría del empleo público nacional; <strong>Cajamarca, Piura, La Libertad y Loreto</strong> son los departamentos regionales con más servidores.
-        </p>
+        <h2 class="tldr-estado__title">
+            🔥 Lo que vas a encontrar aquí
+        </h2>
+        <div class="tldr-estado__grid">
+            <div class="tldr-card">
+                <div class="tldr-card__icon" style="background:#3498db;">1.33M</div>
+                <div class="tldr-card__body">
+                    <div class="tldr-card__title">Servidores totales del Estado</div>
+                    <div class="tldr-card__desc">1,333,460 personas activas a dic-2025. Incluye Activos + CAS, sin pensionistas ni sobrevivientes. ~4% de la PEA del país.</div>
+                </div>
+            </div>
+            <div class="tldr-card">
+                <div class="tldr-card__icon" style="background:#27ae60;">+22%</div>
+                <div class="tldr-card__body">
+                    <div class="tldr-card__title">Creció en 8 años</div>
+                    <div class="tldr-card__desc">De 1,086,886 (2017) a 1,333,460 (2025). +246k servidores, casi una Tacna entera de gente extra.</div>
+                </div>
+            </div>
+            <div class="tldr-card">
+                <div class="tldr-card__icon" style="background:#e74c3c;">S/45k</div>
+                <div class="tldr-card__body">
+                    <div class="tldr-card__title">Diplomáticos, top del Estado</div>
+                    <div class="tldr-card__desc">745 personas con ingreso promedio S/ 45,070/mes. Magistrados Provisionales (S/ 30,847), Funcionarios Públicos (S/ 24,008).</div>
+                </div>
+            </div>
+            <div class="tldr-card">
+                <div class="tldr-card__icon" style="background:#f39c12;">+54%</div>
+                <div class="tldr-card__body">
+                    <div class="tldr-card__title">Subió el salario promedio</div>
+                    <div class="tldr-card__desc">De S/ 2,845 (2017) a S/ 4,370 (2025). Crecimiento nominal; descontando inflación queda ~+15% real.</div>
+                </div>
+            </div>
+            <div class="tldr-card">
+                <div class="tldr-card__icon" style="background:#9b59b6;">8</div>
+                <div class="tldr-card__body">
+                    <div class="tldr-card__title">Regímenes laborales</div>
+                    <div class="tldr-card__desc">Carreras Especiales (618k), CAS (257k), FFAA/PNP (190k), D.Leg. 276 (107k), Asistenciales, 728, Sin Régimen, SERVIR.</div>
+                </div>
+            </div>
+            <div class="tldr-card">
+                <div class="tldr-card__icon" style="background:#1abc9c;">S/77<small>MM</small></div>
+                <div class="tldr-card__body">
+                    <div class="tldr-card__title">Costo anual total</div>
+                    <div class="tldr-card__desc">S/ 77 mil millones al año. Aprox 28% del presupuesto público nacional. 197 pliegos reportan, 916 unidades ejecutoras.</div>
+                </div>
+            </div>
+            <div class="tldr-card">
+                <div class="tldr-card__icon" style="background:#34495e;">25</div>
+                <div class="tldr-card__body">
+                    <div class="tldr-card__title">Departamentos con datos</div>
+                    <div class="tldr-card__desc">Mapa nacional desagregado. Lima concentra el Gobierno Nacional; Cajamarca, Piura, La Libertad y Loreto lideran lo regional.</div>
+                </div>
+            </div>
+            <div class="tldr-card">
+                <div class="tldr-card__icon" style="background:#0B2545;">300</div>
+                <div class="tldr-card__body">
+                    <div class="tldr-card__title">Instituciones buscables</div>
+                    <div class="tldr-card__desc">Cada pliego del Estado con su tamaño e ingreso promedio. Filtrable por nivel y salario mínimo. Tabla ordenable.</div>
+                </div>
+            </div>
+        </div>
+        <details class="tldr-estado__details">
+            <summary>📖 Leer resumen completo (versión texto)</summary>
+            <p>El Estado peruano emplea a <strong>1,333,460 personas</strong> activas a diciembre de 2025, con un ingreso promedio mensual de <strong>S/ 4,370</strong> y un costo anual total de <strong>S/ 77 mil millones</strong>. La planilla se distribuye en 8 regímenes laborales: <strong>Carreras Especiales</strong> es el más grande (618,314 docentes, médicos, FFAA y policías, S/ 4,894 promedio), seguido por <strong>CAS</strong> (256,692 contratos, S/ 3,824). El régimen mejor pagado es <strong>Ley Nº 30057 SERVIR</strong> (3,225 personas, S/ 10,286).</p>
+            <p>Los grupos ocupacionales mejor pagados son: <strong>Diplomáticos</strong> (745, S/ 45,070), <strong>Magistrados Provisionales</strong> (36, S/ 30,847), <strong>Funcionarios Públicos</strong> (270, S/ 24,008), <strong>Magistrados Titulares</strong> (3,228, S/ 21,865) y <strong>Fiscales Titulares</strong> (4,184, S/ 17,797). En el otro extremo, los <strong>Auxiliares</strong> (112,701) ganan S/ 2,190 y los <strong>Profesores Contratados</strong> (115,117) S/ 2,752.</p>
+            <p>Los sectores con más servidores son <strong>Educación</strong> (597,631), <strong>Salud</strong> (270,668), <strong>Interior</strong> (148,391) y <strong>Defensa</strong> (103,695). En distribución territorial, <strong>Lima</strong> concentra el gobierno nacional; <strong>Cajamarca, Piura, La Libertad y Loreto</strong> son los departamentos regionales con más servidores.</p>
+        </details>
     </section>
 
     <!-- ── 1. Régimen laboral ───────────────────────────── -->
