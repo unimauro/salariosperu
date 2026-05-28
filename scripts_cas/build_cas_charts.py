@@ -318,6 +318,43 @@ def format_fecha(iso_str):
         return str(iso_str)[:10] if iso_str else "—"
 
 
+def build_search_payload(df):
+    """Construye el array JSON para el buscador CAS.
+    Campos cortos para reducir tamaño: i=institucion, p=puesto,
+    d=departamento, s=salario, f=fecha_limite, u=url."""
+    out = []
+    for _, r in df.iterrows():
+        salario = r.get("salario")
+        try:
+            salario = int(salario) if pd.notna(salario) and float(salario) > 0 else None
+        except (ValueError, TypeError):
+            salario = None
+        out.append({
+            "i": str(r.get("institucion", "") or "")[:120],
+            "p": str(r.get("puesto", "") or "")[:200],
+            "d": str(r.get("departamento", "") or "")[:60],
+            "s": salario,
+            "f": str(r.get("fecha_limite", "") or ""),
+            "u": str(r.get("url", "") or ""),
+        })
+    # Orden por salario desc para que el primer render sea útil incluso si JS tarda
+    out.sort(key=lambda x: (x["s"] is None, -(x["s"] or 0)))
+    return out
+
+
+def patch_search_data(html, payload):
+    """Reemplaza el contenido del <script id=cas-buscar-data>...</script>."""
+    body = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    # Sanitizar contra cierre de script
+    body = body.replace("</", "<\\/")
+    pat = re.compile(
+        r'(<script\s+id="cas-buscar-data"[^>]*>)([\s\S]*?)(</script>)',
+        re.IGNORECASE
+    )
+    new_html, n = pat.subn(rf"\g<1>{body}\g<3>", html)
+    return new_html, n, len(body)
+
+
 def update_actualizado(html, fecha):
     """Reemplaza 'actualizado diario' por la fecha real del scrape.
     Idempotente: si ya está reemplazado con un patrón 'actualizado al', el
@@ -389,6 +426,11 @@ def main():
     fecha = format_fecha(fecha_raw)
     html, n_fecha = update_actualizado(html, fecha)
     print(f"   ✓ Fecha del scrape actualizada: {fecha} ({n_fecha} reemplazos)")
+
+    # Buscador CAS: payload JSON embebido
+    payload = build_search_payload(df)
+    html, n_search, payload_bytes = patch_search_data(html, payload)
+    print(f"   ✓ Buscador CAS: {len(payload):,} filas · {payload_bytes/1024:.0f} KB · {n_search} bloque(s)")
 
     HTML.write_text(html)
     print(f"\nListo. docs/index.html escrito ({patched_count} charts patcheados).")
