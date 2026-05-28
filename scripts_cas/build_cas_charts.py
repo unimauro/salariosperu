@@ -584,6 +584,15 @@ def main():
 
     HTML.write_text(html)
     print(f"\nListo. docs/index.html escrito ({patched_count} charts patcheados).")
+
+    # Generar feed Atom como parte del mismo build
+    try:
+        from build_atom_feed import main as build_feed_main
+        print("\nGenerando feed Atom …")
+        build_feed_main()
+    except Exception as e:
+        print(f"  ⚠ no se pudo generar feed Atom: {e}")
+
     return 0
 
 
