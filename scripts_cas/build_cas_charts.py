@@ -311,6 +311,47 @@ def build_burbujas(df_sal):
     return traces
 
 
+def build_comparativa(df_sal):
+    """1 trace por rol (top 10 por # convocatorias). Cada trace: top 15
+    instituciones que más pagan ese rol (mediana salarial).
+    Solo el primero arranca con visible=True; el <select> lateral cicla
+    visibilidad vía Plotly.restyle()."""
+    sub = df_sal[df_sal["rol_granular"].notna()].copy()
+    if sub.empty:
+        return []
+    top_roles = sub["rol_granular"].value_counts().head(10).index.tolist()
+
+    palette = ["#3498db", "#e74c3c", "#27ae60", "#f39c12", "#9b59b6",
+               "#1abc9c", "#e67e22", "#16a085", "#2c3e50", "#c0392b"]
+
+    traces = []
+    for i, rol in enumerate(top_roles):
+        s = sub[sub["rol_granular"] == rol]
+        per_inst = s.groupby("institucion").agg(
+            mediana=("salario", "median"),
+            n=("salario", "count"),
+        )
+        # Min 1 convocatoria; top 15 por mediana desc; luego revertir para barras h
+        per_inst = per_inst[per_inst["n"] >= 1].sort_values("mediana", ascending=False).head(15)
+        per_inst = per_inst.sort_values("mediana")  # ascendente para que el top quede arriba
+        if per_inst.empty:
+            continue
+        traces.append({
+            "type": "bar",
+            "orientation": "h",
+            "name": rol,
+            "x": [float(v) for v in per_inst["mediana"]],
+            "y": [str(idx)[:90] for idx in per_inst.index],
+            "text": [f"S/ {v:,.0f}  (n={int(n)})" for v, n in zip(per_inst["mediana"], per_inst["n"])],
+            "textposition": "outside",
+            "marker": {"color": palette[i % len(palette)],
+                       "line": {"color": "white", "width": 1}},
+            "hovertemplate": "<b>%{y}</b><br>" + rol + ": S/ %{x:,.0f}<extra></extra>",
+            "visible": i == 0,
+        })
+    return traces
+
+
 def build_niveles(df_sal):
     traces = []
     for label, color, _kws in NIVELES_6:
@@ -455,6 +496,7 @@ def main():
     charts = {
         "chart-cas-distribucion":  build_distribucion(sal),
         "chart-cas-roles":         build_roles(sal),
+        "chart-cas-comparativa":   build_comparativa(sal),
         "chart-cas-instituciones": build_instituciones(df),
         "chart-cas-heatmap":       build_heatmap(sal),
         "chart-cas-treemap":       build_treemap(df, sal),
