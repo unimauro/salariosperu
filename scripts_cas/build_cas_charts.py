@@ -22,6 +22,7 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 ROOT = Path(__file__).resolve().parent.parent
 HTML = ROOT / "docs" / "index.html"
 CSV = Path("/Users/unimauro/salariosperu-data/cas_vigentes.csv")
+CSV_HIST = Path("/Users/unimauro/salariosperu-data/cas_historico.csv")
 KEY = bytes.fromhex("5a6c3d8e9f1b2a4c7e8d5f3a2b1c0e9d")
 
 # ───────────────────── CLASIFICADORES ─────────────────────
@@ -352,6 +353,51 @@ def build_comparativa(df_sal):
     return traces
 
 
+def build_temporal(hist_df):
+    """Tendencia temporal: por cada fecha de scrape, cuántas URLs únicas
+    se han visto en total (acumulado), cuántas eran vigentes en ese
+    snapshot, y cuántas eran nuevas ese día."""
+    if hist_df is None or hist_df.empty:
+        return []
+    fechas = sorted(set(hist_df["primera_vez_visto"].dropna().tolist()
+                        + hist_df["ultima_vez_visto"].dropna().tolist()))
+    if not fechas:
+        return []
+
+    acumulado, vigentes_snap, nuevas_por_dia = [], [], []
+    for f in fechas:
+        nuevas_por_dia.append(int((hist_df["primera_vez_visto"] == f).sum()))
+        acumulado.append(int((hist_df["primera_vez_visto"] <= f).sum()))
+        vigentes_snap.append(int((hist_df["ultima_vez_visto"] == f).sum()))
+
+    return [
+        {
+            "type": "bar",
+            "name": "Nuevas ese scrape",
+            "x": fechas, "y": nuevas_por_dia,
+            "marker": {"color": "#f39c12", "opacity": 0.45},
+            "hovertemplate": "%{x|%d-%b-%Y}<br>Nuevas convocatorias: %{y:,}<extra></extra>",
+            "yaxis": "y",
+        },
+        {
+            "type": "scatter", "mode": "lines+markers",
+            "name": "Vigentes en ese scrape",
+            "x": fechas, "y": vigentes_snap,
+            "line": {"color": "#3498db", "width": 3},
+            "marker": {"size": 10, "color": "#3498db"},
+            "hovertemplate": "%{x|%d-%b-%Y}<br>Vigentes: %{y:,}<extra></extra>",
+        },
+        {
+            "type": "scatter", "mode": "lines+markers",
+            "name": "Total acumulado (vistas alguna vez)",
+            "x": fechas, "y": acumulado,
+            "line": {"color": "#27ae60", "width": 3, "dash": "dot"},
+            "marker": {"size": 10, "color": "#27ae60"},
+            "hovertemplate": "%{x|%d-%b-%Y}<br>Total histórico: %{y:,}<extra></extra>",
+        },
+    ]
+
+
 def build_niveles(df_sal):
     traces = []
     for label, color, _kws in NIVELES_6:
@@ -493,6 +539,12 @@ def main():
     print(f"   nivel asignado: {sal['nivel'].notna().sum()}/{total_sal}")
 
     print("[2/3] Generando charts …")
+    # Histórico (opcional — se omite el chart temporal si no existe)
+    hist_df = None
+    if CSV_HIST.exists():
+        hist_df = pd.read_csv(CSV_HIST)
+        print(f"   Histórico cargado: {len(hist_df):,} filas (vigentes={int((hist_df['estado']=='vigente').sum())}, expiradas={int((hist_df['estado']=='expirada').sum())})")
+
     charts = {
         "chart-cas-distribucion":  build_distribucion(sal),
         "chart-cas-roles":         build_roles(sal),
@@ -503,6 +555,8 @@ def main():
         "chart-cas-burbujas":      build_burbujas(sal),
         "chart-cas-niveles":       build_niveles(sal),
     }
+    if hist_df is not None:
+        charts["chart-cas-temporal"] = build_temporal(hist_df)
 
     print("[3/3] Patcheando docs/index.html …")
     html = HTML.read_text()
