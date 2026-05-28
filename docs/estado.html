@@ -273,6 +273,26 @@
             .secnav__inner { padding: 0 1rem; }
             .secnav a { padding: 0.35rem 0.65rem; font-size: 0.78rem; }
         }
+
+        /* ── Evaporable: efecto de cierre con fade + scale + blur ── */
+        .evaporable {
+            transition: opacity 0.55s ease, transform 0.55s ease, filter 0.55s ease,
+                        max-height 0.7s ease, padding 0.55s ease, margin 0.55s ease;
+            transform-origin: center top;
+            will-change: opacity, transform, filter;
+        }
+        .evaporable.evaporating {
+            opacity: 0;
+            transform: scale(0.94) translateY(-22px);
+            filter: blur(7px);
+            max-height: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            overflow: hidden;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -296,6 +316,7 @@
         <a href="#sec-regimen"><i class="fas fa-id-card"></i> Régimen</a>
         <a href="#sec-sector"><i class="fas fa-building"></i> Sectores</a>
         <a href="#sec-top-pagados"><i class="fas fa-medal"></i> Mejor pagados</a>
+        <a href="#sec-mas-comunes"><i class="fas fa-users"></i> Más comunes</a>
         <a href="#sec-pliegos"><i class="fas fa-landmark"></i> Instituciones</a>
         <a href="#sec-nivel"><i class="fas fa-sitemap"></i> Nivel</a>
         <a href="#sec-burbujas"><i class="far fa-circle-dot"></i> Burbujas</a>
@@ -331,7 +352,14 @@
     </section>
 
     <!-- Hallazgos clave en texto plano para SEO -->
-    <section class="card" id="sec-resumen-prosa">
+    <section class="card evaporable" id="sec-resumen-prosa" style="position:relative;">
+        <button type="button" aria-label="Cerrar resumen"
+                onclick="(function(b){const c=b.closest('.evaporable');c.classList.add('evaporating');setTimeout(()=>c.remove(),700);try{sessionStorage.setItem('hide-resumen-prosa','1');}catch(e){}})(this);"
+                style="position:absolute;top:0.75rem;right:0.85rem;background:#f1f3f7;color:#5a6478;border:0;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:all 0.18s;z-index:2;"
+                onmouseover="this.style.background='#ffe9b8';this.style.color='#d35400';this.style.transform='rotate(90deg)';"
+                onmouseout="this.style.background='#f1f3f7';this.style.color='#5a6478';this.style.transform='rotate(0)';">
+            <i class="fas fa-xmark"></i>
+        </button>
         <h2><span class="card__icon"><i class="fas fa-newspaper"></i></span> Resumen</h2>
         <p>
             El Estado peruano emplea a <strong>1,333,460 personas</strong> activas a diciembre de 2025, con un ingreso promedio mensual de <strong>S/ 4,370</strong> y un costo anual total de <strong>S/ 77 mil millones</strong>.
@@ -374,6 +402,13 @@
         <div class="takeaway" id="takeaway-mejor-pagados"></div>
     </section>
 
+    <!-- ── 3b. Grupos más comunes ───────────────────────── -->
+    <section class="card" id="sec-mas-comunes">
+        <h2><span class="card__icon"><i class="fas fa-users"></i></span> Top 15 grupos ocupacionales más comunes</h2>
+        <p class="card__desc">No los mejor pagados, sino los más numerosos. Magisterio, Técnicos y Profesionales de la Salud concentran la masa del Estado.</p>
+        <div id="chart-mas-comunes" class="chart" style="min-height: 520px;"></div>
+    </section>
+
     <!-- ── 4. Top pliegos ───────────────────────────────── -->
     <section class="card" id="sec-pliegos">
         <h2><span class="card__icon"><i class="fas fa-landmark"></i></span> Top 20 Pliegos (Instituciones)</h2>
@@ -397,9 +432,9 @@
 
     <!-- ── 7. Mapa territorial ──────────────────────────── -->
     <section class="card" id="sec-mapa">
-        <h2><span class="card__icon"><i class="fas fa-map-marked-alt"></i></span> Empleo público por departamento</h2>
-        <p class="card__desc">Departamento extraído del nombre del pliego regional. Lima concentra al gobierno nacional (sesgo metropolitano normal).</p>
-        <div id="chart-depto" class="chart" style="min-height: 560px;"></div>
+        <h2><span class="card__icon"><i class="fas fa-map-marked-alt"></i></span> Mapa del Perú · Empleo público por departamento</h2>
+        <p class="card__desc">Coroplético departamental. Toggle entre <strong>cantidad de servidores</strong> e <strong>ingreso promedio</strong>. Departamento extraído del nombre del pliego regional; Lima concentra el gobierno nacional (sesgo metropolitano normal).</p>
+        <div id="chart-depto" class="chart" style="min-height: 620px;"></div>
     </section>
 
     <!-- ── 8. Buscador de pliegos ───────────────────────── -->
@@ -564,6 +599,37 @@
             `<strong>Insight:</strong> Los <em>${top1.grupo}</em> son los mejor pagados del Estado (${fmtSol(top1.ing_prom)} promedio) pero son apenas ${fmtMile(top1.cantidad)} personas. Magistrados y Fiscales Titulares cobran ~S/ 18-22k. Compara con el promedio CAS de S/ 3,823 o el ingreso mediano nacional INEI (~S/ 1,840) — el sector público tiene una élite muy bien pagada.`;
     }
 
+    // ── 3b. Más comunes (top 15 por cantidad) ──
+    {
+        const grp = [...DATA.por_grupo_ocupacional]
+            .sort((a,b) => b.cantidad - a.cantidad)
+            .slice(0, 15)
+            .sort((a,b) => a.cantidad - b.cantidad);  // asc para barra h
+        const trace = {
+            type: 'bar', orientation: 'h',
+            x: grp.map(r => r.cantidad),
+            y: grp.map(r => r.grupo),
+            text: grp.map(r => `${fmtMile(r.cantidad)}  ·  ${fmtSol(r.ing_prom)}`),
+            textposition: 'outside',
+            marker: {
+                color: grp.map(r => r.ing_prom),
+                colorscale: 'RdYlGn',
+                showscale: true,
+                colorbar: {title: 'Ingreso<br>prom S/', thickness: 12}
+            },
+            hovertemplate: '<b>%{y}</b><br>Cantidad: %{x:,}<br>Ingreso prom: %{customdata}<extra></extra>',
+            customdata: grp.map(r => fmtSol(r.ing_prom)),
+        };
+        const layout = {
+            title: { text: 'Top 15 grupos ocupacionales por número de personas', x: 0.5, font: {size: 14} },
+            xaxis: { title: 'Servidores', tickformat: ',d', gridcolor: '#f0f0f0' },
+            yaxis: { automargin: true },
+            paper_bgcolor: 'white', plot_bgcolor: 'white',
+            height: 520, margin: {l: 250, r: 100, t: 50, b: 50},
+        };
+        Plotly.newPlot('chart-mas-comunes', [trace], layout, config);
+    }
+
     // ── 4. Pliegos ──
     {
         const pl = [...DATA.top_pliegos].slice(0, 20).sort((a,b) => a.cantidad - b.cantidad);
@@ -651,27 +717,83 @@
         Plotly.newPlot('chart-burbujas', traces, layout, config);
     }
 
-    // ── 7. Mapa por departamento (horizontal bar como mapa visual) ──
+    // ── 7. Mapa choropleth del Perú ──
     {
-        const dep = [...DATA.por_depto].sort((a,b) => a.cantidad - b.cantidad);
-        const trace = {
-            type: 'bar', orientation: 'h',
-            x: dep.map(r => r.cantidad),
-            y: dep.map(r => r.depto),
-            text: dep.map(r => `${fmtMile(r.cantidad)} · ${fmtSol(r.ing_prom)}`),
-            textposition: 'outside',
-            marker: { color: dep.map(r => r.ing_prom), colorscale: 'YlOrRd', showscale: true,
-                      colorbar: {title: 'Ingreso<br>prom S/', thickness: 12} },
-            hovertemplate: '<b>%{y}</b><br>Servidores: %{x:,}<br>Ingreso prom: S/ %{marker.color:,.0f}<extra></extra>',
-        };
-        const layout = {
-            title: { text: '25 departamentos · color = ingreso promedio · etiqueta = (servidores · S/ prom)', x: 0.5, font: {size: 14} },
-            xaxis: { title: 'Servidores', tickformat: ',d', gridcolor: '#f0f0f0' },
-            yaxis: { automargin: true },
-            paper_bgcolor: 'white', plot_bgcolor: 'white',
-            height: 560, margin: {l: 130, r: 100, t: 50, b: 50},
-        };
-        Plotly.newPlot('chart-depto', [trace], layout, config);
+        const dep = DATA.por_depto;
+        // Por defecto coloreamos por cantidad de servidores
+        const byDepto = {};
+        dep.forEach(d => { byDepto[d.depto] = d; });
+
+        // Fallback: si falla el fetch del geojson, mostramos bar chart
+        function fallbackBar() {
+            const sorted = [...dep].sort((a,b) => a.cantidad - b.cantidad);
+            Plotly.newPlot('chart-depto', [{
+                type: 'bar', orientation: 'h',
+                x: sorted.map(r => r.cantidad),
+                y: sorted.map(r => r.depto),
+                text: sorted.map(r => `${fmtMile(r.cantidad)} · ${fmtSol(r.ing_prom)}`),
+                textposition: 'outside',
+                marker: { color: sorted.map(r => r.ing_prom), colorscale: 'YlOrRd', showscale: true },
+            }], { title: { text: 'Por departamento (mapa no disponible)' }, height: 560 }, config);
+        }
+
+        fetch('https://raw.githubusercontent.com/juaneladio/peru-geojson/master/peru_departamental_simple.geojson')
+            .then(r => r.json())
+            .then(geo => {
+                const locs = dep.map(d => d.depto);
+                // Métrica 1: cantidad. Métrica 2: ingreso prom.
+                const traceCant = {
+                    type: 'choropleth',
+                    geojson: geo,
+                    featureidkey: 'properties.NOMBDEP',
+                    locations: locs,
+                    z: dep.map(d => d.cantidad),
+                    text: dep.map(d => `${d.depto}<br>${fmtMile(d.cantidad)} servidores<br>${fmtSol(d.ing_prom)} ingreso prom`),
+                    hoverinfo: 'text',
+                    colorscale: 'Blues',
+                    colorbar: { title: 'Servidores', thickness: 12 },
+                    marker: { line: { color: 'white', width: 1 } },
+                    visible: true,
+                    name: 'Cantidad',
+                };
+                const traceIng = {
+                    ...traceCant,
+                    z: dep.map(d => d.ing_prom),
+                    colorscale: 'YlOrRd',
+                    colorbar: { title: 'S/ ingreso<br>prom mensual', thickness: 12 },
+                    visible: false,
+                    name: 'Ingreso',
+                };
+                const layout = {
+                    title: { text: 'Empleo público por departamento (snapshot dic-2025)', x: 0.5, font: {size: 14} },
+                    geo: {
+                        fitbounds: 'locations',
+                        visible: false,
+                        bgcolor: 'rgba(0,0,0,0)',
+                        projection: { type: 'mercator' },
+                    },
+                    height: 620,
+                    margin: { l: 0, r: 0, t: 60, b: 50 },
+                    paper_bgcolor: 'white',
+                    updatemenus: [{
+                        type: 'buttons',
+                        direction: 'right',
+                        x: 0.5, xanchor: 'center', y: 1.06, yanchor: 'bottom',
+                        showactive: true,
+                        bgcolor: '#f1f3f7',
+                        buttons: [
+                            { label: '👥 Cantidad de servidores', method: 'update',
+                              args: [{visible: [true, false]},
+                                     {'title.text': 'Cantidad de servidores por departamento (dic-2025)'}] },
+                            { label: '💰 Ingreso promedio', method: 'update',
+                              args: [{visible: [false, true]},
+                                     {'title.text': 'Ingreso promedio mensual por departamento (S/, dic-2025)'}] },
+                        ],
+                    }],
+                };
+                Plotly.newPlot('chart-depto', [traceCant, traceIng], layout, config);
+            })
+            .catch(err => { console.error('geojson fetch failed', err); fallbackBar(); });
     }
 
     // ── Resaltar sección activa en el menú secnav ──
