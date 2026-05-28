@@ -304,8 +304,51 @@
         .tldr-estado__close:hover {
             background: rgba(243,156,18,0.25);
             color: #ffdb70;
-            transform: rotate(90deg);
         }
+        .tldr-estado__close .tldr-estado__icon-x { display: inline-block; transition: transform 0.2s; }
+        .tldr-estado__close:hover .tldr-estado__icon-x { transform: rotate(90deg); }
+        .tldr-estado__close .tldr-estado__icon-chevron { display: none; }
+        /* Estado colapsado: solo se muestra el título + chevron para re-expandir */
+        .tldr-estado.is-collapsed {
+            padding-top: 0.85rem;
+            padding-bottom: 0.95rem;
+        }
+        .tldr-estado.is-collapsed .tldr-estado__title {
+            margin-bottom: 0;
+        }
+        .tldr-estado.is-collapsed .tldr-estado__grid,
+        .tldr-estado.is-collapsed .tldr-estado__details {
+            max-height: 0;
+            opacity: 0;
+            transform: scale(0.96) translateY(-12px);
+            filter: blur(5px);
+            overflow: hidden;
+            margin: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            border-top-width: 0 !important;
+            pointer-events: none;
+        }
+        .tldr-estado__grid,
+        .tldr-estado__details {
+            transition:
+                max-height 0.5s ease,
+                opacity 0.4s ease,
+                transform 0.4s ease,
+                filter 0.4s ease,
+                margin 0.4s ease,
+                padding 0.4s ease;
+            max-height: 1200px;
+            opacity: 1;
+            transform: none;
+            filter: none;
+        }
+        .tldr-estado.is-collapsed .tldr-estado__close {
+            background: rgba(255,219,112,0.18);
+            color: #ffdb70;
+        }
+        .tldr-estado.is-collapsed .tldr-estado__close .tldr-estado__icon-x { display: none; }
+        .tldr-estado.is-collapsed .tldr-estado__close .tldr-estado__icon-chevron { display: inline-block; }
         .tldr-estado__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -475,11 +518,19 @@
     </section>
 
     <!-- Hallazgos clave en texto plano para SEO -->
-    <section class="tldr-estado evaporable" id="sec-resumen-prosa">
-        <button type="button" aria-label="Cerrar resumen"
-                onclick="(function(b){const c=b.closest('.evaporable');c.classList.add('evaporating');setTimeout(()=>c.remove(),700);try{sessionStorage.setItem('hide-resumen-prosa','1');}catch(e){}})(this);"
-                class="tldr-estado__close">
-            <i class="fas fa-xmark"></i>
+    <section class="tldr-estado" id="sec-resumen-prosa">
+        <button type="button" class="tldr-estado__close"
+                aria-label="Colapsar resumen"
+                aria-expanded="true"
+                onclick="(function(b){
+                    const sec=b.closest('.tldr-estado');
+                    const willCollapse=!sec.classList.contains('is-collapsed');
+                    sec.classList.toggle('is-collapsed');
+                    b.setAttribute('aria-expanded', String(!willCollapse));
+                    b.setAttribute('aria-label', willCollapse ? 'Expandir resumen' : 'Colapsar resumen');
+                })(this);">
+            <i class="fas fa-xmark tldr-estado__icon-x"></i>
+            <i class="fas fa-chevron-down tldr-estado__icon-chevron"></i>
         </button>
         <h2 class="tldr-estado__title">
             🔥 Lo que vas a encontrar aquí
