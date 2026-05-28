@@ -1,0 +1,573 @@
+{
+  "fuente": "MEF — Aplicativo Informático para el Registro Centralizado de Planillas (AIRHSP)",
+  "fuente_url": "https://www.datosabiertos.gob.pe/dataset/personal-activo-y-pensionista-del-sector-p%C3%BAblico-registrado-en-el-airhsp",
+  "csv_url": "https://fs.datosabiertos.mef.gob.pe/datastorefiles/PERSONALSP_2025.csv",
+  "periodo": "20251231",
+  "kpis": {
+    "total_servidores": 1333460,
+    "ingreso_promedio_mensual": 4369.64,
+    "costo_total_anual": 77005056995.02,
+    "n_pliegos": 197,
+    "n_unidades_ejecutoras": 916
+  },
+  "por_regimen": [
+    {
+      "regimen": "Carreras Especiales",
+      "cantidad": 618314.0,
+      "ing_prom": 4894.259703451644
+    },
+    {
+      "regimen": "D. Leg. 1057 CAS",
+      "cantidad": 256692.0,
+      "ing_prom": 3823.6366656148225
+    },
+    {
+      "regimen": "Fuerzas Armadas y Policiales",
+      "cantidad": 189686.0,
+      "ing_prom": 4444.274144480879
+    },
+    {
+      "regimen": "D. Leg. Nº 276",
+      "cantidad": 107291.0,
+      "ing_prom": 3071.5383491625576
+    },
+    {
+      "regimen": "Asistenciales",
+      "cantidad": 62441.0,
+      "ing_prom": 3184.6365048605885
+    },
+    {
+      "regimen": "D. Leg. Nº 728",
+      "cantidad": 61010.0,
+      "ing_prom": 6516.404214718898
+    },
+    {
+      "regimen": "Sin Regimen Laboral",
+      "cantidad": 34801.0,
+      "ing_prom": 485.65975977701794
+    },
+    {
+      "regimen": "Ley Nº 30057 SERVIR",
+      "cantidad": 3225.0,
+      "ing_prom": 10285.893268217054
+    }
+  ],
+  "por_sector": [
+    {
+      "sector": "EDUCACION",
+      "cantidad": 597631.0,
+      "ing_prom": 4026.1675719800346
+    },
+    {
+      "sector": "SALUD",
+      "cantidad": 270668.0,
+      "ing_prom": 4441.842493903971
+    },
+    {
+      "sector": "INTERIOR",
+      "cantidad": 148391.0,
+      "ing_prom": 4225.862159362765
+    },
+    {
+      "sector": "DEFENSA",
+      "cantidad": 103695.0,
+      "ing_prom": 3294.668264429336
+    },
+    {
+      "sector": "PODER JUDICIAL",
+      "cantidad": 34616.0,
+      "ing_prom": 6249.243429339033
+    },
+    {
+      "sector": "MINISTERIO PUBLICO",
+      "cantidad": 27967.0,
+      "ing_prom": 7017.175875138557
+    },
+    {
+      "sector": "JUSTICIA",
+      "cantidad": 21550.0,
+      "ing_prom": 4309.540631554524
+    },
+    {
+      "sector": "ECONOMIA Y FINANZAS",
+      "cantidad": 18610.0,
+      "ing_prom": 7361.94467544331
+    },
+    {
+      "sector": "GOBIERNOS REGIONALES",
+      "cantidad": 17225.0,
+      "ing_prom": 4004.6180702467336
+    },
+    {
+      "sector": "AGRARIO Y DE RIEGO",
+      "cantidad": 12007.0,
+      "ing_prom": 4454.18945281919
+    },
+    {
+      "sector": "MUJER Y POBLACIONES VULNERABLES",
+      "cantidad": 10894.0,
+      "ing_prom": 4085.1671911143744
+    },
+    {
+      "sector": "TRANSPORTES Y COMUNICACIONES",
+      "cantidad": 9661.0,
+      "ing_prom": 4486.444930131456
+    },
+    {
+      "sector": "DESARROLLO E INCLUSION SOCIAL",
+      "cantidad": 9401.0,
+      "ing_prom": 4020.36008509733
+    },
+    {
+      "sector": "PRESIDENCIA CONSEJO MINISTROS",
+      "cantidad": 9118.0,
+      "ing_prom": 7016.490471594649
+    },
+    {
+      "sector": "CONTRALORIA GENERAL",
+      "cantidad": 5682.0,
+      "ing_prom": 7487.5820028159105
+    },
+    {
+      "sector": "CULTURA",
+      "cantidad": 5487.0,
+      "ing_prom": 4037.310637871332
+    },
+    {
+      "sector": "AMBIENTAL",
+      "cantidad": 5060.0,
+      "ing_prom": 5362.4313873517785
+    },
+    {
+      "sector": "VIVIENDA CONSTRUCCION Y SANEAMIENTO",
+      "cantidad": 4333.0,
+      "ing_prom": 6306.382940226171
+    },
+    {
+      "sector": "CONGRESO DE LA REPUBLICA",
+      "cantidad": 3819.0,
+      "ing_prom": 10490.828342498036
+    },
+    {
+      "sector": "TRABAJO Y PROMOCION DEL EMPLEO",
+      "cantidad": 3537.0,
+      "ing_prom": 5839.399793610404
+    },
+    {
+      "sector": "PRODUCCION",
+      "cantidad": 3331.0,
+      "ing_prom": 6258.290453317322
+    },
+    {
+      "sector": "REGISTRO NACIONAL DE IDENTIFICACION Y ESTADO CIVIL",
+      "cantidad": 3299.0,
+      "ing_prom": 3773.0116611094263
+    },
+    {
+      "sector": "RELACIONES EXTERIORES",
+      "cantidad": 1824.0,
+      "ing_prom": 23366.801809210527
+    },
+    {
+      "sector": "ENERGIA Y MINAS",
+      "cantidad": 1491.0,
+      "ing_prom": 7000.61676056338
+    },
+    {
+      "sector": "COMERCIO EXTERIOR Y TURISMO",
+      "cantidad": 1397.0,
+      "ing_prom": 7450.874094488188
+    },
+    {
+      "sector": "DEFENSORIA DEL PUEBLO",
+      "cantidad": 867.0,
+      "ing_prom": 6571.453621683969
+    },
+    {
+      "sector": "JURADO NACIONAL DE ELECCIONES",
+      "cantidad": 456.0,
+      "ing_prom": 8122.618223684211
+    },
+    {
+      "sector": "FUERO MILITAR POLICIAL",
+      "cantidad": 387.0,
+      "ing_prom": 3003.348811369509
+    },
+    {
+      "sector": "OFICINA NACIONAL DE PROCESOS ELECTORALES",
+      "cantidad": 375.0,
+      "ing_prom": 6104.023520000001
+    },
+    {
+      "sector": "CAJA DE PENSIONES MILITAR POLICIAL",
+      "cantidad": 244.0,
+      "ing_prom": 3470.8284426229507
+    },
+    {
+      "sector": "TRIBUNAL CONSTITUCIONAL",
+      "cantidad": 233.0,
+      "ing_prom": 12114.07227467811
+    },
+    {
+      "sector": "JUNTA NACIONAL DE JUSTICIA",
+      "cantidad": 204.0,
+      "ing_prom": 9345.380147058822
+    }
+  ],
+  "por_grupo_ocupacional": [
+    {
+      "grupo": "Diplomaticos",
+      "cantidad": 745.0,
+      "ing_prom": 45069.53432214766
+    },
+    {
+      "grupo": "Magistrados Provisionales",
+      "cantidad": 36.0,
+      "ing_prom": 30847.487500000003
+    },
+    {
+      "grupo": "Funcionarios Publicos",
+      "cantidad": 270.0,
+      "ing_prom": 24008.70374074074
+    },
+    {
+      "grupo": "Magistrados Titulares",
+      "cantidad": 3228.0,
+      "ing_prom": 21865.231366171003
+    },
+    {
+      "grupo": "Directivos Públicos",
+      "cantidad": 216.0,
+      "ing_prom": 18820.989166666666
+    },
+    {
+      "grupo": "Fiscales Titulares",
+      "cantidad": 4184.0,
+      "ing_prom": 17796.7747586042
+    },
+    {
+      "grupo": "Magistrados Supernumerarios",
+      "cantidad": 346.0,
+      "ing_prom": 10462.063410404624
+    },
+    {
+      "grupo": "Gerente Publico",
+      "cantidad": 77.0,
+      "ing_prom": 8975.543246753248
+    },
+    {
+      "grupo": "Funcionarios y Directivos",
+      "cantidad": 14677.0,
+      "ing_prom": 8377.518184915174
+    },
+    {
+      "grupo": "Servicio Civil de Carrera",
+      "cantidad": 2424.0,
+      "ing_prom": 8283.549422442245
+    },
+    {
+      "grupo": "Servidores de Actividades Complementarias",
+      "cantidad": 315.0,
+      "ing_prom": 8079.359746031747
+    },
+    {
+      "grupo": "Fiscales Provisionales NC",
+      "cantidad": 4359.0,
+      "ing_prom": 7460.022147281487
+    },
+    {
+      "grupo": "Profesionales de la Salud",
+      "cantidad": 143387.0,
+      "ing_prom": 5938.577195282697
+    },
+    {
+      "grupo": "Docentes Universitarios",
+      "cantidad": 28743.0,
+      "ing_prom": 5538.937391016943
+    },
+    {
+      "grupo": "Profesionales",
+      "cantidad": 142021.0,
+      "ing_prom": 5420.363591722352
+    },
+    {
+      "grupo": "Docente de Escuelas de Educación Superior",
+      "cantidad": 2757.0,
+      "ing_prom": 5320.247508161045
+    },
+    {
+      "grupo": "Reforma Magisterial",
+      "cantidad": 316044.0,
+      "ing_prom": 4644.020933414335
+    },
+    {
+      "grupo": "Fuerza Aerea del Peru",
+      "cantidad": 9183.0,
+      "ing_prom": 4449.706264837198
+    },
+    {
+      "grupo": "Miembro de Tribunal",
+      "cantidad": 159.0,
+      "ing_prom": 4395.2830188679245
+    },
+    {
+      "grupo": "Funcionarios con Informe SERVIR",
+      "cantidad": 1220.0,
+      "ing_prom": 4341.483909836065
+    },
+    {
+      "grupo": "Consejero Regional",
+      "cantidad": 339.0,
+      "ing_prom": 4286.283185840708
+    },
+    {
+      "grupo": "Policia Nacional del Peru",
+      "cantidad": 139420.0,
+      "ing_prom": 4243.480884593315
+    },
+    {
+      "grupo": "Docente de Instituto de Educación Superior",
+      "cantidad": 10530.0,
+      "ing_prom": 4001.5443960113953
+    },
+    {
+      "grupo": "Marina de Guerra del Peru",
+      "cantidad": 24273.0,
+      "ing_prom": 3955.586515057883
+    },
+    {
+      "grupo": "Docente de Escuelas de Formación Artística",
+      "cantidad": 1050.0,
+      "ing_prom": 3726.743428571429
+    },
+    {
+      "grupo": "Servidor Penitenciario",
+      "cantidad": 7044.0,
+      "ing_prom": 3148.926104486087
+    },
+    {
+      "grupo": "Profesor contratado",
+      "cantidad": 115117.0,
+      "ing_prom": 3146.4197878679947
+    },
+    {
+      "grupo": "Tecnicos",
+      "cantidad": 188406.0,
+      "ing_prom": 3055.7015058437632
+    },
+    {
+      "grupo": "Guardaparques",
+      "cantidad": 770.0,
+      "ing_prom": 3055.12987012987
+    },
+    {
+      "grupo": "Miembro de Directorio",
+      "cantidad": 224.0,
+      "ing_prom": 3019.541517857143
+    },
+    {
+      "grupo": "Auxiliar de Educación",
+      "cantidad": 25004.0,
+      "ing_prom": 2985.426331786914
+    },
+    {
+      "grupo": "Auxiliares",
+      "cantidad": 95598.0,
+      "ing_prom": 2533.999348731145
+    },
+    {
+      "grupo": "Ejercito Peruano",
+      "cantidad": 50889.0,
+      "ing_prom": 2526.833781956808
+    },
+    {
+      "grupo": "Sin Grupo Ocupacional",
+      "cantidad": 1.0,
+      "ing_prom": 1713.0
+    },
+    {
+      "grupo": "Escalafonados de Salud",
+      "cantidad": 4.0,
+      "ing_prom": 1661.4550000000002
+    },
+    {
+      "grupo": "Auxiliar de Educación Superior",
+      "cantidad": 185.0,
+      "ing_prom": 1437.2972972972973
+    },
+    {
+      "grupo": "Obreros",
+      "cantidad": 142.0,
+      "ing_prom": 1244.6005633802815
+    },
+    {
+      "grupo": "Profesorado",
+      "cantidad": 73.0,
+      "ing_prom": 1169.0079452054792
+    }
+  ],
+  "top_pliegos": [
+    {
+      "pliego": "M. DEL INTERIOR",
+      "cantidad": 145000.0,
+      "ing_prom": 4232.941855241379
+    },
+    {
+      "pliego": "M. DE DEFENSA",
+      "cantidad": 102698.0,
+      "ing_prom": 3274.5903834544006
+    },
+    {
+      "pliego": "M. DE EDUCACION",
+      "cantidad": 86264.0,
+      "ing_prom": 3996.979472549383
+    },
+    {
+      "pliego": "M. DE SALUD",
+      "cantidad": 73916.0,
+      "ing_prom": 4962.79975012176
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PIURA",
+      "cantidad": 48366.0,
+      "ing_prom": 3939.084393995782
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CAJAMARCA",
+      "cantidad": 47713.0,
+      "ing_prom": 4226.987658709367
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LA LIBERTAD",
+      "cantidad": 44612.0,
+      "ing_prom": 4109.852645252398
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LORETO",
+      "cantidad": 43677.0,
+      "ing_prom": 3731.541859788905
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE JUNIN",
+      "cantidad": 39649.0,
+      "ing_prom": 4062.7393702237127
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PUNO",
+      "cantidad": 38783.0,
+      "ing_prom": 4180.0903388082415
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE CUSCO",
+      "cantidad": 38198.0,
+      "ing_prom": 4143.659581129902
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ANCASH",
+      "cantidad": 35902.0,
+      "ing_prom": 4112.738812043897
+    },
+    {
+      "pliego": "PODER JUDICIAL",
+      "cantidad": 34489.0,
+      "ing_prom": 6255.2888886311575
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AREQUIPA",
+      "cantidad": 30885.0,
+      "ing_prom": 4177.464638497652
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE SAN MARTIN",
+      "cantidad": 30522.0,
+      "ing_prom": 3848.718338247821
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LIMA",
+      "cantidad": 28578.0,
+      "ing_prom": 3985.532380152565
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANUCO",
+      "cantidad": 28201.0,
+      "ing_prom": 4004.8858196517854
+    },
+    {
+      "pliego": "MINISTERIO PUBLICO",
+      "cantidad": 27967.0,
+      "ing_prom": 7017.175875138557
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AYACUCHO",
+      "cantidad": 27264.0,
+      "ing_prom": 4166.20184235622
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE LAMBAYEQUE",
+      "cantidad": 23909.0,
+      "ing_prom": 4187.4124894391225
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE ICA",
+      "cantidad": 21630.0,
+      "ing_prom": 4102.243325473879
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE HUANCAVELICA",
+      "cantidad": 20375.0,
+      "ing_prom": 4111.143629447853
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE UCAYALI",
+      "cantidad": 20148.0,
+      "ing_prom": 3840.5505896366885
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE APURIMAC",
+      "cantidad": 19757.0,
+      "ing_prom": 4151.96115250291
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DE LA PROVINCIA CONSTITUCIONAL DEL CALLAO",
+      "cantidad": 19417.0,
+      "ing_prom": 3937.8794190657677
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE AMAZONAS",
+      "cantidad": 19202.0,
+      "ing_prom": 4004.7172888240807
+    },
+    {
+      "pliego": "SUPERINTENDENCIA NACIONAL DE ADUANAS Y DE ADMINISTRACION TRIBUTARIA",
+      "cantidad": 12882.0,
+      "ing_prom": 7252.730363297626
+    },
+    {
+      "pliego": "INSTITUTO NACIONAL PENITENCIARIO",
+      "cantidad": 11503.0,
+      "ing_prom": 3209.484551856038
+    },
+    {
+      "pliego": "GOBIERNO REGIONAL DEL DEPARTAMENTO DE PASCO",
+      "cantidad": 11140.0,
+      "ing_prom": 3941.5883473967683
+    },
+    {
+      "pliego": "MINISTERIO DE LA MUJER Y POBLACIONES VULNERABLES",
+      "cantidad": 10133.0,
+      "ing_prom": 4139.636149215434
+    }
+  ],
+  "por_nivel": [
+    {
+      "nivel": "GOBIERNO REGIONAL",
+      "cantidad": 671336.0,
+      "ing_prom": 4052.038917412443
+    },
+    {
+      "nivel": "GOBIERNO NACIONAL",
+      "cantidad": 662124.0,
+      "ing_prom": 4691.663200865699
+    }
+  ]
+}
