@@ -51,21 +51,54 @@ NIVELES_6 = [
 ]
 
 # Tipos de institución (10 categorías para treemap/burbujas; el heatmap usa 9 sin "Otros")
+# Orden importa: el primer keyword que matche gana. Reglas específicas antes que genéricas.
 TIPO_INST_RULES = [
-    ("Ministerios",          ["ministerio"]),
-    ("Gobiernos Regionales", ["gobierno regional", "gore "]),
-    ("Salud / Hospitales",   ["hospital", "red de salud", "essalud", "instituto nacional de salud",
-                              "instituto nacional materno", "inen", "insn"]),
-    ("Justicia",             ["poder judicial", "fiscal", "tribunal", "corte superior",
-                              "inpe", "academia de la magistratura"]),
+    ("Identidad / Civil",    ["reniec", "migraciones", "registro nacional", "registro civil"]),
+    ("Justicia",             ["poder judicial", "fiscalía", "fiscalia", "fiscal de",
+                              "fiscal superior", "ministerio público", "ministerio publico",
+                              "tribunal", "corte superior", "corte suprema", "inpe",
+                              "academia de la magistratura", "procuraduría", "procuraduria",
+                              "defensoría", "defensoria", "ministerio de justicia", "minjus"]),
+    ("Salud / Hospitales",   ["hospital", "red de salud", "red asistencial",
+                              "essalud", "saludpol", "instituto nacional de salud",
+                              "instituto nacional materno", "instituto nacional del niño",
+                              "instituto nacional oftalm", "instituto nacional neurol",
+                              "inen", "insn", "ino ", "ips ",
+                              "diresa", "dirección regional salud", "dirección regional de salud",
+                              "dirección de salud", "geresa", "salud huallaga", "salud junin",
+                              "salud ", "centro de salud", " sis ", "sis ", " sis"]),
+    ("Educación",            ["universidad", "escuela", "colegio nacional",
+                              "instituto pedagógico", "instituto tecnológico",
+                              "instituto superior", "minedu", "ministerio de educación",
+                              "pronabec", "sineace", "peip", "pronied", "inictel",
+                              "ugel", "dre ", "dre-", "dre)", "dreli", "drep",
+                              "unidad de gestión educativa", "unidad de gestion educativa",
+                              "dirección de educación", "dirección regional educación",
+                              "dirección regional de educación", "drec", "drelm"]),
+    ("Sup. y Fiscalización", ["sunat", "sunafil", "sunarp", "sbs", "indecopi",
+                              "osce", "osinergmin", "osiptel", "sutran", "ositran",
+                              "osinfor", "contraloría", "contraloria", "indeci",
+                              "sunedu", "oefa", "sucamec", "senasa", "serfor",
+                              "smv ", "smv-", "ana ", "ana-", "autoridad nacional del agua",
+                              "atu ", "atu-", "autoridad de transporte", "cenepred",
+                              "instituto geográfico", "instituto geografico", "ign ",
+                              "instituto de calidad", "inacal", "bomberos",
+                              "intendencia nacional", "autoridad nacional de infraestructura",
+                              "superintendencia"]),
+    ("Programas Sociales",   ["inabif", "qali warma", "cuna más", "cuna mas",
+                              "pensión 65", "pension 65", "juntos", "agrorural",
+                              "agro rural", "agroideas", "agromercado", "fonafe",
+                              "fondoempleo", "biblioteca nacional", "ipd ",
+                              "instituto peruano del deporte", "proyecto nay", "naylamp",
+                              "proyecto especial", "midis", "llamkasun",
+                              "programa nacional", "programa conservación", "programa conservacion",
+                              "dirección de agricultura", "direccion de agricultura"]),
+    ("Gobiernos Regionales", ["gobierno regional", "gore ", "gore-", "región "]),
     ("Municipalidades",      ["municipalidad", "municipio"]),
-    ("Educación",            ["universidad", "escuela", "instituto pedagógico",
-                              "instituto tecnológico", "minedu", "pronabec", "sineace", "peip"]),
-    ("Programas Sociales",   ["inabif", "midis", "qali warma", "cuna más", "cuna mas",
-                              "pensión 65", "pension 65", "juntos"]),
-    ("Sup. y Fiscalización", ["sunat", "sunafil", "sunarp", "sbs", "indecopi", "osce",
-                              "osinergmin", "osiptel", "sutran", "contraloría", "contraloria"]),
-    ("Identidad / Civil",    ["reniec", "migraciones", "registro nacional"]),
+    ("Ministerios",          ["ministerio", "mininter", "mindef", "mimp",
+                              "minagri", "midagri", "minam", "mincetur",
+                              "minem", "produce", "mtc ", "mtc-", "mvcs",
+                              "provias"]),
 ]
 
 
@@ -98,12 +131,33 @@ def classify_nivel(puesto):
     return None
 
 
+def _norm(s):
+    """Lowercase + strip accents para matching robusto (DIRECCIÓN == direccion)."""
+    import unicodedata
+    if not s:
+        return ""
+    s = str(s).lower()
+    return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
+
+
 def classify_tipo_inst(inst):
-    e = (inst or "").lower()
+    e = _norm(inst)
+    # Sufijos comunes que aparecen pegados (UGEL-7, DRE), atu-) — matchean igual
     for label, kws in TIPO_INST_RULES:
         for kw in kws:
-            if kw in e:
+            if _norm(kw) in e:
                 return label
+    # Siglas standalone que aparecen como nombre exacto
+    e_strip = e.strip()
+    if e_strip in {"sis", "ipd", "ign", "inei", "inacal", "inictel-uni", "ign ",
+                   "cenepred", "sbn", "agro rural"}:
+        return {
+            "sis": "Salud / Hospitales", "ipd": "Programas Sociales",
+            "ign": "Sup. y Fiscalización", "inei": "Sup. y Fiscalización",
+            "inacal": "Sup. y Fiscalización", "inictel-uni": "Educación",
+            "cenepred": "Sup. y Fiscalización", "sbn": "Sup. y Fiscalización",
+            "agro rural": "Programas Sociales",
+        }[e_strip]
     return "Otros"
 
 
